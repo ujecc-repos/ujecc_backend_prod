@@ -1,0 +1,401 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  Admin
+  Membre
+  SuperAdmin
+  Directeur
+}
+
+model Church {
+  id            String         @id @default(uuid())
+  name          String         @unique
+  quantity      String         @default("1")
+  address       String?
+  picture       String?
+  phone         String?
+  anthem        String?
+  facebook      String?
+  instagram     String?
+  whatsapp      String?
+  email         String?
+  mainPasteur   String?
+  transfersFrom transfert[]    @relation("FromChurch")
+  transfersTo   transfert[]    @relation("ToChurch")
+  users         User[]
+  groups        Groupe[]
+  events        Event[]
+  mariages      Mariage[]
+  funerals      Funeral[]
+  presentations Presentation[]
+  batism        Baptism[]
+  death         death[]
+  sundayClass   sundayClass[]
+  comitees      comitee[]
+  appointments  appointment[]
+  mission       Mission?       @relation(fields: [missionId], references: [id])
+  missionId     String? // 👈 Foreign key to Mission
+  expense       expense[]
+  offering      offering[]
+  donation      donation[]
+  tithing       tithing[]
+  moisson       moisson[]
+  sanction      sanction[]
+  ministry      ministry[]
+  pasteur       pasteur[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model User {
+  id               String        @id @default(uuid())
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  joinDate         String?
+  email            String?       @unique
+  firstname        String
+  lastname         String
+  nif              String?
+  personToContact  String?
+  spouseFullName   String?
+  password         String?       @unique
+  membreActif      Boolean       @default(true)
+  longitude        String?
+  latitude         String?
+  plainPassword    String?
+  age              String?
+  minister         String?
+  mobilePhone      String?
+  homePhone        String?
+  picture          String?
+  city             String?
+  etatCivil        String?
+  country          String?
+  birthCountry     String?
+  birthCity        String?
+  birthDate        String?
+  sex              String?
+  addressLine      String?
+  envelopeNumber   String?
+  baptismLocation  String?
+  baptismDate      String?
+  role             Role          @default(Membre)
+  churchRole       String?
+  facebook         String?
+  instagram        String?
+  profession       String?
+  sundayClass      String?
+  church           Church?       @relation(fields: [churchId], references: [id])
+  churchId         String?
+  groups           Groupe[]
+  userAppointments appointment[]
+  transfers        transfert[]
+  leadingComittees comitee[]     @relation("ComiteeLeaders")
+  memberComittees  comitee[]     @relation("ComiteeMembers")
+}
+
+model Groupe {
+  id               String   @id @default(uuid())
+  name             String
+  minister         String?
+  description      String?
+  picture          String?
+  showToMembers    Boolean?
+  showToNonMembers Boolean?
+  showMembers      Boolean?
+  showLeaders      Boolean?
+  meetingDays      String?
+  meetingTime      String?
+  meetingLocation  String?
+  meetingFrequency String?
+  ageGroup         String?
+  maxMembers       String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+  churchId         String?
+  users            User[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Event {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  location     String?
+  frequency    String
+  startDate    String
+  endDate      String
+  startPeriode String?
+  endPeriode   String?
+  createAt     DateTime @default(now())
+  isRecurring  Boolean  @default(true)
+  updateAt     DateTime @updatedAt
+  church       Church?  @relation(fields: [churchId], references: [id])
+  churchId     String?
+}
+
+model Mariage {
+  id                     String   @id @default(uuid())
+  brideFullname          String
+  birthDate              DateTime
+  groomFullname          String
+  goomBirthDate          DateTime
+  weddingDate            DateTime
+  witnessSignature       String?
+  civilStateStateOfficer String?
+  weddingLocation        String
+  civilStateOfficer      String?
+  witness                String?
+  grooomCertificate      String?
+  brideCertificate       String?
+  weddingCertificate     String?
+  officiantName          String
+  church                 Church?  @relation(fields: [churchId], references: [id])
+  churchId               String?
+}
+
+model Funeral {
+  id               String   @id @default(uuid())
+  fullname         String
+  birthDate        DateTime
+  funeralDate      DateTime
+  funeralTime      String
+  relationShip     String
+  telephone        String?
+  email            String
+  deathCertificate String?
+  nextOfKin        String
+  officiantName    String
+  description      String
+  funeralLocation  String
+  status           String   @default("en attente")
+  church           Church?  @relation(fields: [churchId], references: [id])
+  churchId         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Presentation {
+  id               String   @id @default(uuid())
+  childName        String
+  dateOfBirth      DateTime
+  placeOfBirth     String
+  birthCertificate String?
+  fatherName       String
+  motherName       String
+  phone            String
+  address          String
+  presentationDate DateTime
+  officiantName    String
+  witness          String
+  description      String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+  churchId         String?
+}
+
+model Baptism {
+  id                 String   @id @default(uuid())
+  fullName           String
+  birthDate          DateTime
+  placeOfBirth       String
+  baptismDate        DateTime
+  baptismLocation    String
+  baptismCertificate String?
+  officiantName      String
+  startDate          String?
+  endDate            String?
+  withness           String
+  conversionDate     DateTime
+  previousChurch     String
+  status             String?
+  testimony          String
+  church             Church?  @relation(fields: [churchId], references: [id])
+  churchId           String?
+}
+
+model death {
+  id               String   @id @default(uuid())
+  deathDate        DateTime
+  deathPlace       String
+  deathTime        String
+  deathCause       String
+  deathCertificate String?
+  serviceDate      DateTime
+  location         String
+  nextOfKin        String
+  relationShip     String
+  officiantName    String
+  description      String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+  churchId         String?
+}
+
+model sundayClass {
+  id          String   @id @default(uuid())
+  nom         String
+  teacher     String
+  ageGroup    String
+  startTime   String
+  book        String?
+  endTime     String
+  maxStudents String
+  description String
+  church      Church?  @relation(fields: [churchId], references: [id])
+  churchId    String?
+  createdAt   DateTime @default(now())
+}
+
+model expense {
+  id            String   @id @default(uuid())
+  amount        Int
+  category      String
+  date          DateTime
+  paymentMethod String
+  description   String
+  church        Church?  @relation(fields: [churchId], references: [id])
+  churchId      String?
+}
+
+model offering {
+  id            String   @id @default(uuid())
+  amount        Int
+  date          DateTime
+  status        String?
+  paymentMethod String
+  note          String
+  church        Church?  @relation(fields: [churchId], references: [id])
+  churchId      String?
+}
+
+model tithing {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  church          Church?  @relation(fields: [churchId], references: [id])
+  churchId        String?
+}
+
+model donation {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  church          Church?  @relation(fields: [churchId], references: [id])
+  churchId        String?
+}
+
+model moisson {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  church          Church?  @relation(fields: [churchId], references: [id])
+  churchId        String?
+}
+
+model comitee {
+  id             String  @id @default(uuid())
+  name           String
+  description    String
+  meetingDay     String
+  meetingTime    String
+  commiteeLeader User[]  @relation("ComiteeLeaders")
+  commiteeMember User[]  @relation("ComiteeMembers")
+  church         Church? @relation(fields: [churchId], references: [id])
+  churchId       String?
+}
+
+model appointment {
+  id            String   @id @default(uuid())
+  name          String
+  assignedUsers User[]
+  visibility    String?
+  description   String
+  date          DateTime
+  time          String
+  duration      String
+  notes         String
+  church        Church?  @relation(fields: [churchId], references: [id])
+  churchId      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model transfert {
+  id           String   @id @default(uuid())
+  fromChurch   Church   @relation("FromChurch", fields: [fromChurchId], references: [id])
+  fromChurchId String
+  toChurch     Church   @relation("ToChurch", fields: [toChurchId], references: [id])
+  member       User     @relation(fields: [userId], references: [id])
+  userId       String
+  toChurchId   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+}
+
+model Mission {
+  id            String   @id @default(uuid())
+  missionName   String
+  description   String
+  presidentName String?
+  status        String
+  location      String
+  church        Church[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model sanction {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  startDate   String
+  endDate     String?
+  status      String
+  church      Church?  @relation(fields: [churchId], references: [id])
+  churchId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ministry {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  church      Church?  @relation(fields: [churchId], references: [id])
+  churchId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model pasteur {
+  id          String  @id @default(uuid())
+  pasteurName String
+  phone       String
+  email       String
+  address     String
+  status      String
+  church      Church? @relation(fields: [churchId], references: [id])
+  churchId    String?
+}
