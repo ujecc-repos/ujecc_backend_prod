@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",                 // Good modern JS output
+      "module": "CommonJS",               // Node.js uses CommonJS by default
+      "lib": ["ES2020"],                  // Use modern JS libraries
+      "moduleResolution": "node",         // Resolve node_modules like Node.js
+      "outDir": "dist",                   // Your compiled JS output
+      "rootDir": "src",                   // Your TypeScript source files
+      "strict": true,                     // Enable all strict type-checking
+      "esModuleInterop": true,            // Allow default imports for CJS modules
+      "skipLibCheck": true,               // Faster builds by skipping type checks for node_modules
+      "forceConsistentCasingInFileNames": true // Helps avoid case bugs
+    },
+    "include": ["src"],                   // Compile files in the src folder
+    // "exclude": ["node_modules", "dist"]   // Ignore node_modules & output
+  }
+  
