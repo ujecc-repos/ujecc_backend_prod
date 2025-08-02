@@ -36,10 +36,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["http://ecclesys.ujecc.org","http://ecclesys.ujecc.org"]
+  origin: ["http://ecclesys.ujecc.org","https://ecclesys.ujecc.org", "http://localhost:5173"]
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// let us
 
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
@@ -52,6 +53,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
     message: 'Something went wrong!'
   });
 });
+
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
