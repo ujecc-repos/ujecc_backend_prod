@@ -48,15 +48,27 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
         } = req.body;
 
         // Check if email already exists
-        const existingUser = await prisma.user.findUnique({
-            where: {
-              email: email
-            }
-        })
+        // const existingUser = await prisma.user.findUnique({
+        //     where: {
+        //       email: email
+        //     }
+        // })
 
-        if(existingUser) {
-            return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
-        }
+        // if(existingUser) {
+        //     return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+        // }
+
+        if (email !== "" && email !== null && email !== undefined) {  // Only check if email is not null or empty
+         const existingUser = await prisma.user.findUnique({
+         where: { email: email }
+        });
+
+        if (existingUser) {
+         return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+         }
+      }
+
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const userData = {
@@ -64,7 +76,7 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
             lastname,
             plainPassword: password || "",
             password: hashedPassword || "",
-            email: email || "",
+            email: email || null, // Ensure email is null when not provided
             role: role || "Membre",
             personToContact: personToContact || "",
             minister: minister || "",
@@ -88,6 +100,9 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
             // Add profile picture path if an image was uploaded
             picture: req.file ? `/uploads/${req.file.filename}` : undefined
         };
+        
+        // Log the email value for debugging
+        console.log("Email value being used:", email, "Type:", typeof email);
 
           let user;
           if (churchId) {
