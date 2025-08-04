@@ -30,13 +30,21 @@ router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
     try {
         const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country, birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession, churchId, age, personToContact, spouseFullName, minister, role } = req.body;
         // Check if email already exists
-        const existingUser = await client_1.prisma.user.findUnique({
-            where: {
-                email: email
+        // const existingUser = await prisma.user.findUnique({
+        //     where: {
+        //       email: email
+        //     }
+        // })
+        // if(existingUser) {
+        //     return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+        // }
+        if (email !== "" && email !== null && email !== undefined) { // Only check if email is not null or empty
+            const existingUser = await client_1.prisma.user.findUnique({
+                where: { email: email }
+            });
+            if (existingUser) {
+                return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
             }
-        });
-        if (existingUser) {
-            return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
         }
         const salt = await bcryptjs_1.default.genSalt(10);
         const hashedPassword = await bcryptjs_1.default.hash(password, salt);
@@ -45,7 +53,7 @@ router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
             lastname,
             plainPassword: password || "",
             password: hashedPassword || "",
-            email: email || "",
+            email: email || null, // Ensure email is null when not provided
             role: role || "Membre",
             personToContact: personToContact || "",
             minister: minister || "",
@@ -69,6 +77,8 @@ router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
             // Add profile picture path if an image was uploaded
             picture: req.file ? `/uploads/${req.file.filename}` : undefined
         };
+        // Log the email value for debugging
+        console.log("Email value being used:", email, "Type:", typeof email);
         let user;
         if (churchId) {
             // Si churchId est fourni, utiliser connect

@@ -28,6 +28,8 @@ model Church {
   quantity      String         @default("1")
   address       String?
   picture       String?
+  longitude     String?
+  latitude      String?
   phone         String?
   anthem        String?
   facebook      String?

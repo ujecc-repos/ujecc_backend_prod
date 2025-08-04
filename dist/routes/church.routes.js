@@ -9,7 +9,7 @@ const upload_1 = __importDefault(require("../utils/upload"));
 const router = express_1.default.Router();
 // Create a new church
 router.post('/', async (req, res) => {
-    const { name, commune, sectionCommunale, departement } = req.body;
+    const { name, commune, sectionCommunale, departement, longitude, latitude } = req.body;
     try {
         const isChurchExist = await client_1.prisma.church.findUnique({
             where: {
@@ -22,7 +22,9 @@ router.post('/', async (req, res) => {
         // Prepare church data
         const churchData = {
             name,
-            address: `${commune}, ${sectionCommunale}, ${departement}`
+            address: `${commune}, ${sectionCommunale}, ${departement}`,
+            longitude: longitude || "",
+            latitude: latitude || ""
         };
         // Only connect to mission if one is provided
         if (req.body.mission) {
