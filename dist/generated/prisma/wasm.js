@@ -447,6 +447,23 @@ exports.Prisma.PasteurScalarFieldEnum = {
   churchId: 'churchId'
 };
 
+exports.Prisma.DepartementScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.CommuneScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  departementId: 'departementId'
+};
+
+exports.Prisma.SectionCommunaleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  communeId: 'communeId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -732,6 +749,23 @@ exports.Prisma.pasteurOrderByRelevanceFieldEnum = {
   status: 'status',
   churchId: 'churchId'
 };
+
+exports.Prisma.DepartementOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.CommuneOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  departementId: 'departementId'
+};
+
+exports.Prisma.SectionCommunaleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  communeId: 'communeId'
+};
 exports.Role = exports.$Enums.Role = {
   Admin: 'Admin',
   Membre: 'Membre',
@@ -761,7 +795,10 @@ exports.Prisma.ModelName = {
   Mission: 'Mission',
   sanction: 'sanction',
   ministry: 'ministry',
-  pasteur: 'pasteur'
+  pasteur: 'pasteur',
+  Departement: 'Departement',
+  Commune: 'Commune',
+  SectionCommunale: 'SectionCommunale'
 };
 
 /**

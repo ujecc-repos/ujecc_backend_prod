@@ -123,6 +123,21 @@ export type ministry = $Result.DefaultSelection<Prisma.$ministryPayload>
  * 
  */
 export type pasteur = $Result.DefaultSelection<Prisma.$pasteurPayload>
+/**
+ * Model Departement
+ * 
+ */
+export type Departement = $Result.DefaultSelection<Prisma.$DepartementPayload>
+/**
+ * Model Commune
+ * 
+ */
+export type Commune = $Result.DefaultSelection<Prisma.$CommunePayload>
+/**
+ * Model SectionCommunale
+ * 
+ */
+export type SectionCommunale = $Result.DefaultSelection<Prisma.$SectionCommunalePayload>
 
 /**
  * Enums
@@ -487,6 +502,36 @@ export class PrismaClient<
     * ```
     */
   get pasteur(): Prisma.pasteurDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.departement`: Exposes CRUD operations for the **Departement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Departements
+    * const departements = await prisma.departement.findMany()
+    * ```
+    */
+  get departement(): Prisma.DepartementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.commune`: Exposes CRUD operations for the **Commune** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Communes
+    * const communes = await prisma.commune.findMany()
+    * ```
+    */
+  get commune(): Prisma.CommuneDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sectionCommunale`: Exposes CRUD operations for the **SectionCommunale** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SectionCommunales
+    * const sectionCommunales = await prisma.sectionCommunale.findMany()
+    * ```
+    */
+  get sectionCommunale(): Prisma.SectionCommunaleDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -948,7 +993,10 @@ export namespace Prisma {
     Mission: 'Mission',
     sanction: 'sanction',
     ministry: 'ministry',
-    pasteur: 'pasteur'
+    pasteur: 'pasteur',
+    Departement: 'Departement',
+    Commune: 'Commune',
+    SectionCommunale: 'SectionCommunale'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -967,7 +1015,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur"
+      modelProps: "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2423,6 +2471,204 @@ export namespace Prisma {
           }
         }
       }
+      Departement: {
+        payload: Prisma.$DepartementPayload<ExtArgs>
+        fields: Prisma.DepartementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          findMany: {
+            args: Prisma.DepartementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>[]
+          }
+          create: {
+            args: Prisma.DepartementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          createMany: {
+            args: Prisma.DepartementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DepartementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          update: {
+            args: Prisma.DepartementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DepartementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartementPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartement>
+          }
+          groupBy: {
+            args: Prisma.DepartementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartementCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartementCountAggregateOutputType> | number
+          }
+        }
+      }
+      Commune: {
+        payload: Prisma.$CommunePayload<ExtArgs>
+        fields: Prisma.CommuneFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CommuneFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CommuneFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          findFirst: {
+            args: Prisma.CommuneFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CommuneFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          findMany: {
+            args: Prisma.CommuneFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>[]
+          }
+          create: {
+            args: Prisma.CommuneCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          createMany: {
+            args: Prisma.CommuneCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.CommuneDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          update: {
+            args: Prisma.CommuneUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          deleteMany: {
+            args: Prisma.CommuneDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CommuneUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CommuneUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommunePayload>
+          }
+          aggregate: {
+            args: Prisma.CommuneAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCommune>
+          }
+          groupBy: {
+            args: Prisma.CommuneGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommuneGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CommuneCountArgs<ExtArgs>
+            result: $Utils.Optional<CommuneCountAggregateOutputType> | number
+          }
+        }
+      }
+      SectionCommunale: {
+        payload: Prisma.$SectionCommunalePayload<ExtArgs>
+        fields: Prisma.SectionCommunaleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SectionCommunaleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SectionCommunaleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          findFirst: {
+            args: Prisma.SectionCommunaleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SectionCommunaleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          findMany: {
+            args: Prisma.SectionCommunaleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>[]
+          }
+          create: {
+            args: Prisma.SectionCommunaleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          createMany: {
+            args: Prisma.SectionCommunaleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SectionCommunaleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          update: {
+            args: Prisma.SectionCommunaleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          deleteMany: {
+            args: Prisma.SectionCommunaleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SectionCommunaleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SectionCommunaleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SectionCommunalePayload>
+          }
+          aggregate: {
+            args: Prisma.SectionCommunaleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSectionCommunale>
+          }
+          groupBy: {
+            args: Prisma.SectionCommunaleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SectionCommunaleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SectionCommunaleCountArgs<ExtArgs>
+            result: $Utils.Optional<SectionCommunaleCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2529,6 +2775,9 @@ export namespace Prisma {
     sanction?: sanctionOmit
     ministry?: ministryOmit
     pasteur?: pasteurOmit
+    departement?: DepartementOmit
+    commune?: CommuneOmit
+    sectionCommunale?: SectionCommunaleOmit
   }
 
   /* Types for Logging */
@@ -3026,6 +3275,68 @@ export namespace Prisma {
    */
   export type MissionCountOutputTypeCountChurchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChurchWhereInput
+  }
+
+
+  /**
+   * Count Type DepartementCountOutputType
+   */
+
+  export type DepartementCountOutputType = {
+    commune: number
+  }
+
+  export type DepartementCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    commune?: boolean | DepartementCountOutputTypeCountCommuneArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartementCountOutputType without action
+   */
+  export type DepartementCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartementCountOutputType
+     */
+    select?: DepartementCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartementCountOutputType without action
+   */
+  export type DepartementCountOutputTypeCountCommuneArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommuneWhereInput
+  }
+
+
+  /**
+   * Count Type CommuneCountOutputType
+   */
+
+  export type CommuneCountOutputType = {
+    sectionCommunale: number
+  }
+
+  export type CommuneCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sectionCommunale?: boolean | CommuneCountOutputTypeCountSectionCommunaleArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CommuneCountOutputType without action
+   */
+  export type CommuneCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CommuneCountOutputType
+     */
+    select?: CommuneCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CommuneCountOutputType without action
+   */
+  export type CommuneCountOutputTypeCountSectionCommunaleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SectionCommunaleWhereInput
   }
 
 
@@ -26567,6 +26878,2772 @@ export namespace Prisma {
 
 
   /**
+   * Model Departement
+   */
+
+  export type AggregateDepartement = {
+    _count: DepartementCountAggregateOutputType | null
+    _min: DepartementMinAggregateOutputType | null
+    _max: DepartementMaxAggregateOutputType | null
+  }
+
+  export type DepartementMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type DepartementMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type DepartementCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type DepartementMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type DepartementMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type DepartementCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type DepartementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departement to aggregate.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Departements
+    **/
+    _count?: true | DepartementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartementMaxAggregateInputType
+  }
+
+  export type GetDepartementAggregateType<T extends DepartementAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartement[P]>
+      : GetScalarType<T[P], AggregateDepartement[P]>
+  }
+
+
+
+
+  export type DepartementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartementWhereInput
+    orderBy?: DepartementOrderByWithAggregationInput | DepartementOrderByWithAggregationInput[]
+    by: DepartementScalarFieldEnum[] | DepartementScalarFieldEnum
+    having?: DepartementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartementCountAggregateInputType | true
+    _min?: DepartementMinAggregateInputType
+    _max?: DepartementMaxAggregateInputType
+  }
+
+  export type DepartementGroupByOutputType = {
+    id: string
+    name: string
+    _count: DepartementCountAggregateOutputType | null
+    _min: DepartementMinAggregateOutputType | null
+    _max: DepartementMaxAggregateOutputType | null
+  }
+
+  type GetDepartementGroupByPayload<T extends DepartementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartementGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    commune?: boolean | Departement$communeArgs<ExtArgs>
+    _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["departement"]>
+
+
+
+  export type DepartementSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type DepartementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["departement"]>
+  export type DepartementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    commune?: boolean | Departement$communeArgs<ExtArgs>
+    _count?: boolean | DepartementCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $DepartementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Departement"
+    objects: {
+      commune: Prisma.$CommunePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+    }, ExtArgs["result"]["departement"]>
+    composites: {}
+  }
+
+  type DepartementGetPayload<S extends boolean | null | undefined | DepartementDefaultArgs> = $Result.GetResult<Prisma.$DepartementPayload, S>
+
+  type DepartementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartementCountAggregateInputType | true
+    }
+
+  export interface DepartementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Departement'], meta: { name: 'Departement' } }
+    /**
+     * Find zero or one Departement that matches the filter.
+     * @param {DepartementFindUniqueArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartementFindUniqueArgs>(args: SelectSubset<T, DepartementFindUniqueArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Departement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartementFindUniqueOrThrowArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartementFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindFirstArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartementFindFirstArgs>(args?: SelectSubset<T, DepartementFindFirstArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Departement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindFirstOrThrowArgs} args - Arguments to find a Departement
+     * @example
+     * // Get one Departement
+     * const departement = await prisma.departement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartementFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartementFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Departements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Departements
+     * const departements = await prisma.departement.findMany()
+     * 
+     * // Get first 10 Departements
+     * const departements = await prisma.departement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departementWithIdOnly = await prisma.departement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartementFindManyArgs>(args?: SelectSubset<T, DepartementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Departement.
+     * @param {DepartementCreateArgs} args - Arguments to create a Departement.
+     * @example
+     * // Create one Departement
+     * const Departement = await prisma.departement.create({
+     *   data: {
+     *     // ... data to create a Departement
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartementCreateArgs>(args: SelectSubset<T, DepartementCreateArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Departements.
+     * @param {DepartementCreateManyArgs} args - Arguments to create many Departements.
+     * @example
+     * // Create many Departements
+     * const departement = await prisma.departement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartementCreateManyArgs>(args?: SelectSubset<T, DepartementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Departement.
+     * @param {DepartementDeleteArgs} args - Arguments to delete one Departement.
+     * @example
+     * // Delete one Departement
+     * const Departement = await prisma.departement.delete({
+     *   where: {
+     *     // ... filter to delete one Departement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartementDeleteArgs>(args: SelectSubset<T, DepartementDeleteArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Departement.
+     * @param {DepartementUpdateArgs} args - Arguments to update one Departement.
+     * @example
+     * // Update one Departement
+     * const departement = await prisma.departement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartementUpdateArgs>(args: SelectSubset<T, DepartementUpdateArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Departements.
+     * @param {DepartementDeleteManyArgs} args - Arguments to filter Departements to delete.
+     * @example
+     * // Delete a few Departements
+     * const { count } = await prisma.departement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartementDeleteManyArgs>(args?: SelectSubset<T, DepartementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Departements
+     * const departement = await prisma.departement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartementUpdateManyArgs>(args: SelectSubset<T, DepartementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Departement.
+     * @param {DepartementUpsertArgs} args - Arguments to update or create a Departement.
+     * @example
+     * // Update or create a Departement
+     * const departement = await prisma.departement.upsert({
+     *   create: {
+     *     // ... data to create a Departement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Departement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartementUpsertArgs>(args: SelectSubset<T, DepartementUpsertArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Departements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementCountArgs} args - Arguments to filter Departements to count.
+     * @example
+     * // Count the number of Departements
+     * const count = await prisma.departement.count({
+     *   where: {
+     *     // ... the filter for the Departements we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartementCountArgs>(
+      args?: Subset<T, DepartementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Departement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartementAggregateArgs>(args: Subset<T, DepartementAggregateArgs>): Prisma.PrismaPromise<GetDepartementAggregateType<T>>
+
+    /**
+     * Group by Departement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartementGroupByArgs['orderBy'] }
+        : { orderBy?: DepartementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Departement model
+   */
+  readonly fields: DepartementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Departement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    commune<T extends Departement$communeArgs<ExtArgs> = {}>(args?: Subset<T, Departement$communeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Departement model
+   */
+  interface DepartementFieldRefs {
+    readonly id: FieldRef<"Departement", 'String'>
+    readonly name: FieldRef<"Departement", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Departement findUnique
+   */
+  export type DepartementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement findUniqueOrThrow
+   */
+  export type DepartementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement findFirst
+   */
+  export type DepartementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departements.
+     */
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement findFirstOrThrow
+   */
+  export type DepartementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departement to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departements.
+     */
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement findMany
+   */
+  export type DepartementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter, which Departements to fetch.
+     */
+    where?: DepartementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departements to fetch.
+     */
+    orderBy?: DepartementOrderByWithRelationInput | DepartementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Departements.
+     */
+    cursor?: DepartementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departements.
+     */
+    skip?: number
+    distinct?: DepartementScalarFieldEnum | DepartementScalarFieldEnum[]
+  }
+
+  /**
+   * Departement create
+   */
+  export type DepartementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Departement.
+     */
+    data: XOR<DepartementCreateInput, DepartementUncheckedCreateInput>
+  }
+
+  /**
+   * Departement createMany
+   */
+  export type DepartementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Departements.
+     */
+    data: DepartementCreateManyInput | DepartementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Departement update
+   */
+  export type DepartementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Departement.
+     */
+    data: XOR<DepartementUpdateInput, DepartementUncheckedUpdateInput>
+    /**
+     * Choose, which Departement to update.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement updateMany
+   */
+  export type DepartementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Departements.
+     */
+    data: XOR<DepartementUpdateManyMutationInput, DepartementUncheckedUpdateManyInput>
+    /**
+     * Filter which Departements to update
+     */
+    where?: DepartementWhereInput
+    /**
+     * Limit how many Departements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departement upsert
+   */
+  export type DepartementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Departement to update in case it exists.
+     */
+    where: DepartementWhereUniqueInput
+    /**
+     * In case the Departement found by the `where` argument doesn't exist, create a new Departement with this data.
+     */
+    create: XOR<DepartementCreateInput, DepartementUncheckedCreateInput>
+    /**
+     * In case the Departement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartementUpdateInput, DepartementUncheckedUpdateInput>
+  }
+
+  /**
+   * Departement delete
+   */
+  export type DepartementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+    /**
+     * Filter which Departement to delete.
+     */
+    where: DepartementWhereUniqueInput
+  }
+
+  /**
+   * Departement deleteMany
+   */
+  export type DepartementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departements to delete
+     */
+    where?: DepartementWhereInput
+    /**
+     * Limit how many Departements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Departement.commune
+   */
+  export type Departement$communeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    where?: CommuneWhereInput
+    orderBy?: CommuneOrderByWithRelationInput | CommuneOrderByWithRelationInput[]
+    cursor?: CommuneWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * Departement without action
+   */
+  export type DepartementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Departement
+     */
+    select?: DepartementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Departement
+     */
+    omit?: DepartementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartementInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Commune
+   */
+
+  export type AggregateCommune = {
+    _count: CommuneCountAggregateOutputType | null
+    _min: CommuneMinAggregateOutputType | null
+    _max: CommuneMaxAggregateOutputType | null
+  }
+
+  export type CommuneMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    departementId: string | null
+  }
+
+  export type CommuneMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    departementId: string | null
+  }
+
+  export type CommuneCountAggregateOutputType = {
+    id: number
+    name: number
+    departementId: number
+    _all: number
+  }
+
+
+  export type CommuneMinAggregateInputType = {
+    id?: true
+    name?: true
+    departementId?: true
+  }
+
+  export type CommuneMaxAggregateInputType = {
+    id?: true
+    name?: true
+    departementId?: true
+  }
+
+  export type CommuneCountAggregateInputType = {
+    id?: true
+    name?: true
+    departementId?: true
+    _all?: true
+  }
+
+  export type CommuneAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Commune to aggregate.
+     */
+    where?: CommuneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communes to fetch.
+     */
+    orderBy?: CommuneOrderByWithRelationInput | CommuneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CommuneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Communes
+    **/
+    _count?: true | CommuneCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommuneMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommuneMaxAggregateInputType
+  }
+
+  export type GetCommuneAggregateType<T extends CommuneAggregateArgs> = {
+        [P in keyof T & keyof AggregateCommune]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCommune[P]>
+      : GetScalarType<T[P], AggregateCommune[P]>
+  }
+
+
+
+
+  export type CommuneGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommuneWhereInput
+    orderBy?: CommuneOrderByWithAggregationInput | CommuneOrderByWithAggregationInput[]
+    by: CommuneScalarFieldEnum[] | CommuneScalarFieldEnum
+    having?: CommuneScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommuneCountAggregateInputType | true
+    _min?: CommuneMinAggregateInputType
+    _max?: CommuneMaxAggregateInputType
+  }
+
+  export type CommuneGroupByOutputType = {
+    id: string
+    name: string
+    departementId: string
+    _count: CommuneCountAggregateOutputType | null
+    _min: CommuneMinAggregateOutputType | null
+    _max: CommuneMaxAggregateOutputType | null
+  }
+
+  type GetCommuneGroupByPayload<T extends CommuneGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommuneGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommuneGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommuneGroupByOutputType[P]>
+            : GetScalarType<T[P], CommuneGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CommuneSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    departementId?: boolean
+    departement?: boolean | DepartementDefaultArgs<ExtArgs>
+    sectionCommunale?: boolean | Commune$sectionCommunaleArgs<ExtArgs>
+    _count?: boolean | CommuneCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commune"]>
+
+
+
+  export type CommuneSelectScalar = {
+    id?: boolean
+    name?: boolean
+    departementId?: boolean
+  }
+
+  export type CommuneOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "departementId", ExtArgs["result"]["commune"]>
+  export type CommuneInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    departement?: boolean | DepartementDefaultArgs<ExtArgs>
+    sectionCommunale?: boolean | Commune$sectionCommunaleArgs<ExtArgs>
+    _count?: boolean | CommuneCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $CommunePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Commune"
+    objects: {
+      departement: Prisma.$DepartementPayload<ExtArgs>
+      sectionCommunale: Prisma.$SectionCommunalePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      departementId: string
+    }, ExtArgs["result"]["commune"]>
+    composites: {}
+  }
+
+  type CommuneGetPayload<S extends boolean | null | undefined | CommuneDefaultArgs> = $Result.GetResult<Prisma.$CommunePayload, S>
+
+  type CommuneCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommuneFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommuneCountAggregateInputType | true
+    }
+
+  export interface CommuneDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Commune'], meta: { name: 'Commune' } }
+    /**
+     * Find zero or one Commune that matches the filter.
+     * @param {CommuneFindUniqueArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CommuneFindUniqueArgs>(args: SelectSubset<T, CommuneFindUniqueArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Commune that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CommuneFindUniqueOrThrowArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CommuneFindUniqueOrThrowArgs>(args: SelectSubset<T, CommuneFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commune that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneFindFirstArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CommuneFindFirstArgs>(args?: SelectSubset<T, CommuneFindFirstArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commune that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneFindFirstOrThrowArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CommuneFindFirstOrThrowArgs>(args?: SelectSubset<T, CommuneFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Communes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Communes
+     * const communes = await prisma.commune.findMany()
+     * 
+     * // Get first 10 Communes
+     * const communes = await prisma.commune.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const communeWithIdOnly = await prisma.commune.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CommuneFindManyArgs>(args?: SelectSubset<T, CommuneFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Commune.
+     * @param {CommuneCreateArgs} args - Arguments to create a Commune.
+     * @example
+     * // Create one Commune
+     * const Commune = await prisma.commune.create({
+     *   data: {
+     *     // ... data to create a Commune
+     *   }
+     * })
+     * 
+     */
+    create<T extends CommuneCreateArgs>(args: SelectSubset<T, CommuneCreateArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Communes.
+     * @param {CommuneCreateManyArgs} args - Arguments to create many Communes.
+     * @example
+     * // Create many Communes
+     * const commune = await prisma.commune.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CommuneCreateManyArgs>(args?: SelectSubset<T, CommuneCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Commune.
+     * @param {CommuneDeleteArgs} args - Arguments to delete one Commune.
+     * @example
+     * // Delete one Commune
+     * const Commune = await prisma.commune.delete({
+     *   where: {
+     *     // ... filter to delete one Commune
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CommuneDeleteArgs>(args: SelectSubset<T, CommuneDeleteArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Commune.
+     * @param {CommuneUpdateArgs} args - Arguments to update one Commune.
+     * @example
+     * // Update one Commune
+     * const commune = await prisma.commune.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CommuneUpdateArgs>(args: SelectSubset<T, CommuneUpdateArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Communes.
+     * @param {CommuneDeleteManyArgs} args - Arguments to filter Communes to delete.
+     * @example
+     * // Delete a few Communes
+     * const { count } = await prisma.commune.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CommuneDeleteManyArgs>(args?: SelectSubset<T, CommuneDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Communes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Communes
+     * const commune = await prisma.commune.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CommuneUpdateManyArgs>(args: SelectSubset<T, CommuneUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Commune.
+     * @param {CommuneUpsertArgs} args - Arguments to update or create a Commune.
+     * @example
+     * // Update or create a Commune
+     * const commune = await prisma.commune.upsert({
+     *   create: {
+     *     // ... data to create a Commune
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Commune we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CommuneUpsertArgs>(args: SelectSubset<T, CommuneUpsertArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Communes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneCountArgs} args - Arguments to filter Communes to count.
+     * @example
+     * // Count the number of Communes
+     * const count = await prisma.commune.count({
+     *   where: {
+     *     // ... the filter for the Communes we want to count
+     *   }
+     * })
+    **/
+    count<T extends CommuneCountArgs>(
+      args?: Subset<T, CommuneCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommuneCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Commune.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommuneAggregateArgs>(args: Subset<T, CommuneAggregateArgs>): Prisma.PrismaPromise<GetCommuneAggregateType<T>>
+
+    /**
+     * Group by Commune.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CommuneGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CommuneGroupByArgs['orderBy'] }
+        : { orderBy?: CommuneGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CommuneGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommuneGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Commune model
+   */
+  readonly fields: CommuneFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Commune.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CommuneClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    departement<T extends DepartementDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartementDefaultArgs<ExtArgs>>): Prisma__DepartementClient<$Result.GetResult<Prisma.$DepartementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sectionCommunale<T extends Commune$sectionCommunaleArgs<ExtArgs> = {}>(args?: Subset<T, Commune$sectionCommunaleArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Commune model
+   */
+  interface CommuneFieldRefs {
+    readonly id: FieldRef<"Commune", 'String'>
+    readonly name: FieldRef<"Commune", 'String'>
+    readonly departementId: FieldRef<"Commune", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Commune findUnique
+   */
+  export type CommuneFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter, which Commune to fetch.
+     */
+    where: CommuneWhereUniqueInput
+  }
+
+  /**
+   * Commune findUniqueOrThrow
+   */
+  export type CommuneFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter, which Commune to fetch.
+     */
+    where: CommuneWhereUniqueInput
+  }
+
+  /**
+   * Commune findFirst
+   */
+  export type CommuneFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter, which Commune to fetch.
+     */
+    where?: CommuneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communes to fetch.
+     */
+    orderBy?: CommuneOrderByWithRelationInput | CommuneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Communes.
+     */
+    cursor?: CommuneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Communes.
+     */
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * Commune findFirstOrThrow
+   */
+  export type CommuneFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter, which Commune to fetch.
+     */
+    where?: CommuneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communes to fetch.
+     */
+    orderBy?: CommuneOrderByWithRelationInput | CommuneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Communes.
+     */
+    cursor?: CommuneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Communes.
+     */
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * Commune findMany
+   */
+  export type CommuneFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter, which Communes to fetch.
+     */
+    where?: CommuneWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Communes to fetch.
+     */
+    orderBy?: CommuneOrderByWithRelationInput | CommuneOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Communes.
+     */
+    cursor?: CommuneWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Communes.
+     */
+    skip?: number
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * Commune create
+   */
+  export type CommuneCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Commune.
+     */
+    data: XOR<CommuneCreateInput, CommuneUncheckedCreateInput>
+  }
+
+  /**
+   * Commune createMany
+   */
+  export type CommuneCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Communes.
+     */
+    data: CommuneCreateManyInput | CommuneCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Commune update
+   */
+  export type CommuneUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Commune.
+     */
+    data: XOR<CommuneUpdateInput, CommuneUncheckedUpdateInput>
+    /**
+     * Choose, which Commune to update.
+     */
+    where: CommuneWhereUniqueInput
+  }
+
+  /**
+   * Commune updateMany
+   */
+  export type CommuneUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Communes.
+     */
+    data: XOR<CommuneUpdateManyMutationInput, CommuneUncheckedUpdateManyInput>
+    /**
+     * Filter which Communes to update
+     */
+    where?: CommuneWhereInput
+    /**
+     * Limit how many Communes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Commune upsert
+   */
+  export type CommuneUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Commune to update in case it exists.
+     */
+    where: CommuneWhereUniqueInput
+    /**
+     * In case the Commune found by the `where` argument doesn't exist, create a new Commune with this data.
+     */
+    create: XOR<CommuneCreateInput, CommuneUncheckedCreateInput>
+    /**
+     * In case the Commune was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommuneUpdateInput, CommuneUncheckedUpdateInput>
+  }
+
+  /**
+   * Commune delete
+   */
+  export type CommuneDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+    /**
+     * Filter which Commune to delete.
+     */
+    where: CommuneWhereUniqueInput
+  }
+
+  /**
+   * Commune deleteMany
+   */
+  export type CommuneDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Communes to delete
+     */
+    where?: CommuneWhereInput
+    /**
+     * Limit how many Communes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Commune.sectionCommunale
+   */
+  export type Commune$sectionCommunaleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    where?: SectionCommunaleWhereInput
+    orderBy?: SectionCommunaleOrderByWithRelationInput | SectionCommunaleOrderByWithRelationInput[]
+    cursor?: SectionCommunaleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SectionCommunaleScalarFieldEnum | SectionCommunaleScalarFieldEnum[]
+  }
+
+  /**
+   * Commune without action
+   */
+  export type CommuneDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Commune
+     */
+    select?: CommuneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Commune
+     */
+    omit?: CommuneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommuneInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SectionCommunale
+   */
+
+  export type AggregateSectionCommunale = {
+    _count: SectionCommunaleCountAggregateOutputType | null
+    _min: SectionCommunaleMinAggregateOutputType | null
+    _max: SectionCommunaleMaxAggregateOutputType | null
+  }
+
+  export type SectionCommunaleMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    communeId: string | null
+  }
+
+  export type SectionCommunaleMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    communeId: string | null
+  }
+
+  export type SectionCommunaleCountAggregateOutputType = {
+    id: number
+    name: number
+    communeId: number
+    _all: number
+  }
+
+
+  export type SectionCommunaleMinAggregateInputType = {
+    id?: true
+    name?: true
+    communeId?: true
+  }
+
+  export type SectionCommunaleMaxAggregateInputType = {
+    id?: true
+    name?: true
+    communeId?: true
+  }
+
+  export type SectionCommunaleCountAggregateInputType = {
+    id?: true
+    name?: true
+    communeId?: true
+    _all?: true
+  }
+
+  export type SectionCommunaleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SectionCommunale to aggregate.
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SectionCommunales to fetch.
+     */
+    orderBy?: SectionCommunaleOrderByWithRelationInput | SectionCommunaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SectionCommunaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SectionCommunales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SectionCommunales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SectionCommunales
+    **/
+    _count?: true | SectionCommunaleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SectionCommunaleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SectionCommunaleMaxAggregateInputType
+  }
+
+  export type GetSectionCommunaleAggregateType<T extends SectionCommunaleAggregateArgs> = {
+        [P in keyof T & keyof AggregateSectionCommunale]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSectionCommunale[P]>
+      : GetScalarType<T[P], AggregateSectionCommunale[P]>
+  }
+
+
+
+
+  export type SectionCommunaleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SectionCommunaleWhereInput
+    orderBy?: SectionCommunaleOrderByWithAggregationInput | SectionCommunaleOrderByWithAggregationInput[]
+    by: SectionCommunaleScalarFieldEnum[] | SectionCommunaleScalarFieldEnum
+    having?: SectionCommunaleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SectionCommunaleCountAggregateInputType | true
+    _min?: SectionCommunaleMinAggregateInputType
+    _max?: SectionCommunaleMaxAggregateInputType
+  }
+
+  export type SectionCommunaleGroupByOutputType = {
+    id: string
+    name: string
+    communeId: string
+    _count: SectionCommunaleCountAggregateOutputType | null
+    _min: SectionCommunaleMinAggregateOutputType | null
+    _max: SectionCommunaleMaxAggregateOutputType | null
+  }
+
+  type GetSectionCommunaleGroupByPayload<T extends SectionCommunaleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SectionCommunaleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SectionCommunaleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SectionCommunaleGroupByOutputType[P]>
+            : GetScalarType<T[P], SectionCommunaleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SectionCommunaleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    communeId?: boolean
+    commune?: boolean | CommuneDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sectionCommunale"]>
+
+
+
+  export type SectionCommunaleSelectScalar = {
+    id?: boolean
+    name?: boolean
+    communeId?: boolean
+  }
+
+  export type SectionCommunaleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "communeId", ExtArgs["result"]["sectionCommunale"]>
+  export type SectionCommunaleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    commune?: boolean | CommuneDefaultArgs<ExtArgs>
+  }
+
+  export type $SectionCommunalePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SectionCommunale"
+    objects: {
+      commune: Prisma.$CommunePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      communeId: string
+    }, ExtArgs["result"]["sectionCommunale"]>
+    composites: {}
+  }
+
+  type SectionCommunaleGetPayload<S extends boolean | null | undefined | SectionCommunaleDefaultArgs> = $Result.GetResult<Prisma.$SectionCommunalePayload, S>
+
+  type SectionCommunaleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SectionCommunaleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SectionCommunaleCountAggregateInputType | true
+    }
+
+  export interface SectionCommunaleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SectionCommunale'], meta: { name: 'SectionCommunale' } }
+    /**
+     * Find zero or one SectionCommunale that matches the filter.
+     * @param {SectionCommunaleFindUniqueArgs} args - Arguments to find a SectionCommunale
+     * @example
+     * // Get one SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SectionCommunaleFindUniqueArgs>(args: SelectSubset<T, SectionCommunaleFindUniqueArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SectionCommunale that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SectionCommunaleFindUniqueOrThrowArgs} args - Arguments to find a SectionCommunale
+     * @example
+     * // Get one SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SectionCommunaleFindUniqueOrThrowArgs>(args: SelectSubset<T, SectionCommunaleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SectionCommunale that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleFindFirstArgs} args - Arguments to find a SectionCommunale
+     * @example
+     * // Get one SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SectionCommunaleFindFirstArgs>(args?: SelectSubset<T, SectionCommunaleFindFirstArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SectionCommunale that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleFindFirstOrThrowArgs} args - Arguments to find a SectionCommunale
+     * @example
+     * // Get one SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SectionCommunaleFindFirstOrThrowArgs>(args?: SelectSubset<T, SectionCommunaleFindFirstOrThrowArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SectionCommunales that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SectionCommunales
+     * const sectionCommunales = await prisma.sectionCommunale.findMany()
+     * 
+     * // Get first 10 SectionCommunales
+     * const sectionCommunales = await prisma.sectionCommunale.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sectionCommunaleWithIdOnly = await prisma.sectionCommunale.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SectionCommunaleFindManyArgs>(args?: SelectSubset<T, SectionCommunaleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SectionCommunale.
+     * @param {SectionCommunaleCreateArgs} args - Arguments to create a SectionCommunale.
+     * @example
+     * // Create one SectionCommunale
+     * const SectionCommunale = await prisma.sectionCommunale.create({
+     *   data: {
+     *     // ... data to create a SectionCommunale
+     *   }
+     * })
+     * 
+     */
+    create<T extends SectionCommunaleCreateArgs>(args: SelectSubset<T, SectionCommunaleCreateArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SectionCommunales.
+     * @param {SectionCommunaleCreateManyArgs} args - Arguments to create many SectionCommunales.
+     * @example
+     * // Create many SectionCommunales
+     * const sectionCommunale = await prisma.sectionCommunale.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SectionCommunaleCreateManyArgs>(args?: SelectSubset<T, SectionCommunaleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SectionCommunale.
+     * @param {SectionCommunaleDeleteArgs} args - Arguments to delete one SectionCommunale.
+     * @example
+     * // Delete one SectionCommunale
+     * const SectionCommunale = await prisma.sectionCommunale.delete({
+     *   where: {
+     *     // ... filter to delete one SectionCommunale
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SectionCommunaleDeleteArgs>(args: SelectSubset<T, SectionCommunaleDeleteArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SectionCommunale.
+     * @param {SectionCommunaleUpdateArgs} args - Arguments to update one SectionCommunale.
+     * @example
+     * // Update one SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SectionCommunaleUpdateArgs>(args: SelectSubset<T, SectionCommunaleUpdateArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SectionCommunales.
+     * @param {SectionCommunaleDeleteManyArgs} args - Arguments to filter SectionCommunales to delete.
+     * @example
+     * // Delete a few SectionCommunales
+     * const { count } = await prisma.sectionCommunale.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SectionCommunaleDeleteManyArgs>(args?: SelectSubset<T, SectionCommunaleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SectionCommunales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SectionCommunales
+     * const sectionCommunale = await prisma.sectionCommunale.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SectionCommunaleUpdateManyArgs>(args: SelectSubset<T, SectionCommunaleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SectionCommunale.
+     * @param {SectionCommunaleUpsertArgs} args - Arguments to update or create a SectionCommunale.
+     * @example
+     * // Update or create a SectionCommunale
+     * const sectionCommunale = await prisma.sectionCommunale.upsert({
+     *   create: {
+     *     // ... data to create a SectionCommunale
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SectionCommunale we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SectionCommunaleUpsertArgs>(args: SelectSubset<T, SectionCommunaleUpsertArgs<ExtArgs>>): Prisma__SectionCommunaleClient<$Result.GetResult<Prisma.$SectionCommunalePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SectionCommunales.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleCountArgs} args - Arguments to filter SectionCommunales to count.
+     * @example
+     * // Count the number of SectionCommunales
+     * const count = await prisma.sectionCommunale.count({
+     *   where: {
+     *     // ... the filter for the SectionCommunales we want to count
+     *   }
+     * })
+    **/
+    count<T extends SectionCommunaleCountArgs>(
+      args?: Subset<T, SectionCommunaleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SectionCommunaleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SectionCommunale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SectionCommunaleAggregateArgs>(args: Subset<T, SectionCommunaleAggregateArgs>): Prisma.PrismaPromise<GetSectionCommunaleAggregateType<T>>
+
+    /**
+     * Group by SectionCommunale.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCommunaleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SectionCommunaleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SectionCommunaleGroupByArgs['orderBy'] }
+        : { orderBy?: SectionCommunaleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SectionCommunaleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSectionCommunaleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SectionCommunale model
+   */
+  readonly fields: SectionCommunaleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SectionCommunale.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SectionCommunaleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    commune<T extends CommuneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CommuneDefaultArgs<ExtArgs>>): Prisma__CommuneClient<$Result.GetResult<Prisma.$CommunePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SectionCommunale model
+   */
+  interface SectionCommunaleFieldRefs {
+    readonly id: FieldRef<"SectionCommunale", 'String'>
+    readonly name: FieldRef<"SectionCommunale", 'String'>
+    readonly communeId: FieldRef<"SectionCommunale", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SectionCommunale findUnique
+   */
+  export type SectionCommunaleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter, which SectionCommunale to fetch.
+     */
+    where: SectionCommunaleWhereUniqueInput
+  }
+
+  /**
+   * SectionCommunale findUniqueOrThrow
+   */
+  export type SectionCommunaleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter, which SectionCommunale to fetch.
+     */
+    where: SectionCommunaleWhereUniqueInput
+  }
+
+  /**
+   * SectionCommunale findFirst
+   */
+  export type SectionCommunaleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter, which SectionCommunale to fetch.
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SectionCommunales to fetch.
+     */
+    orderBy?: SectionCommunaleOrderByWithRelationInput | SectionCommunaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SectionCommunales.
+     */
+    cursor?: SectionCommunaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SectionCommunales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SectionCommunales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SectionCommunales.
+     */
+    distinct?: SectionCommunaleScalarFieldEnum | SectionCommunaleScalarFieldEnum[]
+  }
+
+  /**
+   * SectionCommunale findFirstOrThrow
+   */
+  export type SectionCommunaleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter, which SectionCommunale to fetch.
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SectionCommunales to fetch.
+     */
+    orderBy?: SectionCommunaleOrderByWithRelationInput | SectionCommunaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SectionCommunales.
+     */
+    cursor?: SectionCommunaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SectionCommunales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SectionCommunales.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SectionCommunales.
+     */
+    distinct?: SectionCommunaleScalarFieldEnum | SectionCommunaleScalarFieldEnum[]
+  }
+
+  /**
+   * SectionCommunale findMany
+   */
+  export type SectionCommunaleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter, which SectionCommunales to fetch.
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SectionCommunales to fetch.
+     */
+    orderBy?: SectionCommunaleOrderByWithRelationInput | SectionCommunaleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SectionCommunales.
+     */
+    cursor?: SectionCommunaleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SectionCommunales from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SectionCommunales.
+     */
+    skip?: number
+    distinct?: SectionCommunaleScalarFieldEnum | SectionCommunaleScalarFieldEnum[]
+  }
+
+  /**
+   * SectionCommunale create
+   */
+  export type SectionCommunaleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SectionCommunale.
+     */
+    data: XOR<SectionCommunaleCreateInput, SectionCommunaleUncheckedCreateInput>
+  }
+
+  /**
+   * SectionCommunale createMany
+   */
+  export type SectionCommunaleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SectionCommunales.
+     */
+    data: SectionCommunaleCreateManyInput | SectionCommunaleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SectionCommunale update
+   */
+  export type SectionCommunaleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SectionCommunale.
+     */
+    data: XOR<SectionCommunaleUpdateInput, SectionCommunaleUncheckedUpdateInput>
+    /**
+     * Choose, which SectionCommunale to update.
+     */
+    where: SectionCommunaleWhereUniqueInput
+  }
+
+  /**
+   * SectionCommunale updateMany
+   */
+  export type SectionCommunaleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SectionCommunales.
+     */
+    data: XOR<SectionCommunaleUpdateManyMutationInput, SectionCommunaleUncheckedUpdateManyInput>
+    /**
+     * Filter which SectionCommunales to update
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * Limit how many SectionCommunales to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SectionCommunale upsert
+   */
+  export type SectionCommunaleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SectionCommunale to update in case it exists.
+     */
+    where: SectionCommunaleWhereUniqueInput
+    /**
+     * In case the SectionCommunale found by the `where` argument doesn't exist, create a new SectionCommunale with this data.
+     */
+    create: XOR<SectionCommunaleCreateInput, SectionCommunaleUncheckedCreateInput>
+    /**
+     * In case the SectionCommunale was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SectionCommunaleUpdateInput, SectionCommunaleUncheckedUpdateInput>
+  }
+
+  /**
+   * SectionCommunale delete
+   */
+  export type SectionCommunaleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+    /**
+     * Filter which SectionCommunale to delete.
+     */
+    where: SectionCommunaleWhereUniqueInput
+  }
+
+  /**
+   * SectionCommunale deleteMany
+   */
+  export type SectionCommunaleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SectionCommunales to delete
+     */
+    where?: SectionCommunaleWhereInput
+    /**
+     * Limit how many SectionCommunales to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SectionCommunale without action
+   */
+  export type SectionCommunaleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCommunale
+     */
+    select?: SectionCommunaleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SectionCommunale
+     */
+    omit?: SectionCommunaleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionCommunaleInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26973,6 +30050,32 @@ export namespace Prisma {
   export type PasteurScalarFieldEnum = (typeof PasteurScalarFieldEnum)[keyof typeof PasteurScalarFieldEnum]
 
 
+  export const DepartementScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type DepartementScalarFieldEnum = (typeof DepartementScalarFieldEnum)[keyof typeof DepartementScalarFieldEnum]
+
+
+  export const CommuneScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    departementId: 'departementId'
+  };
+
+  export type CommuneScalarFieldEnum = (typeof CommuneScalarFieldEnum)[keyof typeof CommuneScalarFieldEnum]
+
+
+  export const SectionCommunaleScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    communeId: 'communeId'
+  };
+
+  export type SectionCommunaleScalarFieldEnum = (typeof SectionCommunaleScalarFieldEnum)[keyof typeof SectionCommunaleScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -27329,6 +30432,32 @@ export namespace Prisma {
   };
 
   export type pasteurOrderByRelevanceFieldEnum = (typeof pasteurOrderByRelevanceFieldEnum)[keyof typeof pasteurOrderByRelevanceFieldEnum]
+
+
+  export const DepartementOrderByRelevanceFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type DepartementOrderByRelevanceFieldEnum = (typeof DepartementOrderByRelevanceFieldEnum)[keyof typeof DepartementOrderByRelevanceFieldEnum]
+
+
+  export const CommuneOrderByRelevanceFieldEnum: {
+    id: 'id',
+    name: 'name',
+    departementId: 'departementId'
+  };
+
+  export type CommuneOrderByRelevanceFieldEnum = (typeof CommuneOrderByRelevanceFieldEnum)[keyof typeof CommuneOrderByRelevanceFieldEnum]
+
+
+  export const SectionCommunaleOrderByRelevanceFieldEnum: {
+    id: 'id',
+    name: 'name',
+    communeId: 'communeId'
+  };
+
+  export type SectionCommunaleOrderByRelevanceFieldEnum = (typeof SectionCommunaleOrderByRelevanceFieldEnum)[keyof typeof SectionCommunaleOrderByRelevanceFieldEnum]
 
 
   /**
@@ -29472,6 +32601,142 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"pasteur"> | string
     status?: StringWithAggregatesFilter<"pasteur"> | string
     churchId?: StringNullableWithAggregatesFilter<"pasteur"> | string | null
+  }
+
+  export type DepartementWhereInput = {
+    AND?: DepartementWhereInput | DepartementWhereInput[]
+    OR?: DepartementWhereInput[]
+    NOT?: DepartementWhereInput | DepartementWhereInput[]
+    id?: StringFilter<"Departement"> | string
+    name?: StringFilter<"Departement"> | string
+    commune?: CommuneListRelationFilter
+  }
+
+  export type DepartementOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    commune?: CommuneOrderByRelationAggregateInput
+    _relevance?: DepartementOrderByRelevanceInput
+  }
+
+  export type DepartementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: DepartementWhereInput | DepartementWhereInput[]
+    OR?: DepartementWhereInput[]
+    NOT?: DepartementWhereInput | DepartementWhereInput[]
+    commune?: CommuneListRelationFilter
+  }, "id" | "name">
+
+  export type DepartementOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: DepartementCountOrderByAggregateInput
+    _max?: DepartementMaxOrderByAggregateInput
+    _min?: DepartementMinOrderByAggregateInput
+  }
+
+  export type DepartementScalarWhereWithAggregatesInput = {
+    AND?: DepartementScalarWhereWithAggregatesInput | DepartementScalarWhereWithAggregatesInput[]
+    OR?: DepartementScalarWhereWithAggregatesInput[]
+    NOT?: DepartementScalarWhereWithAggregatesInput | DepartementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Departement"> | string
+    name?: StringWithAggregatesFilter<"Departement"> | string
+  }
+
+  export type CommuneWhereInput = {
+    AND?: CommuneWhereInput | CommuneWhereInput[]
+    OR?: CommuneWhereInput[]
+    NOT?: CommuneWhereInput | CommuneWhereInput[]
+    id?: StringFilter<"Commune"> | string
+    name?: StringFilter<"Commune"> | string
+    departementId?: StringFilter<"Commune"> | string
+    departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+    sectionCommunale?: SectionCommunaleListRelationFilter
+  }
+
+  export type CommuneOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    departementId?: SortOrder
+    departement?: DepartementOrderByWithRelationInput
+    sectionCommunale?: SectionCommunaleOrderByRelationAggregateInput
+    _relevance?: CommuneOrderByRelevanceInput
+  }
+
+  export type CommuneWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: CommuneWhereInput | CommuneWhereInput[]
+    OR?: CommuneWhereInput[]
+    NOT?: CommuneWhereInput | CommuneWhereInput[]
+    departementId?: StringFilter<"Commune"> | string
+    departement?: XOR<DepartementScalarRelationFilter, DepartementWhereInput>
+    sectionCommunale?: SectionCommunaleListRelationFilter
+  }, "id" | "name">
+
+  export type CommuneOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    departementId?: SortOrder
+    _count?: CommuneCountOrderByAggregateInput
+    _max?: CommuneMaxOrderByAggregateInput
+    _min?: CommuneMinOrderByAggregateInput
+  }
+
+  export type CommuneScalarWhereWithAggregatesInput = {
+    AND?: CommuneScalarWhereWithAggregatesInput | CommuneScalarWhereWithAggregatesInput[]
+    OR?: CommuneScalarWhereWithAggregatesInput[]
+    NOT?: CommuneScalarWhereWithAggregatesInput | CommuneScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Commune"> | string
+    name?: StringWithAggregatesFilter<"Commune"> | string
+    departementId?: StringWithAggregatesFilter<"Commune"> | string
+  }
+
+  export type SectionCommunaleWhereInput = {
+    AND?: SectionCommunaleWhereInput | SectionCommunaleWhereInput[]
+    OR?: SectionCommunaleWhereInput[]
+    NOT?: SectionCommunaleWhereInput | SectionCommunaleWhereInput[]
+    id?: StringFilter<"SectionCommunale"> | string
+    name?: StringFilter<"SectionCommunale"> | string
+    communeId?: StringFilter<"SectionCommunale"> | string
+    commune?: XOR<CommuneScalarRelationFilter, CommuneWhereInput>
+  }
+
+  export type SectionCommunaleOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    communeId?: SortOrder
+    commune?: CommuneOrderByWithRelationInput
+    _relevance?: SectionCommunaleOrderByRelevanceInput
+  }
+
+  export type SectionCommunaleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    AND?: SectionCommunaleWhereInput | SectionCommunaleWhereInput[]
+    OR?: SectionCommunaleWhereInput[]
+    NOT?: SectionCommunaleWhereInput | SectionCommunaleWhereInput[]
+    communeId?: StringFilter<"SectionCommunale"> | string
+    commune?: XOR<CommuneScalarRelationFilter, CommuneWhereInput>
+  }, "id" | "name">
+
+  export type SectionCommunaleOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    communeId?: SortOrder
+    _count?: SectionCommunaleCountOrderByAggregateInput
+    _max?: SectionCommunaleMaxOrderByAggregateInput
+    _min?: SectionCommunaleMinOrderByAggregateInput
+  }
+
+  export type SectionCommunaleScalarWhereWithAggregatesInput = {
+    AND?: SectionCommunaleScalarWhereWithAggregatesInput | SectionCommunaleScalarWhereWithAggregatesInput[]
+    OR?: SectionCommunaleScalarWhereWithAggregatesInput[]
+    NOT?: SectionCommunaleScalarWhereWithAggregatesInput | SectionCommunaleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SectionCommunale"> | string
+    name?: StringWithAggregatesFilter<"SectionCommunale"> | string
+    communeId?: StringWithAggregatesFilter<"SectionCommunale"> | string
   }
 
   export type ChurchCreateInput = {
@@ -31864,6 +35129,131 @@ export namespace Prisma {
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type DepartementCreateInput = {
+    id?: string
+    name: string
+    commune?: CommuneCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementUncheckedCreateInput = {
+    id?: string
+    name: string
+    commune?: CommuneUncheckedCreateNestedManyWithoutDepartementInput
+  }
+
+  export type DepartementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    commune?: CommuneUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    commune?: CommuneUncheckedUpdateManyWithoutDepartementNestedInput
+  }
+
+  export type DepartementCreateManyInput = {
+    id?: string
+    name: string
+  }
+
+  export type DepartementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommuneCreateInput = {
+    id?: string
+    name: string
+    departement: DepartementCreateNestedOneWithoutCommuneInput
+    sectionCommunale?: SectionCommunaleCreateNestedManyWithoutCommuneInput
+  }
+
+  export type CommuneUncheckedCreateInput = {
+    id?: string
+    name: string
+    departementId: string
+    sectionCommunale?: SectionCommunaleUncheckedCreateNestedManyWithoutCommuneInput
+  }
+
+  export type CommuneUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    departement?: DepartementUpdateOneRequiredWithoutCommuneNestedInput
+    sectionCommunale?: SectionCommunaleUpdateManyWithoutCommuneNestedInput
+  }
+
+  export type CommuneUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    departementId?: StringFieldUpdateOperationsInput | string
+    sectionCommunale?: SectionCommunaleUncheckedUpdateManyWithoutCommuneNestedInput
+  }
+
+  export type CommuneCreateManyInput = {
+    id?: string
+    name: string
+    departementId: string
+  }
+
+  export type CommuneUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommuneUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    departementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleCreateInput = {
+    id?: string
+    name: string
+    commune: CommuneCreateNestedOneWithoutSectionCommunaleInput
+  }
+
+  export type SectionCommunaleUncheckedCreateInput = {
+    id?: string
+    name: string
+    communeId: string
+  }
+
+  export type SectionCommunaleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    commune?: CommuneUpdateOneRequiredWithoutSectionCommunaleNestedInput
+  }
+
+  export type SectionCommunaleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    communeId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleCreateManyInput = {
+    id?: string
+    name: string
+    communeId: string
+  }
+
+  export type SectionCommunaleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    communeId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -33411,6 +36801,105 @@ export namespace Prisma {
     address?: SortOrder
     status?: SortOrder
     churchId?: SortOrder
+  }
+
+  export type CommuneListRelationFilter = {
+    every?: CommuneWhereInput
+    some?: CommuneWhereInput
+    none?: CommuneWhereInput
+  }
+
+  export type CommuneOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DepartementOrderByRelevanceInput = {
+    fields: DepartementOrderByRelevanceFieldEnum | DepartementOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type DepartementCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartementMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type DepartementScalarRelationFilter = {
+    is?: DepartementWhereInput
+    isNot?: DepartementWhereInput
+  }
+
+  export type SectionCommunaleListRelationFilter = {
+    every?: SectionCommunaleWhereInput
+    some?: SectionCommunaleWhereInput
+    none?: SectionCommunaleWhereInput
+  }
+
+  export type SectionCommunaleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommuneOrderByRelevanceInput = {
+    fields: CommuneOrderByRelevanceFieldEnum | CommuneOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type CommuneCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    departementId?: SortOrder
+  }
+
+  export type CommuneMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    departementId?: SortOrder
+  }
+
+  export type CommuneMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    departementId?: SortOrder
+  }
+
+  export type CommuneScalarRelationFilter = {
+    is?: CommuneWhereInput
+    isNot?: CommuneWhereInput
+  }
+
+  export type SectionCommunaleOrderByRelevanceInput = {
+    fields: SectionCommunaleOrderByRelevanceFieldEnum | SectionCommunaleOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type SectionCommunaleCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    communeId?: SortOrder
+  }
+
+  export type SectionCommunaleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    communeId?: SortOrder
+  }
+
+  export type SectionCommunaleMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    communeId?: SortOrder
   }
 
   export type transfertCreateNestedManyWithoutFromChurchInput = {
@@ -35075,6 +38564,118 @@ export namespace Prisma {
     delete?: ChurchWhereInput | boolean
     connect?: ChurchWhereUniqueInput
     update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutPasteurInput, ChurchUpdateWithoutPasteurInput>, ChurchUncheckedUpdateWithoutPasteurInput>
+  }
+
+  export type CommuneCreateNestedManyWithoutDepartementInput = {
+    create?: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput> | CommuneCreateWithoutDepartementInput[] | CommuneUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: CommuneCreateOrConnectWithoutDepartementInput | CommuneCreateOrConnectWithoutDepartementInput[]
+    createMany?: CommuneCreateManyDepartementInputEnvelope
+    connect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+  }
+
+  export type CommuneUncheckedCreateNestedManyWithoutDepartementInput = {
+    create?: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput> | CommuneCreateWithoutDepartementInput[] | CommuneUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: CommuneCreateOrConnectWithoutDepartementInput | CommuneCreateOrConnectWithoutDepartementInput[]
+    createMany?: CommuneCreateManyDepartementInputEnvelope
+    connect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+  }
+
+  export type CommuneUpdateManyWithoutDepartementNestedInput = {
+    create?: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput> | CommuneCreateWithoutDepartementInput[] | CommuneUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: CommuneCreateOrConnectWithoutDepartementInput | CommuneCreateOrConnectWithoutDepartementInput[]
+    upsert?: CommuneUpsertWithWhereUniqueWithoutDepartementInput | CommuneUpsertWithWhereUniqueWithoutDepartementInput[]
+    createMany?: CommuneCreateManyDepartementInputEnvelope
+    set?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    disconnect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    delete?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    connect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    update?: CommuneUpdateWithWhereUniqueWithoutDepartementInput | CommuneUpdateWithWhereUniqueWithoutDepartementInput[]
+    updateMany?: CommuneUpdateManyWithWhereWithoutDepartementInput | CommuneUpdateManyWithWhereWithoutDepartementInput[]
+    deleteMany?: CommuneScalarWhereInput | CommuneScalarWhereInput[]
+  }
+
+  export type CommuneUncheckedUpdateManyWithoutDepartementNestedInput = {
+    create?: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput> | CommuneCreateWithoutDepartementInput[] | CommuneUncheckedCreateWithoutDepartementInput[]
+    connectOrCreate?: CommuneCreateOrConnectWithoutDepartementInput | CommuneCreateOrConnectWithoutDepartementInput[]
+    upsert?: CommuneUpsertWithWhereUniqueWithoutDepartementInput | CommuneUpsertWithWhereUniqueWithoutDepartementInput[]
+    createMany?: CommuneCreateManyDepartementInputEnvelope
+    set?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    disconnect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    delete?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    connect?: CommuneWhereUniqueInput | CommuneWhereUniqueInput[]
+    update?: CommuneUpdateWithWhereUniqueWithoutDepartementInput | CommuneUpdateWithWhereUniqueWithoutDepartementInput[]
+    updateMany?: CommuneUpdateManyWithWhereWithoutDepartementInput | CommuneUpdateManyWithWhereWithoutDepartementInput[]
+    deleteMany?: CommuneScalarWhereInput | CommuneScalarWhereInput[]
+  }
+
+  export type DepartementCreateNestedOneWithoutCommuneInput = {
+    create?: XOR<DepartementCreateWithoutCommuneInput, DepartementUncheckedCreateWithoutCommuneInput>
+    connectOrCreate?: DepartementCreateOrConnectWithoutCommuneInput
+    connect?: DepartementWhereUniqueInput
+  }
+
+  export type SectionCommunaleCreateNestedManyWithoutCommuneInput = {
+    create?: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput> | SectionCommunaleCreateWithoutCommuneInput[] | SectionCommunaleUncheckedCreateWithoutCommuneInput[]
+    connectOrCreate?: SectionCommunaleCreateOrConnectWithoutCommuneInput | SectionCommunaleCreateOrConnectWithoutCommuneInput[]
+    createMany?: SectionCommunaleCreateManyCommuneInputEnvelope
+    connect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+  }
+
+  export type SectionCommunaleUncheckedCreateNestedManyWithoutCommuneInput = {
+    create?: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput> | SectionCommunaleCreateWithoutCommuneInput[] | SectionCommunaleUncheckedCreateWithoutCommuneInput[]
+    connectOrCreate?: SectionCommunaleCreateOrConnectWithoutCommuneInput | SectionCommunaleCreateOrConnectWithoutCommuneInput[]
+    createMany?: SectionCommunaleCreateManyCommuneInputEnvelope
+    connect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+  }
+
+  export type DepartementUpdateOneRequiredWithoutCommuneNestedInput = {
+    create?: XOR<DepartementCreateWithoutCommuneInput, DepartementUncheckedCreateWithoutCommuneInput>
+    connectOrCreate?: DepartementCreateOrConnectWithoutCommuneInput
+    upsert?: DepartementUpsertWithoutCommuneInput
+    connect?: DepartementWhereUniqueInput
+    update?: XOR<XOR<DepartementUpdateToOneWithWhereWithoutCommuneInput, DepartementUpdateWithoutCommuneInput>, DepartementUncheckedUpdateWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleUpdateManyWithoutCommuneNestedInput = {
+    create?: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput> | SectionCommunaleCreateWithoutCommuneInput[] | SectionCommunaleUncheckedCreateWithoutCommuneInput[]
+    connectOrCreate?: SectionCommunaleCreateOrConnectWithoutCommuneInput | SectionCommunaleCreateOrConnectWithoutCommuneInput[]
+    upsert?: SectionCommunaleUpsertWithWhereUniqueWithoutCommuneInput | SectionCommunaleUpsertWithWhereUniqueWithoutCommuneInput[]
+    createMany?: SectionCommunaleCreateManyCommuneInputEnvelope
+    set?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    disconnect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    delete?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    connect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    update?: SectionCommunaleUpdateWithWhereUniqueWithoutCommuneInput | SectionCommunaleUpdateWithWhereUniqueWithoutCommuneInput[]
+    updateMany?: SectionCommunaleUpdateManyWithWhereWithoutCommuneInput | SectionCommunaleUpdateManyWithWhereWithoutCommuneInput[]
+    deleteMany?: SectionCommunaleScalarWhereInput | SectionCommunaleScalarWhereInput[]
+  }
+
+  export type SectionCommunaleUncheckedUpdateManyWithoutCommuneNestedInput = {
+    create?: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput> | SectionCommunaleCreateWithoutCommuneInput[] | SectionCommunaleUncheckedCreateWithoutCommuneInput[]
+    connectOrCreate?: SectionCommunaleCreateOrConnectWithoutCommuneInput | SectionCommunaleCreateOrConnectWithoutCommuneInput[]
+    upsert?: SectionCommunaleUpsertWithWhereUniqueWithoutCommuneInput | SectionCommunaleUpsertWithWhereUniqueWithoutCommuneInput[]
+    createMany?: SectionCommunaleCreateManyCommuneInputEnvelope
+    set?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    disconnect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    delete?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    connect?: SectionCommunaleWhereUniqueInput | SectionCommunaleWhereUniqueInput[]
+    update?: SectionCommunaleUpdateWithWhereUniqueWithoutCommuneInput | SectionCommunaleUpdateWithWhereUniqueWithoutCommuneInput[]
+    updateMany?: SectionCommunaleUpdateManyWithWhereWithoutCommuneInput | SectionCommunaleUpdateManyWithWhereWithoutCommuneInput[]
+    deleteMany?: SectionCommunaleScalarWhereInput | SectionCommunaleScalarWhereInput[]
+  }
+
+  export type CommuneCreateNestedOneWithoutSectionCommunaleInput = {
+    create?: XOR<CommuneCreateWithoutSectionCommunaleInput, CommuneUncheckedCreateWithoutSectionCommunaleInput>
+    connectOrCreate?: CommuneCreateOrConnectWithoutSectionCommunaleInput
+    connect?: CommuneWhereUniqueInput
+  }
+
+  export type CommuneUpdateOneRequiredWithoutSectionCommunaleNestedInput = {
+    create?: XOR<CommuneCreateWithoutSectionCommunaleInput, CommuneUncheckedCreateWithoutSectionCommunaleInput>
+    connectOrCreate?: CommuneCreateOrConnectWithoutSectionCommunaleInput
+    upsert?: CommuneUpsertWithoutSectionCommunaleInput
+    connect?: CommuneWhereUniqueInput
+    update?: XOR<XOR<CommuneUpdateToOneWithWhereWithoutSectionCommunaleInput, CommuneUpdateWithoutSectionCommunaleInput>, CommuneUncheckedUpdateWithoutSectionCommunaleInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -41509,6 +45110,174 @@ export namespace Prisma {
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
   }
 
+  export type CommuneCreateWithoutDepartementInput = {
+    id?: string
+    name: string
+    sectionCommunale?: SectionCommunaleCreateNestedManyWithoutCommuneInput
+  }
+
+  export type CommuneUncheckedCreateWithoutDepartementInput = {
+    id?: string
+    name: string
+    sectionCommunale?: SectionCommunaleUncheckedCreateNestedManyWithoutCommuneInput
+  }
+
+  export type CommuneCreateOrConnectWithoutDepartementInput = {
+    where: CommuneWhereUniqueInput
+    create: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput>
+  }
+
+  export type CommuneCreateManyDepartementInputEnvelope = {
+    data: CommuneCreateManyDepartementInput | CommuneCreateManyDepartementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommuneUpsertWithWhereUniqueWithoutDepartementInput = {
+    where: CommuneWhereUniqueInput
+    update: XOR<CommuneUpdateWithoutDepartementInput, CommuneUncheckedUpdateWithoutDepartementInput>
+    create: XOR<CommuneCreateWithoutDepartementInput, CommuneUncheckedCreateWithoutDepartementInput>
+  }
+
+  export type CommuneUpdateWithWhereUniqueWithoutDepartementInput = {
+    where: CommuneWhereUniqueInput
+    data: XOR<CommuneUpdateWithoutDepartementInput, CommuneUncheckedUpdateWithoutDepartementInput>
+  }
+
+  export type CommuneUpdateManyWithWhereWithoutDepartementInput = {
+    where: CommuneScalarWhereInput
+    data: XOR<CommuneUpdateManyMutationInput, CommuneUncheckedUpdateManyWithoutDepartementInput>
+  }
+
+  export type CommuneScalarWhereInput = {
+    AND?: CommuneScalarWhereInput | CommuneScalarWhereInput[]
+    OR?: CommuneScalarWhereInput[]
+    NOT?: CommuneScalarWhereInput | CommuneScalarWhereInput[]
+    id?: StringFilter<"Commune"> | string
+    name?: StringFilter<"Commune"> | string
+    departementId?: StringFilter<"Commune"> | string
+  }
+
+  export type DepartementCreateWithoutCommuneInput = {
+    id?: string
+    name: string
+  }
+
+  export type DepartementUncheckedCreateWithoutCommuneInput = {
+    id?: string
+    name: string
+  }
+
+  export type DepartementCreateOrConnectWithoutCommuneInput = {
+    where: DepartementWhereUniqueInput
+    create: XOR<DepartementCreateWithoutCommuneInput, DepartementUncheckedCreateWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleCreateWithoutCommuneInput = {
+    id?: string
+    name: string
+  }
+
+  export type SectionCommunaleUncheckedCreateWithoutCommuneInput = {
+    id?: string
+    name: string
+  }
+
+  export type SectionCommunaleCreateOrConnectWithoutCommuneInput = {
+    where: SectionCommunaleWhereUniqueInput
+    create: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleCreateManyCommuneInputEnvelope = {
+    data: SectionCommunaleCreateManyCommuneInput | SectionCommunaleCreateManyCommuneInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DepartementUpsertWithoutCommuneInput = {
+    update: XOR<DepartementUpdateWithoutCommuneInput, DepartementUncheckedUpdateWithoutCommuneInput>
+    create: XOR<DepartementCreateWithoutCommuneInput, DepartementUncheckedCreateWithoutCommuneInput>
+    where?: DepartementWhereInput
+  }
+
+  export type DepartementUpdateToOneWithWhereWithoutCommuneInput = {
+    where?: DepartementWhereInput
+    data: XOR<DepartementUpdateWithoutCommuneInput, DepartementUncheckedUpdateWithoutCommuneInput>
+  }
+
+  export type DepartementUpdateWithoutCommuneInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DepartementUncheckedUpdateWithoutCommuneInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleUpsertWithWhereUniqueWithoutCommuneInput = {
+    where: SectionCommunaleWhereUniqueInput
+    update: XOR<SectionCommunaleUpdateWithoutCommuneInput, SectionCommunaleUncheckedUpdateWithoutCommuneInput>
+    create: XOR<SectionCommunaleCreateWithoutCommuneInput, SectionCommunaleUncheckedCreateWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleUpdateWithWhereUniqueWithoutCommuneInput = {
+    where: SectionCommunaleWhereUniqueInput
+    data: XOR<SectionCommunaleUpdateWithoutCommuneInput, SectionCommunaleUncheckedUpdateWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleUpdateManyWithWhereWithoutCommuneInput = {
+    where: SectionCommunaleScalarWhereInput
+    data: XOR<SectionCommunaleUpdateManyMutationInput, SectionCommunaleUncheckedUpdateManyWithoutCommuneInput>
+  }
+
+  export type SectionCommunaleScalarWhereInput = {
+    AND?: SectionCommunaleScalarWhereInput | SectionCommunaleScalarWhereInput[]
+    OR?: SectionCommunaleScalarWhereInput[]
+    NOT?: SectionCommunaleScalarWhereInput | SectionCommunaleScalarWhereInput[]
+    id?: StringFilter<"SectionCommunale"> | string
+    name?: StringFilter<"SectionCommunale"> | string
+    communeId?: StringFilter<"SectionCommunale"> | string
+  }
+
+  export type CommuneCreateWithoutSectionCommunaleInput = {
+    id?: string
+    name: string
+    departement: DepartementCreateNestedOneWithoutCommuneInput
+  }
+
+  export type CommuneUncheckedCreateWithoutSectionCommunaleInput = {
+    id?: string
+    name: string
+    departementId: string
+  }
+
+  export type CommuneCreateOrConnectWithoutSectionCommunaleInput = {
+    where: CommuneWhereUniqueInput
+    create: XOR<CommuneCreateWithoutSectionCommunaleInput, CommuneUncheckedCreateWithoutSectionCommunaleInput>
+  }
+
+  export type CommuneUpsertWithoutSectionCommunaleInput = {
+    update: XOR<CommuneUpdateWithoutSectionCommunaleInput, CommuneUncheckedUpdateWithoutSectionCommunaleInput>
+    create: XOR<CommuneCreateWithoutSectionCommunaleInput, CommuneUncheckedCreateWithoutSectionCommunaleInput>
+    where?: CommuneWhereInput
+  }
+
+  export type CommuneUpdateToOneWithWhereWithoutSectionCommunaleInput = {
+    where?: CommuneWhereInput
+    data: XOR<CommuneUpdateWithoutSectionCommunaleInput, CommuneUncheckedUpdateWithoutSectionCommunaleInput>
+  }
+
+  export type CommuneUpdateWithoutSectionCommunaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    departement?: DepartementUpdateOneRequiredWithoutCommuneNestedInput
+  }
+
+  export type CommuneUncheckedUpdateWithoutSectionCommunaleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    departementId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type transfertCreateManyFromChurchInput = {
     id?: string
     userId: string
@@ -43498,6 +47267,48 @@ export namespace Prisma {
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommuneCreateManyDepartementInput = {
+    id?: string
+    name: string
+  }
+
+  export type CommuneUpdateWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sectionCommunale?: SectionCommunaleUpdateManyWithoutCommuneNestedInput
+  }
+
+  export type CommuneUncheckedUpdateWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sectionCommunale?: SectionCommunaleUncheckedUpdateManyWithoutCommuneNestedInput
+  }
+
+  export type CommuneUncheckedUpdateManyWithoutDepartementInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleCreateManyCommuneInput = {
+    id?: string
+    name: string
+  }
+
+  export type SectionCommunaleUpdateWithoutCommuneInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleUncheckedUpdateWithoutCommuneInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCommunaleUncheckedUpdateManyWithoutCommuneInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
 
