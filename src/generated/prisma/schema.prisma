@@ -402,3 +402,24 @@ model pasteur {
   church      Church? @relation(fields: [churchId], references: [id])
   churchId    String?
 }
+
+model Departement {
+  id      String    @id @default(uuid())
+  name    String    @unique
+  commune Commune[]
+}
+
+model Commune {
+  id               String             @id @default(uuid())
+  name             String             @unique
+  departement      Departement        @relation(fields: [departementId], references: [id])
+  departementId    String
+  sectionCommunale SectionCommunale[]
+}
+
+model SectionCommunale {
+  id        String  @id @default(uuid())
+  name      String  @unique
+  commune   Commune @relation(fields: [communeId], references: [id])
+  communeId String
+}

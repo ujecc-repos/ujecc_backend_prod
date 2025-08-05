@@ -56,9 +56,38 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+app.get('/api/departement/:departementName', async (req, res) => {
+  try {
+    const departement = await prisma.departement.findUnique({
+    where: { name: req.params.departementName },
+    include: {
+      commune: {
+        include: {
+          sectionCommunale: true,
+        },
+      },
+    },
+  });
+
+  if (!departement) {
+    throw new Error(`Departement with name Artibonite not found`);
+  }
+  
+  // Map into { [communeName]: string[] }
+ const result: Record<string, string[]> = {};
+
+  departement?.commune.forEach(commune => {
+    result[commune.name] = commune.sectionCommunale.map(section => section.name);
+  });
+
+  res.json(result)
+
+  } catch (error) {
+    throw new Error(`error : ${error}`)
+  }
 });
+
+
 
 // Register routes
 app.use('/api/churches', churchRoutes);
@@ -88,6 +117,109 @@ app.use('/api/stats', statsRoutes)
 import sundayClassRoutes from './routes/sundayClass.routes';
 // Register Sunday Class routes
 app.use('/api/sunday-classes', sundayClassRoutes)
+
+export const SudEst: { [commune: string]: string[] } = {
+  "Anse à Pitre": ["Boucan Guillaume", "Bois d'Orme"],
+  "Bainet": [
+    "Bas de Grandou",
+    "Brésilienne",
+    "Trou Mahot",
+    "Haut Grandou",
+    "Bas de Lacroix",
+    "Bras Gauche",
+    "Oranger",
+    "Bas des Gris Gris",
+  ],
+  "Belle Anse": [
+    "Mapou",
+    "Bel Air",
+    "Baie d'Orange",
+    "Mabriole",
+    "Callumette",
+    "Corail Lamothe",
+    "Pichon",
+  ],
+  "Cayes Jacmel": ["Gaillard", "Ravine Normande", "Haut Cap Rouge"],
+  "Côtes de Fer": [
+    "Jamais Vu",
+    "Gris Gris",
+    "Labiche",
+    "Bras Gauche",
+    "Amazones",
+    "Boucan Bélier",
+  ],
+  "Grand Gosier": ["Colline des Chaines"],
+  "Jacmel": [
+    "Quartier de Marbial",
+    "Jacmel",
+    "Ville de Jacmel",
+    "Bas Cap-Rouge",
+    "Sect. Bas Cap Rouge",
+    "Sect. Fond Melon (Selle)",
+    "Sect. Cochon Gras",
+    "Sect. La Gosseline",
+    "Sect. Marbial",
+    "Sect. Montagne la Voute",
+    "Sect. Grande Rivière de Jacmel",
+    "Sect. Bas Coq Chante",
+    "Sect. Haut Coq qui Chante",
+    "Morne à Bruler",
+    "Sect. La Vanneau",
+    "Sect. La Montagne",
+    "Fond Melon",
+  ],
+  "La Vallée": ["La Vallée", "La Vallée"],
+  "Marigot": [
+    "Fond Jean Noel",
+    "Savane Dubois",
+    "Corail Soult",
+    "Grande Rivière Fesles",
+    "Macary",
+  ],
+  "Thiotte": ["Thiotte", "Pot de Chambre"],
+};
+
+
+app.post('/api/communes', async (req, res) => {
+  try {
+   // Upsert the Departement
+  const departement = await prisma.departement.upsert({
+    where: { name: "Sud-Est" },
+    update: {},
+    create: { name: "Sud-Est" },
+  });
+
+  // Loop through Communes
+  for (const [communeName, localities] of Object.entries(SudEst)) {
+    const commune = await prisma.commune.upsert({
+      where: { name: communeName },
+      update: {},
+      create: {
+        name: communeName,
+        departementId: departement.id,
+      },
+    });
+
+    // Now insert Section Communales under this Commune
+    for (const localityName of localities) {
+      await prisma.sectionCommunale.upsert({
+        where: { name: localityName },
+        update: {},
+        create: {
+          name: localityName,
+          communeId: commune.id,
+        },
+      });
+    }
+  }
+
+  console.log('All Communes and their Section Communales registered!');
+  res.status(200).json({ message: 'All Communes and their Section Communales registered!' });
+  } catch (error) {
+    console.log("error : ", error)
+    res.status(500).json({ error: error });
+  }
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
