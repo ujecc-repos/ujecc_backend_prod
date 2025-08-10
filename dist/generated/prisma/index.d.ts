@@ -5033,6 +5033,7 @@ export namespace Prisma {
     firstname: string | null
     lastname: string | null
     nif: string | null
+    groupeSanguin: string | null
     personToContact: string | null
     spouseFullName: string | null
     password: string | null
@@ -5074,6 +5075,7 @@ export namespace Prisma {
     firstname: string | null
     lastname: string | null
     nif: string | null
+    groupeSanguin: string | null
     personToContact: string | null
     spouseFullName: string | null
     password: string | null
@@ -5115,6 +5117,7 @@ export namespace Prisma {
     firstname: number
     lastname: number
     nif: number
+    groupeSanguin: number
     personToContact: number
     spouseFullName: number
     password: number
@@ -5158,6 +5161,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     nif?: true
+    groupeSanguin?: true
     personToContact?: true
     spouseFullName?: true
     password?: true
@@ -5199,6 +5203,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     nif?: true
+    groupeSanguin?: true
     personToContact?: true
     spouseFullName?: true
     password?: true
@@ -5240,6 +5245,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     nif?: true
+    groupeSanguin?: true
     personToContact?: true
     spouseFullName?: true
     password?: true
@@ -5354,6 +5360,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif: string | null
+    groupeSanguin: string | null
     personToContact: string | null
     spouseFullName: string | null
     password: string | null
@@ -5412,6 +5419,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     nif?: boolean
+    groupeSanguin?: boolean
     personToContact?: boolean
     spouseFullName?: boolean
     password?: boolean
@@ -5462,6 +5470,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     nif?: boolean
+    groupeSanguin?: boolean
     personToContact?: boolean
     spouseFullName?: boolean
     password?: boolean
@@ -5494,7 +5503,7 @@ export namespace Prisma {
     churchId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "joinDate" | "email" | "firstname" | "lastname" | "nif" | "personToContact" | "spouseFullName" | "password" | "membreActif" | "longitude" | "latitude" | "plainPassword" | "age" | "minister" | "mobilePhone" | "homePhone" | "picture" | "city" | "etatCivil" | "country" | "birthCountry" | "birthCity" | "birthDate" | "sex" | "addressLine" | "envelopeNumber" | "baptismLocation" | "baptismDate" | "role" | "churchRole" | "facebook" | "instagram" | "profession" | "sundayClass" | "churchId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "joinDate" | "email" | "firstname" | "lastname" | "nif" | "groupeSanguin" | "personToContact" | "spouseFullName" | "password" | "membreActif" | "longitude" | "latitude" | "plainPassword" | "age" | "minister" | "mobilePhone" | "homePhone" | "picture" | "city" | "etatCivil" | "country" | "birthCountry" | "birthCity" | "birthDate" | "sex" | "addressLine" | "envelopeNumber" | "baptismLocation" | "baptismDate" | "role" | "churchRole" | "facebook" | "instagram" | "profession" | "sundayClass" | "churchId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     church?: boolean | User$churchArgs<ExtArgs>
     groups?: boolean | User$groupsArgs<ExtArgs>
@@ -5524,6 +5533,7 @@ export namespace Prisma {
       firstname: string
       lastname: string
       nif: string | null
+      groupeSanguin: string | null
       personToContact: string | null
       spouseFullName: string | null
       password: string | null
@@ -5937,6 +5947,7 @@ export namespace Prisma {
     readonly firstname: FieldRef<"User", 'String'>
     readonly lastname: FieldRef<"User", 'String'>
     readonly nif: FieldRef<"User", 'String'>
+    readonly groupeSanguin: FieldRef<"User", 'String'>
     readonly personToContact: FieldRef<"User", 'String'>
     readonly spouseFullName: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
@@ -29689,6 +29700,7 @@ export namespace Prisma {
     firstname: 'firstname',
     lastname: 'lastname',
     nif: 'nif',
+    groupeSanguin: 'groupeSanguin',
     personToContact: 'personToContact',
     spouseFullName: 'spouseFullName',
     password: 'password',
@@ -30120,6 +30132,7 @@ export namespace Prisma {
     firstname: 'firstname',
     lastname: 'lastname',
     nif: 'nif',
+    groupeSanguin: 'groupeSanguin',
     personToContact: 'personToContact',
     spouseFullName: 'spouseFullName',
     password: 'password',
@@ -30701,6 +30714,7 @@ export namespace Prisma {
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
     nif?: StringNullableFilter<"User"> | string | null
+    groupeSanguin?: StringNullableFilter<"User"> | string | null
     personToContact?: StringNullableFilter<"User"> | string | null
     spouseFullName?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
@@ -30748,6 +30762,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     nif?: SortOrderInput | SortOrder
+    groupeSanguin?: SortOrderInput | SortOrder
     personToContact?: SortOrderInput | SortOrder
     spouseFullName?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
@@ -30800,6 +30815,7 @@ export namespace Prisma {
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
     nif?: StringNullableFilter<"User"> | string | null
+    groupeSanguin?: StringNullableFilter<"User"> | string | null
     personToContact?: StringNullableFilter<"User"> | string | null
     spouseFullName?: StringNullableFilter<"User"> | string | null
     membreActif?: BoolFilter<"User"> | boolean
@@ -30846,6 +30862,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     nif?: SortOrderInput | SortOrder
+    groupeSanguin?: SortOrderInput | SortOrder
     personToContact?: SortOrderInput | SortOrder
     spouseFullName?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
@@ -30893,6 +30910,7 @@ export namespace Prisma {
     firstname?: StringWithAggregatesFilter<"User"> | string
     lastname?: StringWithAggregatesFilter<"User"> | string
     nif?: StringNullableWithAggregatesFilter<"User"> | string | null
+    groupeSanguin?: StringNullableWithAggregatesFilter<"User"> | string | null
     personToContact?: StringNullableWithAggregatesFilter<"User"> | string | null
     spouseFullName?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -32971,6 +32989,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -33017,6 +33036,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -33063,6 +33083,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33109,6 +33130,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33155,6 +33177,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -33196,6 +33219,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33236,6 +33260,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35653,6 +35678,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     nif?: SortOrder
+    groupeSanguin?: SortOrder
     personToContact?: SortOrder
     spouseFullName?: SortOrder
     password?: SortOrder
@@ -35694,6 +35720,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     nif?: SortOrder
+    groupeSanguin?: SortOrder
     personToContact?: SortOrder
     spouseFullName?: SortOrder
     password?: SortOrder
@@ -35735,6 +35762,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     nif?: SortOrder
+    groupeSanguin?: SortOrder
     personToContact?: SortOrder
     spouseFullName?: SortOrder
     password?: SortOrder
@@ -38922,6 +38950,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -38967,6 +38996,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -39756,6 +39786,7 @@ export namespace Prisma {
     firstname?: StringFilter<"User"> | string
     lastname?: StringFilter<"User"> | string
     nif?: StringNullableFilter<"User"> | string | null
+    groupeSanguin?: StringNullableFilter<"User"> | string | null
     personToContact?: StringNullableFilter<"User"> | string | null
     spouseFullName?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
@@ -40915,6 +40946,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -40960,6 +40992,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43229,6 +43262,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43274,6 +43308,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43324,6 +43359,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43369,6 +43405,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43627,6 +43664,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -43672,6 +43710,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -44084,6 +44123,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -44129,6 +44169,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -44372,6 +44413,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44417,6 +44459,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45303,6 +45346,7 @@ export namespace Prisma {
     firstname: string
     lastname: string
     nif?: string | null
+    groupeSanguin?: string | null
     personToContact?: string | null
     spouseFullName?: string | null
     password?: string | null
@@ -45619,6 +45663,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45664,6 +45709,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45709,6 +45755,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46636,6 +46683,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46681,6 +46729,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46726,6 +46775,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46767,6 +46817,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46812,6 +46863,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46857,6 +46909,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46898,6 +46951,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46943,6 +46997,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46988,6 +47043,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47029,6 +47085,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47074,6 +47131,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47119,6 +47177,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     lastname?: StringFieldUpdateOperationsInput | string
     nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
     personToContact?: NullableStringFieldUpdateOperationsInput | string | null
     spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null

@@ -44,7 +44,7 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
     try {
         const {firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
             birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession,
-            churchId, age, personToContact, spouseFullName, minister, role
+            churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin
         } = req.body;
 
         // Check if email already exists
@@ -68,12 +68,14 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
          }
       }
 
-
+        console.log("nif : ", nif, groupeSanguin)
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const userData = {
             firstname,
             lastname,
+            nif: nif || "",
+            groupeSanguin: groupeSanguin || "",
             plainPassword: password || "",
             password: hashedPassword || "",
             email: email || null, // Ensure email is null when not provided

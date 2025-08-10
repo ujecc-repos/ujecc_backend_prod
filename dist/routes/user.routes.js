@@ -28,7 +28,7 @@ const upload_1 = __importDefault(require("../utils/upload"));
 // Create a new user with optional image upload
 router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
     try {
-        const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country, birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession, churchId, age, personToContact, spouseFullName, minister, role } = req.body;
+        const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country, birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession, churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin } = req.body;
         // Check if email already exists
         // const existingUser = await prisma.user.findUnique({
         //     where: {
@@ -46,11 +46,14 @@ router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
                 return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
             }
         }
+        console.log("nif : ", nif, groupeSanguin);
         const salt = await bcryptjs_1.default.genSalt(10);
         const hashedPassword = await bcryptjs_1.default.hash(password, salt);
         const userData = {
             firstname,
             lastname,
+            nif: nif || "",
+            groupeSanguin: groupeSanguin || "",
             plainPassword: password || "",
             password: hashedPassword || "",
             email: email || null, // Ensure email is null when not provided

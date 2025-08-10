@@ -73,6 +73,7 @@ model User {
   firstname       String
   lastname        String
   nif             String?
+  groupeSanguin   String?
   personToContact String?
   spouseFullName  String?
   password        String?   @unique
