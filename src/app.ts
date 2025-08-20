@@ -27,6 +27,8 @@ import ministryRoutes from './routes/ministry.routes'
 import sanctionRoutes from './routes/sanction.routes'
 import pasteurRoutes from './routes/pasteur.routes'
 import statsRoutes from './routes/stats.routes'
+import presenceRoutes from "./routes/presence.route"
+import serviceRoutes from "./routes/service.routes"
 
 // Initialize environment variables
 dotenv.config();
@@ -112,6 +114,8 @@ app.use('/api/ministries', ministryRoutes)
 app.use('/api/sanctions', sanctionRoutes)
 app.use('/api/pasteurs', pasteurRoutes)
 app.use('/api/stats', statsRoutes)
+app.use('/api/presences', presenceRoutes)
+app.use('/api/services', serviceRoutes)
 
 // Import Sunday Class routes
 import sundayClassRoutes from './routes/sundayClass.routes';

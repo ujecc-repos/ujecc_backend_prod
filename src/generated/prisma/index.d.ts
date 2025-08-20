@@ -14,6 +14,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Service
+ * 
+ */
+export type Service = $Result.DefaultSelection<Prisma.$ServicePayload>
+/**
+ * Model Presence
+ * 
+ */
+export type Presence = $Result.DefaultSelection<Prisma.$PresencePayload>
+/**
  * Model Church
  * 
  */
@@ -152,11 +162,25 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const StatutPresence: {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  EN_RETARD: 'EN_RETARD',
+  MOTIVE: 'MOTIVE'
+};
+
+export type StatutPresence = (typeof StatutPresence)[keyof typeof StatutPresence]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type StatutPresence = $Enums.StatutPresence
+
+export const StatutPresence: typeof $Enums.StatutPresence
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,8 +189,8 @@ export const Role: typeof $Enums.Role
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Churches
- * const churches = await prisma.church.findMany()
+ * // Fetch zero or more Services
+ * const services = await prisma.service.findMany()
  * ```
  *
  *
@@ -186,8 +210,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Churches
-   * const churches = await prisma.church.findMany()
+   * // Fetch zero or more Services
+   * const services = await prisma.service.findMany()
    * ```
    *
    *
@@ -284,6 +308,26 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.service`: Exposes CRUD operations for the **Service** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Services
+    * const services = await prisma.service.findMany()
+    * ```
+    */
+  get service(): Prisma.ServiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.presence`: Exposes CRUD operations for the **Presence** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Presences
+    * const presences = await prisma.presence.findMany()
+    * ```
+    */
+  get presence(): Prisma.PresenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.church`: Exposes CRUD operations for the **Church** model.
     * Example usage:
     * ```ts
@@ -972,6 +1016,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Service: 'Service',
+    Presence: 'Presence',
     Church: 'Church',
     User: 'User',
     Groupe: 'Groupe',
@@ -1015,10 +1061,142 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
+      modelProps: "service" | "presence" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Service: {
+        payload: Prisma.$ServicePayload<ExtArgs>
+        fields: Prisma.ServiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ServiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ServiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          findFirst: {
+            args: Prisma.ServiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ServiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          findMany: {
+            args: Prisma.ServiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>[]
+          }
+          create: {
+            args: Prisma.ServiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          createMany: {
+            args: Prisma.ServiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ServiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          update: {
+            args: Prisma.ServiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          deleteMany: {
+            args: Prisma.ServiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ServiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ServiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ServicePayload>
+          }
+          aggregate: {
+            args: Prisma.ServiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateService>
+          }
+          groupBy: {
+            args: Prisma.ServiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ServiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ServiceCountArgs<ExtArgs>
+            result: $Utils.Optional<ServiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Presence: {
+        payload: Prisma.$PresencePayload<ExtArgs>
+        fields: Prisma.PresenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PresenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PresenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          findFirst: {
+            args: Prisma.PresenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PresenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          findMany: {
+            args: Prisma.PresenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>[]
+          }
+          create: {
+            args: Prisma.PresenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          createMany: {
+            args: Prisma.PresenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PresenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          update: {
+            args: Prisma.PresenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          deleteMany: {
+            args: Prisma.PresenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PresenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PresenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PresencePayload>
+          }
+          aggregate: {
+            args: Prisma.PresenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePresence>
+          }
+          groupBy: {
+            args: Prisma.PresenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PresenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PresenceCountArgs<ExtArgs>
+            result: $Utils.Optional<PresenceCountAggregateOutputType> | number
+          }
+        }
+      }
       Church: {
         payload: Prisma.$ChurchPayload<ExtArgs>
         fields: Prisma.ChurchFieldRefs
@@ -2753,6 +2931,8 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    service?: ServiceOmit
+    presence?: PresenceOmit
     church?: ChurchOmit
     user?: UserOmit
     groupe?: GroupeOmit
@@ -2868,6 +3048,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ServiceCountOutputType
+   */
+
+  export type ServiceCountOutputType = {
+    presences: number
+  }
+
+  export type ServiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    presences?: boolean | ServiceCountOutputTypeCountPresencesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ServiceCountOutputType without action
+   */
+  export type ServiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ServiceCountOutputType
+     */
+    select?: ServiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ServiceCountOutputType without action
+   */
+  export type ServiceCountOutputTypeCountPresencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PresenceWhereInput
+  }
+
+
+  /**
    * Count Type ChurchCountOutputType
    */
 
@@ -2893,6 +3104,7 @@ export namespace Prisma {
     sanction: number
     ministry: number
     pasteur: number
+    services: number
   }
 
   export type ChurchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2917,6 +3129,7 @@ export namespace Prisma {
     sanction?: boolean | ChurchCountOutputTypeCountSanctionArgs
     ministry?: boolean | ChurchCountOutputTypeCountMinistryArgs
     pasteur?: boolean | ChurchCountOutputTypeCountPasteurArgs
+    services?: boolean | ChurchCountOutputTypeCountServicesArgs
   }
 
   // Custom InputTypes
@@ -3077,6 +3290,13 @@ export namespace Prisma {
     where?: pasteurWhereInput
   }
 
+  /**
+   * ChurchCountOutputType without action
+   */
+  export type ChurchCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ServiceWhereInput
+  }
+
 
   /**
    * Count Type UserCountOutputType
@@ -3086,6 +3306,7 @@ export namespace Prisma {
     groups: number
     userAppointments: number
     transfers: number
+    presences: number
     leadingComittees: number
     memberComittees: number
   }
@@ -3094,6 +3315,7 @@ export namespace Prisma {
     groups?: boolean | UserCountOutputTypeCountGroupsArgs
     userAppointments?: boolean | UserCountOutputTypeCountUserAppointmentsArgs
     transfers?: boolean | UserCountOutputTypeCountTransfersArgs
+    presences?: boolean | UserCountOutputTypeCountPresencesArgs
     leadingComittees?: boolean | UserCountOutputTypeCountLeadingComitteesArgs
     memberComittees?: boolean | UserCountOutputTypeCountMemberComitteesArgs
   }
@@ -3128,6 +3350,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: transfertWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPresencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PresenceWhereInput
   }
 
   /**
@@ -3343,6 +3572,1928 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model Service
+   */
+
+  export type AggregateService = {
+    _count: ServiceCountAggregateOutputType | null
+    _min: ServiceMinAggregateOutputType | null
+    _max: ServiceMaxAggregateOutputType | null
+  }
+
+  export type ServiceMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    churchId: string | null
+  }
+
+  export type ServiceMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    churchId: string | null
+  }
+
+  export type ServiceCountAggregateOutputType = {
+    id: number
+    nom: number
+    createdAt: number
+    updatedAt: number
+    churchId: number
+    _all: number
+  }
+
+
+  export type ServiceMinAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+    churchId?: true
+  }
+
+  export type ServiceMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+    churchId?: true
+  }
+
+  export type ServiceCountAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+    churchId?: true
+    _all?: true
+  }
+
+  export type ServiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Service to aggregate.
+     */
+    where?: ServiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Services to fetch.
+     */
+    orderBy?: ServiceOrderByWithRelationInput | ServiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ServiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Services from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Services.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Services
+    **/
+    _count?: true | ServiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ServiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ServiceMaxAggregateInputType
+  }
+
+  export type GetServiceAggregateType<T extends ServiceAggregateArgs> = {
+        [P in keyof T & keyof AggregateService]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateService[P]>
+      : GetScalarType<T[P], AggregateService[P]>
+  }
+
+
+
+
+  export type ServiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ServiceWhereInput
+    orderBy?: ServiceOrderByWithAggregationInput | ServiceOrderByWithAggregationInput[]
+    by: ServiceScalarFieldEnum[] | ServiceScalarFieldEnum
+    having?: ServiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ServiceCountAggregateInputType | true
+    _min?: ServiceMinAggregateInputType
+    _max?: ServiceMaxAggregateInputType
+  }
+
+  export type ServiceGroupByOutputType = {
+    id: string
+    nom: string
+    createdAt: Date
+    updatedAt: Date
+    churchId: string | null
+    _count: ServiceCountAggregateOutputType | null
+    _min: ServiceMinAggregateOutputType | null
+    _max: ServiceMaxAggregateOutputType | null
+  }
+
+  type GetServiceGroupByPayload<T extends ServiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ServiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ServiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ServiceGroupByOutputType[P]>
+            : GetScalarType<T[P], ServiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ServiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    churchId?: boolean
+    presences?: boolean | Service$presencesArgs<ExtArgs>
+    church?: boolean | Service$churchArgs<ExtArgs>
+    _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["service"]>
+
+
+
+  export type ServiceSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    churchId?: boolean
+  }
+
+  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "createdAt" | "updatedAt" | "churchId", ExtArgs["result"]["service"]>
+  export type ServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    presences?: boolean | Service$presencesArgs<ExtArgs>
+    church?: boolean | Service$churchArgs<ExtArgs>
+    _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ServicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Service"
+    objects: {
+      presences: Prisma.$PresencePayload<ExtArgs>[]
+      church: Prisma.$ChurchPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      createdAt: Date
+      updatedAt: Date
+      churchId: string | null
+    }, ExtArgs["result"]["service"]>
+    composites: {}
+  }
+
+  type ServiceGetPayload<S extends boolean | null | undefined | ServiceDefaultArgs> = $Result.GetResult<Prisma.$ServicePayload, S>
+
+  type ServiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ServiceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ServiceCountAggregateInputType | true
+    }
+
+  export interface ServiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Service'], meta: { name: 'Service' } }
+    /**
+     * Find zero or one Service that matches the filter.
+     * @param {ServiceFindUniqueArgs} args - Arguments to find a Service
+     * @example
+     * // Get one Service
+     * const service = await prisma.service.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ServiceFindUniqueArgs>(args: SelectSubset<T, ServiceFindUniqueArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Service that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ServiceFindUniqueOrThrowArgs} args - Arguments to find a Service
+     * @example
+     * // Get one Service
+     * const service = await prisma.service.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ServiceFindUniqueOrThrowArgs>(args: SelectSubset<T, ServiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Service that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceFindFirstArgs} args - Arguments to find a Service
+     * @example
+     * // Get one Service
+     * const service = await prisma.service.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ServiceFindFirstArgs>(args?: SelectSubset<T, ServiceFindFirstArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Service that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceFindFirstOrThrowArgs} args - Arguments to find a Service
+     * @example
+     * // Get one Service
+     * const service = await prisma.service.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ServiceFindFirstOrThrowArgs>(args?: SelectSubset<T, ServiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Services that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Services
+     * const services = await prisma.service.findMany()
+     * 
+     * // Get first 10 Services
+     * const services = await prisma.service.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const serviceWithIdOnly = await prisma.service.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ServiceFindManyArgs>(args?: SelectSubset<T, ServiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Service.
+     * @param {ServiceCreateArgs} args - Arguments to create a Service.
+     * @example
+     * // Create one Service
+     * const Service = await prisma.service.create({
+     *   data: {
+     *     // ... data to create a Service
+     *   }
+     * })
+     * 
+     */
+    create<T extends ServiceCreateArgs>(args: SelectSubset<T, ServiceCreateArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Services.
+     * @param {ServiceCreateManyArgs} args - Arguments to create many Services.
+     * @example
+     * // Create many Services
+     * const service = await prisma.service.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ServiceCreateManyArgs>(args?: SelectSubset<T, ServiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Service.
+     * @param {ServiceDeleteArgs} args - Arguments to delete one Service.
+     * @example
+     * // Delete one Service
+     * const Service = await prisma.service.delete({
+     *   where: {
+     *     // ... filter to delete one Service
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ServiceDeleteArgs>(args: SelectSubset<T, ServiceDeleteArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Service.
+     * @param {ServiceUpdateArgs} args - Arguments to update one Service.
+     * @example
+     * // Update one Service
+     * const service = await prisma.service.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ServiceUpdateArgs>(args: SelectSubset<T, ServiceUpdateArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Services.
+     * @param {ServiceDeleteManyArgs} args - Arguments to filter Services to delete.
+     * @example
+     * // Delete a few Services
+     * const { count } = await prisma.service.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ServiceDeleteManyArgs>(args?: SelectSubset<T, ServiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Services.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Services
+     * const service = await prisma.service.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ServiceUpdateManyArgs>(args: SelectSubset<T, ServiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Service.
+     * @param {ServiceUpsertArgs} args - Arguments to update or create a Service.
+     * @example
+     * // Update or create a Service
+     * const service = await prisma.service.upsert({
+     *   create: {
+     *     // ... data to create a Service
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Service we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ServiceUpsertArgs>(args: SelectSubset<T, ServiceUpsertArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Services.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceCountArgs} args - Arguments to filter Services to count.
+     * @example
+     * // Count the number of Services
+     * const count = await prisma.service.count({
+     *   where: {
+     *     // ... the filter for the Services we want to count
+     *   }
+     * })
+    **/
+    count<T extends ServiceCountArgs>(
+      args?: Subset<T, ServiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ServiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Service.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ServiceAggregateArgs>(args: Subset<T, ServiceAggregateArgs>): Prisma.PrismaPromise<GetServiceAggregateType<T>>
+
+    /**
+     * Group by Service.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ServiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ServiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ServiceGroupByArgs['orderBy'] }
+        : { orderBy?: ServiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ServiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetServiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Service model
+   */
+  readonly fields: ServiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Service.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ServiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    presences<T extends Service$presencesArgs<ExtArgs> = {}>(args?: Subset<T, Service$presencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    church<T extends Service$churchArgs<ExtArgs> = {}>(args?: Subset<T, Service$churchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Service model
+   */
+  interface ServiceFieldRefs {
+    readonly id: FieldRef<"Service", 'String'>
+    readonly nom: FieldRef<"Service", 'String'>
+    readonly createdAt: FieldRef<"Service", 'DateTime'>
+    readonly updatedAt: FieldRef<"Service", 'DateTime'>
+    readonly churchId: FieldRef<"Service", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Service findUnique
+   */
+  export type ServiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Service to fetch.
+     */
+    where: ServiceWhereUniqueInput
+  }
+
+  /**
+   * Service findUniqueOrThrow
+   */
+  export type ServiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Service to fetch.
+     */
+    where: ServiceWhereUniqueInput
+  }
+
+  /**
+   * Service findFirst
+   */
+  export type ServiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Service to fetch.
+     */
+    where?: ServiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Services to fetch.
+     */
+    orderBy?: ServiceOrderByWithRelationInput | ServiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Services.
+     */
+    cursor?: ServiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Services from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Services.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Services.
+     */
+    distinct?: ServiceScalarFieldEnum | ServiceScalarFieldEnum[]
+  }
+
+  /**
+   * Service findFirstOrThrow
+   */
+  export type ServiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Service to fetch.
+     */
+    where?: ServiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Services to fetch.
+     */
+    orderBy?: ServiceOrderByWithRelationInput | ServiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Services.
+     */
+    cursor?: ServiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Services from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Services.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Services.
+     */
+    distinct?: ServiceScalarFieldEnum | ServiceScalarFieldEnum[]
+  }
+
+  /**
+   * Service findMany
+   */
+  export type ServiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Services to fetch.
+     */
+    where?: ServiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Services to fetch.
+     */
+    orderBy?: ServiceOrderByWithRelationInput | ServiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Services.
+     */
+    cursor?: ServiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Services from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Services.
+     */
+    skip?: number
+    distinct?: ServiceScalarFieldEnum | ServiceScalarFieldEnum[]
+  }
+
+  /**
+   * Service create
+   */
+  export type ServiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Service.
+     */
+    data: XOR<ServiceCreateInput, ServiceUncheckedCreateInput>
+  }
+
+  /**
+   * Service createMany
+   */
+  export type ServiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Services.
+     */
+    data: ServiceCreateManyInput | ServiceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Service update
+   */
+  export type ServiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Service.
+     */
+    data: XOR<ServiceUpdateInput, ServiceUncheckedUpdateInput>
+    /**
+     * Choose, which Service to update.
+     */
+    where: ServiceWhereUniqueInput
+  }
+
+  /**
+   * Service updateMany
+   */
+  export type ServiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Services.
+     */
+    data: XOR<ServiceUpdateManyMutationInput, ServiceUncheckedUpdateManyInput>
+    /**
+     * Filter which Services to update
+     */
+    where?: ServiceWhereInput
+    /**
+     * Limit how many Services to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Service upsert
+   */
+  export type ServiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Service to update in case it exists.
+     */
+    where: ServiceWhereUniqueInput
+    /**
+     * In case the Service found by the `where` argument doesn't exist, create a new Service with this data.
+     */
+    create: XOR<ServiceCreateInput, ServiceUncheckedCreateInput>
+    /**
+     * In case the Service was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ServiceUpdateInput, ServiceUncheckedUpdateInput>
+  }
+
+  /**
+   * Service delete
+   */
+  export type ServiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    /**
+     * Filter which Service to delete.
+     */
+    where: ServiceWhereUniqueInput
+  }
+
+  /**
+   * Service deleteMany
+   */
+  export type ServiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Services to delete
+     */
+    where?: ServiceWhereInput
+    /**
+     * Limit how many Services to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Service.presences
+   */
+  export type Service$presencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    where?: PresenceWhereInput
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    cursor?: PresenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PresenceScalarFieldEnum | PresenceScalarFieldEnum[]
+  }
+
+  /**
+   * Service.church
+   */
+  export type Service$churchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Church
+     */
+    select?: ChurchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Church
+     */
+    omit?: ChurchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChurchInclude<ExtArgs> | null
+    where?: ChurchWhereInput
+  }
+
+  /**
+   * Service without action
+   */
+  export type ServiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Presence
+   */
+
+  export type AggregatePresence = {
+    _count: PresenceCountAggregateOutputType | null
+    _min: PresenceMinAggregateOutputType | null
+    _max: PresenceMaxAggregateOutputType | null
+  }
+
+  export type PresenceMinAggregateOutputType = {
+    id: string | null
+    statut: $Enums.StatutPresence | null
+    utilisateurId: string | null
+    serviceId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PresenceMaxAggregateOutputType = {
+    id: string | null
+    statut: $Enums.StatutPresence | null
+    utilisateurId: string | null
+    serviceId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PresenceCountAggregateOutputType = {
+    id: number
+    statut: number
+    utilisateurId: number
+    serviceId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PresenceMinAggregateInputType = {
+    id?: true
+    statut?: true
+    utilisateurId?: true
+    serviceId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PresenceMaxAggregateInputType = {
+    id?: true
+    statut?: true
+    utilisateurId?: true
+    serviceId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PresenceCountAggregateInputType = {
+    id?: true
+    statut?: true
+    utilisateurId?: true
+    serviceId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PresenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Presence to aggregate.
+     */
+    where?: PresenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Presences to fetch.
+     */
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PresenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Presences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Presences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Presences
+    **/
+    _count?: true | PresenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PresenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PresenceMaxAggregateInputType
+  }
+
+  export type GetPresenceAggregateType<T extends PresenceAggregateArgs> = {
+        [P in keyof T & keyof AggregatePresence]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePresence[P]>
+      : GetScalarType<T[P], AggregatePresence[P]>
+  }
+
+
+
+
+  export type PresenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PresenceWhereInput
+    orderBy?: PresenceOrderByWithAggregationInput | PresenceOrderByWithAggregationInput[]
+    by: PresenceScalarFieldEnum[] | PresenceScalarFieldEnum
+    having?: PresenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PresenceCountAggregateInputType | true
+    _min?: PresenceMinAggregateInputType
+    _max?: PresenceMaxAggregateInputType
+  }
+
+  export type PresenceGroupByOutputType = {
+    id: string
+    statut: $Enums.StatutPresence
+    utilisateurId: string
+    serviceId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PresenceCountAggregateOutputType | null
+    _min: PresenceMinAggregateOutputType | null
+    _max: PresenceMaxAggregateOutputType | null
+  }
+
+  type GetPresenceGroupByPayload<T extends PresenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PresenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PresenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PresenceGroupByOutputType[P]>
+            : GetScalarType<T[P], PresenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PresenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    statut?: boolean
+    utilisateurId?: boolean
+    serviceId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    service?: boolean | ServiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["presence"]>
+
+
+
+  export type PresenceSelectScalar = {
+    id?: boolean
+    statut?: boolean
+    utilisateurId?: boolean
+    serviceId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PresenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "statut" | "utilisateurId" | "serviceId" | "createdAt" | "updatedAt", ExtArgs["result"]["presence"]>
+  export type PresenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    service?: boolean | ServiceDefaultArgs<ExtArgs>
+  }
+
+  export type $PresencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Presence"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      service: Prisma.$ServicePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      statut: $Enums.StatutPresence
+      utilisateurId: string
+      serviceId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["presence"]>
+    composites: {}
+  }
+
+  type PresenceGetPayload<S extends boolean | null | undefined | PresenceDefaultArgs> = $Result.GetResult<Prisma.$PresencePayload, S>
+
+  type PresenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PresenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PresenceCountAggregateInputType | true
+    }
+
+  export interface PresenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Presence'], meta: { name: 'Presence' } }
+    /**
+     * Find zero or one Presence that matches the filter.
+     * @param {PresenceFindUniqueArgs} args - Arguments to find a Presence
+     * @example
+     * // Get one Presence
+     * const presence = await prisma.presence.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PresenceFindUniqueArgs>(args: SelectSubset<T, PresenceFindUniqueArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Presence that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PresenceFindUniqueOrThrowArgs} args - Arguments to find a Presence
+     * @example
+     * // Get one Presence
+     * const presence = await prisma.presence.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PresenceFindUniqueOrThrowArgs>(args: SelectSubset<T, PresenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Presence that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceFindFirstArgs} args - Arguments to find a Presence
+     * @example
+     * // Get one Presence
+     * const presence = await prisma.presence.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PresenceFindFirstArgs>(args?: SelectSubset<T, PresenceFindFirstArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Presence that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceFindFirstOrThrowArgs} args - Arguments to find a Presence
+     * @example
+     * // Get one Presence
+     * const presence = await prisma.presence.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PresenceFindFirstOrThrowArgs>(args?: SelectSubset<T, PresenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Presences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Presences
+     * const presences = await prisma.presence.findMany()
+     * 
+     * // Get first 10 Presences
+     * const presences = await prisma.presence.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const presenceWithIdOnly = await prisma.presence.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PresenceFindManyArgs>(args?: SelectSubset<T, PresenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Presence.
+     * @param {PresenceCreateArgs} args - Arguments to create a Presence.
+     * @example
+     * // Create one Presence
+     * const Presence = await prisma.presence.create({
+     *   data: {
+     *     // ... data to create a Presence
+     *   }
+     * })
+     * 
+     */
+    create<T extends PresenceCreateArgs>(args: SelectSubset<T, PresenceCreateArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Presences.
+     * @param {PresenceCreateManyArgs} args - Arguments to create many Presences.
+     * @example
+     * // Create many Presences
+     * const presence = await prisma.presence.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PresenceCreateManyArgs>(args?: SelectSubset<T, PresenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Presence.
+     * @param {PresenceDeleteArgs} args - Arguments to delete one Presence.
+     * @example
+     * // Delete one Presence
+     * const Presence = await prisma.presence.delete({
+     *   where: {
+     *     // ... filter to delete one Presence
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PresenceDeleteArgs>(args: SelectSubset<T, PresenceDeleteArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Presence.
+     * @param {PresenceUpdateArgs} args - Arguments to update one Presence.
+     * @example
+     * // Update one Presence
+     * const presence = await prisma.presence.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PresenceUpdateArgs>(args: SelectSubset<T, PresenceUpdateArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Presences.
+     * @param {PresenceDeleteManyArgs} args - Arguments to filter Presences to delete.
+     * @example
+     * // Delete a few Presences
+     * const { count } = await prisma.presence.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PresenceDeleteManyArgs>(args?: SelectSubset<T, PresenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Presences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Presences
+     * const presence = await prisma.presence.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PresenceUpdateManyArgs>(args: SelectSubset<T, PresenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Presence.
+     * @param {PresenceUpsertArgs} args - Arguments to update or create a Presence.
+     * @example
+     * // Update or create a Presence
+     * const presence = await prisma.presence.upsert({
+     *   create: {
+     *     // ... data to create a Presence
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Presence we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PresenceUpsertArgs>(args: SelectSubset<T, PresenceUpsertArgs<ExtArgs>>): Prisma__PresenceClient<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Presences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceCountArgs} args - Arguments to filter Presences to count.
+     * @example
+     * // Count the number of Presences
+     * const count = await prisma.presence.count({
+     *   where: {
+     *     // ... the filter for the Presences we want to count
+     *   }
+     * })
+    **/
+    count<T extends PresenceCountArgs>(
+      args?: Subset<T, PresenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PresenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Presence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PresenceAggregateArgs>(args: Subset<T, PresenceAggregateArgs>): Prisma.PrismaPromise<GetPresenceAggregateType<T>>
+
+    /**
+     * Group by Presence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PresenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PresenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PresenceGroupByArgs['orderBy'] }
+        : { orderBy?: PresenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PresenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPresenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Presence model
+   */
+  readonly fields: PresenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Presence.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PresenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Presence model
+   */
+  interface PresenceFieldRefs {
+    readonly id: FieldRef<"Presence", 'String'>
+    readonly statut: FieldRef<"Presence", 'StatutPresence'>
+    readonly utilisateurId: FieldRef<"Presence", 'String'>
+    readonly serviceId: FieldRef<"Presence", 'String'>
+    readonly createdAt: FieldRef<"Presence", 'DateTime'>
+    readonly updatedAt: FieldRef<"Presence", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Presence findUnique
+   */
+  export type PresenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Presence to fetch.
+     */
+    where: PresenceWhereUniqueInput
+  }
+
+  /**
+   * Presence findUniqueOrThrow
+   */
+  export type PresenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Presence to fetch.
+     */
+    where: PresenceWhereUniqueInput
+  }
+
+  /**
+   * Presence findFirst
+   */
+  export type PresenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Presence to fetch.
+     */
+    where?: PresenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Presences to fetch.
+     */
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Presences.
+     */
+    cursor?: PresenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Presences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Presences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Presences.
+     */
+    distinct?: PresenceScalarFieldEnum | PresenceScalarFieldEnum[]
+  }
+
+  /**
+   * Presence findFirstOrThrow
+   */
+  export type PresenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Presence to fetch.
+     */
+    where?: PresenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Presences to fetch.
+     */
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Presences.
+     */
+    cursor?: PresenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Presences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Presences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Presences.
+     */
+    distinct?: PresenceScalarFieldEnum | PresenceScalarFieldEnum[]
+  }
+
+  /**
+   * Presence findMany
+   */
+  export type PresenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Presences to fetch.
+     */
+    where?: PresenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Presences to fetch.
+     */
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Presences.
+     */
+    cursor?: PresenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Presences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Presences.
+     */
+    skip?: number
+    distinct?: PresenceScalarFieldEnum | PresenceScalarFieldEnum[]
+  }
+
+  /**
+   * Presence create
+   */
+  export type PresenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Presence.
+     */
+    data: XOR<PresenceCreateInput, PresenceUncheckedCreateInput>
+  }
+
+  /**
+   * Presence createMany
+   */
+  export type PresenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Presences.
+     */
+    data: PresenceCreateManyInput | PresenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Presence update
+   */
+  export type PresenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Presence.
+     */
+    data: XOR<PresenceUpdateInput, PresenceUncheckedUpdateInput>
+    /**
+     * Choose, which Presence to update.
+     */
+    where: PresenceWhereUniqueInput
+  }
+
+  /**
+   * Presence updateMany
+   */
+  export type PresenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Presences.
+     */
+    data: XOR<PresenceUpdateManyMutationInput, PresenceUncheckedUpdateManyInput>
+    /**
+     * Filter which Presences to update
+     */
+    where?: PresenceWhereInput
+    /**
+     * Limit how many Presences to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Presence upsert
+   */
+  export type PresenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Presence to update in case it exists.
+     */
+    where: PresenceWhereUniqueInput
+    /**
+     * In case the Presence found by the `where` argument doesn't exist, create a new Presence with this data.
+     */
+    create: XOR<PresenceCreateInput, PresenceUncheckedCreateInput>
+    /**
+     * In case the Presence was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PresenceUpdateInput, PresenceUncheckedUpdateInput>
+  }
+
+  /**
+   * Presence delete
+   */
+  export type PresenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    /**
+     * Filter which Presence to delete.
+     */
+    where: PresenceWhereUniqueInput
+  }
+
+  /**
+   * Presence deleteMany
+   */
+  export type PresenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Presences to delete
+     */
+    where?: PresenceWhereInput
+    /**
+     * Limit how many Presences to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Presence without action
+   */
+  export type PresenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Church
@@ -3626,6 +5777,7 @@ export namespace Prisma {
     sanction?: boolean | Church$sanctionArgs<ExtArgs>
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
+    services?: boolean | Church$servicesArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["church"]>
 
@@ -3675,6 +5827,7 @@ export namespace Prisma {
     sanction?: boolean | Church$sanctionArgs<ExtArgs>
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
+    services?: boolean | Church$servicesArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3703,6 +5856,7 @@ export namespace Prisma {
       sanction: Prisma.$sanctionPayload<ExtArgs>[]
       ministry: Prisma.$ministryPayload<ExtArgs>[]
       pasteur: Prisma.$pasteurPayload<ExtArgs>[]
+      services: Prisma.$ServicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4084,6 +6238,7 @@ export namespace Prisma {
     sanction<T extends Church$sanctionArgs<ExtArgs> = {}>(args?: Subset<T, Church$sanctionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$sanctionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ministry<T extends Church$ministryArgs<ExtArgs> = {}>(args?: Subset<T, Church$ministryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pasteur<T extends Church$pasteurArgs<ExtArgs> = {}>(args?: Subset<T, Church$pasteurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pasteurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    services<T extends Church$servicesArgs<ExtArgs> = {}>(args?: Subset<T, Church$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4996,6 +7151,30 @@ export namespace Prisma {
   }
 
   /**
+   * Church.services
+   */
+  export type Church$servicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Service
+     */
+    omit?: ServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    where?: ServiceWhereInput
+    orderBy?: ServiceOrderByWithRelationInput | ServiceOrderByWithRelationInput[]
+    cursor?: ServiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ServiceScalarFieldEnum | ServiceScalarFieldEnum[]
+  }
+
+  /**
    * Church without action
    */
   export type ChurchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5454,6 +7633,7 @@ export namespace Prisma {
     groups?: boolean | User$groupsArgs<ExtArgs>
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
     transfers?: boolean | User$transfersArgs<ExtArgs>
+    presences?: boolean | User$presencesArgs<ExtArgs>
     leadingComittees?: boolean | User$leadingComitteesArgs<ExtArgs>
     memberComittees?: boolean | User$memberComitteesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -5509,6 +7689,7 @@ export namespace Prisma {
     groups?: boolean | User$groupsArgs<ExtArgs>
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
     transfers?: boolean | User$transfersArgs<ExtArgs>
+    presences?: boolean | User$presencesArgs<ExtArgs>
     leadingComittees?: boolean | User$leadingComitteesArgs<ExtArgs>
     memberComittees?: boolean | User$memberComitteesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -5521,6 +7702,7 @@ export namespace Prisma {
       groups: Prisma.$GroupePayload<ExtArgs>[]
       userAppointments: Prisma.$appointmentPayload<ExtArgs>[]
       transfers: Prisma.$transfertPayload<ExtArgs>[]
+      presences: Prisma.$PresencePayload<ExtArgs>[]
       leadingComittees: Prisma.$comiteePayload<ExtArgs>[]
       memberComittees: Prisma.$comiteePayload<ExtArgs>[]
     }
@@ -5908,6 +8090,7 @@ export namespace Prisma {
     groups<T extends User$groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userAppointments<T extends User$userAppointmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$userAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$appointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     transfers<T extends User$transfersArgs<ExtArgs> = {}>(args?: Subset<T, User$transfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$transfertPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    presences<T extends User$presencesArgs<ExtArgs> = {}>(args?: Subset<T, User$presencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PresencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     leadingComittees<T extends User$leadingComitteesArgs<ExtArgs> = {}>(args?: Subset<T, User$leadingComitteesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comiteePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     memberComittees<T extends User$memberComitteesArgs<ExtArgs> = {}>(args?: Subset<T, User$memberComitteesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$comiteePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -6409,6 +8592,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TransfertScalarFieldEnum | TransfertScalarFieldEnum[]
+  }
+
+  /**
+   * User.presences
+   */
+  export type User$presencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Presence
+     */
+    select?: PresenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Presence
+     */
+    omit?: PresenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PresenceInclude<ExtArgs> | null
+    where?: PresenceWhereInput
+    orderBy?: PresenceOrderByWithRelationInput | PresenceOrderByWithRelationInput[]
+    cursor?: PresenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PresenceScalarFieldEnum | PresenceScalarFieldEnum[]
   }
 
   /**
@@ -29668,6 +31875,29 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const ServiceScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    churchId: 'churchId'
+  };
+
+  export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+  export const PresenceScalarFieldEnum: {
+    id: 'id',
+    statut: 'statut',
+    utilisateurId: 'utilisateurId',
+    serviceId: 'serviceId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
+
+
   export const ChurchScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -30104,6 +32334,24 @@ export namespace Prisma {
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
+  export const ServiceOrderByRelevanceFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    churchId: 'churchId'
+  };
+
+  export type ServiceOrderByRelevanceFieldEnum = (typeof ServiceOrderByRelevanceFieldEnum)[keyof typeof ServiceOrderByRelevanceFieldEnum]
+
+
+  export const PresenceOrderByRelevanceFieldEnum: {
+    id: 'id',
+    utilisateurId: 'utilisateurId',
+    serviceId: 'serviceId'
+  };
+
+  export type PresenceOrderByRelevanceFieldEnum = (typeof PresenceOrderByRelevanceFieldEnum)[keyof typeof PresenceOrderByRelevanceFieldEnum]
+
+
   export const ChurchOrderByRelevanceFieldEnum: {
     id: 'id',
     name: 'name',
@@ -30493,6 +32741,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'StatutPresence'
+   */
+  export type EnumStatutPresenceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutPresence'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -30522,6 +32777,129 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type ServiceWhereInput = {
+    AND?: ServiceWhereInput | ServiceWhereInput[]
+    OR?: ServiceWhereInput[]
+    NOT?: ServiceWhereInput | ServiceWhereInput[]
+    id?: StringFilter<"Service"> | string
+    nom?: StringFilter<"Service"> | string
+    createdAt?: DateTimeFilter<"Service"> | Date | string
+    updatedAt?: DateTimeFilter<"Service"> | Date | string
+    churchId?: StringNullableFilter<"Service"> | string | null
+    presences?: PresenceListRelationFilter
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }
+
+  export type ServiceOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    churchId?: SortOrderInput | SortOrder
+    presences?: PresenceOrderByRelationAggregateInput
+    church?: ChurchOrderByWithRelationInput
+    _relevance?: ServiceOrderByRelevanceInput
+  }
+
+  export type ServiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ServiceWhereInput | ServiceWhereInput[]
+    OR?: ServiceWhereInput[]
+    NOT?: ServiceWhereInput | ServiceWhereInput[]
+    nom?: StringFilter<"Service"> | string
+    createdAt?: DateTimeFilter<"Service"> | Date | string
+    updatedAt?: DateTimeFilter<"Service"> | Date | string
+    churchId?: StringNullableFilter<"Service"> | string | null
+    presences?: PresenceListRelationFilter
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }, "id">
+
+  export type ServiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    churchId?: SortOrderInput | SortOrder
+    _count?: ServiceCountOrderByAggregateInput
+    _max?: ServiceMaxOrderByAggregateInput
+    _min?: ServiceMinOrderByAggregateInput
+  }
+
+  export type ServiceScalarWhereWithAggregatesInput = {
+    AND?: ServiceScalarWhereWithAggregatesInput | ServiceScalarWhereWithAggregatesInput[]
+    OR?: ServiceScalarWhereWithAggregatesInput[]
+    NOT?: ServiceScalarWhereWithAggregatesInput | ServiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Service"> | string
+    nom?: StringWithAggregatesFilter<"Service"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Service"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Service"> | Date | string
+    churchId?: StringNullableWithAggregatesFilter<"Service"> | string | null
+  }
+
+  export type PresenceWhereInput = {
+    AND?: PresenceWhereInput | PresenceWhereInput[]
+    OR?: PresenceWhereInput[]
+    NOT?: PresenceWhereInput | PresenceWhereInput[]
+    id?: StringFilter<"Presence"> | string
+    statut?: EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
+    utilisateurId?: StringFilter<"Presence"> | string
+    serviceId?: StringFilter<"Presence"> | string
+    createdAt?: DateTimeFilter<"Presence"> | Date | string
+    updatedAt?: DateTimeFilter<"Presence"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+  }
+
+  export type PresenceOrderByWithRelationInput = {
+    id?: SortOrder
+    statut?: SortOrder
+    utilisateurId?: SortOrder
+    serviceId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    service?: ServiceOrderByWithRelationInput
+    _relevance?: PresenceOrderByRelevanceInput
+  }
+
+  export type PresenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PresenceWhereInput | PresenceWhereInput[]
+    OR?: PresenceWhereInput[]
+    NOT?: PresenceWhereInput | PresenceWhereInput[]
+    statut?: EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
+    utilisateurId?: StringFilter<"Presence"> | string
+    serviceId?: StringFilter<"Presence"> | string
+    createdAt?: DateTimeFilter<"Presence"> | Date | string
+    updatedAt?: DateTimeFilter<"Presence"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+  }, "id">
+
+  export type PresenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    statut?: SortOrder
+    utilisateurId?: SortOrder
+    serviceId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PresenceCountOrderByAggregateInput
+    _max?: PresenceMaxOrderByAggregateInput
+    _min?: PresenceMinOrderByAggregateInput
+  }
+
+  export type PresenceScalarWhereWithAggregatesInput = {
+    AND?: PresenceScalarWhereWithAggregatesInput | PresenceScalarWhereWithAggregatesInput[]
+    OR?: PresenceScalarWhereWithAggregatesInput[]
+    NOT?: PresenceScalarWhereWithAggregatesInput | PresenceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Presence"> | string
+    statut?: EnumStatutPresenceWithAggregatesFilter<"Presence"> | $Enums.StatutPresence
+    utilisateurId?: StringWithAggregatesFilter<"Presence"> | string
+    serviceId?: StringWithAggregatesFilter<"Presence"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Presence"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Presence"> | Date | string
+  }
 
   export type ChurchWhereInput = {
     AND?: ChurchWhereInput | ChurchWhereInput[]
@@ -30566,6 +32944,7 @@ export namespace Prisma {
     sanction?: SanctionListRelationFilter
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
+    services?: ServiceListRelationFilter
   }
 
   export type ChurchOrderByWithRelationInput = {
@@ -30608,6 +32987,7 @@ export namespace Prisma {
     sanction?: sanctionOrderByRelationAggregateInput
     ministry?: ministryOrderByRelationAggregateInput
     pasteur?: pasteurOrderByRelationAggregateInput
+    services?: ServiceOrderByRelationAggregateInput
     _relevance?: ChurchOrderByRelevanceInput
   }
 
@@ -30654,6 +33034,7 @@ export namespace Prisma {
     sanction?: SanctionListRelationFilter
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
+    services?: ServiceListRelationFilter
   }, "id" | "name">
 
   export type ChurchOrderByWithAggregationInput = {
@@ -30749,6 +33130,7 @@ export namespace Prisma {
     groups?: GroupeListRelationFilter
     userAppointments?: AppointmentListRelationFilter
     transfers?: TransfertListRelationFilter
+    presences?: PresenceListRelationFilter
     leadingComittees?: ComiteeListRelationFilter
     memberComittees?: ComiteeListRelationFilter
   }
@@ -30797,6 +33179,7 @@ export namespace Prisma {
     groups?: GroupeOrderByRelationAggregateInput
     userAppointments?: appointmentOrderByRelationAggregateInput
     transfers?: transfertOrderByRelationAggregateInput
+    presences?: PresenceOrderByRelationAggregateInput
     leadingComittees?: comiteeOrderByRelationAggregateInput
     memberComittees?: comiteeOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
@@ -30849,6 +33232,7 @@ export namespace Prisma {
     groups?: GroupeListRelationFilter
     userAppointments?: AppointmentListRelationFilter
     transfers?: TransfertListRelationFilter
+    presences?: PresenceListRelationFilter
     leadingComittees?: ComiteeListRelationFilter
     memberComittees?: ComiteeListRelationFilter
   }, "id" | "email" | "password">
@@ -32757,6 +35141,126 @@ export namespace Prisma {
     communeId?: StringWithAggregatesFilter<"SectionCommunale"> | string
   }
 
+  export type ServiceCreateInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    presences?: PresenceCreateNestedManyWithoutServiceInput
+    church?: ChurchCreateNestedOneWithoutServicesInput
+  }
+
+  export type ServiceUncheckedCreateInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    churchId?: string | null
+    presences?: PresenceUncheckedCreateNestedManyWithoutServiceInput
+  }
+
+  export type ServiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    presences?: PresenceUpdateManyWithoutServiceNestedInput
+    church?: ChurchUpdateOneWithoutServicesNestedInput
+  }
+
+  export type ServiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    presences?: PresenceUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
+  export type ServiceCreateManyInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    churchId?: string | null
+  }
+
+  export type ServiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ServiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PresenceCreateInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPresencesInput
+    service: ServiceCreateNestedOneWithoutPresencesInput
+  }
+
+  export type PresenceUncheckedCreateInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    utilisateurId: string
+    serviceId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PresenceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPresencesNestedInput
+    service?: ServiceUpdateOneRequiredWithoutPresencesNestedInput
+  }
+
+  export type PresenceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PresenceCreateManyInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    utilisateurId: string
+    serviceId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PresenceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PresenceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ChurchCreateInput = {
     id?: string
     name: string
@@ -32796,6 +35300,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateInput = {
@@ -32837,6 +35342,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUpdateInput = {
@@ -32878,6 +35384,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateInput = {
@@ -32919,6 +35426,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateManyInput = {
@@ -33023,6 +35531,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -33070,6 +35579,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -33117,6 +35627,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -33164,6 +35675,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -35294,6 +37806,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -35309,7 +37832,75 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
+  export type PresenceListRelationFilter = {
+    every?: PresenceWhereInput
+    some?: PresenceWhereInput
+    none?: PresenceWhereInput
+  }
+
+  export type ChurchNullableScalarRelationFilter = {
+    is?: ChurchWhereInput | null
+    isNot?: ChurchWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type PresenceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ServiceOrderByRelevanceInput = {
+    fields: ServiceOrderByRelevanceFieldEnum | ServiceOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ServiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    churchId?: SortOrder
+  }
+
+  export type ServiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    churchId?: SortOrder
+  }
+
+  export type ServiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    churchId?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
     notIn?: Date[] | string[]
@@ -35317,7 +37908,88 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatutPresenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutPresence | EnumStatutPresenceFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutPresence[]
+    notIn?: $Enums.StatutPresence[]
+    not?: NestedEnumStatutPresenceFilter<$PrismaModel> | $Enums.StatutPresence
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type ServiceScalarRelationFilter = {
+    is?: ServiceWhereInput
+    isNot?: ServiceWhereInput
+  }
+
+  export type PresenceOrderByRelevanceInput = {
+    fields: PresenceOrderByRelevanceFieldEnum | PresenceOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PresenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    statut?: SortOrder
+    utilisateurId?: SortOrder
+    serviceId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PresenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    statut?: SortOrder
+    utilisateurId?: SortOrder
+    serviceId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PresenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    statut?: SortOrder
+    utilisateurId?: SortOrder
+    serviceId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumStatutPresenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutPresence | EnumStatutPresenceFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutPresence[]
+    notIn?: $Enums.StatutPresence[]
+    not?: NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel> | $Enums.StatutPresence
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatutPresenceFilter<$PrismaModel>
+    _max?: NestedEnumStatutPresenceFilter<$PrismaModel>
   }
 
   export type TransfertListRelationFilter = {
@@ -35445,9 +38117,10 @@ export namespace Prisma {
     none?: pasteurWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type ServiceListRelationFilter = {
+    every?: ServiceWhereInput
+    some?: ServiceWhereInput
+    none?: ServiceWhereInput
   }
 
   export type transfertOrderByRelationAggregateInput = {
@@ -35530,6 +38203,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type ServiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ChurchOrderByRelevanceInput = {
     fields: ChurchOrderByRelevanceFieldEnum | ChurchOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -35596,56 +38273,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -35656,11 +38283,6 @@ export namespace Prisma {
     in?: $Enums.Role[]
     notIn?: $Enums.Role[]
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type ChurchNullableScalarRelationFilter = {
-    is?: ChurchWhereInput | null
-    isNot?: ChurchWhereInput | null
   }
 
   export type UserOrderByRelevanceInput = {
@@ -36633,11 +39255,6 @@ export namespace Prisma {
     isNot?: ChurchWhereInput
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type transfertOrderByRelevanceInput = {
     fields: transfertOrderByRelevanceFieldEnum | transfertOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -36930,6 +39547,108 @@ export namespace Prisma {
     communeId?: SortOrder
   }
 
+  export type PresenceCreateNestedManyWithoutServiceInput = {
+    create?: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput> | PresenceCreateWithoutServiceInput[] | PresenceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutServiceInput | PresenceCreateOrConnectWithoutServiceInput[]
+    createMany?: PresenceCreateManyServiceInputEnvelope
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+  }
+
+  export type ChurchCreateNestedOneWithoutServicesInput = {
+    create?: XOR<ChurchCreateWithoutServicesInput, ChurchUncheckedCreateWithoutServicesInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutServicesInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type PresenceUncheckedCreateNestedManyWithoutServiceInput = {
+    create?: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput> | PresenceCreateWithoutServiceInput[] | PresenceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutServiceInput | PresenceCreateOrConnectWithoutServiceInput[]
+    createMany?: PresenceCreateManyServiceInputEnvelope
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type PresenceUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput> | PresenceCreateWithoutServiceInput[] | PresenceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutServiceInput | PresenceCreateOrConnectWithoutServiceInput[]
+    upsert?: PresenceUpsertWithWhereUniqueWithoutServiceInput | PresenceUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: PresenceCreateManyServiceInputEnvelope
+    set?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    disconnect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    delete?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    update?: PresenceUpdateWithWhereUniqueWithoutServiceInput | PresenceUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: PresenceUpdateManyWithWhereWithoutServiceInput | PresenceUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
+  }
+
+  export type ChurchUpdateOneWithoutServicesNestedInput = {
+    create?: XOR<ChurchCreateWithoutServicesInput, ChurchUncheckedCreateWithoutServicesInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutServicesInput
+    upsert?: ChurchUpsertWithoutServicesInput
+    disconnect?: ChurchWhereInput | boolean
+    delete?: ChurchWhereInput | boolean
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutServicesInput, ChurchUpdateWithoutServicesInput>, ChurchUncheckedUpdateWithoutServicesInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type PresenceUncheckedUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput> | PresenceCreateWithoutServiceInput[] | PresenceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutServiceInput | PresenceCreateOrConnectWithoutServiceInput[]
+    upsert?: PresenceUpsertWithWhereUniqueWithoutServiceInput | PresenceUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: PresenceCreateManyServiceInputEnvelope
+    set?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    disconnect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    delete?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    update?: PresenceUpdateWithWhereUniqueWithoutServiceInput | PresenceUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: PresenceUpdateManyWithWhereWithoutServiceInput | PresenceUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutPresencesInput = {
+    create?: XOR<UserCreateWithoutPresencesInput, UserUncheckedCreateWithoutPresencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPresencesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ServiceCreateNestedOneWithoutPresencesInput = {
+    create?: XOR<ServiceCreateWithoutPresencesInput, ServiceUncheckedCreateWithoutPresencesInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutPresencesInput
+    connect?: ServiceWhereUniqueInput
+  }
+
+  export type EnumStatutPresenceFieldUpdateOperationsInput = {
+    set?: $Enums.StatutPresence
+  }
+
+  export type UserUpdateOneRequiredWithoutPresencesNestedInput = {
+    create?: XOR<UserCreateWithoutPresencesInput, UserUncheckedCreateWithoutPresencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPresencesInput
+    upsert?: UserUpsertWithoutPresencesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPresencesInput, UserUpdateWithoutPresencesInput>, UserUncheckedUpdateWithoutPresencesInput>
+  }
+
+  export type ServiceUpdateOneRequiredWithoutPresencesNestedInput = {
+    create?: XOR<ServiceCreateWithoutPresencesInput, ServiceUncheckedCreateWithoutPresencesInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutPresencesInput
+    upsert?: ServiceUpsertWithoutPresencesInput
+    connect?: ServiceWhereUniqueInput
+    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutPresencesInput, ServiceUpdateWithoutPresencesInput>, ServiceUncheckedUpdateWithoutPresencesInput>
+  }
+
   export type transfertCreateNestedManyWithoutFromChurchInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -37083,6 +39802,13 @@ export namespace Prisma {
     connect?: pasteurWhereUniqueInput | pasteurWhereUniqueInput[]
   }
 
+  export type ServiceCreateNestedManyWithoutChurchInput = {
+    create?: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput> | ServiceCreateWithoutChurchInput[] | ServiceUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
+    createMany?: ServiceCreateManyChurchInputEnvelope
+    connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+  }
+
   export type transfertUncheckedCreateNestedManyWithoutFromChurchInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -37230,16 +39956,11 @@ export namespace Prisma {
     connect?: pasteurWhereUniqueInput | pasteurWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type ServiceUncheckedCreateNestedManyWithoutChurchInput = {
+    create?: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput> | ServiceCreateWithoutChurchInput[] | ServiceUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
+    createMany?: ServiceCreateManyChurchInputEnvelope
+    connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
   }
 
   export type transfertUpdateManyWithoutFromChurchNestedInput = {
@@ -37546,6 +40267,20 @@ export namespace Prisma {
     deleteMany?: pasteurScalarWhereInput | pasteurScalarWhereInput[]
   }
 
+  export type ServiceUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput> | ServiceCreateWithoutChurchInput[] | ServiceUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
+    upsert?: ServiceUpsertWithWhereUniqueWithoutChurchInput | ServiceUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: ServiceCreateManyChurchInputEnvelope
+    set?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    disconnect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    delete?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    update?: ServiceUpdateWithWhereUniqueWithoutChurchInput | ServiceUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: ServiceUpdateManyWithWhereWithoutChurchInput | ServiceUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
+  }
+
   export type transfertUncheckedUpdateManyWithoutFromChurchNestedInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -37840,6 +40575,20 @@ export namespace Prisma {
     deleteMany?: pasteurScalarWhereInput | pasteurScalarWhereInput[]
   }
 
+  export type ServiceUncheckedUpdateManyWithoutChurchNestedInput = {
+    create?: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput> | ServiceCreateWithoutChurchInput[] | ServiceUncheckedCreateWithoutChurchInput[]
+    connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
+    upsert?: ServiceUpsertWithWhereUniqueWithoutChurchInput | ServiceUpsertWithWhereUniqueWithoutChurchInput[]
+    createMany?: ServiceCreateManyChurchInputEnvelope
+    set?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    disconnect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    delete?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+    update?: ServiceUpdateWithWhereUniqueWithoutChurchInput | ServiceUpdateWithWhereUniqueWithoutChurchInput[]
+    updateMany?: ServiceUpdateManyWithWhereWithoutChurchInput | ServiceUpdateManyWithWhereWithoutChurchInput[]
+    deleteMany?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
+  }
+
   export type ChurchCreateNestedOneWithoutUsersInput = {
     create?: XOR<ChurchCreateWithoutUsersInput, ChurchUncheckedCreateWithoutUsersInput>
     connectOrCreate?: ChurchCreateOrConnectWithoutUsersInput
@@ -37863,6 +40612,13 @@ export namespace Prisma {
     connectOrCreate?: transfertCreateOrConnectWithoutMemberInput | transfertCreateOrConnectWithoutMemberInput[]
     createMany?: transfertCreateManyMemberInputEnvelope
     connect?: transfertWhereUniqueInput | transfertWhereUniqueInput[]
+  }
+
+  export type PresenceCreateNestedManyWithoutUserInput = {
+    create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
+    createMany?: PresenceCreateManyUserInputEnvelope
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
   }
 
   export type comiteeCreateNestedManyWithoutCommiteeLeaderInput = {
@@ -37894,6 +40650,13 @@ export namespace Prisma {
     connectOrCreate?: transfertCreateOrConnectWithoutMemberInput | transfertCreateOrConnectWithoutMemberInput[]
     createMany?: transfertCreateManyMemberInputEnvelope
     connect?: transfertWhereUniqueInput | transfertWhereUniqueInput[]
+  }
+
+  export type PresenceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
+    createMany?: PresenceCreateManyUserInputEnvelope
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
   }
 
   export type comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput = {
@@ -37966,6 +40729,20 @@ export namespace Prisma {
     deleteMany?: transfertScalarWhereInput | transfertScalarWhereInput[]
   }
 
+  export type PresenceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
+    upsert?: PresenceUpsertWithWhereUniqueWithoutUserInput | PresenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PresenceCreateManyUserInputEnvelope
+    set?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    disconnect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    delete?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    update?: PresenceUpdateWithWhereUniqueWithoutUserInput | PresenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PresenceUpdateManyWithWhereWithoutUserInput | PresenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
+  }
+
   export type comiteeUpdateManyWithoutCommiteeLeaderNestedInput = {
     create?: XOR<comiteeCreateWithoutCommiteeLeaderInput, comiteeUncheckedCreateWithoutCommiteeLeaderInput> | comiteeCreateWithoutCommiteeLeaderInput[] | comiteeUncheckedCreateWithoutCommiteeLeaderInput[]
     connectOrCreate?: comiteeCreateOrConnectWithoutCommiteeLeaderInput | comiteeCreateOrConnectWithoutCommiteeLeaderInput[]
@@ -38030,6 +40807,20 @@ export namespace Prisma {
     update?: transfertUpdateWithWhereUniqueWithoutMemberInput | transfertUpdateWithWhereUniqueWithoutMemberInput[]
     updateMany?: transfertUpdateManyWithWhereWithoutMemberInput | transfertUpdateManyWithWhereWithoutMemberInput[]
     deleteMany?: transfertScalarWhereInput | transfertScalarWhereInput[]
+  }
+
+  export type PresenceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
+    upsert?: PresenceUpsertWithWhereUniqueWithoutUserInput | PresenceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PresenceCreateManyUserInputEnvelope
+    set?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    disconnect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    delete?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    connect?: PresenceWhereUniqueInput | PresenceWhereUniqueInput[]
+    update?: PresenceUpdateWithWhereUniqueWithoutUserInput | PresenceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PresenceUpdateManyWithWhereWithoutUserInput | PresenceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
   }
 
   export type comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput = {
@@ -38721,6 +41512,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -38734,17 +41536,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -38776,6 +41567,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -38805,18 +41610,21 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedEnumStatutPresenceFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutPresence | EnumStatutPresenceFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutPresence[]
+    notIn?: $Enums.StatutPresence[]
+    not?: NestedEnumStatutPresenceFilter<$PrismaModel> | $Enums.StatutPresence
+  }
+
+  export type NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutPresence | EnumStatutPresenceFieldRefInput<$PrismaModel>
+    in?: $Enums.StatutPresence[]
+    notIn?: $Enums.StatutPresence[]
+    not?: NestedEnumStatutPresenceWithAggregatesFilter<$PrismaModel> | $Enums.StatutPresence
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _min?: NestedEnumStatutPresenceFilter<$PrismaModel>
+    _max?: NestedEnumStatutPresenceFilter<$PrismaModel>
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -38887,6 +41695,492 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PresenceCreateWithoutServiceInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPresencesInput
+  }
+
+  export type PresenceUncheckedCreateWithoutServiceInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    utilisateurId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PresenceCreateOrConnectWithoutServiceInput = {
+    where: PresenceWhereUniqueInput
+    create: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput>
+  }
+
+  export type PresenceCreateManyServiceInputEnvelope = {
+    data: PresenceCreateManyServiceInput | PresenceCreateManyServiceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChurchCreateWithoutServicesInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertCreateNestedManyWithoutToChurchInput
+    users?: UserCreateNestedManyWithoutChurchInput
+    groups?: GroupeCreateNestedManyWithoutChurchInput
+    events?: EventCreateNestedManyWithoutChurchInput
+    mariages?: MariageCreateNestedManyWithoutChurchInput
+    funerals?: FuneralCreateNestedManyWithoutChurchInput
+    presentations?: PresentationCreateNestedManyWithoutChurchInput
+    batism?: BaptismCreateNestedManyWithoutChurchInput
+    death?: deathCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassCreateNestedManyWithoutChurchInput
+    comitees?: comiteeCreateNestedManyWithoutChurchInput
+    appointments?: appointmentCreateNestedManyWithoutChurchInput
+    mission?: MissionCreateNestedOneWithoutChurchInput
+    expense?: expenseCreateNestedManyWithoutChurchInput
+    offering?: offeringCreateNestedManyWithoutChurchInput
+    donation?: donationCreateNestedManyWithoutChurchInput
+    tithing?: tithingCreateNestedManyWithoutChurchInput
+    moisson?: moissonCreateNestedManyWithoutChurchInput
+    sanction?: sanctionCreateNestedManyWithoutChurchInput
+    ministry?: ministryCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutServicesInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    missionId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
+    users?: UserUncheckedCreateNestedManyWithoutChurchInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutChurchInput
+    events?: EventUncheckedCreateNestedManyWithoutChurchInput
+    mariages?: MariageUncheckedCreateNestedManyWithoutChurchInput
+    funerals?: FuneralUncheckedCreateNestedManyWithoutChurchInput
+    presentations?: PresentationUncheckedCreateNestedManyWithoutChurchInput
+    batism?: BaptismUncheckedCreateNestedManyWithoutChurchInput
+    death?: deathUncheckedCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassUncheckedCreateNestedManyWithoutChurchInput
+    comitees?: comiteeUncheckedCreateNestedManyWithoutChurchInput
+    appointments?: appointmentUncheckedCreateNestedManyWithoutChurchInput
+    expense?: expenseUncheckedCreateNestedManyWithoutChurchInput
+    offering?: offeringUncheckedCreateNestedManyWithoutChurchInput
+    donation?: donationUncheckedCreateNestedManyWithoutChurchInput
+    tithing?: tithingUncheckedCreateNestedManyWithoutChurchInput
+    moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
+    sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
+    ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutServicesInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutServicesInput, ChurchUncheckedCreateWithoutServicesInput>
+  }
+
+  export type PresenceUpsertWithWhereUniqueWithoutServiceInput = {
+    where: PresenceWhereUniqueInput
+    update: XOR<PresenceUpdateWithoutServiceInput, PresenceUncheckedUpdateWithoutServiceInput>
+    create: XOR<PresenceCreateWithoutServiceInput, PresenceUncheckedCreateWithoutServiceInput>
+  }
+
+  export type PresenceUpdateWithWhereUniqueWithoutServiceInput = {
+    where: PresenceWhereUniqueInput
+    data: XOR<PresenceUpdateWithoutServiceInput, PresenceUncheckedUpdateWithoutServiceInput>
+  }
+
+  export type PresenceUpdateManyWithWhereWithoutServiceInput = {
+    where: PresenceScalarWhereInput
+    data: XOR<PresenceUpdateManyMutationInput, PresenceUncheckedUpdateManyWithoutServiceInput>
+  }
+
+  export type PresenceScalarWhereInput = {
+    AND?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
+    OR?: PresenceScalarWhereInput[]
+    NOT?: PresenceScalarWhereInput | PresenceScalarWhereInput[]
+    id?: StringFilter<"Presence"> | string
+    statut?: EnumStatutPresenceFilter<"Presence"> | $Enums.StatutPresence
+    utilisateurId?: StringFilter<"Presence"> | string
+    serviceId?: StringFilter<"Presence"> | string
+    createdAt?: DateTimeFilter<"Presence"> | Date | string
+    updatedAt?: DateTimeFilter<"Presence"> | Date | string
+  }
+
+  export type ChurchUpsertWithoutServicesInput = {
+    update: XOR<ChurchUpdateWithoutServicesInput, ChurchUncheckedUpdateWithoutServicesInput>
+    create: XOR<ChurchCreateWithoutServicesInput, ChurchUncheckedCreateWithoutServicesInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutServicesInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutServicesInput, ChurchUncheckedUpdateWithoutServicesInput>
+  }
+
+  export type ChurchUpdateWithoutServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUpdateManyWithoutToChurchNestedInput
+    users?: UserUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUpdateManyWithoutChurchNestedInput
+    events?: EventUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUpdateManyWithoutChurchNestedInput
+    death?: deathUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUpdateManyWithoutChurchNestedInput
+    mission?: MissionUpdateOneWithoutChurchNestedInput
+    expense?: expenseUpdateManyWithoutChurchNestedInput
+    offering?: offeringUpdateManyWithoutChurchNestedInput
+    donation?: donationUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
+    users?: UserUncheckedUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutChurchNestedInput
+    events?: EventUncheckedUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUncheckedUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUncheckedUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUncheckedUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUncheckedUpdateManyWithoutChurchNestedInput
+    death?: deathUncheckedUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUncheckedUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUncheckedUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUncheckedUpdateManyWithoutChurchNestedInput
+    expense?: expenseUncheckedUpdateManyWithoutChurchNestedInput
+    offering?: offeringUncheckedUpdateManyWithoutChurchNestedInput
+    donation?: donationUncheckedUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUncheckedUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type UserCreateWithoutPresencesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    church?: ChurchCreateNestedOneWithoutUsersInput
+    groups?: GroupeCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserUncheckedCreateWithoutPresencesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    churchId?: string | null
+    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserCreateOrConnectWithoutPresencesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPresencesInput, UserUncheckedCreateWithoutPresencesInput>
+  }
+
+  export type ServiceCreateWithoutPresencesInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church?: ChurchCreateNestedOneWithoutServicesInput
+  }
+
+  export type ServiceUncheckedCreateWithoutPresencesInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    churchId?: string | null
+  }
+
+  export type ServiceCreateOrConnectWithoutPresencesInput = {
+    where: ServiceWhereUniqueInput
+    create: XOR<ServiceCreateWithoutPresencesInput, ServiceUncheckedCreateWithoutPresencesInput>
+  }
+
+  export type UserUpsertWithoutPresencesInput = {
+    update: XOR<UserUpdateWithoutPresencesInput, UserUncheckedUpdateWithoutPresencesInput>
+    create: XOR<UserCreateWithoutPresencesInput, UserUncheckedCreateWithoutPresencesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPresencesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPresencesInput, UserUncheckedUpdateWithoutPresencesInput>
+  }
+
+  export type UserUpdateWithoutPresencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    church?: ChurchUpdateOneWithoutUsersNestedInput
+    groups?: GroupeUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPresencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type ServiceUpsertWithoutPresencesInput = {
+    update: XOR<ServiceUpdateWithoutPresencesInput, ServiceUncheckedUpdateWithoutPresencesInput>
+    create: XOR<ServiceCreateWithoutPresencesInput, ServiceUncheckedCreateWithoutPresencesInput>
+    where?: ServiceWhereInput
+  }
+
+  export type ServiceUpdateToOneWithWhereWithoutPresencesInput = {
+    where?: ServiceWhereInput
+    data: XOR<ServiceUpdateWithoutPresencesInput, ServiceUncheckedUpdateWithoutPresencesInput>
+  }
+
+  export type ServiceUpdateWithoutPresencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateOneWithoutServicesNestedInput
+  }
+
+  export type ServiceUncheckedUpdateWithoutPresencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transfertCreateWithoutFromChurchInput = {
@@ -38983,6 +42277,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -39029,6 +42324,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -39711,6 +43007,32 @@ export namespace Prisma {
 
   export type pasteurCreateManyChurchInputEnvelope = {
     data: pasteurCreateManyChurchInput | pasteurCreateManyChurchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ServiceCreateWithoutChurchInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    presences?: PresenceCreateNestedManyWithoutServiceInput
+  }
+
+  export type ServiceUncheckedCreateWithoutChurchInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    presences?: PresenceUncheckedCreateNestedManyWithoutServiceInput
+  }
+
+  export type ServiceCreateOrConnectWithoutChurchInput = {
+    where: ServiceWhereUniqueInput
+    create: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput>
+  }
+
+  export type ServiceCreateManyChurchInputEnvelope = {
+    data: ServiceCreateManyChurchInput | ServiceCreateManyChurchInput[]
     skipDuplicates?: boolean
   }
 
@@ -40440,6 +43762,33 @@ export namespace Prisma {
     churchId?: StringNullableFilter<"pasteur"> | string | null
   }
 
+  export type ServiceUpsertWithWhereUniqueWithoutChurchInput = {
+    where: ServiceWhereUniqueInput
+    update: XOR<ServiceUpdateWithoutChurchInput, ServiceUncheckedUpdateWithoutChurchInput>
+    create: XOR<ServiceCreateWithoutChurchInput, ServiceUncheckedCreateWithoutChurchInput>
+  }
+
+  export type ServiceUpdateWithWhereUniqueWithoutChurchInput = {
+    where: ServiceWhereUniqueInput
+    data: XOR<ServiceUpdateWithoutChurchInput, ServiceUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type ServiceUpdateManyWithWhereWithoutChurchInput = {
+    where: ServiceScalarWhereInput
+    data: XOR<ServiceUpdateManyMutationInput, ServiceUncheckedUpdateManyWithoutChurchInput>
+  }
+
+  export type ServiceScalarWhereInput = {
+    AND?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
+    OR?: ServiceScalarWhereInput[]
+    NOT?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
+    id?: StringFilter<"Service"> | string
+    nom?: StringFilter<"Service"> | string
+    createdAt?: DateTimeFilter<"Service"> | Date | string
+    updatedAt?: DateTimeFilter<"Service"> | Date | string
+    churchId?: StringNullableFilter<"Service"> | string | null
+  }
+
   export type ChurchCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -40478,6 +43827,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutUsersInput = {
@@ -40518,6 +43868,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutUsersInput = {
@@ -40631,6 +43982,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PresenceCreateWithoutUserInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    service: ServiceCreateNestedOneWithoutPresencesInput
+  }
+
+  export type PresenceUncheckedCreateWithoutUserInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    serviceId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PresenceCreateOrConnectWithoutUserInput = {
+    where: PresenceWhereUniqueInput
+    create: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type PresenceCreateManyUserInputEnvelope = {
+    data: PresenceCreateManyUserInput | PresenceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type comiteeCreateWithoutCommiteeLeaderInput = {
     id?: string
     name: string
@@ -40730,6 +44107,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutUsersInput = {
@@ -40770,6 +44148,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type GroupeUpsertWithWhereUniqueWithoutUsersInput = {
@@ -40818,6 +44197,22 @@ export namespace Prisma {
   export type transfertUpdateManyWithWhereWithoutMemberInput = {
     where: transfertScalarWhereInput
     data: XOR<transfertUpdateManyMutationInput, transfertUncheckedUpdateManyWithoutMemberInput>
+  }
+
+  export type PresenceUpsertWithWhereUniqueWithoutUserInput = {
+    where: PresenceWhereUniqueInput
+    update: XOR<PresenceUpdateWithoutUserInput, PresenceUncheckedUpdateWithoutUserInput>
+    create: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput>
+  }
+
+  export type PresenceUpdateWithWhereUniqueWithoutUserInput = {
+    where: PresenceWhereUniqueInput
+    data: XOR<PresenceUpdateWithoutUserInput, PresenceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PresenceUpdateManyWithWhereWithoutUserInput = {
+    where: PresenceScalarWhereInput
+    data: XOR<PresenceUpdateManyMutationInput, PresenceUncheckedUpdateManyWithoutUserInput>
   }
 
   export type comiteeUpsertWithWhereUniqueWithoutCommiteeLeaderInput = {
@@ -40890,6 +44285,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutGroupsInput = {
@@ -40930,6 +44326,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutGroupsInput = {
@@ -40979,6 +44376,7 @@ export namespace Prisma {
     church?: ChurchCreateNestedOneWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -41025,6 +44423,7 @@ export namespace Prisma {
     churchId?: string | null
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -41083,6 +44482,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutGroupsInput = {
@@ -41123,6 +44523,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutGroupsInput = {
@@ -41179,6 +44580,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutEventsInput = {
@@ -41219,6 +44621,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutEventsInput = {
@@ -41275,6 +44678,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutEventsInput = {
@@ -41315,6 +44719,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutMariagesInput = {
@@ -41355,6 +44760,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMariagesInput = {
@@ -41395,6 +44801,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutMariagesInput = {
@@ -41451,6 +44858,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMariagesInput = {
@@ -41491,6 +44899,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutFuneralsInput = {
@@ -41531,6 +44940,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutFuneralsInput = {
@@ -41571,6 +44981,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutFuneralsInput = {
@@ -41627,6 +45038,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutFuneralsInput = {
@@ -41667,6 +45079,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutPresentationsInput = {
@@ -41707,6 +45120,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutPresentationsInput = {
@@ -41747,6 +45161,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutPresentationsInput = {
@@ -41803,6 +45218,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutPresentationsInput = {
@@ -41843,6 +45259,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutBatismInput = {
@@ -41883,6 +45300,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutBatismInput = {
@@ -41923,6 +45341,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutBatismInput = {
@@ -41979,6 +45398,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutBatismInput = {
@@ -42019,6 +45439,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutDeathInput = {
@@ -42059,6 +45480,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutDeathInput = {
@@ -42099,6 +45521,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutDeathInput = {
@@ -42155,6 +45578,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutDeathInput = {
@@ -42195,6 +45619,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutSundayClassInput = {
@@ -42235,6 +45660,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutSundayClassInput = {
@@ -42275,6 +45701,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutSundayClassInput = {
@@ -42331,6 +45758,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutSundayClassInput = {
@@ -42371,6 +45799,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutExpenseInput = {
@@ -42411,6 +45840,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutExpenseInput = {
@@ -42451,6 +45881,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutExpenseInput = {
@@ -42507,6 +45938,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutExpenseInput = {
@@ -42547,6 +45979,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutOfferingInput = {
@@ -42587,6 +46020,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutOfferingInput = {
@@ -42627,6 +46061,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutOfferingInput = {
@@ -42683,6 +46118,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutOfferingInput = {
@@ -42723,6 +46159,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutTithingInput = {
@@ -42763,6 +46200,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTithingInput = {
@@ -42803,6 +46241,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutTithingInput = {
@@ -42859,6 +46298,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTithingInput = {
@@ -42899,6 +46339,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutDonationInput = {
@@ -42939,6 +46380,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutDonationInput = {
@@ -42979,6 +46421,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutDonationInput = {
@@ -43035,6 +46478,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutDonationInput = {
@@ -43075,6 +46519,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutMoissonInput = {
@@ -43115,6 +46560,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMoissonInput = {
@@ -43155,6 +46601,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutMoissonInput = {
@@ -43211,6 +46658,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMoissonInput = {
@@ -43251,6 +46699,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type UserCreateWithoutLeadingComitteesInput = {
@@ -43296,6 +46745,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
 
@@ -43342,6 +46792,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
 
@@ -43393,6 +46844,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
   }
 
@@ -43439,6 +46891,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
   }
 
@@ -43485,6 +46938,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutComiteesInput = {
@@ -43525,6 +46979,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutComiteesInput = {
@@ -43613,6 +47068,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutComiteesInput = {
@@ -43653,6 +47109,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type UserCreateWithoutUserAppointmentsInput = {
@@ -43697,6 +47154,7 @@ export namespace Prisma {
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -43743,6 +47201,7 @@ export namespace Prisma {
     churchId?: string | null
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -43790,6 +47249,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutAppointmentsInput = {
@@ -43830,6 +47290,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutAppointmentsInput = {
@@ -43902,6 +47363,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutAppointmentsInput = {
@@ -43942,6 +47404,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutTransfersFromInput = {
@@ -43982,6 +47445,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTransfersFromInput = {
@@ -44022,6 +47486,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutTransfersFromInput = {
@@ -44067,6 +47532,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTransfersToInput = {
@@ -44107,6 +47573,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutTransfersToInput = {
@@ -44156,6 +47623,7 @@ export namespace Prisma {
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -44202,6 +47670,7 @@ export namespace Prisma {
     churchId?: string | null
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
     leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
     memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
   }
@@ -44260,6 +47729,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTransfersFromInput = {
@@ -44300,6 +47770,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUpsertWithoutTransfersToInput = {
@@ -44351,6 +47822,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTransfersToInput = {
@@ -44391,6 +47863,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type UserUpsertWithoutTransfersInput = {
@@ -44446,6 +47919,7 @@ export namespace Prisma {
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -44492,6 +47966,7 @@ export namespace Prisma {
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -44534,6 +48009,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMissionInput = {
@@ -44574,6 +48050,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutMissionInput = {
@@ -44663,6 +48140,7 @@ export namespace Prisma {
     moisson?: moissonCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutSanctionInput = {
@@ -44703,6 +48181,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutSanctionInput = {
@@ -44759,6 +48238,7 @@ export namespace Prisma {
     moisson?: moissonUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutSanctionInput = {
@@ -44799,6 +48279,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutMinistryInput = {
@@ -44839,6 +48320,7 @@ export namespace Prisma {
     moisson?: moissonCreateNestedManyWithoutChurchInput
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMinistryInput = {
@@ -44879,6 +48361,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutMinistryInput = {
@@ -44935,6 +48418,7 @@ export namespace Prisma {
     moisson?: moissonUpdateManyWithoutChurchNestedInput
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMinistryInput = {
@@ -44975,6 +48459,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchCreateWithoutPasteurInput = {
@@ -45015,6 +48500,7 @@ export namespace Prisma {
     moisson?: moissonCreateNestedManyWithoutChurchInput
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutPasteurInput = {
@@ -45055,6 +48541,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
     sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
     ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
   }
 
   export type ChurchCreateOrConnectWithoutPasteurInput = {
@@ -45111,6 +48598,7 @@ export namespace Prisma {
     moisson?: moissonUpdateManyWithoutChurchNestedInput
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutPasteurInput = {
@@ -45151,6 +48639,7 @@ export namespace Prisma {
     moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type CommuneCreateWithoutDepartementInput = {
@@ -45319,6 +48808,38 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     departementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PresenceCreateManyServiceInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    utilisateurId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PresenceUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPresencesNestedInput
+  }
+
+  export type PresenceUncheckedUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PresenceUncheckedUpdateManyWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    utilisateurId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type transfertCreateManyFromChurchInput = {
@@ -45606,6 +49127,13 @@ export namespace Prisma {
     status: string
   }
 
+  export type ServiceCreateManyChurchInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type transfertUpdateWithoutFromChurchInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45696,6 +49224,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -45742,6 +49271,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -46479,12 +50009,43 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ServiceUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    presences?: PresenceUpdateManyWithoutServiceNestedInput
+  }
+
+  export type ServiceUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    presences?: PresenceUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
+  export type ServiceUncheckedUpdateManyWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type transfertCreateManyMemberInput = {
     id?: string
     fromChurchId: string
     toChurchId: string
     createdAt?: Date | string
     updatedAt: Date | string
+  }
+
+  export type PresenceCreateManyUserInput = {
+    id?: string
+    statut: $Enums.StatutPresence
+    serviceId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type GroupeUpdateWithoutUsersInput = {
@@ -46616,6 +50177,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PresenceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    service?: ServiceUpdateOneRequiredWithoutPresencesNestedInput
+  }
+
+  export type PresenceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    serviceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PresenceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    statut?: EnumStatutPresenceFieldUpdateOperationsInput | $Enums.StatutPresence
+    serviceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type comiteeUpdateWithoutCommiteeLeaderInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -46716,6 +50301,7 @@ export namespace Prisma {
     church?: ChurchUpdateOneWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -46762,6 +50348,7 @@ export namespace Prisma {
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -46851,6 +50438,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
 
@@ -46897,6 +50485,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
 
@@ -46985,6 +50574,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
   }
 
@@ -47031,6 +50621,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
   }
 
@@ -47118,6 +50709,7 @@ export namespace Prisma {
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -47164,6 +50756,7 @@ export namespace Prisma {
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
     leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
     memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
   }
@@ -47267,6 +50860,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMissionInput = {
@@ -47307,6 +50901,7 @@ export namespace Prisma {
     sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
     ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateManyWithoutMissionInput = {

@@ -120,6 +120,23 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ServiceScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  churchId: 'churchId'
+};
+
+exports.Prisma.PresenceScalarFieldEnum = {
+  id: 'id',
+  statut: 'statut',
+  utilisateurId: 'utilisateurId',
+  serviceId: 'serviceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ChurchScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -475,6 +492,18 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.ServiceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  churchId: 'churchId'
+};
+
+exports.Prisma.PresenceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  utilisateurId: 'utilisateurId',
+  serviceId: 'serviceId'
+};
+
 exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -768,6 +797,13 @@ exports.Prisma.SectionCommunaleOrderByRelevanceFieldEnum = {
   name: 'name',
   communeId: 'communeId'
 };
+exports.StatutPresence = exports.$Enums.StatutPresence = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  EN_RETARD: 'EN_RETARD',
+  MOTIVE: 'MOTIVE'
+};
+
 exports.Role = exports.$Enums.Role = {
   Admin: 'Admin',
   Membre: 'Membre',
@@ -776,6 +812,8 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.Prisma.ModelName = {
+  Service: 'Service',
+  Presence: 'Presence',
   Church: 'Church',
   User: 'User',
   Groupe: 'Groupe',
