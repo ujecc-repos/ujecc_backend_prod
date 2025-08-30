@@ -53,6 +53,14 @@ model Presence {
   updatedAt DateTime @updatedAt
 }
 
+model Tti {
+  id        String   @id @default(cuid())
+  nom       String
+  church    Church[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Church {
   id            String         @id @default(uuid())
   name          String         @unique
@@ -92,6 +100,8 @@ model Church {
   ministry      ministry[]
   pasteur       pasteur[]
   services      Service[]
+  tti           Tti?           @relation(fields: [ttiId], references: [id])
+  ttiId         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 }
@@ -129,12 +139,16 @@ model User {
   envelopeNumber   String?
   baptismLocation  String?
   baptismDate      String?
+  istimothee       Boolean?      @default(false)
   role             Role          @default(Membre)
   churchRole       String?
   facebook         String?
   instagram        String?
   profession       String?
   sundayClass      String?
+  timotheeId       String?
+  timothee         User?         @relation("TimotheeTithes", fields: [timotheeId], references: [id])
+  tithes           User[]        @relation("TimotheeTithes")
   church           Church?       @relation(fields: [churchId], references: [id])
   churchId         String?
   groups           Groupe[]

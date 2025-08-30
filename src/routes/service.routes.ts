@@ -55,7 +55,7 @@ router.get("//:id", async (req, res) => {
 /**
  * ✏️ Mettre à jour un événement
  */
-router.put("//:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { nom } = req.body;
 
@@ -77,11 +77,18 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
+    // First delete all related presence records
+    await prisma.presence.deleteMany({
+      where: { serviceId: id },
+    });
+    
+    // Then delete the service
     await prisma.service.delete({
       where: { id },
     });
     res.json({ message: "Événement supprimé avec succès" });
   } catch (err) {
+    console.error("Error deleting service:", err);
     res.status(500).json({ error: "Impossible de supprimer l'événement" });
   }
 });
