@@ -137,6 +137,13 @@ exports.Prisma.PresenceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TtiScalarFieldEnum = {
+  id: 'id',
+  nom: 'nom',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ChurchScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -153,6 +160,7 @@ exports.Prisma.ChurchScalarFieldEnum = {
   email: 'email',
   mainPasteur: 'mainPasteur',
   missionId: 'missionId',
+  ttiId: 'ttiId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -190,12 +198,14 @@ exports.Prisma.UserScalarFieldEnum = {
   envelopeNumber: 'envelopeNumber',
   baptismLocation: 'baptismLocation',
   baptismDate: 'baptismDate',
+  istimothee: 'istimothee',
   role: 'role',
   churchRole: 'churchRole',
   facebook: 'facebook',
   instagram: 'instagram',
   profession: 'profession',
   sundayClass: 'sundayClass',
+  timotheeId: 'timotheeId',
   churchId: 'churchId'
 };
 
@@ -504,6 +514,11 @@ exports.Prisma.PresenceOrderByRelevanceFieldEnum = {
   serviceId: 'serviceId'
 };
 
+exports.Prisma.TtiOrderByRelevanceFieldEnum = {
+  id: 'id',
+  nom: 'nom'
+};
+
 exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -519,7 +534,8 @@ exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   whatsapp: 'whatsapp',
   email: 'email',
   mainPasteur: 'mainPasteur',
-  missionId: 'missionId'
+  missionId: 'missionId',
+  ttiId: 'ttiId'
 };
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
@@ -557,6 +573,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   instagram: 'instagram',
   profession: 'profession',
   sundayClass: 'sundayClass',
+  timotheeId: 'timotheeId',
   churchId: 'churchId'
 };
 
@@ -814,6 +831,7 @@ exports.Role = exports.$Enums.Role = {
 exports.Prisma.ModelName = {
   Service: 'Service',
   Presence: 'Presence',
+  Tti: 'Tti',
   Church: 'Church',
   User: 'User',
   Groupe: 'Groupe',

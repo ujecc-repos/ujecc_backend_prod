@@ -9,7 +9,7 @@ const upload_1 = __importDefault(require("../utils/upload"));
 const router = express_1.default.Router();
 // Create a new church
 router.post('/', async (req, res) => {
-    const { name, commune, sectionCommunale, departement, longitude, latitude } = req.body;
+    const { name, commune, sectionCommunale, departement, longitude, latitude, country, telephone, rue } = req.body;
     try {
         const isChurchExist = await client_1.prisma.church.findUnique({
             where: {
@@ -19,18 +19,19 @@ router.post('/', async (req, res) => {
         if (isChurchExist) {
             return res.status(400).json({ error: 'Désoler, cette église existe déja' });
         }
+        const fullAddress = `${country}`.toLowerCase() != "haiti" ? `${country}, ${departement}, ${commune}, ${rue} ${telephone}` : `${commune}, ${sectionCommunale}, ${departement}`;
         // Prepare church data
         const churchData = {
             name,
-            address: `${commune}, ${sectionCommunale}, ${departement}`,
+            address: fullAddress,
             longitude: longitude || "",
             latitude: latitude || ""
         };
         // Only connect to mission if one is provided
-        if (req.body.mission) {
+        if (req.body.missionId) {
             churchData.mission = {
                 connect: {
-                    id: req.body.mission
+                    id: req.body.missionId
                 }
             };
         }
@@ -232,6 +233,95 @@ router.post('/:churchId/remove-user', async (req, res) => {
     catch (error) {
         console.log("error : ", error);
         res.status(400).json({ error: `${error}` });
+    }
+});
+router.put("/church/:churchId/connect-tti/:ttiId", async (req, res) => {
+    try {
+        const { churchId, ttiId } = req.params;
+        const updatedTti = await client_1.prisma.church.update({
+            where: { id: churchId },
+            data: {
+                tti: { connect: { id: ttiId } },
+            },
+            include: { tti: true },
+        });
+        return res.json({
+            message: `Tti connected to Church successfully`,
+            tti: updatedTti,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+// 1️⃣ Create a new Tti and connect it to a Church
+router.post("/church/create-tti", async (req, res) => {
+    try {
+        const { nom } = req.body;
+        if (!nom) {
+            return res.status(400).json({ error: "nom is required" });
+        }
+        const newTti = await client_1.prisma.tti.create({
+            data: {
+                nom,
+            },
+        });
+        return res.status(201).json({
+            message: "Tti created successfully",
+            tti: newTti,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+// router.get("/church/:churchId/ttis", async (req, res) => {
+//   try {
+//     const { churchId } = req.params;
+//     const ttiList = await prisma.tti.findMany({
+//       where: {  }, // filter by churchId
+//     });
+//     return res.json(ttiList);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ error: "Something went wrong" });
+//   }
+// });
+router.get("/ttis/all-tti", async (req, res) => {
+    try {
+        const ttiList = await client_1.prisma.tti.findMany({
+            include: { church: true }, // optional: include church info
+        });
+        return res.json(ttiList);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+router.post("/tti", async (req, res) => {
+    try {
+        const { nom } = req.body;
+        if (!nom) {
+            return res.status(400).json({ error: "Field 'nom' is required" });
+        }
+        const newTti = await client_1.prisma.tti.create({
+            data: {
+                nom,
+                // church: churchId ? { connect: { id: churchId } } : undefined, // optional connect
+            },
+            // include: { church: true }, // return church info if connected
+        });
+        return res.status(201).json({
+            message: "Tti created successfully",
+            tti: newTti,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
     }
 });
 exports.default = router;

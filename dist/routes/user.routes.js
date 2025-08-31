@@ -8,6 +8,7 @@ const client_1 = require("../utils/client");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const lodash_1 = __importDefault(require("lodash"));
+const multer_1 = __importDefault(require("multer"));
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const verifyToken = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
@@ -25,8 +26,29 @@ const verifyToken = (req, res, next) => {
 };
 const router = express_1.default.Router();
 const upload_1 = __importDefault(require("../utils/upload"));
+// Multer error handling middleware
+const handleMulterError = (err, req, res, next) => {
+    if (err instanceof multer_1.default.MulterError) {
+        console.error('Multer Error:', err);
+        return res.status(400).json({
+            error: `File upload error: ${err.message}`,
+            code: err.code
+        });
+    }
+    else if (err) {
+        console.error('Upload Error:', err);
+        return res.status(400).json({
+            error: `Upload error: ${err.message}`
+        });
+    }
+    next();
+};
 // Create a new user with optional image upload
-router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
+router.post('/', upload_1.default.single('profileImage'), handleMulterError, async (req, res) => {
+    console.log('=== User Registration Request ===');
+    console.log('Body:', req.body);
+    console.log('File:', req.file);
+    console.log('Headers:', req.headers);
     try {
         const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country, birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession, churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin } = req.body;
         // Check if email already exists
@@ -98,8 +120,15 @@ router.post('/', upload_1.default.single('profileImage'), async (req, res) => {
         res.json(user);
     }
     catch (error) {
-        console.log("error : ", error);
-        res.status(400).json({ error: `${error}` });
+        console.error('=== User Registration Error ===');
+        console.error('Error details:', error);
+        console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+        // Send more detailed error response
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        res.status(400).json({
+            error: errorMessage,
+            details: error instanceof Error ? error.stack : error
+        });
     }
 });
 router.put("/logout", async (req, res) => {
@@ -280,16 +309,46 @@ router.get('/userbytoken/token', verifyToken, async (req, res) => {
         res.status(400).json({ error: 'Failed to fetch user' });
     }
 });
+// Connect tithe to timothee - MUST be before /:id route
+router.put("/connect-tithe", async (req, res) => {
+    try {
+        const { titheId, timotheeId } = req.body;
+        if (!titheId || !timotheeId) {
+            return res.status(400).json({ error: "titheId and timotheeId are required" });
+        }
+        console.log("titheid  & timotheeId: ", titheId, timotheeId);
+        // Update the tithe user to connect with a timothee
+        const updatedTithe = await client_1.prisma.user.update({
+            where: { id: titheId },
+            data: {
+                timotheeId: timotheeId,
+            },
+            include: { timothee: true }, // optional: to see timothee details in response
+        });
+        return res.json(updatedTithe);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
 // Update a user with optional image upload
 router.put('/:id', upload_1.default.single('profileImage'), async (req, res) => {
-    console.log("user : ", req.body);
+    console.log('=== User Update Request ===');
+    console.log('Request params:', req.params);
+    console.log('Request body:', req.body);
+    console.log('Request file:', req.file);
+    console.log('Request headers:', req.headers);
     try {
         // Extract data from request body
         const userData = req.body;
-        console.log("user body : ", req.body);
         // If a file was uploaded, add the file path to the user data
         if (req.file) {
+            console.log('File uploaded:', req.file.filename);
             userData.picture = `/uploads/${req.file.filename}`;
+        }
+        else {
+            console.log('No file uploaded');
         }
         // Remove fields that shouldn't be updated or cause conflicts
         const fieldsToOmit = ['id', 'createdAt', 'updatedAt', 'civilState'];
@@ -553,6 +612,93 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
     }
     catch (error) {
         res.status(400).json({ error: 'Impossible de récupérer les anniversaires à venir' });
+    }
+});
+// connect tithee 
+// get all tithes of a specific timothee 
+// GET /timothee/:id/tithes
+router.get("/timothee/:id/tithes/:churchId", async (req, res) => {
+    try {
+        const { id, churchId } = req.params;
+        const timotheeWithTithes = await client_1.prisma.user.findUnique({
+            where: { id, churchId },
+            include: { tithes: true }, // load all tithes connected
+        });
+        if (!timotheeWithTithes) {
+            return res.status(404).json({ error: "Timothee not found" });
+        }
+        return res.json(timotheeWithTithes.tithes);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+// Get all Tithes of all Timothees
+// GET /timothees/tithes
+router.get("/timothees/tithes/:churchId", async (req, res) => {
+    try {
+        const { churchId } = req.params;
+        const timotheesWithTithes = await client_1.prisma.user.findMany({
+            where: { istimothee: true, churchId }, // only timothees
+            include: { tithes: true }, // include their tithes
+        });
+        // Flatten the array of tithes
+        const allTithes = timotheesWithTithes.flatMap(timothee => timothee.tithes);
+        return res.json(allTithes);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+// ✅ Make a user a timothee
+router.put("/user/:id/make-timothee", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await client_1.prisma.user.update({
+            where: { id },
+            data: { istimothee: true },
+        });
+        return res.json({
+            message: `${updatedUser.firstname} ${updatedUser.lastname} is now a timothee`,
+            user: updatedUser,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+// ✅ Remove timothee status from a user
+router.put("/user/:id/remove-timothee", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await client_1.prisma.user.update({
+            where: { id },
+            data: { istimothee: false },
+        });
+        return res.json({
+            message: `${updatedUser.firstname} ${updatedUser.lastname} is no longer a timothee`,
+            user: updatedUser,
+        });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
+    }
+});
+router.get("/timothees/:churchId", async (req, res) => {
+    try {
+        const { churchId } = req.params;
+        const timothees = await client_1.prisma.user.findMany({
+            where: { istimothee: true, churchId }, // only users with timothee = true
+        });
+        return res.json(timothees);
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Something went wrong" });
     }
 });
 exports.default = router;

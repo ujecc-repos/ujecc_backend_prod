@@ -24,6 +24,11 @@ export type Service = $Result.DefaultSelection<Prisma.$ServicePayload>
  */
 export type Presence = $Result.DefaultSelection<Prisma.$PresencePayload>
 /**
+ * Model Tti
+ * 
+ */
+export type Tti = $Result.DefaultSelection<Prisma.$TtiPayload>
+/**
  * Model Church
  * 
  */
@@ -326,6 +331,16 @@ export class PrismaClient<
     * ```
     */
   get presence(): Prisma.PresenceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tti`: Exposes CRUD operations for the **Tti** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ttis
+    * const ttis = await prisma.tti.findMany()
+    * ```
+    */
+  get tti(): Prisma.TtiDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.church`: Exposes CRUD operations for the **Church** model.
@@ -1018,6 +1033,7 @@ export namespace Prisma {
   export const ModelName: {
     Service: 'Service',
     Presence: 'Presence',
+    Tti: 'Tti',
     Church: 'Church',
     User: 'User',
     Groupe: 'Groupe',
@@ -1061,7 +1077,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "service" | "presence" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
+      modelProps: "service" | "presence" | "tti" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1194,6 +1210,72 @@ export namespace Prisma {
           count: {
             args: Prisma.PresenceCountArgs<ExtArgs>
             result: $Utils.Optional<PresenceCountAggregateOutputType> | number
+          }
+        }
+      }
+      Tti: {
+        payload: Prisma.$TtiPayload<ExtArgs>
+        fields: Prisma.TtiFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TtiFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TtiFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          findFirst: {
+            args: Prisma.TtiFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TtiFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          findMany: {
+            args: Prisma.TtiFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>[]
+          }
+          create: {
+            args: Prisma.TtiCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          createMany: {
+            args: Prisma.TtiCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.TtiDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          update: {
+            args: Prisma.TtiUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          deleteMany: {
+            args: Prisma.TtiDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TtiUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.TtiUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TtiPayload>
+          }
+          aggregate: {
+            args: Prisma.TtiAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTti>
+          }
+          groupBy: {
+            args: Prisma.TtiGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TtiGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TtiCountArgs<ExtArgs>
+            result: $Utils.Optional<TtiCountAggregateOutputType> | number
           }
         }
       }
@@ -2933,6 +3015,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     service?: ServiceOmit
     presence?: PresenceOmit
+    tti?: TtiOmit
     church?: ChurchOmit
     user?: UserOmit
     groupe?: GroupeOmit
@@ -3075,6 +3158,37 @@ export namespace Prisma {
    */
   export type ServiceCountOutputTypeCountPresencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PresenceWhereInput
+  }
+
+
+  /**
+   * Count Type TtiCountOutputType
+   */
+
+  export type TtiCountOutputType = {
+    church: number
+  }
+
+  export type TtiCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | TtiCountOutputTypeCountChurchArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TtiCountOutputType without action
+   */
+  export type TtiCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TtiCountOutputType
+     */
+    select?: TtiCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TtiCountOutputType without action
+   */
+  export type TtiCountOutputTypeCountChurchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChurchWhereInput
   }
 
 
@@ -3303,6 +3417,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    tithes: number
     groups: number
     userAppointments: number
     transfers: number
@@ -3312,6 +3427,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tithes?: boolean | UserCountOutputTypeCountTithesArgs
     groups?: boolean | UserCountOutputTypeCountGroupsArgs
     userAppointments?: boolean | UserCountOutputTypeCountUserAppointmentsArgs
     transfers?: boolean | UserCountOutputTypeCountTransfersArgs
@@ -3329,6 +3445,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTithesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
   }
 
   /**
@@ -5496,6 +5619,950 @@ export namespace Prisma {
 
 
   /**
+   * Model Tti
+   */
+
+  export type AggregateTti = {
+    _count: TtiCountAggregateOutputType | null
+    _min: TtiMinAggregateOutputType | null
+    _max: TtiMaxAggregateOutputType | null
+  }
+
+  export type TtiMinAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TtiMaxAggregateOutputType = {
+    id: string | null
+    nom: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TtiCountAggregateOutputType = {
+    id: number
+    nom: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TtiMinAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TtiMaxAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TtiCountAggregateInputType = {
+    id?: true
+    nom?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TtiAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tti to aggregate.
+     */
+    where?: TtiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ttis to fetch.
+     */
+    orderBy?: TtiOrderByWithRelationInput | TtiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TtiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ttis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ttis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Ttis
+    **/
+    _count?: true | TtiCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TtiMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TtiMaxAggregateInputType
+  }
+
+  export type GetTtiAggregateType<T extends TtiAggregateArgs> = {
+        [P in keyof T & keyof AggregateTti]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTti[P]>
+      : GetScalarType<T[P], AggregateTti[P]>
+  }
+
+
+
+
+  export type TtiGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TtiWhereInput
+    orderBy?: TtiOrderByWithAggregationInput | TtiOrderByWithAggregationInput[]
+    by: TtiScalarFieldEnum[] | TtiScalarFieldEnum
+    having?: TtiScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TtiCountAggregateInputType | true
+    _min?: TtiMinAggregateInputType
+    _max?: TtiMaxAggregateInputType
+  }
+
+  export type TtiGroupByOutputType = {
+    id: string
+    nom: string
+    createdAt: Date
+    updatedAt: Date
+    _count: TtiCountAggregateOutputType | null
+    _min: TtiMinAggregateOutputType | null
+    _max: TtiMaxAggregateOutputType | null
+  }
+
+  type GetTtiGroupByPayload<T extends TtiGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TtiGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TtiGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TtiGroupByOutputType[P]>
+            : GetScalarType<T[P], TtiGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TtiSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nom?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    church?: boolean | Tti$churchArgs<ExtArgs>
+    _count?: boolean | TtiCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tti"]>
+
+
+
+  export type TtiSelectScalar = {
+    id?: boolean
+    nom?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TtiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "createdAt" | "updatedAt", ExtArgs["result"]["tti"]>
+  export type TtiInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | Tti$churchArgs<ExtArgs>
+    _count?: boolean | TtiCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $TtiPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tti"
+    objects: {
+      church: Prisma.$ChurchPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      nom: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tti"]>
+    composites: {}
+  }
+
+  type TtiGetPayload<S extends boolean | null | undefined | TtiDefaultArgs> = $Result.GetResult<Prisma.$TtiPayload, S>
+
+  type TtiCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TtiFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TtiCountAggregateInputType | true
+    }
+
+  export interface TtiDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tti'], meta: { name: 'Tti' } }
+    /**
+     * Find zero or one Tti that matches the filter.
+     * @param {TtiFindUniqueArgs} args - Arguments to find a Tti
+     * @example
+     * // Get one Tti
+     * const tti = await prisma.tti.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TtiFindUniqueArgs>(args: SelectSubset<T, TtiFindUniqueArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tti that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TtiFindUniqueOrThrowArgs} args - Arguments to find a Tti
+     * @example
+     * // Get one Tti
+     * const tti = await prisma.tti.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TtiFindUniqueOrThrowArgs>(args: SelectSubset<T, TtiFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tti that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiFindFirstArgs} args - Arguments to find a Tti
+     * @example
+     * // Get one Tti
+     * const tti = await prisma.tti.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TtiFindFirstArgs>(args?: SelectSubset<T, TtiFindFirstArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tti that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiFindFirstOrThrowArgs} args - Arguments to find a Tti
+     * @example
+     * // Get one Tti
+     * const tti = await prisma.tti.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TtiFindFirstOrThrowArgs>(args?: SelectSubset<T, TtiFindFirstOrThrowArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Ttis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Ttis
+     * const ttis = await prisma.tti.findMany()
+     * 
+     * // Get first 10 Ttis
+     * const ttis = await prisma.tti.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ttiWithIdOnly = await prisma.tti.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TtiFindManyArgs>(args?: SelectSubset<T, TtiFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tti.
+     * @param {TtiCreateArgs} args - Arguments to create a Tti.
+     * @example
+     * // Create one Tti
+     * const Tti = await prisma.tti.create({
+     *   data: {
+     *     // ... data to create a Tti
+     *   }
+     * })
+     * 
+     */
+    create<T extends TtiCreateArgs>(args: SelectSubset<T, TtiCreateArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Ttis.
+     * @param {TtiCreateManyArgs} args - Arguments to create many Ttis.
+     * @example
+     * // Create many Ttis
+     * const tti = await prisma.tti.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TtiCreateManyArgs>(args?: SelectSubset<T, TtiCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Tti.
+     * @param {TtiDeleteArgs} args - Arguments to delete one Tti.
+     * @example
+     * // Delete one Tti
+     * const Tti = await prisma.tti.delete({
+     *   where: {
+     *     // ... filter to delete one Tti
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TtiDeleteArgs>(args: SelectSubset<T, TtiDeleteArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tti.
+     * @param {TtiUpdateArgs} args - Arguments to update one Tti.
+     * @example
+     * // Update one Tti
+     * const tti = await prisma.tti.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TtiUpdateArgs>(args: SelectSubset<T, TtiUpdateArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Ttis.
+     * @param {TtiDeleteManyArgs} args - Arguments to filter Ttis to delete.
+     * @example
+     * // Delete a few Ttis
+     * const { count } = await prisma.tti.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TtiDeleteManyArgs>(args?: SelectSubset<T, TtiDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ttis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Ttis
+     * const tti = await prisma.tti.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TtiUpdateManyArgs>(args: SelectSubset<T, TtiUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Tti.
+     * @param {TtiUpsertArgs} args - Arguments to update or create a Tti.
+     * @example
+     * // Update or create a Tti
+     * const tti = await prisma.tti.upsert({
+     *   create: {
+     *     // ... data to create a Tti
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tti we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TtiUpsertArgs>(args: SelectSubset<T, TtiUpsertArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Ttis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiCountArgs} args - Arguments to filter Ttis to count.
+     * @example
+     * // Count the number of Ttis
+     * const count = await prisma.tti.count({
+     *   where: {
+     *     // ... the filter for the Ttis we want to count
+     *   }
+     * })
+    **/
+    count<T extends TtiCountArgs>(
+      args?: Subset<T, TtiCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TtiCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tti.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TtiAggregateArgs>(args: Subset<T, TtiAggregateArgs>): Prisma.PrismaPromise<GetTtiAggregateType<T>>
+
+    /**
+     * Group by Tti.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TtiGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TtiGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TtiGroupByArgs['orderBy'] }
+        : { orderBy?: TtiGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TtiGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTtiGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tti model
+   */
+  readonly fields: TtiFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tti.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TtiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    church<T extends Tti$churchArgs<ExtArgs> = {}>(args?: Subset<T, Tti$churchArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tti model
+   */
+  interface TtiFieldRefs {
+    readonly id: FieldRef<"Tti", 'String'>
+    readonly nom: FieldRef<"Tti", 'String'>
+    readonly createdAt: FieldRef<"Tti", 'DateTime'>
+    readonly updatedAt: FieldRef<"Tti", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tti findUnique
+   */
+  export type TtiFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter, which Tti to fetch.
+     */
+    where: TtiWhereUniqueInput
+  }
+
+  /**
+   * Tti findUniqueOrThrow
+   */
+  export type TtiFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter, which Tti to fetch.
+     */
+    where: TtiWhereUniqueInput
+  }
+
+  /**
+   * Tti findFirst
+   */
+  export type TtiFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter, which Tti to fetch.
+     */
+    where?: TtiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ttis to fetch.
+     */
+    orderBy?: TtiOrderByWithRelationInput | TtiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ttis.
+     */
+    cursor?: TtiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ttis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ttis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ttis.
+     */
+    distinct?: TtiScalarFieldEnum | TtiScalarFieldEnum[]
+  }
+
+  /**
+   * Tti findFirstOrThrow
+   */
+  export type TtiFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter, which Tti to fetch.
+     */
+    where?: TtiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ttis to fetch.
+     */
+    orderBy?: TtiOrderByWithRelationInput | TtiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Ttis.
+     */
+    cursor?: TtiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ttis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ttis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Ttis.
+     */
+    distinct?: TtiScalarFieldEnum | TtiScalarFieldEnum[]
+  }
+
+  /**
+   * Tti findMany
+   */
+  export type TtiFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter, which Ttis to fetch.
+     */
+    where?: TtiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Ttis to fetch.
+     */
+    orderBy?: TtiOrderByWithRelationInput | TtiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Ttis.
+     */
+    cursor?: TtiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Ttis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Ttis.
+     */
+    skip?: number
+    distinct?: TtiScalarFieldEnum | TtiScalarFieldEnum[]
+  }
+
+  /**
+   * Tti create
+   */
+  export type TtiCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tti.
+     */
+    data: XOR<TtiCreateInput, TtiUncheckedCreateInput>
+  }
+
+  /**
+   * Tti createMany
+   */
+  export type TtiCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Ttis.
+     */
+    data: TtiCreateManyInput | TtiCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tti update
+   */
+  export type TtiUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tti.
+     */
+    data: XOR<TtiUpdateInput, TtiUncheckedUpdateInput>
+    /**
+     * Choose, which Tti to update.
+     */
+    where: TtiWhereUniqueInput
+  }
+
+  /**
+   * Tti updateMany
+   */
+  export type TtiUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Ttis.
+     */
+    data: XOR<TtiUpdateManyMutationInput, TtiUncheckedUpdateManyInput>
+    /**
+     * Filter which Ttis to update
+     */
+    where?: TtiWhereInput
+    /**
+     * Limit how many Ttis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tti upsert
+   */
+  export type TtiUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tti to update in case it exists.
+     */
+    where: TtiWhereUniqueInput
+    /**
+     * In case the Tti found by the `where` argument doesn't exist, create a new Tti with this data.
+     */
+    create: XOR<TtiCreateInput, TtiUncheckedCreateInput>
+    /**
+     * In case the Tti was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TtiUpdateInput, TtiUncheckedUpdateInput>
+  }
+
+  /**
+   * Tti delete
+   */
+  export type TtiDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    /**
+     * Filter which Tti to delete.
+     */
+    where: TtiWhereUniqueInput
+  }
+
+  /**
+   * Tti deleteMany
+   */
+  export type TtiDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Ttis to delete
+     */
+    where?: TtiWhereInput
+    /**
+     * Limit how many Ttis to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tti.church
+   */
+  export type Tti$churchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Church
+     */
+    select?: ChurchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Church
+     */
+    omit?: ChurchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChurchInclude<ExtArgs> | null
+    where?: ChurchWhereInput
+    orderBy?: ChurchOrderByWithRelationInput | ChurchOrderByWithRelationInput[]
+    cursor?: ChurchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChurchScalarFieldEnum | ChurchScalarFieldEnum[]
+  }
+
+  /**
+   * Tti without action
+   */
+  export type TtiDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Church
    */
 
@@ -5521,6 +6588,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    ttiId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5541,6 +6609,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    ttiId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5561,6 +6630,7 @@ export namespace Prisma {
     email: number
     mainPasteur: number
     missionId: number
+    ttiId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5583,6 +6653,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    ttiId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5603,6 +6674,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    ttiId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5623,6 +6695,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    ttiId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5716,6 +6789,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    ttiId: string | null
     createdAt: Date
     updatedAt: Date
     _count: ChurchCountAggregateOutputType | null
@@ -5753,6 +6827,7 @@ export namespace Prisma {
     email?: boolean
     mainPasteur?: boolean
     missionId?: boolean
+    ttiId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     transfersFrom?: boolean | Church$transfersFromArgs<ExtArgs>
@@ -5778,6 +6853,7 @@ export namespace Prisma {
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
     services?: boolean | Church$servicesArgs<ExtArgs>
+    tti?: boolean | Church$ttiArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["church"]>
 
@@ -5799,11 +6875,12 @@ export namespace Prisma {
     email?: boolean
     mainPasteur?: boolean
     missionId?: boolean
+    ttiId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "picture" | "longitude" | "latitude" | "phone" | "anthem" | "facebook" | "instagram" | "whatsapp" | "email" | "mainPasteur" | "missionId" | "createdAt" | "updatedAt", ExtArgs["result"]["church"]>
+  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "picture" | "longitude" | "latitude" | "phone" | "anthem" | "facebook" | "instagram" | "whatsapp" | "email" | "mainPasteur" | "missionId" | "ttiId" | "createdAt" | "updatedAt", ExtArgs["result"]["church"]>
   export type ChurchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transfersFrom?: boolean | Church$transfersFromArgs<ExtArgs>
     transfersTo?: boolean | Church$transfersToArgs<ExtArgs>
@@ -5828,6 +6905,7 @@ export namespace Prisma {
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
     services?: boolean | Church$servicesArgs<ExtArgs>
+    tti?: boolean | Church$ttiArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5857,6 +6935,7 @@ export namespace Prisma {
       ministry: Prisma.$ministryPayload<ExtArgs>[]
       pasteur: Prisma.$pasteurPayload<ExtArgs>[]
       services: Prisma.$ServicePayload<ExtArgs>[]
+      tti: Prisma.$TtiPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5874,6 +6953,7 @@ export namespace Prisma {
       email: string | null
       mainPasteur: string | null
       missionId: string | null
+      ttiId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["church"]>
@@ -6239,6 +7319,7 @@ export namespace Prisma {
     ministry<T extends Church$ministryArgs<ExtArgs> = {}>(args?: Subset<T, Church$ministryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pasteur<T extends Church$pasteurArgs<ExtArgs> = {}>(args?: Subset<T, Church$pasteurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pasteurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     services<T extends Church$servicesArgs<ExtArgs> = {}>(args?: Subset<T, Church$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tti<T extends Church$ttiArgs<ExtArgs> = {}>(args?: Subset<T, Church$ttiArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6283,6 +7364,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Church", 'String'>
     readonly mainPasteur: FieldRef<"Church", 'String'>
     readonly missionId: FieldRef<"Church", 'String'>
+    readonly ttiId: FieldRef<"Church", 'String'>
     readonly createdAt: FieldRef<"Church", 'DateTime'>
     readonly updatedAt: FieldRef<"Church", 'DateTime'>
   }
@@ -7175,6 +8257,25 @@ export namespace Prisma {
   }
 
   /**
+   * Church.tti
+   */
+  export type Church$ttiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tti
+     */
+    select?: TtiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tti
+     */
+    omit?: TtiOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TtiInclude<ExtArgs> | null
+    where?: TtiWhereInput
+  }
+
+  /**
    * Church without action
    */
   export type ChurchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7236,12 +8337,14 @@ export namespace Prisma {
     envelopeNumber: string | null
     baptismLocation: string | null
     baptismDate: string | null
+    istimothee: boolean | null
     role: $Enums.Role | null
     churchRole: string | null
     facebook: string | null
     instagram: string | null
     profession: string | null
     sundayClass: string | null
+    timotheeId: string | null
     churchId: string | null
   }
 
@@ -7278,12 +8381,14 @@ export namespace Prisma {
     envelopeNumber: string | null
     baptismLocation: string | null
     baptismDate: string | null
+    istimothee: boolean | null
     role: $Enums.Role | null
     churchRole: string | null
     facebook: string | null
     instagram: string | null
     profession: string | null
     sundayClass: string | null
+    timotheeId: string | null
     churchId: string | null
   }
 
@@ -7320,12 +8425,14 @@ export namespace Prisma {
     envelopeNumber: number
     baptismLocation: number
     baptismDate: number
+    istimothee: number
     role: number
     churchRole: number
     facebook: number
     instagram: number
     profession: number
     sundayClass: number
+    timotheeId: number
     churchId: number
     _all: number
   }
@@ -7364,12 +8471,14 @@ export namespace Prisma {
     envelopeNumber?: true
     baptismLocation?: true
     baptismDate?: true
+    istimothee?: true
     role?: true
     churchRole?: true
     facebook?: true
     instagram?: true
     profession?: true
     sundayClass?: true
+    timotheeId?: true
     churchId?: true
   }
 
@@ -7406,12 +8515,14 @@ export namespace Prisma {
     envelopeNumber?: true
     baptismLocation?: true
     baptismDate?: true
+    istimothee?: true
     role?: true
     churchRole?: true
     facebook?: true
     instagram?: true
     profession?: true
     sundayClass?: true
+    timotheeId?: true
     churchId?: true
   }
 
@@ -7448,12 +8559,14 @@ export namespace Prisma {
     envelopeNumber?: true
     baptismLocation?: true
     baptismDate?: true
+    istimothee?: true
     role?: true
     churchRole?: true
     facebook?: true
     instagram?: true
     profession?: true
     sundayClass?: true
+    timotheeId?: true
     churchId?: true
     _all?: true
   }
@@ -7563,12 +8676,14 @@ export namespace Prisma {
     envelopeNumber: string | null
     baptismLocation: string | null
     baptismDate: string | null
+    istimothee: boolean | null
     role: $Enums.Role
     churchRole: string | null
     facebook: string | null
     instagram: string | null
     profession: string | null
     sundayClass: string | null
+    timotheeId: string | null
     churchId: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
@@ -7622,13 +8737,17 @@ export namespace Prisma {
     envelopeNumber?: boolean
     baptismLocation?: boolean
     baptismDate?: boolean
+    istimothee?: boolean
     role?: boolean
     churchRole?: boolean
     facebook?: boolean
     instagram?: boolean
     profession?: boolean
     sundayClass?: boolean
+    timotheeId?: boolean
     churchId?: boolean
+    timothee?: boolean | User$timotheeArgs<ExtArgs>
+    tithes?: boolean | User$tithesArgs<ExtArgs>
     church?: boolean | User$churchArgs<ExtArgs>
     groups?: boolean | User$groupsArgs<ExtArgs>
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
@@ -7674,17 +8793,21 @@ export namespace Prisma {
     envelopeNumber?: boolean
     baptismLocation?: boolean
     baptismDate?: boolean
+    istimothee?: boolean
     role?: boolean
     churchRole?: boolean
     facebook?: boolean
     instagram?: boolean
     profession?: boolean
     sundayClass?: boolean
+    timotheeId?: boolean
     churchId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "joinDate" | "email" | "firstname" | "lastname" | "nif" | "groupeSanguin" | "personToContact" | "spouseFullName" | "password" | "membreActif" | "longitude" | "latitude" | "plainPassword" | "age" | "minister" | "mobilePhone" | "homePhone" | "picture" | "city" | "etatCivil" | "country" | "birthCountry" | "birthCity" | "birthDate" | "sex" | "addressLine" | "envelopeNumber" | "baptismLocation" | "baptismDate" | "role" | "churchRole" | "facebook" | "instagram" | "profession" | "sundayClass" | "churchId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "joinDate" | "email" | "firstname" | "lastname" | "nif" | "groupeSanguin" | "personToContact" | "spouseFullName" | "password" | "membreActif" | "longitude" | "latitude" | "plainPassword" | "age" | "minister" | "mobilePhone" | "homePhone" | "picture" | "city" | "etatCivil" | "country" | "birthCountry" | "birthCity" | "birthDate" | "sex" | "addressLine" | "envelopeNumber" | "baptismLocation" | "baptismDate" | "istimothee" | "role" | "churchRole" | "facebook" | "instagram" | "profession" | "sundayClass" | "timotheeId" | "churchId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    timothee?: boolean | User$timotheeArgs<ExtArgs>
+    tithes?: boolean | User$tithesArgs<ExtArgs>
     church?: boolean | User$churchArgs<ExtArgs>
     groups?: boolean | User$groupsArgs<ExtArgs>
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
@@ -7698,6 +8821,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      timothee: Prisma.$UserPayload<ExtArgs> | null
+      tithes: Prisma.$UserPayload<ExtArgs>[]
       church: Prisma.$ChurchPayload<ExtArgs> | null
       groups: Prisma.$GroupePayload<ExtArgs>[]
       userAppointments: Prisma.$appointmentPayload<ExtArgs>[]
@@ -7739,12 +8864,14 @@ export namespace Prisma {
       envelopeNumber: string | null
       baptismLocation: string | null
       baptismDate: string | null
+      istimothee: boolean | null
       role: $Enums.Role
       churchRole: string | null
       facebook: string | null
       instagram: string | null
       profession: string | null
       sundayClass: string | null
+      timotheeId: string | null
       churchId: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -8086,6 +9213,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    timothee<T extends User$timotheeArgs<ExtArgs> = {}>(args?: Subset<T, User$timotheeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tithes<T extends User$tithesArgs<ExtArgs> = {}>(args?: Subset<T, User$tithesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     church<T extends User$churchArgs<ExtArgs> = {}>(args?: Subset<T, User$churchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     groups<T extends User$groupsArgs<ExtArgs> = {}>(args?: Subset<T, User$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GroupePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userAppointments<T extends User$userAppointmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$userAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$appointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8154,12 +9283,14 @@ export namespace Prisma {
     readonly envelopeNumber: FieldRef<"User", 'String'>
     readonly baptismLocation: FieldRef<"User", 'String'>
     readonly baptismDate: FieldRef<"User", 'String'>
+    readonly istimothee: FieldRef<"User", 'Boolean'>
     readonly role: FieldRef<"User", 'Role'>
     readonly churchRole: FieldRef<"User", 'String'>
     readonly facebook: FieldRef<"User", 'String'>
     readonly instagram: FieldRef<"User", 'String'>
     readonly profession: FieldRef<"User", 'String'>
     readonly sundayClass: FieldRef<"User", 'String'>
+    readonly timotheeId: FieldRef<"User", 'String'>
     readonly churchId: FieldRef<"User", 'String'>
   }
     
@@ -8501,6 +9632,49 @@ export namespace Prisma {
      * Limit how many Users to delete.
      */
     limit?: number
+  }
+
+  /**
+   * User.timothee
+   */
+  export type User$timotheeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * User.tithes
+   */
+  export type User$tithesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
   }
 
   /**
@@ -31898,6 +33072,16 @@ export namespace Prisma {
   export type PresenceScalarFieldEnum = (typeof PresenceScalarFieldEnum)[keyof typeof PresenceScalarFieldEnum]
 
 
+  export const TtiScalarFieldEnum: {
+    id: 'id',
+    nom: 'nom',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TtiScalarFieldEnum = (typeof TtiScalarFieldEnum)[keyof typeof TtiScalarFieldEnum]
+
+
   export const ChurchScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -31914,6 +33098,7 @@ export namespace Prisma {
     email: 'email',
     mainPasteur: 'mainPasteur',
     missionId: 'missionId',
+    ttiId: 'ttiId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -31954,12 +33139,14 @@ export namespace Prisma {
     envelopeNumber: 'envelopeNumber',
     baptismLocation: 'baptismLocation',
     baptismDate: 'baptismDate',
+    istimothee: 'istimothee',
     role: 'role',
     churchRole: 'churchRole',
     facebook: 'facebook',
     instagram: 'instagram',
     profession: 'profession',
     sundayClass: 'sundayClass',
+    timotheeId: 'timotheeId',
     churchId: 'churchId'
   };
 
@@ -32352,6 +33539,14 @@ export namespace Prisma {
   export type PresenceOrderByRelevanceFieldEnum = (typeof PresenceOrderByRelevanceFieldEnum)[keyof typeof PresenceOrderByRelevanceFieldEnum]
 
 
+  export const TtiOrderByRelevanceFieldEnum: {
+    id: 'id',
+    nom: 'nom'
+  };
+
+  export type TtiOrderByRelevanceFieldEnum = (typeof TtiOrderByRelevanceFieldEnum)[keyof typeof TtiOrderByRelevanceFieldEnum]
+
+
   export const ChurchOrderByRelevanceFieldEnum: {
     id: 'id',
     name: 'name',
@@ -32367,7 +33562,8 @@ export namespace Prisma {
     whatsapp: 'whatsapp',
     email: 'email',
     mainPasteur: 'mainPasteur',
-    missionId: 'missionId'
+    missionId: 'missionId',
+    ttiId: 'ttiId'
   };
 
   export type ChurchOrderByRelevanceFieldEnum = (typeof ChurchOrderByRelevanceFieldEnum)[keyof typeof ChurchOrderByRelevanceFieldEnum]
@@ -32408,6 +33604,7 @@ export namespace Prisma {
     instagram: 'instagram',
     profession: 'profession',
     sundayClass: 'sundayClass',
+    timotheeId: 'timotheeId',
     churchId: 'churchId'
   };
 
@@ -32901,6 +34098,57 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Presence"> | Date | string
   }
 
+  export type TtiWhereInput = {
+    AND?: TtiWhereInput | TtiWhereInput[]
+    OR?: TtiWhereInput[]
+    NOT?: TtiWhereInput | TtiWhereInput[]
+    id?: StringFilter<"Tti"> | string
+    nom?: StringFilter<"Tti"> | string
+    createdAt?: DateTimeFilter<"Tti"> | Date | string
+    updatedAt?: DateTimeFilter<"Tti"> | Date | string
+    church?: ChurchListRelationFilter
+  }
+
+  export type TtiOrderByWithRelationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    church?: ChurchOrderByRelationAggregateInput
+    _relevance?: TtiOrderByRelevanceInput
+  }
+
+  export type TtiWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TtiWhereInput | TtiWhereInput[]
+    OR?: TtiWhereInput[]
+    NOT?: TtiWhereInput | TtiWhereInput[]
+    nom?: StringFilter<"Tti"> | string
+    createdAt?: DateTimeFilter<"Tti"> | Date | string
+    updatedAt?: DateTimeFilter<"Tti"> | Date | string
+    church?: ChurchListRelationFilter
+  }, "id">
+
+  export type TtiOrderByWithAggregationInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TtiCountOrderByAggregateInput
+    _max?: TtiMaxOrderByAggregateInput
+    _min?: TtiMinOrderByAggregateInput
+  }
+
+  export type TtiScalarWhereWithAggregatesInput = {
+    AND?: TtiScalarWhereWithAggregatesInput | TtiScalarWhereWithAggregatesInput[]
+    OR?: TtiScalarWhereWithAggregatesInput[]
+    NOT?: TtiScalarWhereWithAggregatesInput | TtiScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Tti"> | string
+    nom?: StringWithAggregatesFilter<"Tti"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Tti"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Tti"> | Date | string
+  }
+
   export type ChurchWhereInput = {
     AND?: ChurchWhereInput | ChurchWhereInput[]
     OR?: ChurchWhereInput[]
@@ -32920,6 +34168,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"Church"> | string | null
     mainPasteur?: StringNullableFilter<"Church"> | string | null
     missionId?: StringNullableFilter<"Church"> | string | null
+    ttiId?: StringNullableFilter<"Church"> | string | null
     createdAt?: DateTimeFilter<"Church"> | Date | string
     updatedAt?: DateTimeFilter<"Church"> | Date | string
     transfersFrom?: TransfertListRelationFilter
@@ -32945,6 +34194,7 @@ export namespace Prisma {
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
     services?: ServiceListRelationFilter
+    tti?: XOR<TtiNullableScalarRelationFilter, TtiWhereInput> | null
   }
 
   export type ChurchOrderByWithRelationInput = {
@@ -32963,6 +34213,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     mainPasteur?: SortOrderInput | SortOrder
     missionId?: SortOrderInput | SortOrder
+    ttiId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     transfersFrom?: transfertOrderByRelationAggregateInput
@@ -32988,6 +34239,7 @@ export namespace Prisma {
     ministry?: ministryOrderByRelationAggregateInput
     pasteur?: pasteurOrderByRelationAggregateInput
     services?: ServiceOrderByRelationAggregateInput
+    tti?: TtiOrderByWithRelationInput
     _relevance?: ChurchOrderByRelevanceInput
   }
 
@@ -33010,6 +34262,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"Church"> | string | null
     mainPasteur?: StringNullableFilter<"Church"> | string | null
     missionId?: StringNullableFilter<"Church"> | string | null
+    ttiId?: StringNullableFilter<"Church"> | string | null
     createdAt?: DateTimeFilter<"Church"> | Date | string
     updatedAt?: DateTimeFilter<"Church"> | Date | string
     transfersFrom?: TransfertListRelationFilter
@@ -33035,6 +34288,7 @@ export namespace Prisma {
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
     services?: ServiceListRelationFilter
+    tti?: XOR<TtiNullableScalarRelationFilter, TtiWhereInput> | null
   }, "id" | "name">
 
   export type ChurchOrderByWithAggregationInput = {
@@ -33053,6 +34307,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     mainPasteur?: SortOrderInput | SortOrder
     missionId?: SortOrderInput | SortOrder
+    ttiId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ChurchCountOrderByAggregateInput
@@ -33079,6 +34334,7 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"Church"> | string | null
     mainPasteur?: StringNullableWithAggregatesFilter<"Church"> | string | null
     missionId?: StringNullableWithAggregatesFilter<"Church"> | string | null
+    ttiId?: StringNullableWithAggregatesFilter<"Church"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Church"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Church"> | Date | string
   }
@@ -33119,13 +34375,17 @@ export namespace Prisma {
     envelopeNumber?: StringNullableFilter<"User"> | string | null
     baptismLocation?: StringNullableFilter<"User"> | string | null
     baptismDate?: StringNullableFilter<"User"> | string | null
+    istimothee?: BoolNullableFilter<"User"> | boolean | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     churchRole?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     instagram?: StringNullableFilter<"User"> | string | null
     profession?: StringNullableFilter<"User"> | string | null
     sundayClass?: StringNullableFilter<"User"> | string | null
+    timotheeId?: StringNullableFilter<"User"> | string | null
     churchId?: StringNullableFilter<"User"> | string | null
+    timothee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    tithes?: UserListRelationFilter
     church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
     groups?: GroupeListRelationFilter
     userAppointments?: AppointmentListRelationFilter
@@ -33168,13 +34428,17 @@ export namespace Prisma {
     envelopeNumber?: SortOrderInput | SortOrder
     baptismLocation?: SortOrderInput | SortOrder
     baptismDate?: SortOrderInput | SortOrder
+    istimothee?: SortOrderInput | SortOrder
     role?: SortOrder
     churchRole?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     profession?: SortOrderInput | SortOrder
     sundayClass?: SortOrderInput | SortOrder
+    timotheeId?: SortOrderInput | SortOrder
     churchId?: SortOrderInput | SortOrder
+    timothee?: UserOrderByWithRelationInput
+    tithes?: UserOrderByRelationAggregateInput
     church?: ChurchOrderByWithRelationInput
     groups?: GroupeOrderByRelationAggregateInput
     userAppointments?: appointmentOrderByRelationAggregateInput
@@ -33221,13 +34485,17 @@ export namespace Prisma {
     envelopeNumber?: StringNullableFilter<"User"> | string | null
     baptismLocation?: StringNullableFilter<"User"> | string | null
     baptismDate?: StringNullableFilter<"User"> | string | null
+    istimothee?: BoolNullableFilter<"User"> | boolean | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     churchRole?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     instagram?: StringNullableFilter<"User"> | string | null
     profession?: StringNullableFilter<"User"> | string | null
     sundayClass?: StringNullableFilter<"User"> | string | null
+    timotheeId?: StringNullableFilter<"User"> | string | null
     churchId?: StringNullableFilter<"User"> | string | null
+    timothee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    tithes?: UserListRelationFilter
     church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
     groups?: GroupeListRelationFilter
     userAppointments?: AppointmentListRelationFilter
@@ -33270,12 +34538,14 @@ export namespace Prisma {
     envelopeNumber?: SortOrderInput | SortOrder
     baptismLocation?: SortOrderInput | SortOrder
     baptismDate?: SortOrderInput | SortOrder
+    istimothee?: SortOrderInput | SortOrder
     role?: SortOrder
     churchRole?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
     profession?: SortOrderInput | SortOrder
     sundayClass?: SortOrderInput | SortOrder
+    timotheeId?: SortOrderInput | SortOrder
     churchId?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -33318,12 +34588,14 @@ export namespace Prisma {
     envelopeNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     baptismLocation?: StringNullableWithAggregatesFilter<"User"> | string | null
     baptismDate?: StringNullableWithAggregatesFilter<"User"> | string | null
+    istimothee?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     churchRole?: StringNullableWithAggregatesFilter<"User"> | string | null
     facebook?: StringNullableWithAggregatesFilter<"User"> | string | null
     instagram?: StringNullableWithAggregatesFilter<"User"> | string | null
     profession?: StringNullableWithAggregatesFilter<"User"> | string | null
     sundayClass?: StringNullableWithAggregatesFilter<"User"> | string | null
+    timotheeId?: StringNullableWithAggregatesFilter<"User"> | string | null
     churchId?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
@@ -35261,6 +36533,59 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TtiCreateInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church?: ChurchCreateNestedManyWithoutTtiInput
+  }
+
+  export type TtiUncheckedCreateInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    church?: ChurchUncheckedCreateNestedManyWithoutTtiInput
+  }
+
+  export type TtiUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUpdateManyWithoutTtiNestedInput
+  }
+
+  export type TtiUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    church?: ChurchUncheckedUpdateManyWithoutTtiNestedInput
+  }
+
+  export type TtiCreateManyInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TtiUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TtiUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ChurchCreateInput = {
     id?: string
     name: string
@@ -35301,6 +36626,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateInput = {
@@ -35319,6 +36645,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -35385,6 +36712,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateInput = {
@@ -35403,6 +36731,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -35445,6 +36774,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35484,6 +36814,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35521,12 +36852,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
@@ -35569,13 +36903,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
@@ -35617,12 +36954,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
@@ -35665,13 +37005,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
@@ -35713,12 +37056,14 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
   }
 
@@ -35755,6 +37100,7 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35796,12 +37142,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -37992,6 +39340,43 @@ export namespace Prisma {
     _max?: NestedEnumStatutPresenceFilter<$PrismaModel>
   }
 
+  export type ChurchListRelationFilter = {
+    every?: ChurchWhereInput
+    some?: ChurchWhereInput
+    none?: ChurchWhereInput
+  }
+
+  export type ChurchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TtiOrderByRelevanceInput = {
+    fields: TtiOrderByRelevanceFieldEnum | TtiOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type TtiCountOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TtiMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TtiMinOrderByAggregateInput = {
+    id?: SortOrder
+    nom?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type TransfertListRelationFilter = {
     every?: transfertWhereInput
     some?: transfertWhereInput
@@ -38123,6 +39508,11 @@ export namespace Prisma {
     none?: ServiceWhereInput
   }
 
+  export type TtiNullableScalarRelationFilter = {
+    is?: TtiWhereInput | null
+    isNot?: TtiWhereInput | null
+  }
+
   export type transfertOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -38229,6 +39619,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38249,6 +39640,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38269,6 +39661,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -38278,11 +39671,21 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type EnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
     notIn?: $Enums.Role[]
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type UserOrderByRelevanceInput = {
@@ -38324,12 +39727,14 @@ export namespace Prisma {
     envelopeNumber?: SortOrder
     baptismLocation?: SortOrder
     baptismDate?: SortOrder
+    istimothee?: SortOrder
     role?: SortOrder
     churchRole?: SortOrder
     facebook?: SortOrder
     instagram?: SortOrder
     profession?: SortOrder
     sundayClass?: SortOrder
+    timotheeId?: SortOrder
     churchId?: SortOrder
   }
 
@@ -38366,12 +39771,14 @@ export namespace Prisma {
     envelopeNumber?: SortOrder
     baptismLocation?: SortOrder
     baptismDate?: SortOrder
+    istimothee?: SortOrder
     role?: SortOrder
     churchRole?: SortOrder
     facebook?: SortOrder
     instagram?: SortOrder
     profession?: SortOrder
     sundayClass?: SortOrder
+    timotheeId?: SortOrder
     churchId?: SortOrder
   }
 
@@ -38408,12 +39815,14 @@ export namespace Prisma {
     envelopeNumber?: SortOrder
     baptismLocation?: SortOrder
     baptismDate?: SortOrder
+    istimothee?: SortOrder
     role?: SortOrder
     churchRole?: SortOrder
     facebook?: SortOrder
     instagram?: SortOrder
     profession?: SortOrder
     sundayClass?: SortOrder
+    timotheeId?: SortOrder
     churchId?: SortOrder
   }
 
@@ -38425,6 +39834,14 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
@@ -38433,11 +39850,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type GroupeOrderByRelevanceInput = {
@@ -38507,14 +39919,6 @@ export namespace Prisma {
     churchId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EventOrderByRelevanceInput = {
@@ -39288,16 +40692,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type ChurchListRelationFilter = {
-    every?: ChurchWhereInput
-    some?: ChurchWhereInput
-    none?: ChurchWhereInput
-  }
-
-  export type ChurchOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type MissionOrderByRelevanceInput = {
     fields: MissionOrderByRelevanceFieldEnum | MissionOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -39649,6 +41043,48 @@ export namespace Prisma {
     update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutPresencesInput, ServiceUpdateWithoutPresencesInput>, ServiceUncheckedUpdateWithoutPresencesInput>
   }
 
+  export type ChurchCreateNestedManyWithoutTtiInput = {
+    create?: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput> | ChurchCreateWithoutTtiInput[] | ChurchUncheckedCreateWithoutTtiInput[]
+    connectOrCreate?: ChurchCreateOrConnectWithoutTtiInput | ChurchCreateOrConnectWithoutTtiInput[]
+    createMany?: ChurchCreateManyTtiInputEnvelope
+    connect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+  }
+
+  export type ChurchUncheckedCreateNestedManyWithoutTtiInput = {
+    create?: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput> | ChurchCreateWithoutTtiInput[] | ChurchUncheckedCreateWithoutTtiInput[]
+    connectOrCreate?: ChurchCreateOrConnectWithoutTtiInput | ChurchCreateOrConnectWithoutTtiInput[]
+    createMany?: ChurchCreateManyTtiInputEnvelope
+    connect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+  }
+
+  export type ChurchUpdateManyWithoutTtiNestedInput = {
+    create?: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput> | ChurchCreateWithoutTtiInput[] | ChurchUncheckedCreateWithoutTtiInput[]
+    connectOrCreate?: ChurchCreateOrConnectWithoutTtiInput | ChurchCreateOrConnectWithoutTtiInput[]
+    upsert?: ChurchUpsertWithWhereUniqueWithoutTtiInput | ChurchUpsertWithWhereUniqueWithoutTtiInput[]
+    createMany?: ChurchCreateManyTtiInputEnvelope
+    set?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    disconnect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    delete?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    connect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    update?: ChurchUpdateWithWhereUniqueWithoutTtiInput | ChurchUpdateWithWhereUniqueWithoutTtiInput[]
+    updateMany?: ChurchUpdateManyWithWhereWithoutTtiInput | ChurchUpdateManyWithWhereWithoutTtiInput[]
+    deleteMany?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
+  }
+
+  export type ChurchUncheckedUpdateManyWithoutTtiNestedInput = {
+    create?: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput> | ChurchCreateWithoutTtiInput[] | ChurchUncheckedCreateWithoutTtiInput[]
+    connectOrCreate?: ChurchCreateOrConnectWithoutTtiInput | ChurchCreateOrConnectWithoutTtiInput[]
+    upsert?: ChurchUpsertWithWhereUniqueWithoutTtiInput | ChurchUpsertWithWhereUniqueWithoutTtiInput[]
+    createMany?: ChurchCreateManyTtiInputEnvelope
+    set?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    disconnect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    delete?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    connect?: ChurchWhereUniqueInput | ChurchWhereUniqueInput[]
+    update?: ChurchUpdateWithWhereUniqueWithoutTtiInput | ChurchUpdateWithWhereUniqueWithoutTtiInput[]
+    updateMany?: ChurchUpdateManyWithWhereWithoutTtiInput | ChurchUpdateManyWithWhereWithoutTtiInput[]
+    deleteMany?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
+  }
+
   export type transfertCreateNestedManyWithoutFromChurchInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -39807,6 +41243,12 @@ export namespace Prisma {
     connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
     createMany?: ServiceCreateManyChurchInputEnvelope
     connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+  }
+
+  export type TtiCreateNestedOneWithoutChurchInput = {
+    create?: XOR<TtiCreateWithoutChurchInput, TtiUncheckedCreateWithoutChurchInput>
+    connectOrCreate?: TtiCreateOrConnectWithoutChurchInput
+    connect?: TtiWhereUniqueInput
   }
 
   export type transfertUncheckedCreateNestedManyWithoutFromChurchInput = {
@@ -40281,6 +41723,16 @@ export namespace Prisma {
     deleteMany?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
   }
 
+  export type TtiUpdateOneWithoutChurchNestedInput = {
+    create?: XOR<TtiCreateWithoutChurchInput, TtiUncheckedCreateWithoutChurchInput>
+    connectOrCreate?: TtiCreateOrConnectWithoutChurchInput
+    upsert?: TtiUpsertWithoutChurchInput
+    disconnect?: TtiWhereInput | boolean
+    delete?: TtiWhereInput | boolean
+    connect?: TtiWhereUniqueInput
+    update?: XOR<XOR<TtiUpdateToOneWithWhereWithoutChurchInput, TtiUpdateWithoutChurchInput>, TtiUncheckedUpdateWithoutChurchInput>
+  }
+
   export type transfertUncheckedUpdateManyWithoutFromChurchNestedInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -40589,6 +42041,19 @@ export namespace Prisma {
     deleteMany?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutTithesInput = {
+    create?: XOR<UserCreateWithoutTithesInput, UserUncheckedCreateWithoutTithesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTithesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedManyWithoutTimotheeInput = {
+    create?: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput> | UserCreateWithoutTimotheeInput[] | UserUncheckedCreateWithoutTimotheeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutTimotheeInput | UserCreateOrConnectWithoutTimotheeInput[]
+    createMany?: UserCreateManyTimotheeInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type ChurchCreateNestedOneWithoutUsersInput = {
     create?: XOR<ChurchCreateWithoutUsersInput, ChurchUncheckedCreateWithoutUsersInput>
     connectOrCreate?: ChurchCreateOrConnectWithoutUsersInput
@@ -40633,6 +42098,13 @@ export namespace Prisma {
     connect?: comiteeWhereUniqueInput | comiteeWhereUniqueInput[]
   }
 
+  export type UserUncheckedCreateNestedManyWithoutTimotheeInput = {
+    create?: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput> | UserCreateWithoutTimotheeInput[] | UserUncheckedCreateWithoutTimotheeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutTimotheeInput | UserCreateOrConnectWithoutTimotheeInput[]
+    createMany?: UserCreateManyTimotheeInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
   export type GroupeUncheckedCreateNestedManyWithoutUsersInput = {
     create?: XOR<GroupeCreateWithoutUsersInput, GroupeUncheckedCreateWithoutUsersInput> | GroupeCreateWithoutUsersInput[] | GroupeUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: GroupeCreateOrConnectWithoutUsersInput | GroupeCreateOrConnectWithoutUsersInput[]
@@ -40675,8 +42147,36 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type EnumRoleFieldUpdateOperationsInput = {
     set?: $Enums.Role
+  }
+
+  export type UserUpdateOneWithoutTithesNestedInput = {
+    create?: XOR<UserCreateWithoutTithesInput, UserUncheckedCreateWithoutTithesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTithesInput
+    upsert?: UserUpsertWithoutTithesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTithesInput, UserUpdateWithoutTithesInput>, UserUncheckedUpdateWithoutTithesInput>
+  }
+
+  export type UserUpdateManyWithoutTimotheeNestedInput = {
+    create?: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput> | UserCreateWithoutTimotheeInput[] | UserUncheckedCreateWithoutTimotheeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutTimotheeInput | UserCreateOrConnectWithoutTimotheeInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutTimotheeInput | UserUpsertWithWhereUniqueWithoutTimotheeInput[]
+    createMany?: UserCreateManyTimotheeInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutTimotheeInput | UserUpdateWithWhereUniqueWithoutTimotheeInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutTimotheeInput | UserUpdateManyWithWhereWithoutTimotheeInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type ChurchUpdateOneWithoutUsersNestedInput = {
@@ -40767,6 +42267,20 @@ export namespace Prisma {
     update?: comiteeUpdateWithWhereUniqueWithoutCommiteeMemberInput | comiteeUpdateWithWhereUniqueWithoutCommiteeMemberInput[]
     updateMany?: comiteeUpdateManyWithWhereWithoutCommiteeMemberInput | comiteeUpdateManyWithWhereWithoutCommiteeMemberInput[]
     deleteMany?: comiteeScalarWhereInput | comiteeScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutTimotheeNestedInput = {
+    create?: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput> | UserCreateWithoutTimotheeInput[] | UserUncheckedCreateWithoutTimotheeInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutTimotheeInput | UserCreateOrConnectWithoutTimotheeInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutTimotheeInput | UserUpsertWithWhereUniqueWithoutTimotheeInput[]
+    createMany?: UserCreateManyTimotheeInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutTimotheeInput | UserUpdateWithWhereUniqueWithoutTimotheeInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutTimotheeInput | UserUpdateManyWithWhereWithoutTimotheeInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type GroupeUncheckedUpdateManyWithoutUsersNestedInput = {
@@ -40865,10 +42379,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutGroupsInput, UserUncheckedCreateWithoutGroupsInput> | UserCreateWithoutGroupsInput[] | UserUncheckedCreateWithoutGroupsInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGroupsInput | UserCreateOrConnectWithoutGroupsInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
   }
 
   export type ChurchUpdateOneWithoutGroupsNestedInput = {
@@ -41632,6 +43142,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
@@ -41647,6 +43162,14 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
@@ -41655,19 +43178,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -41762,6 +43272,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutServicesInput = {
@@ -41780,6 +43291,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -41888,6 +43400,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutServicesInput = {
@@ -41906,6 +43419,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -41964,12 +43478,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
@@ -42011,13 +43528,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
@@ -42095,12 +43615,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
@@ -42142,13 +43665,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
@@ -42181,6 +43707,140 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ChurchCreateWithoutTtiInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertCreateNestedManyWithoutToChurchInput
+    users?: UserCreateNestedManyWithoutChurchInput
+    groups?: GroupeCreateNestedManyWithoutChurchInput
+    events?: EventCreateNestedManyWithoutChurchInput
+    mariages?: MariageCreateNestedManyWithoutChurchInput
+    funerals?: FuneralCreateNestedManyWithoutChurchInput
+    presentations?: PresentationCreateNestedManyWithoutChurchInput
+    batism?: BaptismCreateNestedManyWithoutChurchInput
+    death?: deathCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassCreateNestedManyWithoutChurchInput
+    comitees?: comiteeCreateNestedManyWithoutChurchInput
+    appointments?: appointmentCreateNestedManyWithoutChurchInput
+    mission?: MissionCreateNestedOneWithoutChurchInput
+    expense?: expenseCreateNestedManyWithoutChurchInput
+    offering?: offeringCreateNestedManyWithoutChurchInput
+    donation?: donationCreateNestedManyWithoutChurchInput
+    tithing?: tithingCreateNestedManyWithoutChurchInput
+    moisson?: moissonCreateNestedManyWithoutChurchInput
+    sanction?: sanctionCreateNestedManyWithoutChurchInput
+    ministry?: ministryCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutTtiInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    missionId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
+    users?: UserUncheckedCreateNestedManyWithoutChurchInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutChurchInput
+    events?: EventUncheckedCreateNestedManyWithoutChurchInput
+    mariages?: MariageUncheckedCreateNestedManyWithoutChurchInput
+    funerals?: FuneralUncheckedCreateNestedManyWithoutChurchInput
+    presentations?: PresentationUncheckedCreateNestedManyWithoutChurchInput
+    batism?: BaptismUncheckedCreateNestedManyWithoutChurchInput
+    death?: deathUncheckedCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassUncheckedCreateNestedManyWithoutChurchInput
+    comitees?: comiteeUncheckedCreateNestedManyWithoutChurchInput
+    appointments?: appointmentUncheckedCreateNestedManyWithoutChurchInput
+    expense?: expenseUncheckedCreateNestedManyWithoutChurchInput
+    offering?: offeringUncheckedCreateNestedManyWithoutChurchInput
+    donation?: donationUncheckedCreateNestedManyWithoutChurchInput
+    tithing?: tithingUncheckedCreateNestedManyWithoutChurchInput
+    moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
+    sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
+    ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutTtiInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput>
+  }
+
+  export type ChurchCreateManyTtiInputEnvelope = {
+    data: ChurchCreateManyTtiInput | ChurchCreateManyTtiInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChurchUpsertWithWhereUniqueWithoutTtiInput = {
+    where: ChurchWhereUniqueInput
+    update: XOR<ChurchUpdateWithoutTtiInput, ChurchUncheckedUpdateWithoutTtiInput>
+    create: XOR<ChurchCreateWithoutTtiInput, ChurchUncheckedCreateWithoutTtiInput>
+  }
+
+  export type ChurchUpdateWithWhereUniqueWithoutTtiInput = {
+    where: ChurchWhereUniqueInput
+    data: XOR<ChurchUpdateWithoutTtiInput, ChurchUncheckedUpdateWithoutTtiInput>
+  }
+
+  export type ChurchUpdateManyWithWhereWithoutTtiInput = {
+    where: ChurchScalarWhereInput
+    data: XOR<ChurchUpdateManyMutationInput, ChurchUncheckedUpdateManyWithoutTtiInput>
+  }
+
+  export type ChurchScalarWhereInput = {
+    AND?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
+    OR?: ChurchScalarWhereInput[]
+    NOT?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
+    id?: StringFilter<"Church"> | string
+    name?: StringFilter<"Church"> | string
+    quantity?: StringFilter<"Church"> | string
+    address?: StringNullableFilter<"Church"> | string | null
+    picture?: StringNullableFilter<"Church"> | string | null
+    longitude?: StringNullableFilter<"Church"> | string | null
+    latitude?: StringNullableFilter<"Church"> | string | null
+    phone?: StringNullableFilter<"Church"> | string | null
+    anthem?: StringNullableFilter<"Church"> | string | null
+    facebook?: StringNullableFilter<"Church"> | string | null
+    instagram?: StringNullableFilter<"Church"> | string | null
+    whatsapp?: StringNullableFilter<"Church"> | string | null
+    email?: StringNullableFilter<"Church"> | string | null
+    mainPasteur?: StringNullableFilter<"Church"> | string | null
+    missionId?: StringNullableFilter<"Church"> | string | null
+    ttiId?: StringNullableFilter<"Church"> | string | null
+    createdAt?: DateTimeFilter<"Church"> | Date | string
+    updatedAt?: DateTimeFilter<"Church"> | Date | string
   }
 
   export type transfertCreateWithoutFromChurchInput = {
@@ -42268,12 +43928,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
@@ -42315,12 +43978,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
@@ -43036,6 +44702,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TtiCreateWithoutChurchInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TtiUncheckedCreateWithoutChurchInput = {
+    id?: string
+    nom: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TtiCreateOrConnectWithoutChurchInput = {
+    where: TtiWhereUniqueInput
+    create: XOR<TtiCreateWithoutChurchInput, TtiUncheckedCreateWithoutChurchInput>
+  }
+
   export type transfertUpsertWithWhereUniqueWithoutFromChurchInput = {
     where: transfertWhereUniqueInput
     update: XOR<transfertUpdateWithoutFromChurchInput, transfertUncheckedUpdateWithoutFromChurchInput>
@@ -43132,12 +44817,14 @@ export namespace Prisma {
     envelopeNumber?: StringNullableFilter<"User"> | string | null
     baptismLocation?: StringNullableFilter<"User"> | string | null
     baptismDate?: StringNullableFilter<"User"> | string | null
+    istimothee?: BoolNullableFilter<"User"> | boolean | null
     role?: EnumRoleFilter<"User"> | $Enums.Role
     churchRole?: StringNullableFilter<"User"> | string | null
     facebook?: StringNullableFilter<"User"> | string | null
     instagram?: StringNullableFilter<"User"> | string | null
     profession?: StringNullableFilter<"User"> | string | null
     sundayClass?: StringNullableFilter<"User"> | string | null
+    timotheeId?: StringNullableFilter<"User"> | string | null
     churchId?: StringNullableFilter<"User"> | string | null
   }
 
@@ -43789,6 +45476,246 @@ export namespace Prisma {
     churchId?: StringNullableFilter<"Service"> | string | null
   }
 
+  export type TtiUpsertWithoutChurchInput = {
+    update: XOR<TtiUpdateWithoutChurchInput, TtiUncheckedUpdateWithoutChurchInput>
+    create: XOR<TtiCreateWithoutChurchInput, TtiUncheckedCreateWithoutChurchInput>
+    where?: TtiWhereInput
+  }
+
+  export type TtiUpdateToOneWithWhereWithoutChurchInput = {
+    where?: TtiWhereInput
+    data: XOR<TtiUpdateWithoutChurchInput, TtiUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type TtiUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TtiUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCreateWithoutTithesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    istimothee?: boolean | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    church?: ChurchCreateNestedOneWithoutUsersInput
+    groups?: GroupeCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
+    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserUncheckedCreateWithoutTithesInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    istimothee?: boolean | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    timotheeId?: string | null
+    churchId?: string | null
+    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
+    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserCreateOrConnectWithoutTithesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTithesInput, UserUncheckedCreateWithoutTithesInput>
+  }
+
+  export type UserCreateWithoutTimotheeInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    istimothee?: boolean | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
+    church?: ChurchCreateNestedOneWithoutUsersInput
+    groups?: GroupeCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertCreateNestedManyWithoutMemberInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
+    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserUncheckedCreateWithoutTimotheeInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    istimothee?: boolean | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
+    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
+  }
+
+  export type UserCreateOrConnectWithoutTimotheeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput>
+  }
+
+  export type UserCreateManyTimotheeInputEnvelope = {
+    data: UserCreateManyTimotheeInput | UserCreateManyTimotheeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ChurchCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -43828,6 +45755,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutUsersInput = {
@@ -43846,6 +45774,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -44058,6 +45987,133 @@ export namespace Prisma {
     create: XOR<comiteeCreateWithoutCommiteeMemberInput, comiteeUncheckedCreateWithoutCommiteeMemberInput>
   }
 
+  export type UserUpsertWithoutTithesInput = {
+    update: XOR<UserUpdateWithoutTithesInput, UserUncheckedUpdateWithoutTithesInput>
+    create: XOR<UserCreateWithoutTithesInput, UserUncheckedCreateWithoutTithesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTithesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTithesInput, UserUncheckedUpdateWithoutTithesInput>
+  }
+
+  export type UserUpdateWithoutTithesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    church?: ChurchUpdateOneWithoutUsersNestedInput
+    groups?: GroupeUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
+    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTithesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
+    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutTimotheeInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutTimotheeInput, UserUncheckedUpdateWithoutTimotheeInput>
+    create: XOR<UserCreateWithoutTimotheeInput, UserUncheckedCreateWithoutTimotheeInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutTimotheeInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutTimotheeInput, UserUncheckedUpdateWithoutTimotheeInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutTimotheeInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutTimotheeInput>
+  }
+
   export type ChurchUpsertWithoutUsersInput = {
     update: XOR<ChurchUpdateWithoutUsersInput, ChurchUncheckedUpdateWithoutUsersInput>
     create: XOR<ChurchCreateWithoutUsersInput, ChurchUncheckedCreateWithoutUsersInput>
@@ -44108,6 +46164,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutUsersInput = {
@@ -44126,6 +46183,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -44286,6 +46344,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutGroupsInput = {
@@ -44304,6 +46363,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -44367,12 +46427,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
@@ -44414,13 +46477,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
     presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
@@ -44483,6 +46549,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutGroupsInput = {
@@ -44501,6 +46568,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -44581,6 +46649,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutEventsInput = {
@@ -44599,6 +46668,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -44679,6 +46749,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutEventsInput = {
@@ -44697,6 +46768,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -44761,6 +46833,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMariagesInput = {
@@ -44779,6 +46852,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -44859,6 +46933,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMariagesInput = {
@@ -44877,6 +46952,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -44941,6 +47017,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutFuneralsInput = {
@@ -44959,6 +47036,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45039,6 +47117,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutFuneralsInput = {
@@ -45057,6 +47136,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -45121,6 +47201,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutPresentationsInput = {
@@ -45139,6 +47220,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45219,6 +47301,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutPresentationsInput = {
@@ -45237,6 +47320,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -45301,6 +47385,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutBatismInput = {
@@ -45319,6 +47404,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45399,6 +47485,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutBatismInput = {
@@ -45417,6 +47504,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -45481,6 +47569,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutDeathInput = {
@@ -45499,6 +47588,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45579,6 +47669,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutDeathInput = {
@@ -45597,6 +47688,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -45661,6 +47753,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutSundayClassInput = {
@@ -45679,6 +47772,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45759,6 +47853,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutSundayClassInput = {
@@ -45777,6 +47872,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -45841,6 +47937,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutExpenseInput = {
@@ -45859,6 +47956,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -45939,6 +48037,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutExpenseInput = {
@@ -45957,6 +48056,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -46021,6 +48121,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutOfferingInput = {
@@ -46039,6 +48140,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -46119,6 +48221,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutOfferingInput = {
@@ -46137,6 +48240,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -46201,6 +48305,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTithingInput = {
@@ -46219,6 +48324,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -46299,6 +48405,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTithingInput = {
@@ -46317,6 +48424,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -46381,6 +48489,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutDonationInput = {
@@ -46399,6 +48508,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -46479,6 +48589,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutDonationInput = {
@@ -46497,6 +48608,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -46561,6 +48673,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMoissonInput = {
@@ -46579,6 +48692,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -46659,6 +48773,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMoissonInput = {
@@ -46677,6 +48792,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -46735,12 +48851,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
@@ -46782,13 +48901,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
@@ -46834,12 +48956,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
@@ -46881,13 +49006,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
@@ -46939,6 +49067,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutComiteesInput = {
@@ -46957,6 +49086,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -47069,6 +49199,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutComiteesInput = {
@@ -47087,6 +49218,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -47145,12 +49277,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     transfers?: transfertCreateNestedManyWithoutMemberInput
@@ -47192,13 +49327,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
     presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
@@ -47250,6 +49388,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutAppointmentsInput = {
@@ -47268,6 +49407,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -47364,6 +49504,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutAppointmentsInput = {
@@ -47382,6 +49523,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -47446,6 +49588,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTransfersFromInput = {
@@ -47464,6 +49607,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
@@ -47533,6 +49677,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTransfersToInput = {
@@ -47551,6 +49696,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -47614,12 +49760,15 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
     church?: ChurchCreateNestedOneWithoutUsersInput
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
@@ -47661,13 +49810,16 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
     churchId?: string | null
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
@@ -47730,6 +49882,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTransfersFromInput = {
@@ -47748,6 +49901,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
@@ -47823,6 +49977,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTransfersToInput = {
@@ -47841,6 +49996,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -47910,12 +50066,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
@@ -47957,13 +50116,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
@@ -48010,6 +50172,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMissionInput = {
@@ -48027,6 +50190,7 @@ export namespace Prisma {
     whatsapp?: string | null
     email?: string | null
     mainPasteur?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -48079,29 +50243,6 @@ export namespace Prisma {
     data: XOR<ChurchUpdateManyMutationInput, ChurchUncheckedUpdateManyWithoutMissionInput>
   }
 
-  export type ChurchScalarWhereInput = {
-    AND?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
-    OR?: ChurchScalarWhereInput[]
-    NOT?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
-    id?: StringFilter<"Church"> | string
-    name?: StringFilter<"Church"> | string
-    quantity?: StringFilter<"Church"> | string
-    address?: StringNullableFilter<"Church"> | string | null
-    picture?: StringNullableFilter<"Church"> | string | null
-    longitude?: StringNullableFilter<"Church"> | string | null
-    latitude?: StringNullableFilter<"Church"> | string | null
-    phone?: StringNullableFilter<"Church"> | string | null
-    anthem?: StringNullableFilter<"Church"> | string | null
-    facebook?: StringNullableFilter<"Church"> | string | null
-    instagram?: StringNullableFilter<"Church"> | string | null
-    whatsapp?: StringNullableFilter<"Church"> | string | null
-    email?: StringNullableFilter<"Church"> | string | null
-    mainPasteur?: StringNullableFilter<"Church"> | string | null
-    missionId?: StringNullableFilter<"Church"> | string | null
-    createdAt?: DateTimeFilter<"Church"> | Date | string
-    updatedAt?: DateTimeFilter<"Church"> | Date | string
-  }
-
   export type ChurchCreateWithoutSanctionInput = {
     id?: string
     name: string
@@ -48141,6 +50282,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutSanctionInput = {
@@ -48159,6 +50301,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -48239,6 +50382,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutSanctionInput = {
@@ -48257,6 +50401,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -48321,6 +50466,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutMinistryInput = {
@@ -48339,6 +50485,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -48419,6 +50566,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMinistryInput = {
@@ -48437,6 +50585,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -48501,6 +50650,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutPasteurInput = {
@@ -48519,6 +50669,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -48599,6 +50750,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutPasteurInput = {
@@ -48617,6 +50769,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -48842,6 +50995,130 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChurchCreateManyTtiInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    missionId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChurchUpdateWithoutTtiInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUpdateManyWithoutToChurchNestedInput
+    users?: UserUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUpdateManyWithoutChurchNestedInput
+    events?: EventUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUpdateManyWithoutChurchNestedInput
+    death?: deathUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUpdateManyWithoutChurchNestedInput
+    mission?: MissionUpdateOneWithoutChurchNestedInput
+    expense?: expenseUpdateManyWithoutChurchNestedInput
+    offering?: offeringUpdateManyWithoutChurchNestedInput
+    donation?: donationUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutTtiInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
+    users?: UserUncheckedUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutChurchNestedInput
+    events?: EventUncheckedUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUncheckedUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUncheckedUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUncheckedUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUncheckedUpdateManyWithoutChurchNestedInput
+    death?: deathUncheckedUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUncheckedUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUncheckedUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUncheckedUpdateManyWithoutChurchNestedInput
+    expense?: expenseUncheckedUpdateManyWithoutChurchNestedInput
+    offering?: offeringUncheckedUpdateManyWithoutChurchNestedInput
+    donation?: donationUncheckedUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUncheckedUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateManyWithoutTtiInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type transfertCreateManyFromChurchInput = {
     id?: string
     userId: string
@@ -48891,12 +51168,14 @@ export namespace Prisma {
     envelopeNumber?: string | null
     baptismLocation?: string | null
     baptismDate?: string | null
+    istimothee?: boolean | null
     role?: $Enums.Role
     churchRole?: string | null
     facebook?: string | null
     instagram?: string | null
     profession?: string | null
     sundayClass?: string | null
+    timotheeId?: string | null
   }
 
   export type GroupeCreateManyChurchInput = {
@@ -49215,12 +51494,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
@@ -49262,12 +51544,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
@@ -49309,12 +51594,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GroupeUpdateWithoutChurchInput = {
@@ -50032,6 +52319,49 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateManyTimotheeInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    joinDate?: string | null
+    email?: string | null
+    firstname: string
+    lastname: string
+    nif?: string | null
+    groupeSanguin?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    password?: string | null
+    membreActif?: boolean
+    longitude?: string | null
+    latitude?: string | null
+    plainPassword?: string | null
+    age?: string | null
+    minister?: string | null
+    mobilePhone?: string | null
+    homePhone?: string | null
+    picture?: string | null
+    city?: string | null
+    etatCivil?: string | null
+    country?: string | null
+    birthCountry?: string | null
+    birthCity?: string | null
+    birthDate?: string | null
+    sex?: string | null
+    addressLine?: string | null
+    envelopeNumber?: string | null
+    baptismLocation?: string | null
+    baptismDate?: string | null
+    istimothee?: boolean | null
+    role?: $Enums.Role
+    churchRole?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    profession?: string | null
+    sundayClass?: string | null
+    churchId?: string | null
+  }
+
   export type transfertCreateManyMemberInput = {
     id?: string
     fromChurchId: string
@@ -50046,6 +52376,149 @@ export namespace Prisma {
     serviceId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type UserUpdateWithoutTimotheeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
+    church?: ChurchUpdateOneWithoutUsersNestedInput
+    groups?: GroupeUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
+    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTimotheeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
+    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutTimotheeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GroupeUpdateWithoutUsersInput = {
@@ -50292,12 +52765,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
@@ -50339,13 +52815,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
     presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
@@ -50386,12 +52865,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -50428,12 +52909,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
@@ -50475,13 +52959,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
@@ -50522,12 +53009,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -50564,12 +53053,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
@@ -50611,13 +53103,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
@@ -50658,12 +53153,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -50700,12 +53197,15 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
     church?: ChurchUpdateOneWithoutUsersNestedInput
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     transfers?: transfertUpdateManyWithoutMemberNestedInput
@@ -50747,13 +53247,16 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
     presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
@@ -50794,12 +53297,14 @@ export namespace Prisma {
     envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
     baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
     baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     churchRole?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
     profession?: NullableStringFieldUpdateOperationsInput | string | null
     sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -50818,6 +53323,7 @@ export namespace Prisma {
     whatsapp?: string | null
     email?: string | null
     mainPasteur?: string | null
+    ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -50861,6 +53367,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutMissionInput = {
@@ -50878,6 +53385,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -50919,6 +53427,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
