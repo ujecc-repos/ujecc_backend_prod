@@ -38,7 +38,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["http://ecclesys.ujecc.org","https://ecclesys.ujecc.org", "http://localhost:5173"]
+  origin: "*"
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
