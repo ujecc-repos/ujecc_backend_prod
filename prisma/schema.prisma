@@ -61,6 +61,17 @@ model Tti {
   updatedAt   DateTime   @updatedAt
 }
 
+model Address {
+  id          String     @id @default(cuid())
+  country     String?
+  departement  String?
+  commune     String?
+  sectionCommunale String?
+  telephone        String?
+  rue              String?
+  church Church?
+}
+
 
 
 model Church {
@@ -102,6 +113,8 @@ model Church {
   ministry    ministry[]
   pasteur     pasteur[]
   services    Service[]
+  fullAddress  Address?  @relation(fields: [addressId], references: [id])
+  addressId   String?   @unique
   tti         Tti?    @relation(fields: [ttiId], references: [id])
   ttiId       String?
   createdAt   DateTime @default(now())
