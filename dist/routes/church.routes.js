@@ -19,14 +19,23 @@ router.post('/', async (req, res) => {
         if (isChurchExist) {
             return res.status(400).json({ error: 'Désoler, cette église existe déja' });
         }
-        const fullAddress = `${country}`.toLowerCase() != "haiti" ? `${country}, ${departement}, ${commune}, ${rue} ${telephone}` : `${commune}, ${sectionCommunale}, ${departement}`;
         // Prepare church data
         const churchData = {
             name,
-            address: fullAddress,
             longitude: longitude || "",
-            latitude: latitude || ""
+            latitude: latitude || "",
+            fullAddress: {
+                create: {
+                    country: country || null,
+                    departement: departement || null,
+                    commune: commune || null,
+                    sectionCommunale: sectionCommunale || null,
+                    telephone: telephone || null,
+                    rue: rue || null
+                }
+            }
         };
+        console.log("churchData : ", churchData);
         // Only connect to mission if one is provided
         if (req.body.missionId) {
             churchData.mission = {
@@ -67,8 +76,10 @@ router.get('/', async (req, res) => {
                 mariages: true,
                 funerals: true,
                 presentations: true,
+                mission: true,
                 batism: true,
-                death: true
+                death: true,
+                fullAddress: true
             }
         });
         res.json(churches);
@@ -89,8 +100,10 @@ router.get('/:id', async (req, res) => {
                 mariages: true,
                 funerals: true,
                 presentations: true,
+                mission: true,
                 batism: true,
-                death: true
+                death: true,
+                fullAddress: true
             }
         });
         if (!church) {
@@ -106,14 +119,51 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', upload_1.default.single('churchImage'), async (req, res) => {
     try {
         // Extract data from request body
-        const churchData = req.body;
+        const { country, departement, commune, sectionCommunale, telephone, rue, ...otherData } = req.body;
+        // Prepare church data
+        const churchData = otherData;
         // If a file was uploaded, add the file path to the church data
         if (req.file) {
             churchData.picture = `/uploads/${req.file.filename}`;
         }
+        // Handle fullAddress update if address fields are provided
+        if (country || departement || commune || sectionCommunale || telephone || rue) {
+            // First, get the current church to check if it has an existing address
+            const existingChurch = await client_1.prisma.church.findUnique({
+                where: { id: req.params.id },
+                include: { fullAddress: true }
+            });
+            if (existingChurch?.fullAddress) {
+                // Update existing address
+                churchData.fullAddress = {
+                    update: {
+                        country: country || existingChurch.fullAddress.country,
+                        departement: departement || existingChurch.fullAddress.departement,
+                        commune: commune || existingChurch.fullAddress.commune,
+                        sectionCommunale: sectionCommunale || existingChurch.fullAddress.sectionCommunale,
+                        telephone: telephone || existingChurch.fullAddress.telephone,
+                        rue: rue || existingChurch.fullAddress.rue
+                    }
+                };
+            }
+            else {
+                // Create new address
+                churchData.fullAddress = {
+                    create: {
+                        country: country || null,
+                        departement: departement || null,
+                        commune: commune || null,
+                        sectionCommunale: sectionCommunale || null,
+                        telephone: telephone || null,
+                        rue: rue || null
+                    }
+                };
+            }
+        }
         const church = await client_1.prisma.church.update({
             where: { id: req.params.id },
-            data: churchData
+            data: churchData,
+            include: { fullAddress: true }
         });
         res.json(church);
     }

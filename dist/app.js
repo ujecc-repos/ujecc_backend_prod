@@ -40,7 +40,7 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 // Middleware
 app.use((0, cors_1.default)({
-    origin: ["http://ecclesys.ujecc.org", "https://ecclesys.ujecc.org", "http://localhost:5173"]
+    origin: "*"
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));

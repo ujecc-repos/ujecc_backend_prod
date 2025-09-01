@@ -29,6 +29,11 @@ export type Presence = $Result.DefaultSelection<Prisma.$PresencePayload>
  */
 export type Tti = $Result.DefaultSelection<Prisma.$TtiPayload>
 /**
+ * Model Address
+ * 
+ */
+export type Address = $Result.DefaultSelection<Prisma.$AddressPayload>
+/**
  * Model Church
  * 
  */
@@ -341,6 +346,16 @@ export class PrismaClient<
     * ```
     */
   get tti(): Prisma.TtiDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.address`: Exposes CRUD operations for the **Address** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Addresses
+    * const addresses = await prisma.address.findMany()
+    * ```
+    */
+  get address(): Prisma.AddressDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.church`: Exposes CRUD operations for the **Church** model.
@@ -1034,6 +1049,7 @@ export namespace Prisma {
     Service: 'Service',
     Presence: 'Presence',
     Tti: 'Tti',
+    Address: 'Address',
     Church: 'Church',
     User: 'User',
     Groupe: 'Groupe',
@@ -1077,7 +1093,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "service" | "presence" | "tti" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
+      modelProps: "service" | "presence" | "tti" | "address" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1276,6 +1292,72 @@ export namespace Prisma {
           count: {
             args: Prisma.TtiCountArgs<ExtArgs>
             result: $Utils.Optional<TtiCountAggregateOutputType> | number
+          }
+        }
+      }
+      Address: {
+        payload: Prisma.$AddressPayload<ExtArgs>
+        fields: Prisma.AddressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AddressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AddressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          findFirst: {
+            args: Prisma.AddressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AddressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          findMany: {
+            args: Prisma.AddressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>[]
+          }
+          create: {
+            args: Prisma.AddressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          createMany: {
+            args: Prisma.AddressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AddressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          update: {
+            args: Prisma.AddressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          deleteMany: {
+            args: Prisma.AddressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AddressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AddressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AddressPayload>
+          }
+          aggregate: {
+            args: Prisma.AddressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAddress>
+          }
+          groupBy: {
+            args: Prisma.AddressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AddressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AddressCountArgs<ExtArgs>
+            result: $Utils.Optional<AddressCountAggregateOutputType> | number
           }
         }
       }
@@ -3016,6 +3098,7 @@ export namespace Prisma {
     service?: ServiceOmit
     presence?: PresenceOmit
     tti?: TtiOmit
+    address?: AddressOmit
     church?: ChurchOmit
     user?: UserOmit
     groupe?: GroupeOmit
@@ -6563,6 +6646,976 @@ export namespace Prisma {
 
 
   /**
+   * Model Address
+   */
+
+  export type AggregateAddress = {
+    _count: AddressCountAggregateOutputType | null
+    _min: AddressMinAggregateOutputType | null
+    _max: AddressMaxAggregateOutputType | null
+  }
+
+  export type AddressMinAggregateOutputType = {
+    id: string | null
+    country: string | null
+    departement: string | null
+    commune: string | null
+    sectionCommunale: string | null
+    telephone: string | null
+    rue: string | null
+  }
+
+  export type AddressMaxAggregateOutputType = {
+    id: string | null
+    country: string | null
+    departement: string | null
+    commune: string | null
+    sectionCommunale: string | null
+    telephone: string | null
+    rue: string | null
+  }
+
+  export type AddressCountAggregateOutputType = {
+    id: number
+    country: number
+    departement: number
+    commune: number
+    sectionCommunale: number
+    telephone: number
+    rue: number
+    _all: number
+  }
+
+
+  export type AddressMinAggregateInputType = {
+    id?: true
+    country?: true
+    departement?: true
+    commune?: true
+    sectionCommunale?: true
+    telephone?: true
+    rue?: true
+  }
+
+  export type AddressMaxAggregateInputType = {
+    id?: true
+    country?: true
+    departement?: true
+    commune?: true
+    sectionCommunale?: true
+    telephone?: true
+    rue?: true
+  }
+
+  export type AddressCountAggregateInputType = {
+    id?: true
+    country?: true
+    departement?: true
+    commune?: true
+    sectionCommunale?: true
+    telephone?: true
+    rue?: true
+    _all?: true
+  }
+
+  export type AddressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Address to aggregate.
+     */
+    where?: AddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Addresses to fetch.
+     */
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Addresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Addresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Addresses
+    **/
+    _count?: true | AddressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AddressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AddressMaxAggregateInputType
+  }
+
+  export type GetAddressAggregateType<T extends AddressAggregateArgs> = {
+        [P in keyof T & keyof AggregateAddress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAddress[P]>
+      : GetScalarType<T[P], AggregateAddress[P]>
+  }
+
+
+
+
+  export type AddressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AddressWhereInput
+    orderBy?: AddressOrderByWithAggregationInput | AddressOrderByWithAggregationInput[]
+    by: AddressScalarFieldEnum[] | AddressScalarFieldEnum
+    having?: AddressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AddressCountAggregateInputType | true
+    _min?: AddressMinAggregateInputType
+    _max?: AddressMaxAggregateInputType
+  }
+
+  export type AddressGroupByOutputType = {
+    id: string
+    country: string | null
+    departement: string | null
+    commune: string | null
+    sectionCommunale: string | null
+    telephone: string | null
+    rue: string | null
+    _count: AddressCountAggregateOutputType | null
+    _min: AddressMinAggregateOutputType | null
+    _max: AddressMaxAggregateOutputType | null
+  }
+
+  type GetAddressGroupByPayload<T extends AddressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AddressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AddressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AddressGroupByOutputType[P]>
+            : GetScalarType<T[P], AddressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AddressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    country?: boolean
+    departement?: boolean
+    commune?: boolean
+    sectionCommunale?: boolean
+    telephone?: boolean
+    rue?: boolean
+    church?: boolean | Address$churchArgs<ExtArgs>
+  }, ExtArgs["result"]["address"]>
+
+
+
+  export type AddressSelectScalar = {
+    id?: boolean
+    country?: boolean
+    departement?: boolean
+    commune?: boolean
+    sectionCommunale?: boolean
+    telephone?: boolean
+    rue?: boolean
+  }
+
+  export type AddressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "country" | "departement" | "commune" | "sectionCommunale" | "telephone" | "rue", ExtArgs["result"]["address"]>
+  export type AddressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    church?: boolean | Address$churchArgs<ExtArgs>
+  }
+
+  export type $AddressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Address"
+    objects: {
+      church: Prisma.$ChurchPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      country: string | null
+      departement: string | null
+      commune: string | null
+      sectionCommunale: string | null
+      telephone: string | null
+      rue: string | null
+    }, ExtArgs["result"]["address"]>
+    composites: {}
+  }
+
+  type AddressGetPayload<S extends boolean | null | undefined | AddressDefaultArgs> = $Result.GetResult<Prisma.$AddressPayload, S>
+
+  type AddressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AddressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AddressCountAggregateInputType | true
+    }
+
+  export interface AddressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Address'], meta: { name: 'Address' } }
+    /**
+     * Find zero or one Address that matches the filter.
+     * @param {AddressFindUniqueArgs} args - Arguments to find a Address
+     * @example
+     * // Get one Address
+     * const address = await prisma.address.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AddressFindUniqueArgs>(args: SelectSubset<T, AddressFindUniqueArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Address that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AddressFindUniqueOrThrowArgs} args - Arguments to find a Address
+     * @example
+     * // Get one Address
+     * const address = await prisma.address.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AddressFindUniqueOrThrowArgs>(args: SelectSubset<T, AddressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Address that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressFindFirstArgs} args - Arguments to find a Address
+     * @example
+     * // Get one Address
+     * const address = await prisma.address.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AddressFindFirstArgs>(args?: SelectSubset<T, AddressFindFirstArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Address that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressFindFirstOrThrowArgs} args - Arguments to find a Address
+     * @example
+     * // Get one Address
+     * const address = await prisma.address.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AddressFindFirstOrThrowArgs>(args?: SelectSubset<T, AddressFindFirstOrThrowArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Addresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Addresses
+     * const addresses = await prisma.address.findMany()
+     * 
+     * // Get first 10 Addresses
+     * const addresses = await prisma.address.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const addressWithIdOnly = await prisma.address.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AddressFindManyArgs>(args?: SelectSubset<T, AddressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Address.
+     * @param {AddressCreateArgs} args - Arguments to create a Address.
+     * @example
+     * // Create one Address
+     * const Address = await prisma.address.create({
+     *   data: {
+     *     // ... data to create a Address
+     *   }
+     * })
+     * 
+     */
+    create<T extends AddressCreateArgs>(args: SelectSubset<T, AddressCreateArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Addresses.
+     * @param {AddressCreateManyArgs} args - Arguments to create many Addresses.
+     * @example
+     * // Create many Addresses
+     * const address = await prisma.address.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AddressCreateManyArgs>(args?: SelectSubset<T, AddressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Address.
+     * @param {AddressDeleteArgs} args - Arguments to delete one Address.
+     * @example
+     * // Delete one Address
+     * const Address = await prisma.address.delete({
+     *   where: {
+     *     // ... filter to delete one Address
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AddressDeleteArgs>(args: SelectSubset<T, AddressDeleteArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Address.
+     * @param {AddressUpdateArgs} args - Arguments to update one Address.
+     * @example
+     * // Update one Address
+     * const address = await prisma.address.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AddressUpdateArgs>(args: SelectSubset<T, AddressUpdateArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Addresses.
+     * @param {AddressDeleteManyArgs} args - Arguments to filter Addresses to delete.
+     * @example
+     * // Delete a few Addresses
+     * const { count } = await prisma.address.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AddressDeleteManyArgs>(args?: SelectSubset<T, AddressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Addresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Addresses
+     * const address = await prisma.address.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AddressUpdateManyArgs>(args: SelectSubset<T, AddressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Address.
+     * @param {AddressUpsertArgs} args - Arguments to update or create a Address.
+     * @example
+     * // Update or create a Address
+     * const address = await prisma.address.upsert({
+     *   create: {
+     *     // ... data to create a Address
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Address we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AddressUpsertArgs>(args: SelectSubset<T, AddressUpsertArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Addresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressCountArgs} args - Arguments to filter Addresses to count.
+     * @example
+     * // Count the number of Addresses
+     * const count = await prisma.address.count({
+     *   where: {
+     *     // ... the filter for the Addresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends AddressCountArgs>(
+      args?: Subset<T, AddressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AddressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Address.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AddressAggregateArgs>(args: Subset<T, AddressAggregateArgs>): Prisma.PrismaPromise<GetAddressAggregateType<T>>
+
+    /**
+     * Group by Address.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AddressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AddressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AddressGroupByArgs['orderBy'] }
+        : { orderBy?: AddressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AddressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAddressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Address model
+   */
+  readonly fields: AddressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Address.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AddressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    church<T extends Address$churchArgs<ExtArgs> = {}>(args?: Subset<T, Address$churchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Address model
+   */
+  interface AddressFieldRefs {
+    readonly id: FieldRef<"Address", 'String'>
+    readonly country: FieldRef<"Address", 'String'>
+    readonly departement: FieldRef<"Address", 'String'>
+    readonly commune: FieldRef<"Address", 'String'>
+    readonly sectionCommunale: FieldRef<"Address", 'String'>
+    readonly telephone: FieldRef<"Address", 'String'>
+    readonly rue: FieldRef<"Address", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Address findUnique
+   */
+  export type AddressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Address to fetch.
+     */
+    where: AddressWhereUniqueInput
+  }
+
+  /**
+   * Address findUniqueOrThrow
+   */
+  export type AddressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Address to fetch.
+     */
+    where: AddressWhereUniqueInput
+  }
+
+  /**
+   * Address findFirst
+   */
+  export type AddressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Address to fetch.
+     */
+    where?: AddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Addresses to fetch.
+     */
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Addresses.
+     */
+    cursor?: AddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Addresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Addresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Addresses.
+     */
+    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
+  }
+
+  /**
+   * Address findFirstOrThrow
+   */
+  export type AddressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Address to fetch.
+     */
+    where?: AddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Addresses to fetch.
+     */
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Addresses.
+     */
+    cursor?: AddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Addresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Addresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Addresses.
+     */
+    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
+  }
+
+  /**
+   * Address findMany
+   */
+  export type AddressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter, which Addresses to fetch.
+     */
+    where?: AddressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Addresses to fetch.
+     */
+    orderBy?: AddressOrderByWithRelationInput | AddressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Addresses.
+     */
+    cursor?: AddressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Addresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Addresses.
+     */
+    skip?: number
+    distinct?: AddressScalarFieldEnum | AddressScalarFieldEnum[]
+  }
+
+  /**
+   * Address create
+   */
+  export type AddressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Address.
+     */
+    data?: XOR<AddressCreateInput, AddressUncheckedCreateInput>
+  }
+
+  /**
+   * Address createMany
+   */
+  export type AddressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Addresses.
+     */
+    data: AddressCreateManyInput | AddressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Address update
+   */
+  export type AddressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Address.
+     */
+    data: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
+    /**
+     * Choose, which Address to update.
+     */
+    where: AddressWhereUniqueInput
+  }
+
+  /**
+   * Address updateMany
+   */
+  export type AddressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Addresses.
+     */
+    data: XOR<AddressUpdateManyMutationInput, AddressUncheckedUpdateManyInput>
+    /**
+     * Filter which Addresses to update
+     */
+    where?: AddressWhereInput
+    /**
+     * Limit how many Addresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Address upsert
+   */
+  export type AddressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Address to update in case it exists.
+     */
+    where: AddressWhereUniqueInput
+    /**
+     * In case the Address found by the `where` argument doesn't exist, create a new Address with this data.
+     */
+    create: XOR<AddressCreateInput, AddressUncheckedCreateInput>
+    /**
+     * In case the Address was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AddressUpdateInput, AddressUncheckedUpdateInput>
+  }
+
+  /**
+   * Address delete
+   */
+  export type AddressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    /**
+     * Filter which Address to delete.
+     */
+    where: AddressWhereUniqueInput
+  }
+
+  /**
+   * Address deleteMany
+   */
+  export type AddressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Addresses to delete
+     */
+    where?: AddressWhereInput
+    /**
+     * Limit how many Addresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Address.church
+   */
+  export type Address$churchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Church
+     */
+    select?: ChurchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Church
+     */
+    omit?: ChurchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChurchInclude<ExtArgs> | null
+    where?: ChurchWhereInput
+  }
+
+  /**
+   * Address without action
+   */
+  export type AddressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Church
    */
 
@@ -6588,6 +7641,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    addressId: string | null
     ttiId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6609,6 +7663,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    addressId: string | null
     ttiId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6630,6 +7685,7 @@ export namespace Prisma {
     email: number
     mainPasteur: number
     missionId: number
+    addressId: number
     ttiId: number
     createdAt: number
     updatedAt: number
@@ -6653,6 +7709,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    addressId?: true
     ttiId?: true
     createdAt?: true
     updatedAt?: true
@@ -6674,6 +7731,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    addressId?: true
     ttiId?: true
     createdAt?: true
     updatedAt?: true
@@ -6695,6 +7753,7 @@ export namespace Prisma {
     email?: true
     mainPasteur?: true
     missionId?: true
+    addressId?: true
     ttiId?: true
     createdAt?: true
     updatedAt?: true
@@ -6789,6 +7848,7 @@ export namespace Prisma {
     email: string | null
     mainPasteur: string | null
     missionId: string | null
+    addressId: string | null
     ttiId: string | null
     createdAt: Date
     updatedAt: Date
@@ -6827,6 +7887,7 @@ export namespace Prisma {
     email?: boolean
     mainPasteur?: boolean
     missionId?: boolean
+    addressId?: boolean
     ttiId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6853,6 +7914,7 @@ export namespace Prisma {
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
     services?: boolean | Church$servicesArgs<ExtArgs>
+    fullAddress?: boolean | Church$fullAddressArgs<ExtArgs>
     tti?: boolean | Church$ttiArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["church"]>
@@ -6875,12 +7937,13 @@ export namespace Prisma {
     email?: boolean
     mainPasteur?: boolean
     missionId?: boolean
+    addressId?: boolean
     ttiId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "picture" | "longitude" | "latitude" | "phone" | "anthem" | "facebook" | "instagram" | "whatsapp" | "email" | "mainPasteur" | "missionId" | "ttiId" | "createdAt" | "updatedAt", ExtArgs["result"]["church"]>
+  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "picture" | "longitude" | "latitude" | "phone" | "anthem" | "facebook" | "instagram" | "whatsapp" | "email" | "mainPasteur" | "missionId" | "addressId" | "ttiId" | "createdAt" | "updatedAt", ExtArgs["result"]["church"]>
   export type ChurchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transfersFrom?: boolean | Church$transfersFromArgs<ExtArgs>
     transfersTo?: boolean | Church$transfersToArgs<ExtArgs>
@@ -6905,6 +7968,7 @@ export namespace Prisma {
     ministry?: boolean | Church$ministryArgs<ExtArgs>
     pasteur?: boolean | Church$pasteurArgs<ExtArgs>
     services?: boolean | Church$servicesArgs<ExtArgs>
+    fullAddress?: boolean | Church$fullAddressArgs<ExtArgs>
     tti?: boolean | Church$ttiArgs<ExtArgs>
     _count?: boolean | ChurchCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -6935,6 +7999,7 @@ export namespace Prisma {
       ministry: Prisma.$ministryPayload<ExtArgs>[]
       pasteur: Prisma.$pasteurPayload<ExtArgs>[]
       services: Prisma.$ServicePayload<ExtArgs>[]
+      fullAddress: Prisma.$AddressPayload<ExtArgs> | null
       tti: Prisma.$TtiPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6953,6 +8018,7 @@ export namespace Prisma {
       email: string | null
       mainPasteur: string | null
       missionId: string | null
+      addressId: string | null
       ttiId: string | null
       createdAt: Date
       updatedAt: Date
@@ -7319,6 +8385,7 @@ export namespace Prisma {
     ministry<T extends Church$ministryArgs<ExtArgs> = {}>(args?: Subset<T, Church$ministryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pasteur<T extends Church$pasteurArgs<ExtArgs> = {}>(args?: Subset<T, Church$pasteurArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$pasteurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     services<T extends Church$servicesArgs<ExtArgs> = {}>(args?: Subset<T, Church$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    fullAddress<T extends Church$fullAddressArgs<ExtArgs> = {}>(args?: Subset<T, Church$fullAddressArgs<ExtArgs>>): Prisma__AddressClient<$Result.GetResult<Prisma.$AddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     tti<T extends Church$ttiArgs<ExtArgs> = {}>(args?: Subset<T, Church$ttiArgs<ExtArgs>>): Prisma__TtiClient<$Result.GetResult<Prisma.$TtiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7364,6 +8431,7 @@ export namespace Prisma {
     readonly email: FieldRef<"Church", 'String'>
     readonly mainPasteur: FieldRef<"Church", 'String'>
     readonly missionId: FieldRef<"Church", 'String'>
+    readonly addressId: FieldRef<"Church", 'String'>
     readonly ttiId: FieldRef<"Church", 'String'>
     readonly createdAt: FieldRef<"Church", 'DateTime'>
     readonly updatedAt: FieldRef<"Church", 'DateTime'>
@@ -8254,6 +9322,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ServiceScalarFieldEnum | ServiceScalarFieldEnum[]
+  }
+
+  /**
+   * Church.fullAddress
+   */
+  export type Church$fullAddressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Address
+     */
+    select?: AddressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Address
+     */
+    omit?: AddressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AddressInclude<ExtArgs> | null
+    where?: AddressWhereInput
   }
 
   /**
@@ -33082,6 +34169,19 @@ export namespace Prisma {
   export type TtiScalarFieldEnum = (typeof TtiScalarFieldEnum)[keyof typeof TtiScalarFieldEnum]
 
 
+  export const AddressScalarFieldEnum: {
+    id: 'id',
+    country: 'country',
+    departement: 'departement',
+    commune: 'commune',
+    sectionCommunale: 'sectionCommunale',
+    telephone: 'telephone',
+    rue: 'rue'
+  };
+
+  export type AddressScalarFieldEnum = (typeof AddressScalarFieldEnum)[keyof typeof AddressScalarFieldEnum]
+
+
   export const ChurchScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -33098,6 +34198,7 @@ export namespace Prisma {
     email: 'email',
     mainPasteur: 'mainPasteur',
     missionId: 'missionId',
+    addressId: 'addressId',
     ttiId: 'ttiId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -33547,6 +34648,19 @@ export namespace Prisma {
   export type TtiOrderByRelevanceFieldEnum = (typeof TtiOrderByRelevanceFieldEnum)[keyof typeof TtiOrderByRelevanceFieldEnum]
 
 
+  export const AddressOrderByRelevanceFieldEnum: {
+    id: 'id',
+    country: 'country',
+    departement: 'departement',
+    commune: 'commune',
+    sectionCommunale: 'sectionCommunale',
+    telephone: 'telephone',
+    rue: 'rue'
+  };
+
+  export type AddressOrderByRelevanceFieldEnum = (typeof AddressOrderByRelevanceFieldEnum)[keyof typeof AddressOrderByRelevanceFieldEnum]
+
+
   export const ChurchOrderByRelevanceFieldEnum: {
     id: 'id',
     name: 'name',
@@ -33563,6 +34677,7 @@ export namespace Prisma {
     email: 'email',
     mainPasteur: 'mainPasteur',
     missionId: 'missionId',
+    addressId: 'addressId',
     ttiId: 'ttiId'
   };
 
@@ -34149,6 +35264,72 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Tti"> | Date | string
   }
 
+  export type AddressWhereInput = {
+    AND?: AddressWhereInput | AddressWhereInput[]
+    OR?: AddressWhereInput[]
+    NOT?: AddressWhereInput | AddressWhereInput[]
+    id?: StringFilter<"Address"> | string
+    country?: StringNullableFilter<"Address"> | string | null
+    departement?: StringNullableFilter<"Address"> | string | null
+    commune?: StringNullableFilter<"Address"> | string | null
+    sectionCommunale?: StringNullableFilter<"Address"> | string | null
+    telephone?: StringNullableFilter<"Address"> | string | null
+    rue?: StringNullableFilter<"Address"> | string | null
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }
+
+  export type AddressOrderByWithRelationInput = {
+    id?: SortOrder
+    country?: SortOrderInput | SortOrder
+    departement?: SortOrderInput | SortOrder
+    commune?: SortOrderInput | SortOrder
+    sectionCommunale?: SortOrderInput | SortOrder
+    telephone?: SortOrderInput | SortOrder
+    rue?: SortOrderInput | SortOrder
+    church?: ChurchOrderByWithRelationInput
+    _relevance?: AddressOrderByRelevanceInput
+  }
+
+  export type AddressWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AddressWhereInput | AddressWhereInput[]
+    OR?: AddressWhereInput[]
+    NOT?: AddressWhereInput | AddressWhereInput[]
+    country?: StringNullableFilter<"Address"> | string | null
+    departement?: StringNullableFilter<"Address"> | string | null
+    commune?: StringNullableFilter<"Address"> | string | null
+    sectionCommunale?: StringNullableFilter<"Address"> | string | null
+    telephone?: StringNullableFilter<"Address"> | string | null
+    rue?: StringNullableFilter<"Address"> | string | null
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }, "id">
+
+  export type AddressOrderByWithAggregationInput = {
+    id?: SortOrder
+    country?: SortOrderInput | SortOrder
+    departement?: SortOrderInput | SortOrder
+    commune?: SortOrderInput | SortOrder
+    sectionCommunale?: SortOrderInput | SortOrder
+    telephone?: SortOrderInput | SortOrder
+    rue?: SortOrderInput | SortOrder
+    _count?: AddressCountOrderByAggregateInput
+    _max?: AddressMaxOrderByAggregateInput
+    _min?: AddressMinOrderByAggregateInput
+  }
+
+  export type AddressScalarWhereWithAggregatesInput = {
+    AND?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[]
+    OR?: AddressScalarWhereWithAggregatesInput[]
+    NOT?: AddressScalarWhereWithAggregatesInput | AddressScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Address"> | string
+    country?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    departement?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    commune?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    sectionCommunale?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    telephone?: StringNullableWithAggregatesFilter<"Address"> | string | null
+    rue?: StringNullableWithAggregatesFilter<"Address"> | string | null
+  }
+
   export type ChurchWhereInput = {
     AND?: ChurchWhereInput | ChurchWhereInput[]
     OR?: ChurchWhereInput[]
@@ -34168,6 +35349,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"Church"> | string | null
     mainPasteur?: StringNullableFilter<"Church"> | string | null
     missionId?: StringNullableFilter<"Church"> | string | null
+    addressId?: StringNullableFilter<"Church"> | string | null
     ttiId?: StringNullableFilter<"Church"> | string | null
     createdAt?: DateTimeFilter<"Church"> | Date | string
     updatedAt?: DateTimeFilter<"Church"> | Date | string
@@ -34194,6 +35376,7 @@ export namespace Prisma {
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
     services?: ServiceListRelationFilter
+    fullAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null
     tti?: XOR<TtiNullableScalarRelationFilter, TtiWhereInput> | null
   }
 
@@ -34213,6 +35396,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     mainPasteur?: SortOrderInput | SortOrder
     missionId?: SortOrderInput | SortOrder
+    addressId?: SortOrderInput | SortOrder
     ttiId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -34239,6 +35423,7 @@ export namespace Prisma {
     ministry?: ministryOrderByRelationAggregateInput
     pasteur?: pasteurOrderByRelationAggregateInput
     services?: ServiceOrderByRelationAggregateInput
+    fullAddress?: AddressOrderByWithRelationInput
     tti?: TtiOrderByWithRelationInput
     _relevance?: ChurchOrderByRelevanceInput
   }
@@ -34246,6 +35431,7 @@ export namespace Prisma {
   export type ChurchWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     name?: string
+    addressId?: string
     AND?: ChurchWhereInput | ChurchWhereInput[]
     OR?: ChurchWhereInput[]
     NOT?: ChurchWhereInput | ChurchWhereInput[]
@@ -34288,8 +35474,9 @@ export namespace Prisma {
     ministry?: MinistryListRelationFilter
     pasteur?: PasteurListRelationFilter
     services?: ServiceListRelationFilter
+    fullAddress?: XOR<AddressNullableScalarRelationFilter, AddressWhereInput> | null
     tti?: XOR<TtiNullableScalarRelationFilter, TtiWhereInput> | null
-  }, "id" | "name">
+  }, "id" | "name" | "addressId">
 
   export type ChurchOrderByWithAggregationInput = {
     id?: SortOrder
@@ -34307,6 +35494,7 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     mainPasteur?: SortOrderInput | SortOrder
     missionId?: SortOrderInput | SortOrder
+    addressId?: SortOrderInput | SortOrder
     ttiId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -34334,6 +35522,7 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"Church"> | string | null
     mainPasteur?: StringNullableWithAggregatesFilter<"Church"> | string | null
     missionId?: StringNullableWithAggregatesFilter<"Church"> | string | null
+    addressId?: StringNullableWithAggregatesFilter<"Church"> | string | null
     ttiId?: StringNullableWithAggregatesFilter<"Church"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Church"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Church"> | Date | string
@@ -36586,6 +37775,80 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AddressCreateInput = {
+    id?: string
+    country?: string | null
+    departement?: string | null
+    commune?: string | null
+    sectionCommunale?: string | null
+    telephone?: string | null
+    rue?: string | null
+    church?: ChurchCreateNestedOneWithoutFullAddressInput
+  }
+
+  export type AddressUncheckedCreateInput = {
+    id?: string
+    country?: string | null
+    departement?: string | null
+    commune?: string | null
+    sectionCommunale?: string | null
+    telephone?: string | null
+    rue?: string | null
+    church?: ChurchUncheckedCreateNestedOneWithoutFullAddressInput
+  }
+
+  export type AddressUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+    church?: ChurchUpdateOneWithoutFullAddressNestedInput
+  }
+
+  export type AddressUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+    church?: ChurchUncheckedUpdateOneWithoutFullAddressNestedInput
+  }
+
+  export type AddressCreateManyInput = {
+    id?: string
+    country?: string | null
+    departement?: string | null
+    commune?: string | null
+    sectionCommunale?: string | null
+    telephone?: string | null
+    rue?: string | null
+  }
+
+  export type AddressUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AddressUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type ChurchCreateInput = {
     id?: string
     name: string
@@ -36626,6 +37889,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -36645,6 +37909,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36712,6 +37977,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -36731,6 +37997,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36774,6 +38041,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -36814,6 +38082,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39377,6 +40646,42 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AddressOrderByRelevanceInput = {
+    fields: AddressOrderByRelevanceFieldEnum | AddressOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AddressCountOrderByAggregateInput = {
+    id?: SortOrder
+    country?: SortOrder
+    departement?: SortOrder
+    commune?: SortOrder
+    sectionCommunale?: SortOrder
+    telephone?: SortOrder
+    rue?: SortOrder
+  }
+
+  export type AddressMaxOrderByAggregateInput = {
+    id?: SortOrder
+    country?: SortOrder
+    departement?: SortOrder
+    commune?: SortOrder
+    sectionCommunale?: SortOrder
+    telephone?: SortOrder
+    rue?: SortOrder
+  }
+
+  export type AddressMinOrderByAggregateInput = {
+    id?: SortOrder
+    country?: SortOrder
+    departement?: SortOrder
+    commune?: SortOrder
+    sectionCommunale?: SortOrder
+    telephone?: SortOrder
+    rue?: SortOrder
+  }
+
   export type TransfertListRelationFilter = {
     every?: transfertWhereInput
     some?: transfertWhereInput
@@ -39508,6 +40813,11 @@ export namespace Prisma {
     none?: ServiceWhereInput
   }
 
+  export type AddressNullableScalarRelationFilter = {
+    is?: AddressWhereInput | null
+    isNot?: AddressWhereInput | null
+  }
+
   export type TtiNullableScalarRelationFilter = {
     is?: TtiWhereInput | null
     isNot?: TtiWhereInput | null
@@ -39619,6 +40929,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    addressId?: SortOrder
     ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -39640,6 +40951,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    addressId?: SortOrder
     ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -39661,6 +40973,7 @@ export namespace Prisma {
     email?: SortOrder
     mainPasteur?: SortOrder
     missionId?: SortOrder
+    addressId?: SortOrder
     ttiId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41085,6 +42398,38 @@ export namespace Prisma {
     deleteMany?: ChurchScalarWhereInput | ChurchScalarWhereInput[]
   }
 
+  export type ChurchCreateNestedOneWithoutFullAddressInput = {
+    create?: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutFullAddressInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type ChurchUncheckedCreateNestedOneWithoutFullAddressInput = {
+    create?: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutFullAddressInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type ChurchUpdateOneWithoutFullAddressNestedInput = {
+    create?: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutFullAddressInput
+    upsert?: ChurchUpsertWithoutFullAddressInput
+    disconnect?: ChurchWhereInput | boolean
+    delete?: ChurchWhereInput | boolean
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutFullAddressInput, ChurchUpdateWithoutFullAddressInput>, ChurchUncheckedUpdateWithoutFullAddressInput>
+  }
+
+  export type ChurchUncheckedUpdateOneWithoutFullAddressNestedInput = {
+    create?: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutFullAddressInput
+    upsert?: ChurchUpsertWithoutFullAddressInput
+    disconnect?: ChurchWhereInput | boolean
+    delete?: ChurchWhereInput | boolean
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutFullAddressInput, ChurchUpdateWithoutFullAddressInput>, ChurchUncheckedUpdateWithoutFullAddressInput>
+  }
+
   export type transfertCreateNestedManyWithoutFromChurchInput = {
     create?: XOR<transfertCreateWithoutFromChurchInput, transfertUncheckedCreateWithoutFromChurchInput> | transfertCreateWithoutFromChurchInput[] | transfertUncheckedCreateWithoutFromChurchInput[]
     connectOrCreate?: transfertCreateOrConnectWithoutFromChurchInput | transfertCreateOrConnectWithoutFromChurchInput[]
@@ -41243,6 +42588,12 @@ export namespace Prisma {
     connectOrCreate?: ServiceCreateOrConnectWithoutChurchInput | ServiceCreateOrConnectWithoutChurchInput[]
     createMany?: ServiceCreateManyChurchInputEnvelope
     connect?: ServiceWhereUniqueInput | ServiceWhereUniqueInput[]
+  }
+
+  export type AddressCreateNestedOneWithoutChurchInput = {
+    create?: XOR<AddressCreateWithoutChurchInput, AddressUncheckedCreateWithoutChurchInput>
+    connectOrCreate?: AddressCreateOrConnectWithoutChurchInput
+    connect?: AddressWhereUniqueInput
   }
 
   export type TtiCreateNestedOneWithoutChurchInput = {
@@ -41721,6 +43072,16 @@ export namespace Prisma {
     update?: ServiceUpdateWithWhereUniqueWithoutChurchInput | ServiceUpdateWithWhereUniqueWithoutChurchInput[]
     updateMany?: ServiceUpdateManyWithWhereWithoutChurchInput | ServiceUpdateManyWithWhereWithoutChurchInput[]
     deleteMany?: ServiceScalarWhereInput | ServiceScalarWhereInput[]
+  }
+
+  export type AddressUpdateOneWithoutChurchNestedInput = {
+    create?: XOR<AddressCreateWithoutChurchInput, AddressUncheckedCreateWithoutChurchInput>
+    connectOrCreate?: AddressCreateOrConnectWithoutChurchInput
+    upsert?: AddressUpsertWithoutChurchInput
+    disconnect?: AddressWhereInput | boolean
+    delete?: AddressWhereInput | boolean
+    connect?: AddressWhereUniqueInput
+    update?: XOR<XOR<AddressUpdateToOneWithWhereWithoutChurchInput, AddressUpdateWithoutChurchInput>, AddressUncheckedUpdateWithoutChurchInput>
   }
 
   export type TtiUpdateOneWithoutChurchNestedInput = {
@@ -43272,6 +44633,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -43291,6 +44653,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43400,6 +44763,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -43419,6 +44783,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43749,6 +45114,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
   }
 
   export type ChurchUncheckedCreateWithoutTtiInput = {
@@ -43767,6 +45133,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
@@ -43838,9 +45205,198 @@ export namespace Prisma {
     email?: StringNullableFilter<"Church"> | string | null
     mainPasteur?: StringNullableFilter<"Church"> | string | null
     missionId?: StringNullableFilter<"Church"> | string | null
+    addressId?: StringNullableFilter<"Church"> | string | null
     ttiId?: StringNullableFilter<"Church"> | string | null
     createdAt?: DateTimeFilter<"Church"> | Date | string
     updatedAt?: DateTimeFilter<"Church"> | Date | string
+  }
+
+  export type ChurchCreateWithoutFullAddressInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertCreateNestedManyWithoutToChurchInput
+    users?: UserCreateNestedManyWithoutChurchInput
+    groups?: GroupeCreateNestedManyWithoutChurchInput
+    events?: EventCreateNestedManyWithoutChurchInput
+    mariages?: MariageCreateNestedManyWithoutChurchInput
+    funerals?: FuneralCreateNestedManyWithoutChurchInput
+    presentations?: PresentationCreateNestedManyWithoutChurchInput
+    batism?: BaptismCreateNestedManyWithoutChurchInput
+    death?: deathCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassCreateNestedManyWithoutChurchInput
+    comitees?: comiteeCreateNestedManyWithoutChurchInput
+    appointments?: appointmentCreateNestedManyWithoutChurchInput
+    mission?: MissionCreateNestedOneWithoutChurchInput
+    expense?: expenseCreateNestedManyWithoutChurchInput
+    offering?: offeringCreateNestedManyWithoutChurchInput
+    donation?: donationCreateNestedManyWithoutChurchInput
+    tithing?: tithingCreateNestedManyWithoutChurchInput
+    moisson?: moissonCreateNestedManyWithoutChurchInput
+    sanction?: sanctionCreateNestedManyWithoutChurchInput
+    ministry?: ministryCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutFullAddressInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    picture?: string | null
+    longitude?: string | null
+    latitude?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    whatsapp?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    missionId?: string | null
+    ttiId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
+    users?: UserUncheckedCreateNestedManyWithoutChurchInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutChurchInput
+    events?: EventUncheckedCreateNestedManyWithoutChurchInput
+    mariages?: MariageUncheckedCreateNestedManyWithoutChurchInput
+    funerals?: FuneralUncheckedCreateNestedManyWithoutChurchInput
+    presentations?: PresentationUncheckedCreateNestedManyWithoutChurchInput
+    batism?: BaptismUncheckedCreateNestedManyWithoutChurchInput
+    death?: deathUncheckedCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassUncheckedCreateNestedManyWithoutChurchInput
+    comitees?: comiteeUncheckedCreateNestedManyWithoutChurchInput
+    appointments?: appointmentUncheckedCreateNestedManyWithoutChurchInput
+    expense?: expenseUncheckedCreateNestedManyWithoutChurchInput
+    offering?: offeringUncheckedCreateNestedManyWithoutChurchInput
+    donation?: donationUncheckedCreateNestedManyWithoutChurchInput
+    tithing?: tithingUncheckedCreateNestedManyWithoutChurchInput
+    moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
+    sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
+    ministry?: ministryUncheckedCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutFullAddressInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+  }
+
+  export type ChurchUpsertWithoutFullAddressInput = {
+    update: XOR<ChurchUpdateWithoutFullAddressInput, ChurchUncheckedUpdateWithoutFullAddressInput>
+    create: XOR<ChurchCreateWithoutFullAddressInput, ChurchUncheckedCreateWithoutFullAddressInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutFullAddressInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutFullAddressInput, ChurchUncheckedUpdateWithoutFullAddressInput>
+  }
+
+  export type ChurchUpdateWithoutFullAddressInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUpdateManyWithoutToChurchNestedInput
+    users?: UserUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUpdateManyWithoutChurchNestedInput
+    events?: EventUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUpdateManyWithoutChurchNestedInput
+    death?: deathUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUpdateManyWithoutChurchNestedInput
+    mission?: MissionUpdateOneWithoutChurchNestedInput
+    expense?: expenseUpdateManyWithoutChurchNestedInput
+    offering?: offeringUpdateManyWithoutChurchNestedInput
+    donation?: donationUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutFullAddressInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
+    users?: UserUncheckedUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutChurchNestedInput
+    events?: EventUncheckedUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUncheckedUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUncheckedUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUncheckedUpdateManyWithoutChurchNestedInput
+    batism?: BaptismUncheckedUpdateManyWithoutChurchNestedInput
+    death?: deathUncheckedUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUncheckedUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUncheckedUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUncheckedUpdateManyWithoutChurchNestedInput
+    expense?: expenseUncheckedUpdateManyWithoutChurchNestedInput
+    offering?: offeringUncheckedUpdateManyWithoutChurchNestedInput
+    donation?: donationUncheckedUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUncheckedUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
+    ministry?: ministryUncheckedUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
   }
 
   export type transfertCreateWithoutFromChurchInput = {
@@ -44702,6 +46258,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AddressCreateWithoutChurchInput = {
+    id?: string
+    country?: string | null
+    departement?: string | null
+    commune?: string | null
+    sectionCommunale?: string | null
+    telephone?: string | null
+    rue?: string | null
+  }
+
+  export type AddressUncheckedCreateWithoutChurchInput = {
+    id?: string
+    country?: string | null
+    departement?: string | null
+    commune?: string | null
+    sectionCommunale?: string | null
+    telephone?: string | null
+    rue?: string | null
+  }
+
+  export type AddressCreateOrConnectWithoutChurchInput = {
+    where: AddressWhereUniqueInput
+    create: XOR<AddressCreateWithoutChurchInput, AddressUncheckedCreateWithoutChurchInput>
+  }
+
   export type TtiCreateWithoutChurchInput = {
     id?: string
     nom: string
@@ -45476,6 +47057,37 @@ export namespace Prisma {
     churchId?: StringNullableFilter<"Service"> | string | null
   }
 
+  export type AddressUpsertWithoutChurchInput = {
+    update: XOR<AddressUpdateWithoutChurchInput, AddressUncheckedUpdateWithoutChurchInput>
+    create: XOR<AddressCreateWithoutChurchInput, AddressUncheckedCreateWithoutChurchInput>
+    where?: AddressWhereInput
+  }
+
+  export type AddressUpdateToOneWithWhereWithoutChurchInput = {
+    where?: AddressWhereInput
+    data: XOR<AddressUpdateWithoutChurchInput, AddressUncheckedUpdateWithoutChurchInput>
+  }
+
+  export type AddressUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AddressUncheckedUpdateWithoutChurchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    departement?: NullableStringFieldUpdateOperationsInput | string | null
+    commune?: NullableStringFieldUpdateOperationsInput | string | null
+    sectionCommunale?: NullableStringFieldUpdateOperationsInput | string | null
+    telephone?: NullableStringFieldUpdateOperationsInput | string | null
+    rue?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type TtiUpsertWithoutChurchInput = {
     update: XOR<TtiUpdateWithoutChurchInput, TtiUncheckedUpdateWithoutChurchInput>
     create: XOR<TtiCreateWithoutChurchInput, TtiUncheckedCreateWithoutChurchInput>
@@ -45755,6 +47367,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -45774,6 +47387,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46164,6 +47778,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -46183,6 +47798,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46344,6 +47960,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -46363,6 +47980,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46549,6 +48167,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -46568,6 +48187,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46649,6 +48269,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -46668,6 +48289,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46749,6 +48371,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -46768,6 +48391,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46833,6 +48457,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -46852,6 +48477,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46933,6 +48559,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -46952,6 +48579,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47017,6 +48645,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47036,6 +48665,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47117,6 +48747,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -47136,6 +48767,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47201,6 +48833,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47220,6 +48853,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47301,6 +48935,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -47320,6 +48955,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47385,6 +49021,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47404,6 +49041,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47485,6 +49123,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -47504,6 +49143,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47569,6 +49209,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47588,6 +49229,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47669,6 +49311,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -47688,6 +49331,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47753,6 +49397,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47772,6 +49417,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -47853,6 +49499,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -47872,6 +49519,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47937,6 +49585,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -47956,6 +49605,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48037,6 +49687,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -48056,6 +49707,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48121,6 +49773,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -48140,6 +49793,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48221,6 +49875,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -48240,6 +49895,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48305,6 +49961,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -48324,6 +49981,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48405,6 +50063,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -48424,6 +50083,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48489,6 +50149,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -48508,6 +50169,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48589,6 +50251,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -48608,6 +50271,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48673,6 +50337,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -48692,6 +50357,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -48773,6 +50439,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -48792,6 +50459,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49067,6 +50735,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -49086,6 +50755,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49199,6 +50869,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -49218,6 +50889,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49388,6 +51060,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -49407,6 +51080,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49504,6 +51178,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -49523,6 +51198,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49588,6 +51264,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -49607,6 +51284,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49677,6 +51355,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -49696,6 +51375,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -49882,6 +51562,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -49901,6 +51582,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49977,6 +51659,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -49996,6 +51679,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50172,6 +51856,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -50190,6 +51875,7 @@ export namespace Prisma {
     whatsapp?: string | null
     email?: string | null
     mainPasteur?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50282,6 +51968,7 @@ export namespace Prisma {
     ministry?: ministryCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -50301,6 +51988,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50382,6 +52070,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -50401,6 +52090,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50466,6 +52156,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     pasteur?: pasteurCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -50485,6 +52176,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50566,6 +52258,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -50585,6 +52278,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -50650,6 +52344,7 @@ export namespace Prisma {
     sanction?: sanctionCreateNestedManyWithoutChurchInput
     ministry?: ministryCreateNestedManyWithoutChurchInput
     services?: ServiceCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
     tti?: TtiCreateNestedOneWithoutChurchInput
   }
 
@@ -50669,6 +52364,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -50750,6 +52446,7 @@ export namespace Prisma {
     sanction?: sanctionUpdateManyWithoutChurchNestedInput
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -50769,6 +52466,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -51011,6 +52709,7 @@ export namespace Prisma {
     email?: string | null
     mainPasteur?: string | null
     missionId?: string | null
+    addressId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -51055,6 +52754,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
   }
 
   export type ChurchUncheckedUpdateWithoutTtiInput = {
@@ -51073,6 +52773,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
@@ -51115,6 +52816,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
     missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -53323,6 +55025,7 @@ export namespace Prisma {
     whatsapp?: string | null
     email?: string | null
     mainPasteur?: string | null
+    addressId?: string | null
     ttiId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -53367,6 +55070,7 @@ export namespace Prisma {
     ministry?: ministryUpdateManyWithoutChurchNestedInput
     pasteur?: pasteurUpdateManyWithoutChurchNestedInput
     services?: ServiceUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
     tti?: TtiUpdateOneWithoutChurchNestedInput
   }
 
@@ -53385,6 +55089,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53427,6 +55132,7 @@ export namespace Prisma {
     whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

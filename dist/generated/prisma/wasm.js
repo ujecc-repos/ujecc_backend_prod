@@ -144,6 +144,16 @@ exports.Prisma.TtiScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AddressScalarFieldEnum = {
+  id: 'id',
+  country: 'country',
+  departement: 'departement',
+  commune: 'commune',
+  sectionCommunale: 'sectionCommunale',
+  telephone: 'telephone',
+  rue: 'rue'
+};
+
 exports.Prisma.ChurchScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -160,6 +170,7 @@ exports.Prisma.ChurchScalarFieldEnum = {
   email: 'email',
   mainPasteur: 'mainPasteur',
   missionId: 'missionId',
+  addressId: 'addressId',
   ttiId: 'ttiId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -519,6 +530,16 @@ exports.Prisma.TtiOrderByRelevanceFieldEnum = {
   nom: 'nom'
 };
 
+exports.Prisma.AddressOrderByRelevanceFieldEnum = {
+  id: 'id',
+  country: 'country',
+  departement: 'departement',
+  commune: 'commune',
+  sectionCommunale: 'sectionCommunale',
+  telephone: 'telephone',
+  rue: 'rue'
+};
+
 exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -535,6 +556,7 @@ exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   email: 'email',
   mainPasteur: 'mainPasteur',
   missionId: 'missionId',
+  addressId: 'addressId',
   ttiId: 'ttiId'
 };
 
@@ -832,6 +854,7 @@ exports.Prisma.ModelName = {
   Service: 'Service',
   Presence: 'Presence',
   Tti: 'Tti',
+  Address: 'Address',
   Church: 'Church',
   User: 'User',
   Groupe: 'Groupe',
