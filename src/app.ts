@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import { prisma } from "./utils/client"
 
+
 // Import routes
 import churchRoutes from './routes/church.routes';
 import userRoutes from './routes/user.routes';
@@ -36,9 +37,11 @@ dotenv.config();
 // Create Express application
 const app = express();
 
+
 // Middleware
 app.use(cors({
-  origin: "*"
+  origin: [`${process.env.FRONTEND_URL}`],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
