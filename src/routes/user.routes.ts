@@ -58,10 +58,6 @@ const handleMulterError = (err: any, req: express.Request, res: express.Response
 
 // Create a new user with optional image upload
 router.post('/', upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
-    console.log('=== User Registration Request ===');
-    console.log('Body:', req.body);
-    console.log('File:', req.file);
-    console.log('Headers:', req.headers);
      
     try {
         const {firstname, lastname, civilState, password, birthDate, gender, joinDate, country,

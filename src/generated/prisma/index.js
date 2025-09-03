@@ -865,7 +865,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/romeusclarens/Desktop/Programing/Expo/churchProject_backend/src/generated/prisma",
+      "value": "/Users/romeusclarens/Desktop/Programing/Expo/ujec_backend/ujecc_backend_prod/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -883,12 +883,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/romeusclarens/Desktop/Programing/Expo/churchProject_backend/prisma/schema.prisma",
+    "sourceFilePath": "/Users/romeusclarens/Desktop/Programing/Expo/ujec_backend/ujecc_backend_prod/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.11.1",
