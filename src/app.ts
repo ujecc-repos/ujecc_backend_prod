@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import { prisma } from "./utils/client"
+// desrameaux now
 
 
 // Import routes
@@ -36,8 +37,6 @@ dotenv.config();
 
 // Create Express application
 const app = express();
-
-
 // Middleware
 app.use(cors({
   origin: [`${process.env.FRONTEND_URL}`],
