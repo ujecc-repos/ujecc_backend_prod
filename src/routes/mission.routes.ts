@@ -329,6 +329,39 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Connect a church to a mission
+router.put('/connect-church', async (req, res) => {
+  try {
+    const { churchId, missionId } = req.body;
+    console.log(churchId, missionId)
+
+    // Validate required fields
+    if (!churchId || !missionId) {
+      return res.status(400).json({ error: 'churchId et missionId sont requis.' });
+    }
+
+    // Update church to connect it to the mission
+    const updatedChurch = await prisma.church.update({
+      where: { id: churchId },
+      data: {
+        missionId: missionId
+      },
+      include: {
+        mission: true
+      }
+    });
+    console.log("finish")
+
+    res.status(200).json({
+      message: 'Église connectée à la mission avec succès.',
+      church: updatedChurch
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la connexion de l\'église à la mission.' });
+  }
+});
+
 // Update a mission
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
@@ -562,5 +595,7 @@ router.get('/pasteurs/:presidentName', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la récupération des pasteurs.' });
   }
 });
+
+
 
 export default router;
