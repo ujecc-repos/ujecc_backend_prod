@@ -132,9 +132,9 @@ exports.Prisma.PresenceScalarFieldEnum = {
   id: 'id',
   statut: 'statut',
   utilisateurId: 'utilisateurId',
-  serviceId: 'serviceId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  serviceId: 'serviceId'
 };
 
 exports.Prisma.TtiScalarFieldEnum = {
@@ -159,71 +159,70 @@ exports.Prisma.ChurchScalarFieldEnum = {
   name: 'name',
   quantity: 'quantity',
   address: 'address',
-  picture: 'picture',
-  longitude: 'longitude',
-  latitude: 'latitude',
   phone: 'phone',
   anthem: 'anthem',
   facebook: 'facebook',
   instagram: 'instagram',
-  whatsapp: 'whatsapp',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  picture: 'picture',
+  missionId: 'missionId',
   email: 'email',
   mainPasteur: 'mainPasteur',
-  missionId: 'missionId',
-  addressId: 'addressId',
+  whatsapp: 'whatsapp',
+  latitude: 'latitude',
+  longitude: 'longitude',
   ttiId: 'ttiId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  addressId: 'addressId'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  joinDate: 'joinDate',
   email: 'email',
+  baptismDate: 'baptismDate',
+  baptismLocation: 'baptismLocation',
+  birthCity: 'birthCity',
+  birthCountry: 'birthCountry',
+  birthDate: 'birthDate',
+  churchId: 'churchId',
+  churchRole: 'churchRole',
+  city: 'city',
+  country: 'country',
+  envelopeNumber: 'envelopeNumber',
+  etatCivil: 'etatCivil',
+  facebook: 'facebook',
   firstname: 'firstname',
-  lastname: 'lastname',
-  nif: 'nif',
-  groupeSanguin: 'groupeSanguin',
-  personToContact: 'personToContact',
-  spouseFullName: 'spouseFullName',
+  instagram: 'instagram',
   password: 'password',
+  picture: 'picture',
+  profession: 'profession',
+  role: 'role',
+  sex: 'sex',
+  sundayClass: 'sundayClass',
+  lastname: 'lastname',
   membreActif: 'membreActif',
-  longitude: 'longitude',
-  latitude: 'latitude',
-  plainPassword: 'plainPassword',
+  addressLine: 'addressLine',
+  homePhone: 'homePhone',
+  joinDate: 'joinDate',
+  mobilePhone: 'mobilePhone',
   age: 'age',
   minister: 'minister',
-  mobilePhone: 'mobilePhone',
-  homePhone: 'homePhone',
-  picture: 'picture',
-  city: 'city',
-  etatCivil: 'etatCivil',
-  country: 'country',
-  birthCountry: 'birthCountry',
-  birthCity: 'birthCity',
-  birthDate: 'birthDate',
-  sex: 'sex',
-  addressLine: 'addressLine',
-  envelopeNumber: 'envelopeNumber',
-  baptismLocation: 'baptismLocation',
-  baptismDate: 'baptismDate',
+  plainPassword: 'plainPassword',
+  personToContact: 'personToContact',
+  spouseFullName: 'spouseFullName',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  nif: 'nif',
+  groupeSanguin: 'groupeSanguin',
   istimothee: 'istimothee',
-  role: 'role',
-  churchRole: 'churchRole',
-  facebook: 'facebook',
-  instagram: 'instagram',
-  profession: 'profession',
-  sundayClass: 'sundayClass',
-  timotheeId: 'timotheeId',
-  churchId: 'churchId'
+  timotheeId: 'timotheeId'
 };
 
 exports.Prisma.GroupeScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  minister: 'minister',
   description: 'description',
   picture: 'picture',
   showToMembers: 'showToMembers',
@@ -234,11 +233,12 @@ exports.Prisma.GroupeScalarFieldEnum = {
   meetingTime: 'meetingTime',
   meetingLocation: 'meetingLocation',
   meetingFrequency: 'meetingFrequency',
-  ageGroup: 'ageGroup',
   maxMembers: 'maxMembers',
   churchId: 'churchId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  ageGroup: 'ageGroup',
+  minister: 'minister'
 };
 
 exports.Prisma.EventScalarFieldEnum = {
@@ -249,12 +249,12 @@ exports.Prisma.EventScalarFieldEnum = {
   frequency: 'frequency',
   startDate: 'startDate',
   endDate: 'endDate',
-  startPeriode: 'startPeriode',
-  endPeriode: 'endPeriode',
+  churchId: 'churchId',
   createAt: 'createAt',
-  isRecurring: 'isRecurring',
   updateAt: 'updateAt',
-  churchId: 'churchId'
+  isRecurring: 'isRecurring',
+  endPeriode: 'endPeriode',
+  startPeriode: 'startPeriode'
 };
 
 exports.Prisma.MariageScalarFieldEnum = {
@@ -264,16 +264,16 @@ exports.Prisma.MariageScalarFieldEnum = {
   groomFullname: 'groomFullname',
   goomBirthDate: 'goomBirthDate',
   weddingDate: 'weddingDate',
-  witnessSignature: 'witnessSignature',
-  civilStateStateOfficer: 'civilStateStateOfficer',
   weddingLocation: 'weddingLocation',
-  civilStateOfficer: 'civilStateOfficer',
-  witness: 'witness',
-  grooomCertificate: 'grooomCertificate',
-  brideCertificate: 'brideCertificate',
   weddingCertificate: 'weddingCertificate',
   officiantName: 'officiantName',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  brideCertificate: 'brideCertificate',
+  civilStateOfficer: 'civilStateOfficer',
+  grooomCertificate: 'grooomCertificate',
+  witness: 'witness',
+  civilStateStateOfficer: 'civilStateStateOfficer',
+  witnessSignature: 'witnessSignature'
 };
 
 exports.Prisma.FuneralScalarFieldEnum = {
@@ -283,23 +283,21 @@ exports.Prisma.FuneralScalarFieldEnum = {
   funeralDate: 'funeralDate',
   funeralTime: 'funeralTime',
   relationShip: 'relationShip',
-  telephone: 'telephone',
   email: 'email',
   deathCertificate: 'deathCertificate',
   nextOfKin: 'nextOfKin',
   officiantName: 'officiantName',
   description: 'description',
   funeralLocation: 'funeralLocation',
-  status: 'status',
   churchId: 'churchId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  status: 'status',
+  updatedAt: 'updatedAt',
+  telephone: 'telephone'
 };
 
 exports.Prisma.PresentationScalarFieldEnum = {
   id: 'id',
-  childName: 'childName',
-  dateOfBirth: 'dateOfBirth',
   placeOfBirth: 'placeOfBirth',
   birthCertificate: 'birthCertificate',
   fatherName: 'fatherName',
@@ -308,9 +306,11 @@ exports.Prisma.PresentationScalarFieldEnum = {
   address: 'address',
   presentationDate: 'presentationDate',
   officiantName: 'officiantName',
-  witness: 'witness',
   description: 'description',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  childName: 'childName',
+  dateOfBirth: 'dateOfBirth',
+  witness: 'witness'
 };
 
 exports.Prisma.BaptismScalarFieldEnum = {
@@ -319,47 +319,47 @@ exports.Prisma.BaptismScalarFieldEnum = {
   birthDate: 'birthDate',
   placeOfBirth: 'placeOfBirth',
   baptismDate: 'baptismDate',
-  baptismLocation: 'baptismLocation',
   baptismCertificate: 'baptismCertificate',
   officiantName: 'officiantName',
-  startDate: 'startDate',
-  endDate: 'endDate',
   withness: 'withness',
-  conversionDate: 'conversionDate',
   previousChurch: 'previousChurch',
-  status: 'status',
   testimony: 'testimony',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  conversionDate: 'conversionDate',
+  status: 'status',
+  baptismLocation: 'baptismLocation',
+  endDate: 'endDate',
+  startDate: 'startDate'
 };
 
 exports.Prisma.DeathScalarFieldEnum = {
   id: 'id',
   deathDate: 'deathDate',
   deathPlace: 'deathPlace',
-  deathTime: 'deathTime',
   deathCause: 'deathCause',
   deathCertificate: 'deathCertificate',
-  serviceDate: 'serviceDate',
-  location: 'location',
-  nextOfKin: 'nextOfKin',
-  relationShip: 'relationShip',
-  officiantName: 'officiantName',
+  churchId: 'churchId',
+  deathTime: 'deathTime',
   description: 'description',
-  churchId: 'churchId'
+  location: 'location',
+  officiantName: 'officiantName',
+  relationShip: 'relationShip',
+  serviceDate: 'serviceDate',
+  nextOfKin: 'nextOfKin'
 };
 
 exports.Prisma.SundayClassScalarFieldEnum = {
   id: 'id',
   nom: 'nom',
   teacher: 'teacher',
-  ageGroup: 'ageGroup',
   startTime: 'startTime',
-  book: 'book',
   endTime: 'endTime',
-  maxStudents: 'maxStudents',
   description: 'description',
   churchId: 'churchId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  maxStudents: 'maxStudents',
+  ageGroup: 'ageGroup',
+  book: 'book'
 };
 
 exports.Prisma.ExpenseScalarFieldEnum = {
@@ -376,10 +376,10 @@ exports.Prisma.OfferingScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
   date: 'date',
-  status: 'status',
   paymentMethod: 'paymentMethod',
   note: 'note',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  status: 'status'
 };
 
 exports.Prisma.TithingScalarFieldEnum = {
@@ -414,10 +414,10 @@ exports.Prisma.MoissonScalarFieldEnum = {
 
 exports.Prisma.ComiteeScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   description: 'description',
   meetingDay: 'meetingDay',
   meetingTime: 'meetingTime',
+  name: 'name',
   churchId: 'churchId'
 };
 
@@ -437,22 +437,22 @@ exports.Prisma.AppointmentScalarFieldEnum = {
 
 exports.Prisma.TransfertScalarFieldEnum = {
   id: 'id',
-  fromChurchId: 'fromChurchId',
-  userId: 'userId',
-  toChurchId: 'toChurchId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  fromChurchId: 'fromChurchId',
+  toChurchId: 'toChurchId',
+  userId: 'userId'
 };
 
 exports.Prisma.MissionScalarFieldEnum = {
   id: 'id',
   missionName: 'missionName',
   description: 'description',
-  presidentName: 'presidentName',
   status: 'status',
   location: 'location',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  presidentName: 'presidentName'
 };
 
 exports.Prisma.SanctionScalarFieldEnum = {
@@ -460,11 +460,11 @@ exports.Prisma.SanctionScalarFieldEnum = {
   name: 'name',
   description: 'description',
   startDate: 'startDate',
-  endDate: 'endDate',
   status: 'status',
   churchId: 'churchId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  endDate: 'endDate'
 };
 
 exports.Prisma.MinistryScalarFieldEnum = {
@@ -479,11 +479,11 @@ exports.Prisma.MinistryScalarFieldEnum = {
 exports.Prisma.PasteurScalarFieldEnum = {
   id: 'id',
   pasteurName: 'pasteurName',
-  phone: 'phone',
-  email: 'email',
+  churchId: 'churchId',
   address: 'address',
+  phone: 'phone',
   status: 'status',
-  churchId: 'churchId'
+  email: 'email'
 };
 
 exports.Prisma.DepartementScalarFieldEnum = {
@@ -545,73 +545,73 @@ exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   name: 'name',
   quantity: 'quantity',
   address: 'address',
-  picture: 'picture',
-  longitude: 'longitude',
-  latitude: 'latitude',
   phone: 'phone',
   anthem: 'anthem',
   facebook: 'facebook',
   instagram: 'instagram',
-  whatsapp: 'whatsapp',
+  picture: 'picture',
+  missionId: 'missionId',
   email: 'email',
   mainPasteur: 'mainPasteur',
-  missionId: 'missionId',
-  addressId: 'addressId',
-  ttiId: 'ttiId'
+  whatsapp: 'whatsapp',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  ttiId: 'ttiId',
+  addressId: 'addressId'
 };
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
   id: 'id',
-  joinDate: 'joinDate',
   email: 'email',
+  baptismDate: 'baptismDate',
+  baptismLocation: 'baptismLocation',
+  birthCity: 'birthCity',
+  birthCountry: 'birthCountry',
+  birthDate: 'birthDate',
+  churchId: 'churchId',
+  churchRole: 'churchRole',
+  city: 'city',
+  country: 'country',
+  envelopeNumber: 'envelopeNumber',
+  etatCivil: 'etatCivil',
+  facebook: 'facebook',
   firstname: 'firstname',
-  lastname: 'lastname',
-  nif: 'nif',
-  groupeSanguin: 'groupeSanguin',
-  personToContact: 'personToContact',
-  spouseFullName: 'spouseFullName',
+  instagram: 'instagram',
   password: 'password',
-  longitude: 'longitude',
-  latitude: 'latitude',
-  plainPassword: 'plainPassword',
+  picture: 'picture',
+  profession: 'profession',
+  sex: 'sex',
+  sundayClass: 'sundayClass',
+  lastname: 'lastname',
+  addressLine: 'addressLine',
+  homePhone: 'homePhone',
+  joinDate: 'joinDate',
+  mobilePhone: 'mobilePhone',
   age: 'age',
   minister: 'minister',
-  mobilePhone: 'mobilePhone',
-  homePhone: 'homePhone',
-  picture: 'picture',
-  city: 'city',
-  etatCivil: 'etatCivil',
-  country: 'country',
-  birthCountry: 'birthCountry',
-  birthCity: 'birthCity',
-  birthDate: 'birthDate',
-  sex: 'sex',
-  addressLine: 'addressLine',
-  envelopeNumber: 'envelopeNumber',
-  baptismLocation: 'baptismLocation',
-  baptismDate: 'baptismDate',
-  churchRole: 'churchRole',
-  facebook: 'facebook',
-  instagram: 'instagram',
-  profession: 'profession',
-  sundayClass: 'sundayClass',
-  timotheeId: 'timotheeId',
-  churchId: 'churchId'
+  plainPassword: 'plainPassword',
+  personToContact: 'personToContact',
+  spouseFullName: 'spouseFullName',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  nif: 'nif',
+  groupeSanguin: 'groupeSanguin',
+  timotheeId: 'timotheeId'
 };
 
 exports.Prisma.GroupeOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
-  minister: 'minister',
   description: 'description',
   picture: 'picture',
   meetingDays: 'meetingDays',
   meetingTime: 'meetingTime',
   meetingLocation: 'meetingLocation',
   meetingFrequency: 'meetingFrequency',
-  ageGroup: 'ageGroup',
   maxMembers: 'maxMembers',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  ageGroup: 'ageGroup',
+  minister: 'minister'
 };
 
 exports.Prisma.EventOrderByRelevanceFieldEnum = {
@@ -622,25 +622,25 @@ exports.Prisma.EventOrderByRelevanceFieldEnum = {
   frequency: 'frequency',
   startDate: 'startDate',
   endDate: 'endDate',
-  startPeriode: 'startPeriode',
+  churchId: 'churchId',
   endPeriode: 'endPeriode',
-  churchId: 'churchId'
+  startPeriode: 'startPeriode'
 };
 
 exports.Prisma.MariageOrderByRelevanceFieldEnum = {
   id: 'id',
   brideFullname: 'brideFullname',
   groomFullname: 'groomFullname',
-  witnessSignature: 'witnessSignature',
-  civilStateStateOfficer: 'civilStateStateOfficer',
   weddingLocation: 'weddingLocation',
-  civilStateOfficer: 'civilStateOfficer',
-  witness: 'witness',
-  grooomCertificate: 'grooomCertificate',
-  brideCertificate: 'brideCertificate',
   weddingCertificate: 'weddingCertificate',
   officiantName: 'officiantName',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  brideCertificate: 'brideCertificate',
+  civilStateOfficer: 'civilStateOfficer',
+  grooomCertificate: 'grooomCertificate',
+  witness: 'witness',
+  civilStateStateOfficer: 'civilStateStateOfficer',
+  witnessSignature: 'witnessSignature'
 };
 
 exports.Prisma.FuneralOrderByRelevanceFieldEnum = {
@@ -648,20 +648,19 @@ exports.Prisma.FuneralOrderByRelevanceFieldEnum = {
   fullname: 'fullname',
   funeralTime: 'funeralTime',
   relationShip: 'relationShip',
-  telephone: 'telephone',
   email: 'email',
   deathCertificate: 'deathCertificate',
   nextOfKin: 'nextOfKin',
   officiantName: 'officiantName',
   description: 'description',
   funeralLocation: 'funeralLocation',
+  churchId: 'churchId',
   status: 'status',
-  churchId: 'churchId'
+  telephone: 'telephone'
 };
 
 exports.Prisma.PresentationOrderByRelevanceFieldEnum = {
   id: 'id',
-  childName: 'childName',
   placeOfBirth: 'placeOfBirth',
   birthCertificate: 'birthCertificate',
   fatherName: 'fatherName',
@@ -669,52 +668,53 @@ exports.Prisma.PresentationOrderByRelevanceFieldEnum = {
   phone: 'phone',
   address: 'address',
   officiantName: 'officiantName',
-  witness: 'witness',
   description: 'description',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  childName: 'childName',
+  witness: 'witness'
 };
 
 exports.Prisma.BaptismOrderByRelevanceFieldEnum = {
   id: 'id',
   fullName: 'fullName',
   placeOfBirth: 'placeOfBirth',
-  baptismLocation: 'baptismLocation',
   baptismCertificate: 'baptismCertificate',
   officiantName: 'officiantName',
-  startDate: 'startDate',
-  endDate: 'endDate',
   withness: 'withness',
   previousChurch: 'previousChurch',
-  status: 'status',
   testimony: 'testimony',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  status: 'status',
+  baptismLocation: 'baptismLocation',
+  endDate: 'endDate',
+  startDate: 'startDate'
 };
 
 exports.Prisma.deathOrderByRelevanceFieldEnum = {
   id: 'id',
   deathPlace: 'deathPlace',
-  deathTime: 'deathTime',
   deathCause: 'deathCause',
   deathCertificate: 'deathCertificate',
-  location: 'location',
-  nextOfKin: 'nextOfKin',
-  relationShip: 'relationShip',
-  officiantName: 'officiantName',
+  churchId: 'churchId',
+  deathTime: 'deathTime',
   description: 'description',
-  churchId: 'churchId'
+  location: 'location',
+  officiantName: 'officiantName',
+  relationShip: 'relationShip',
+  nextOfKin: 'nextOfKin'
 };
 
 exports.Prisma.sundayClassOrderByRelevanceFieldEnum = {
   id: 'id',
   nom: 'nom',
   teacher: 'teacher',
-  ageGroup: 'ageGroup',
   startTime: 'startTime',
-  book: 'book',
   endTime: 'endTime',
-  maxStudents: 'maxStudents',
   description: 'description',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  maxStudents: 'maxStudents',
+  ageGroup: 'ageGroup',
+  book: 'book'
 };
 
 exports.Prisma.expenseOrderByRelevanceFieldEnum = {
@@ -727,10 +727,10 @@ exports.Prisma.expenseOrderByRelevanceFieldEnum = {
 
 exports.Prisma.offeringOrderByRelevanceFieldEnum = {
   id: 'id',
-  status: 'status',
   paymentMethod: 'paymentMethod',
   note: 'note',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  status: 'status'
 };
 
 exports.Prisma.tithingOrderByRelevanceFieldEnum = {
@@ -759,10 +759,10 @@ exports.Prisma.moissonOrderByRelevanceFieldEnum = {
 
 exports.Prisma.comiteeOrderByRelevanceFieldEnum = {
   id: 'id',
-  name: 'name',
   description: 'description',
   meetingDay: 'meetingDay',
   meetingTime: 'meetingTime',
+  name: 'name',
   churchId: 'churchId'
 };
 
@@ -780,17 +780,17 @@ exports.Prisma.appointmentOrderByRelevanceFieldEnum = {
 exports.Prisma.transfertOrderByRelevanceFieldEnum = {
   id: 'id',
   fromChurchId: 'fromChurchId',
-  userId: 'userId',
-  toChurchId: 'toChurchId'
+  toChurchId: 'toChurchId',
+  userId: 'userId'
 };
 
 exports.Prisma.MissionOrderByRelevanceFieldEnum = {
   id: 'id',
   missionName: 'missionName',
   description: 'description',
-  presidentName: 'presidentName',
   status: 'status',
-  location: 'location'
+  location: 'location',
+  presidentName: 'presidentName'
 };
 
 exports.Prisma.sanctionOrderByRelevanceFieldEnum = {
@@ -798,9 +798,9 @@ exports.Prisma.sanctionOrderByRelevanceFieldEnum = {
   name: 'name',
   description: 'description',
   startDate: 'startDate',
-  endDate: 'endDate',
   status: 'status',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  endDate: 'endDate'
 };
 
 exports.Prisma.ministryOrderByRelevanceFieldEnum = {
@@ -813,11 +813,11 @@ exports.Prisma.ministryOrderByRelevanceFieldEnum = {
 exports.Prisma.pasteurOrderByRelevanceFieldEnum = {
   id: 'id',
   pasteurName: 'pasteurName',
-  phone: 'phone',
-  email: 'email',
+  churchId: 'churchId',
   address: 'address',
+  phone: 'phone',
   status: 'status',
-  churchId: 'churchId'
+  email: 'email'
 };
 
 exports.Prisma.DepartementOrderByRelevanceFieldEnum = {
@@ -847,7 +847,8 @@ exports.Role = exports.$Enums.Role = {
   Admin: 'Admin',
   Membre: 'Membre',
   SuperAdmin: 'SuperAdmin',
-  Directeur: 'Directeur'
+  Directeur: 'Directeur',
+  Invite: 'Invite'
 };
 
 exports.Prisma.ModelName = {
