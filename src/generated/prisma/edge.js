@@ -865,7 +865,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/romeusclarens/Desktop/Programing/Expo/ujec_backend/ujecc_backend_prod/src/generated/prisma",
+      "value": "/Users/desrameauxjodelin/Library/CloudStorage/OneDrive-Personal/ujecc_app/ujecc_backend_prod/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -874,7 +874,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin",
+        "value": "darwin-arm64",
         "native": true
       },
       {
@@ -883,7 +883,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/romeusclarens/Desktop/Programing/Expo/ujec_backend/ujecc_backend_prod/prisma/schema.prisma",
+    "sourceFilePath": "/Users/desrameauxjodelin/Library/CloudStorage/OneDrive-Personal/ujecc_app/ujecc_backend_prod/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -897,7 +897,6 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
