@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider      = "prisma-client-js"
   output        = "../src/generated/prisma"
@@ -15,50 +9,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  Admin
-  Membre
-  SuperAdmin
-  Directeur
-}
-
-enum StatutPresence {
-  PRESENT
-  ABSENT
-  EN_RETARD
-  MOTIVE
-}
-
 model Service {
   id        String     @id @default(cuid())
-  nom       String // Ex: "École du dimanche", "Étude biblique"
-  presences Presence[]
+  nom       String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   churchId  String?
+  presences Presence[]
   church    Church?    @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Service_churchId_fkey")
 }
 
 model Presence {
-  id     String         @id @default(cuid())
-  statut StatutPresence
-
+  id            String         @id @default(cuid())
+  statut        StatutPresence
   utilisateurId String
-  user          User   @relation(fields: [utilisateurId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  serviceId     String
+  service       Service        @relation(fields: [serviceId], references: [id])
+  user          User           @relation(fields: [utilisateurId], references: [id])
 
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@index([serviceId], map: "Presence_serviceId_fkey")
+  @@index([utilisateurId], map: "Presence_utilisateurId_fkey")
 }
 
 model Tti {
   id        String   @id @default(cuid())
   nom       String
-  church    Church[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  church    Church[]
 }
 
 model Address {
@@ -77,105 +59,110 @@ model Church {
   name          String         @unique
   quantity      String         @default("1")
   address       String?
-  picture       String?
-  longitude     String?
-  latitude      String?
   phone         String?
   anthem        String?
   facebook      String?
   instagram     String?
-  whatsapp      String?
-  email         String?
-  mainPasteur   String?
-  transfersFrom transfert[]    @relation("FromChurch")
-  transfersTo   transfert[]    @relation("ToChurch")
-  users         User[]
-  groups        Groupe[]
-  events        Event[]
-  mariages      Mariage[]
-  funerals      Funeral[]
-  presentations Presentation[]
-  batism        Baptism[]
-  death         death[]
-  sundayClass   sundayClass[]
-  comitees      comitee[]
-  appointments  appointment[]
-  mission       Mission?       @relation(fields: [missionId], references: [id])
-  missionId     String? // 👈 Foreign key to Mission
-  expense       expense[]
-  offering      offering[]
-  donation      donation[]
-  tithing       tithing[]
-  moisson       moisson[]
-  sanction      sanction[]
-  ministry      ministry[]
-  pasteur       pasteur[]
-  services      Service[]
-  fullAddress   Address?       @relation(fields: [addressId], references: [id])
-  addressId     String?        @unique
-  tti           Tti?           @relation(fields: [ttiId], references: [id])
-  ttiId         String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  picture       String?
+  missionId     String?
+  email         String?
+  mainPasteur   String?
+  whatsapp      String?
+  latitude      String?
+  longitude     String?
+  ttiId         String?
+  addressId     String?        @unique
+  batism        Baptism[]
+  fullAddress   Address?       @relation(fields: [addressId], references: [id])
+  mission       Mission?       @relation(fields: [missionId], references: [id])
+  tti           Tti?           @relation(fields: [ttiId], references: [id])
+  events        Event[]
+  funerals      Funeral[]
+  groups        Groupe[]
+  mariages      Mariage[]
+  presentations Presentation[]
+  services      Service[]
+  users         User[]
+  appointments  appointment[]
+  comitees      comitee[]
+  death         death[]
+  donation      donation[]
+  expense       expense[]
+  ministry      ministry[]
+  moisson       moisson[]
+  offering      offering[]
+  pasteur       pasteur[]
+  sanction      sanction[]
+  sundayClass   sundayClass[]
+  tithing       tithing[]
+  transfersFrom transfert[]    @relation("FromChurch")
+  transfersTo   transfert[]    @relation("ToChurch")
+
+  @@index([missionId], map: "Church_missionId_fkey")
+  @@index([ttiId], map: "Church_ttiId_fkey")
 }
 
 model User {
   id               String        @id @default(uuid())
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
-  joinDate         String?
   email            String?       @unique
+  baptismDate      String?
+  baptismLocation  String?
+  birthCity        String?
+  birthCountry     String?
+  birthDate        String?
+  churchId         String?
+  churchRole       String?
+  city             String?
+  country          String?
+  envelopeNumber   String?
+  etatCivil        String?
+  facebook         String?
   firstname        String
-  lastname         String
-  nif              String?
-  groupeSanguin    String?
-  personToContact  String?
-  spouseFullName   String?
+  instagram        String?
   password         String?       @unique
+  picture          String?
+  profession       String?
+  role             Role          @default(Membre)
+  sex              String?
+  sundayClass      String?
+  lastname         String
   membreActif      Boolean       @default(true)
-  longitude        String?
-  latitude         String?
-  plainPassword    String?
+  addressLine      String?
+  homePhone        String?
+  joinDate         String?
+  mobilePhone      String?
   age              String?
   minister         String?
-  mobilePhone      String?
-  homePhone        String?
-  picture          String?
-  city             String?
-  etatCivil        String?
-  country          String?
-  birthCountry     String?
-  birthCity        String?
-  birthDate        String?
-  sex              String?
-  addressLine      String?
-  envelopeNumber   String?
-  baptismLocation  String?
-  baptismDate      String?
+  plainPassword    String?
+  personToContact  String?
+  spouseFullName   String?
+  latitude         String?
+  longitude        String?
+  nif              String?
+  groupeSanguin    String?
   istimothee       Boolean?      @default(false)
-  role             Role          @default(Membre)
-  churchRole       String?
-  facebook         String?
-  instagram        String?
-  profession       String?
-  sundayClass      String?
   timotheeId       String?
+  presences        Presence[]
+  church           Church?       @relation(fields: [churchId], references: [id])
   timothee         User?         @relation("TimotheeTithes", fields: [timotheeId], references: [id])
   tithes           User[]        @relation("TimotheeTithes")
-  church           Church?       @relation(fields: [churchId], references: [id])
-  churchId         String?
-  groups           Groupe[]
-  userAppointments appointment[]
   transfers        transfert[]
-  presences        Presence[]
   leadingComittees comitee[]     @relation("ComiteeLeaders")
   memberComittees  comitee[]     @relation("ComiteeMembers")
+  groups           Groupe[]      @relation("GroupeToUser")
+  userAppointments appointment[] @relation("UserToappointment")
+
+  @@index([churchId], map: "User_churchId_fkey")
+  @@index([timotheeId], map: "User_timotheeId_fkey")
 }
 
 model Groupe {
   id               String   @id @default(uuid())
   name             String
-  minister         String?
   description      String?
   picture          String?
   showToMembers    Boolean?
@@ -186,13 +173,16 @@ model Groupe {
   meetingTime      String?
   meetingLocation  String?
   meetingFrequency String?
-  ageGroup         String?
   maxMembers       String?
-  church           Church?  @relation(fields: [churchId], references: [id])
   churchId         String?
-  users            User[]
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+  ageGroup         String?
+  minister         String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+  users            User[]   @relation("GroupeToUser")
+
+  @@index([churchId], map: "Groupe_churchId_fkey")
 }
 
 model Event {
@@ -203,13 +193,15 @@ model Event {
   frequency    String
   startDate    String
   endDate      String
-  startPeriode String?
-  endPeriode   String?
-  createAt     DateTime @default(now())
-  isRecurring  Boolean  @default(true)
-  updateAt     DateTime @updatedAt
-  church       Church?  @relation(fields: [churchId], references: [id])
   churchId     String?
+  createAt     DateTime @default(now())
+  updateAt     DateTime @updatedAt
+  isRecurring  Boolean  @default(true)
+  endPeriode   String?
+  startPeriode String?
+  church       Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Event_churchId_fkey")
 }
 
 model Mariage {
@@ -219,17 +211,19 @@ model Mariage {
   groomFullname          String
   goomBirthDate          DateTime
   weddingDate            DateTime
-  witnessSignature       String?
-  civilStateStateOfficer String?
   weddingLocation        String
-  civilStateOfficer      String?
-  witness                String?
-  grooomCertificate      String?
-  brideCertificate       String?
   weddingCertificate     String?
   officiantName          String
-  church                 Church?  @relation(fields: [churchId], references: [id])
   churchId               String?
+  brideCertificate       String?
+  civilStateOfficer      String?
+  grooomCertificate      String?
+  witness                String?
+  civilStateStateOfficer String?
+  witnessSignature       String?
+  church                 Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Mariage_churchId_fkey")
 }
 
 model Funeral {
@@ -239,24 +233,24 @@ model Funeral {
   funeralDate      DateTime
   funeralTime      String
   relationShip     String
-  telephone        String?
   email            String
   deathCertificate String?
   nextOfKin        String
   officiantName    String
   description      String
   funeralLocation  String
-  status           String   @default("en attente")
-  church           Church?  @relation(fields: [churchId], references: [id])
   churchId         String?
   createdAt        DateTime @default(now())
+  status           String   @default("en attente")
   updatedAt        DateTime @updatedAt
+  telephone        String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Funeral_churchId_fkey")
 }
 
 model Presentation {
   id               String   @id @default(uuid())
-  childName        String
-  dateOfBirth      DateTime
   placeOfBirth     String
   birthCertificate String?
   fatherName       String
@@ -265,10 +259,14 @@ model Presentation {
   address          String
   presentationDate DateTime
   officiantName    String
-  witness          String
   description      String?
-  church           Church?  @relation(fields: [churchId], references: [id])
   churchId         String?
+  childName        String
+  dateOfBirth      DateTime
+  witness          String
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Presentation_churchId_fkey")
 }
 
 model Baptism {
@@ -277,50 +275,56 @@ model Baptism {
   birthDate          DateTime
   placeOfBirth       String
   baptismDate        DateTime
-  baptismLocation    String
   baptismCertificate String?
   officiantName      String
-  startDate          String?
-  endDate            String?
   withness           String
-  conversionDate     DateTime
   previousChurch     String
-  status             String?
   testimony          String
-  church             Church?  @relation(fields: [churchId], references: [id])
   churchId           String?
+  conversionDate     DateTime
+  status             String?
+  baptismLocation    String
+  endDate            String?
+  startDate          String?
+  church             Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Baptism_churchId_fkey")
 }
 
 model death {
   id               String   @id @default(uuid())
   deathDate        DateTime
   deathPlace       String
-  deathTime        String
   deathCause       String
   deathCertificate String?
-  serviceDate      DateTime
-  location         String
-  nextOfKin        String
-  relationShip     String
-  officiantName    String
-  description      String?
-  church           Church?  @relation(fields: [churchId], references: [id])
   churchId         String?
+  deathTime        String
+  description      String?
+  location         String
+  officiantName    String
+  relationShip     String
+  serviceDate      DateTime
+  nextOfKin        String
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "death_churchId_fkey")
 }
 
 model sundayClass {
   id          String   @id @default(uuid())
   nom         String
   teacher     String
-  ageGroup    String
   startTime   String
-  book        String?
   endTime     String
-  maxStudents String
   description String
-  church      Church?  @relation(fields: [churchId], references: [id])
   churchId    String?
   createdAt   DateTime @default(now())
+  maxStudents String
+  ageGroup    String
+  book        String?
+  church      Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "sundayClass_churchId_fkey")
 }
 
 model expense {
@@ -330,19 +334,23 @@ model expense {
   date          DateTime
   paymentMethod String
   description   String
-  church        Church?  @relation(fields: [churchId], references: [id])
   churchId      String?
+  church        Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "expense_churchId_fkey")
 }
 
 model offering {
   id            String   @id @default(uuid())
   amount        Int
   date          DateTime
-  status        String?
   paymentMethod String
   note          String
-  church        Church?  @relation(fields: [churchId], references: [id])
   churchId      String?
+  status        String?
+  church        Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "offering_churchId_fkey")
 }
 
 model tithing {
@@ -352,8 +360,10 @@ model tithing {
   date            DateTime
   paymentMethod   String
   note            String
-  church          Church?  @relation(fields: [churchId], references: [id])
   churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "tithing_churchId_fkey")
 }
 
 model donation {
@@ -363,8 +373,10 @@ model donation {
   date            DateTime
   paymentMethod   String
   note            String
-  church          Church?  @relation(fields: [churchId], references: [id])
   churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "donation_churchId_fkey")
 }
 
 model moisson {
@@ -374,60 +386,70 @@ model moisson {
   date            DateTime
   paymentMethod   String
   note            String
-  church          Church?  @relation(fields: [churchId], references: [id])
   churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "moisson_churchId_fkey")
 }
 
 model comitee {
   id             String  @id @default(uuid())
-  name           String
   description    String
   meetingDay     String
   meetingTime    String
+  name           String
+  churchId       String?
+  church         Church? @relation(fields: [churchId], references: [id])
   commiteeLeader User[]  @relation("ComiteeLeaders")
   commiteeMember User[]  @relation("ComiteeMembers")
-  church         Church? @relation(fields: [churchId], references: [id])
-  churchId       String?
+
+  @@index([churchId], map: "comitee_churchId_fkey")
 }
 
 model appointment {
   id            String   @id @default(uuid())
   name          String
-  assignedUsers User[]
   visibility    String?
   description   String
   date          DateTime
   time          String
   duration      String
   notes         String
-  church        Church?  @relation(fields: [churchId], references: [id])
   churchId      String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  church        Church?  @relation(fields: [churchId], references: [id])
+  assignedUsers User[]   @relation("UserToappointment")
+
+  @@index([churchId], map: "appointment_churchId_fkey")
 }
 
 model transfert {
   id           String   @id @default(uuid())
-  fromChurch   Church   @relation("FromChurch", fields: [fromChurchId], references: [id])
-  fromChurchId String
-  toChurch     Church   @relation("ToChurch", fields: [toChurchId], references: [id])
-  member       User     @relation(fields: [userId], references: [id])
-  userId       String
-  toChurchId   String
   createdAt    DateTime @default(now())
   updatedAt    DateTime
+  fromChurchId String
+  toChurchId   String
+  userId       String
+  fromChurch   Church   @relation("FromChurch", fields: [fromChurchId], references: [id])
+  toChurch     Church   @relation("ToChurch", fields: [toChurchId], references: [id])
+  member       User     @relation(fields: [userId], references: [id])
+
+  @@index([fromChurchId], map: "transfert_fromChurchId_fkey")
+  @@index([toChurchId], map: "transfert_toChurchId_fkey")
+  @@index([userId], map: "transfert_userId_fkey")
 }
 
 model Mission {
   id            String   @id @default(uuid())
   missionName   String
   description   String
-  presidentName String?
   status        String
   location      String
-  church        Church[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  presidentName String?
+  church        Church[]
 }
 
 model sanction {
@@ -435,33 +457,39 @@ model sanction {
   name        String
   description String
   startDate   String
-  endDate     String?
   status      String
-  church      Church?  @relation(fields: [churchId], references: [id])
   churchId    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  endDate     String?
+  church      Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "sanction_churchId_fkey")
 }
 
 model ministry {
   id          String   @id @default(uuid())
   name        String
   description String
-  church      Church?  @relation(fields: [churchId], references: [id])
   churchId    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  church      Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "ministry_churchId_fkey")
 }
 
 model pasteur {
   id          String  @id @default(uuid())
   pasteurName String
-  phone       String
-  email       String
-  address     String
-  status      String
-  church      Church? @relation(fields: [churchId], references: [id])
   churchId    String?
+  address     String
+  phone       String
+  status      String
+  email       String
+  church      Church? @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "pasteur_churchId_fkey")
 }
 
 model Departement {
@@ -473,14 +501,33 @@ model Departement {
 model Commune {
   id               String             @id @default(uuid())
   name             String             @unique
-  departement      Departement        @relation(fields: [departementId], references: [id])
   departementId    String
+  departement      Departement        @relation(fields: [departementId], references: [id])
   sectionCommunale SectionCommunale[]
+
+  @@index([departementId], map: "Commune_departementId_fkey")
 }
 
 model SectionCommunale {
   id        String  @id @default(uuid())
   name      String  @unique
-  commune   Commune @relation(fields: [communeId], references: [id])
   communeId String
+  commune   Commune @relation(fields: [communeId], references: [id])
+
+  @@index([communeId], map: "SectionCommunale_communeId_fkey")
+}
+
+enum Role {
+  Admin
+  Membre
+  SuperAdmin
+  Directeur
+  Invite
+}
+
+enum StatutPresence {
+  PRESENT
+  ABSENT
+  EN_RETARD
+  MOTIVE
 }
