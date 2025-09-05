@@ -469,6 +469,7 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/changeuser/role/:id', async (req, res) => {
   try {
+    console.log("role : ", req.body.role)
     const user = await prisma.user.update({
       where: { id: req.params.id },
       data: {role: req.body.role}
