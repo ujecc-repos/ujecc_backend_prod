@@ -86,7 +86,6 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
          }
       }
 
-        console.log("nif : ", nif, groupeSanguin)
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const userData = {
@@ -775,6 +774,132 @@ router.get("/timothees/:churchId", async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Something went wrong" });
+  }
+});
+
+// Bulk insert users endpoint
+router.post('/bulk-insert', async (req, res) => {
+  try {
+    const { users, churchId } = req.body;
+    console.log("users : ", users, churchId)
+    // Validate input
+    if (!users || !Array.isArray(users) || users.length === 0) {
+      return res.status(400).json({ error: 'Users array is required and cannot be empty' });
+    }
+
+    if (!churchId) {
+      return res.status(400).json({ error: 'Church ID is required' });
+    }
+
+    // Validate church exists
+    const church = await prisma.church.findUnique({
+      where: { id: churchId }
+    });
+
+    if (!church) {
+      return res.status(400).json({ error: 'Church not found' });
+    }
+
+    const createdUsers = [];
+    const errors = [];
+
+    // Process each user
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i];
+      
+      try {
+        // Validate required fields
+        if (!user.firstname || !user.lastname) {
+          errors.push({ index: i, error: 'Firstname and lastname are required', user });
+          continue;
+        }
+
+        // Check if email already exists (if provided)
+        if (user.email) {
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email }
+          });
+
+          if (existingUser) {
+            errors.push({ index: i, error: `Email ${user.email} already exists`, user });
+            continue;
+          }
+        }
+
+        // // Hash password
+        // const salt = await bcrypt.genSalt(10);
+        // const hashedPassword = await bcrypt.hash(user.password || 'defaultPassword123', salt);
+
+        // Prepare user data
+        const userData = {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email || null,
+          password: null,
+          plainPassword: user.password || null,
+          // role: user.role || 'Membre',
+          sex: user.sex || '',
+          birthDate: user.birthDate || '',
+          etatCivil: user.etatCivil || '',
+          profession: user.profession || '',
+          city: user.city || '',
+          country: user.country || '',
+          addressLine: user.addressLine || '',
+          mobilePhone: user.mobilePhone || '',
+          homePhone: user.homePhone || '',
+          facebook: user.facebook || '',
+          age: user.age || '',
+          personToContact: user.personToContact || '',
+          minister: user.minister || '',
+          spouseFullName: user.spouseFullName || '',
+          joinDate: user.joinDate || '',
+          baptismDate: user.baptismDate || '',
+          baptismLocation: user.baptismLocation || '',
+          birthCountry: user.birthCountry || '',
+          birthCity: user.birthCity || '',
+          nif: user.nif || '',
+          groupeSanguin: user.groupeSanguin || '',
+          church: { connect: { id: churchId } }
+        };
+
+        // Create user
+        const createdUser = await prisma.user.create({
+          data: userData,
+          include: {
+            church: true
+          }
+        });
+
+        createdUsers.push(createdUser);
+      } catch (error) {
+        console.error(`Error creating user at index ${i}:`, error);
+        errors.push({ 
+          index: i, 
+          error: error instanceof Error ? error.message : 'Unknown error', 
+          user 
+        });
+      }
+    }
+
+    // Return results
+    res.json({
+      success: true,
+      message: `Successfully created ${createdUsers.length} users`,
+      createdUsers,
+      errors: errors.length > 0 ? errors : undefined,
+      summary: {
+        total: users.length,
+        created: createdUsers.length,
+        failed: errors.length
+      }
+    });
+
+  } catch (error) {
+    console.error('Bulk insert error:', error);
+    res.status(500).json({ 
+      error: 'Internal server error during bulk insert',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 });
 

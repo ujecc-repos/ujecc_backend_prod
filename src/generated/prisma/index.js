@@ -866,7 +866,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/desrameauxjodelin/Library/CloudStorage/OneDrive-Personal/ujecc_app/ujecc_backend_prod/src/generated/prisma",
+      "value": "/Users/romeusclarens/Desktop/Programing/Expo/ujecc_project/ujecc_backend_prod/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -875,7 +875,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "darwin",
         "native": true
       },
       {
@@ -884,7 +884,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/desrameauxjodelin/Library/CloudStorage/OneDrive-Personal/ujecc_app/ujecc_backend_prod/prisma/schema.prisma",
+    "sourceFilePath": "/Users/romeusclarens/Desktop/Programing/Expo/ujecc_project/ujecc_backend_prod/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -898,6 +898,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -946,8 +947,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
+path.join(__dirname, "libquery_engine-darwin.dylib.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin.dylib.node")
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
