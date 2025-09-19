@@ -196,7 +196,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email },
       JWT_SECRET,
-      { expiresIn: '1y' }
+      { expiresIn: '2y' }
     );
 
     res.json({ token, user: { id: user.id, email: user.email, role: user.role } });
