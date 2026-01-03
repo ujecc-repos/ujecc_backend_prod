@@ -56,14 +56,20 @@ const handleMulterError = (err: any, req: express.Request, res: express.Response
   next();
 };
 
+function generate6DigitCode() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
 // Create a new user with optional image upload
 router.post('/', upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
      
     try {
         const {firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
             birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession,
-            churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin
+            churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
         } = req.body;
+
+        console.log("groupId : ", groupId, sundayClassId, isBaptized)
 
         // Check if email already exists
         // const existingUser = await prisma.user.findUnique({
@@ -86,12 +92,23 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
          }
       }
 
+      if (nif !== "" && nif !== null && nif !== undefined) {
+         const existingUserNif = await prisma.user.findFirst({
+           where: { nif: nif }
+         });
+
+         if (existingUserNif) {
+           return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
+         }
+      }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const userData = {
             firstname,
             lastname,
             nif: nif || "",
+            isBaptized: Boolean(isBaptized) || false,
             groupeSanguin: groupeSanguin || "",
             plainPassword: password || "",
             password: hashedPassword || "",
@@ -113,31 +130,29 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
             facebook: facebook || "",
             city: city || "",
             age: age || "",
+            code: `${generate6DigitCode()}` || "",
             birthCity: birthCity || "",
             profession: profession || "",
             addressLine: addressLine || "",
             // Add profile picture path if an image was uploaded
             picture: req.file ? `/uploads/${req.file.filename}` : undefined
         };
-        
-        // Log the email value for debugging
-        console.log("Email value being used:", email, "Type:", typeof email);
 
-          let user;
+          const createData: any = { ...userData };
+
           if (churchId) {
-            // Si churchId est fourni, utiliser connect
-            user = await prisma.user.create({
-              data: {...userData, church: { connect: { id: churchId } }}
-            });
-          } else {
-            // Si churchId n'est pas fourni, ne pas utiliser connect
-            user = await prisma.user.create({
-              data: userData
-            });
+            createData.church = { connect: { id: churchId } };
           }
-      
-        
-        res.json(user);
+
+          if (groupId) {
+             createData.groups = { connect: { id: groupId } };
+          }
+
+          const user = await prisma.user.create({
+            data: createData
+          });
+        console.log("user is  : ", user)
+        res.json({user: user.code});
       } catch (error) {
         console.error('=== User Registration Error ===');
         console.error('Error details:', error);
@@ -399,11 +414,6 @@ router.put("/connect-tithe", async (req, res) => {
 
 // Update a user with optional image upload
 router.put('/:id', upload.single('profileImage'), async (req, res) => {
-  console.log('=== User Update Request ===');
-  console.log('Request params:', req.params);
-  console.log('Request body:', req.body);
-  console.log('Request file:', req.file);
-  console.log('Request headers:', req.headers);
   
   try {
     // Extract data from request body
@@ -449,7 +459,15 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
       }
     });
     
-    console.log("cleaned data : ", cleanedData)
+    // 1. Boolean fields list
+const booleanFields = ["membreActif"];
+
+// 2. Convert strings to booleans
+booleanFields.forEach((field) => {
+  if (cleanedData[field] !== undefined && cleanedData[field] !== null) {
+    cleanedData[field] = cleanedData[field] === "true";
+  }
+});
     
     const user = await prisma.user.update({
       where: { id: req.params.id },
@@ -925,6 +943,20 @@ router.post('/bulk-insert', async (req, res) => {
 
 
 
+
+// Count baptized users
+router.get('/baptized/count/:id', async (req, res) => {
+  try {
+    const churchId = req.params.id
+    const count = await prisma.user.count({
+      where: { isBaptized: true, churchId }
+    });
+    res.json({ count });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors du comptage des utilisateurs baptisés' });
+  }
+});
 
 
 export default router;

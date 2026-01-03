@@ -7,12 +7,13 @@ const router = Router();
 // Create tithing record
 router.post("/", async (req, res) => {
   try {
-    const { contributorName, amount, date, paymentMethod, note, churchId } = req.body;
+    const { contributorName, amount, date, paymentMethod, note, currency, churchId } = req.body;
     const convert1 = moment(`${date}`, 'YYYY-MM-DD', true);
     const tithing = await prisma.tithing.create({
       data: {
         contributorName,
         amount,
+        currency: currency || "HTG",
         date: convert1.toDate(),
         paymentMethod,
         note,

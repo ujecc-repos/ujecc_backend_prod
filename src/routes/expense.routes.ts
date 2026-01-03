@@ -13,12 +13,13 @@ const EXPENSE_TYPE = {
 // Create expense
 router.post("/", async (req, res) => {
   try {
-    const { amount, category, date, paymentMethod, description } = req.body;
+    const { amount, category, date, paymentMethod, description, currency } = req.body;
     const convert1 = moment(`${date}`, 'YYYY-MM-DD', true);
     const expense = await prisma.expense.create({
       data: {
         amount,
         category,
+        currency: currency || "HTG",
         date: convert1.toDate(),
         paymentMethod,
         description,

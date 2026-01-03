@@ -166,6 +166,7 @@ exports.Prisma.ChurchScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   picture: 'picture',
+  option: 'option',
   missionId: 'missionId',
   email: 'email',
   mainPasteur: 'mainPasteur',
@@ -173,7 +174,8 @@ exports.Prisma.ChurchScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   ttiId: 'ttiId',
-  addressId: 'addressId'
+  addressId: 'addressId',
+  isBaptized: 'isBaptized'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -200,11 +202,13 @@ exports.Prisma.UserScalarFieldEnum = {
   profession: 'profession',
   role: 'role',
   sex: 'sex',
+  code: 'code',
   sundayClass: 'sundayClass',
   lastname: 'lastname',
   membreActif: 'membreActif',
   addressLine: 'addressLine',
   homePhone: 'homePhone',
+  isBaptized: 'isBaptized',
   joinDate: 'joinDate',
   mobilePhone: 'mobilePhone',
   age: 'age',
@@ -369,7 +373,8 @@ exports.Prisma.ExpenseScalarFieldEnum = {
   date: 'date',
   paymentMethod: 'paymentMethod',
   description: 'description',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  currency: 'currency'
 };
 
 exports.Prisma.OfferingScalarFieldEnum = {
@@ -378,6 +383,7 @@ exports.Prisma.OfferingScalarFieldEnum = {
   date: 'date',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId',
   status: 'status'
 };
@@ -389,6 +395,7 @@ exports.Prisma.TithingScalarFieldEnum = {
   date: 'date',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -399,6 +406,7 @@ exports.Prisma.DonationScalarFieldEnum = {
   date: 'date',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -409,6 +417,7 @@ exports.Prisma.MoissonScalarFieldEnum = {
   date: 'date',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -550,6 +559,7 @@ exports.Prisma.ChurchOrderByRelevanceFieldEnum = {
   facebook: 'facebook',
   instagram: 'instagram',
   picture: 'picture',
+  option: 'option',
   missionId: 'missionId',
   email: 'email',
   mainPasteur: 'mainPasteur',
@@ -581,6 +591,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   picture: 'picture',
   profession: 'profession',
   sex: 'sex',
+  code: 'code',
   sundayClass: 'sundayClass',
   lastname: 'lastname',
   addressLine: 'addressLine',
@@ -722,13 +733,15 @@ exports.Prisma.expenseOrderByRelevanceFieldEnum = {
   category: 'category',
   paymentMethod: 'paymentMethod',
   description: 'description',
-  churchId: 'churchId'
+  churchId: 'churchId',
+  currency: 'currency'
 };
 
 exports.Prisma.offeringOrderByRelevanceFieldEnum = {
   id: 'id',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId',
   status: 'status'
 };
@@ -738,6 +751,7 @@ exports.Prisma.tithingOrderByRelevanceFieldEnum = {
   contributorName: 'contributorName',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -746,6 +760,7 @@ exports.Prisma.donationOrderByRelevanceFieldEnum = {
   contributorName: 'contributorName',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -754,6 +769,7 @@ exports.Prisma.moissonOrderByRelevanceFieldEnum = {
   contributorName: 'contributorName',
   paymentMethod: 'paymentMethod',
   note: 'note',
+  currency: 'currency',
   churchId: 'churchId'
 };
 
@@ -848,7 +864,8 @@ exports.Role = exports.$Enums.Role = {
   Membre: 'Membre',
   SuperAdmin: 'SuperAdmin',
   Directeur: 'Directeur',
-  Invite: 'Invite'
+  Invite: 'Invite',
+  Leader: 'Leader'
 };
 
 exports.Prisma.ModelName = {
