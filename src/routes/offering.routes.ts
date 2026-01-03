@@ -7,11 +7,13 @@ const router = Router();
 // Create offering
 router.post("/", async (req, res) => {
   try {
-    const { amount, date, paymentMethod, note, churchId, status } = req.body;
+    const { amount, date, paymentMethod, note, currency, churchId, status } = req.body;
     const convert1 = moment(`${date}`, 'YYYY-MM-DD', true);
+    console.log("currency", currency)
     const offering = await prisma.offering.create({
       data: {
         amount,
+        currency: currency || "HTG",
         date: convert1.toDate(),
         status: status || "offrande",
         paymentMethod,
@@ -23,6 +25,7 @@ router.post("/", async (req, res) => {
         }
       },
     });
+    console.log("offering : ", offering)
     res.json(offering);
   } catch (error) {
     res.status(500).json({ error: "Failed to create offering record" });

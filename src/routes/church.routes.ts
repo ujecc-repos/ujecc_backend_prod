@@ -3,10 +3,11 @@ import { prisma } from '../utils/client';
 import upload from '../utils/upload';
 
 const router = express.Router();
+
 // Create a new church
 router.post('/', async (req, res) => {
   const {name, commune, sectionCommunale, departement, longitude, latitude, country, telephone, rue} = req.body
-
+ 
   try {
     const isChurchExist = await prisma.church.findUnique({
         where: {
@@ -23,6 +24,7 @@ router.post('/', async (req, res) => {
       name,
       longitude: longitude || "",
       latitude: latitude || "",
+      option: req.body.option || null,
       fullAddress: {
         create: {
           country: country || null,
@@ -34,8 +36,6 @@ router.post('/', async (req, res) => {
         }
       }
     };
-
-    console.log("churchData : ", churchData)
 
     // Only connect to mission if one is provided
     if (req.body.missionId) {
@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
         users: {select: {id: true, firstname: true, lastname: true, email: true}}
       },
     });
-
+    // console.log("last : ", church.option)
     // Generate JWT token
     // const token = jwt.sign(
     //     { id: church.users[0].id, email: church.users[0].email },

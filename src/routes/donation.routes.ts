@@ -7,13 +7,14 @@ const router = Router();
 // Create donation record
 router.post("/", async (req, res) => {
   try {
-    const { contributorName, amount, date, paymentMethod, note, churchId } = req.body;
+    const { contributorName, amount, date, paymentMethod, note, currency, churchId } = req.body;
     const convert1 = moment(`${date}`, 'YYYY-MM-DD', true);
     
     const donation = await prisma.donation.create({
       data: {
         contributorName,
         amount,
+        currency: currency || "HTG",
         date: convert1.toDate(),
         paymentMethod,
         note,
