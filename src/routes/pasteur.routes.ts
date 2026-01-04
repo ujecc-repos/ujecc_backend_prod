@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 // Create a pasteur
 router.post('/', async (req, res) => {
-  console.log(req.body)
   try {
     const {
       pasteurName,
@@ -24,7 +23,7 @@ router.post('/', async (req, res) => {
         pasteurName,
         phone,
         address,
-        email,
+        email: email || null,
         status,
         church: {
           connect: {

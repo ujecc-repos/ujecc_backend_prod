@@ -66,6 +66,7 @@ model Church {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   picture       String?
+  option        String?
   missionId     String?
   email         String?
   mainPasteur   String?
@@ -85,6 +86,7 @@ model Church {
   presentations Presentation[]
   services      Service[]
   users         User[]
+  isBaptized    Boolean        @default(false)
   appointments  appointment[]
   comitees      comitee[]
   death         death[]
@@ -128,11 +130,13 @@ model User {
   profession       String?
   role             Role          @default(Membre)
   sex              String?
+  code           String?       @unique
   sundayClass      String?
   lastname         String
   membreActif      Boolean       @default(true)
   addressLine      String?
   homePhone        String?
+  isBaptized       Boolean       @default(false)
   joinDate         String?
   mobilePhone      String?
   age              String?
@@ -335,6 +339,7 @@ model expense {
   paymentMethod String
   description   String
   churchId      String?
+  currency      String?
   church        Church?  @relation(fields: [churchId], references: [id])
 
   @@index([churchId], map: "expense_churchId_fkey")
@@ -346,6 +351,7 @@ model offering {
   date          DateTime
   paymentMethod String
   note          String
+  currency      String?
   churchId      String?
   status        String?
   church        Church?  @relation(fields: [churchId], references: [id])
@@ -360,6 +366,7 @@ model tithing {
   date            DateTime
   paymentMethod   String
   note            String
+  currency        String?
   churchId        String?
   church          Church?  @relation(fields: [churchId], references: [id])
 
@@ -373,6 +380,7 @@ model donation {
   date            DateTime
   paymentMethod   String
   note            String
+  currency        String?
   churchId        String?
   church          Church?  @relation(fields: [churchId], references: [id])
 
@@ -386,6 +394,7 @@ model moisson {
   date            DateTime
   paymentMethod   String
   note            String
+  currency        String?
   churchId        String?
   church          Church?  @relation(fields: [churchId], references: [id])
 
@@ -486,7 +495,7 @@ model pasteur {
   address     String
   phone       String
   status      String
-  email       String
+  email       String?
   church      Church? @relation(fields: [churchId], references: [id])
 
   @@index([churchId], map: "pasteur_churchId_fkey")
@@ -523,6 +532,7 @@ enum Role {
   SuperAdmin
   Directeur
   Invite
+  Leader
 }
 
 enum StatutPresence {

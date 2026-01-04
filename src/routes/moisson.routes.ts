@@ -7,7 +7,7 @@ const router = Router();
 // Create moisson record
 router.post("/", async (req, res) => {
   try {
-    const { contributorName, amount, date, paymentMethod, note, churchId } = req.body;
+    const { contributorName, amount, date, paymentMethod, note, currency, churchId } = req.body;
     const convert1 = moment(`${date}`, 'YYYY-MM-DD', true);
     
     // Add status field with default value to satisfy TypeScript requirements
@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
       data: {
         contributorName,
         amount,
+        currency: currency || "HTG",
         date: convert1.toDate(),
         paymentMethod,
         note,
