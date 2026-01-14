@@ -39,7 +39,7 @@ dotenv.config();
 const app = express();
 // Middleware
 app.use(cors({
-  origin: [`${process.env.FRONTEND_URL}`, "http://10.50.102.68:5173"],
+  origin: [`${process.env.FRONTEND_URL}`, "https://ujecc-test.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 }));
