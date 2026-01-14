@@ -87,6 +87,7 @@ router.get('/', async (req, res) => {
     });
     res.json(churches);
   } catch (error) {
+    console.log("error : ", error)
     res.status(400).json({ error: 'Failed to fetch churches' });
   }
 });
