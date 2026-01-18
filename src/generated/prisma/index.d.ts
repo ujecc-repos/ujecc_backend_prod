@@ -7632,6 +7632,7 @@ export namespace Prisma {
     name: string | null
     quantity: string | null
     address: string | null
+    foundationYear: string | null
     phone: string | null
     anthem: string | null
     facebook: string | null
@@ -7656,6 +7657,7 @@ export namespace Prisma {
     name: string | null
     quantity: string | null
     address: string | null
+    foundationYear: string | null
     phone: string | null
     anthem: string | null
     facebook: string | null
@@ -7680,6 +7682,7 @@ export namespace Prisma {
     name: number
     quantity: number
     address: number
+    foundationYear: number
     phone: number
     anthem: number
     facebook: number
@@ -7706,6 +7709,7 @@ export namespace Prisma {
     name?: true
     quantity?: true
     address?: true
+    foundationYear?: true
     phone?: true
     anthem?: true
     facebook?: true
@@ -7730,6 +7734,7 @@ export namespace Prisma {
     name?: true
     quantity?: true
     address?: true
+    foundationYear?: true
     phone?: true
     anthem?: true
     facebook?: true
@@ -7754,6 +7759,7 @@ export namespace Prisma {
     name?: true
     quantity?: true
     address?: true
+    foundationYear?: true
     phone?: true
     anthem?: true
     facebook?: true
@@ -7851,6 +7857,7 @@ export namespace Prisma {
     name: string
     quantity: string
     address: string | null
+    foundationYear: string | null
     phone: string | null
     anthem: string | null
     facebook: string | null
@@ -7892,6 +7899,7 @@ export namespace Prisma {
     name?: boolean
     quantity?: boolean
     address?: boolean
+    foundationYear?: boolean
     phone?: boolean
     anthem?: boolean
     facebook?: boolean
@@ -7944,6 +7952,7 @@ export namespace Prisma {
     name?: boolean
     quantity?: boolean
     address?: boolean
+    foundationYear?: boolean
     phone?: boolean
     anthem?: boolean
     facebook?: boolean
@@ -7963,7 +7972,7 @@ export namespace Prisma {
     isBaptized?: boolean
   }
 
-  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "phone" | "anthem" | "facebook" | "instagram" | "createdAt" | "updatedAt" | "picture" | "option" | "missionId" | "email" | "mainPasteur" | "whatsapp" | "latitude" | "longitude" | "ttiId" | "addressId" | "isBaptized", ExtArgs["result"]["church"]>
+  export type ChurchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "quantity" | "address" | "foundationYear" | "phone" | "anthem" | "facebook" | "instagram" | "createdAt" | "updatedAt" | "picture" | "option" | "missionId" | "email" | "mainPasteur" | "whatsapp" | "latitude" | "longitude" | "ttiId" | "addressId" | "isBaptized", ExtArgs["result"]["church"]>
   export type ChurchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     batism?: boolean | Church$batismArgs<ExtArgs>
     fullAddress?: boolean | Church$fullAddressArgs<ExtArgs>
@@ -8027,6 +8036,7 @@ export namespace Prisma {
       name: string
       quantity: string
       address: string | null
+      foundationYear: string | null
       phone: string | null
       anthem: string | null
       facebook: string | null
@@ -8442,6 +8452,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Church", 'String'>
     readonly quantity: FieldRef<"Church", 'String'>
     readonly address: FieldRef<"Church", 'String'>
+    readonly foundationYear: FieldRef<"Church", 'String'>
     readonly phone: FieldRef<"Church", 'String'>
     readonly anthem: FieldRef<"Church", 'String'>
     readonly facebook: FieldRef<"Church", 'String'>
@@ -34288,6 +34299,7 @@ export namespace Prisma {
     name: 'name',
     quantity: 'quantity',
     address: 'address',
+    foundationYear: 'foundationYear',
     phone: 'phone',
     anthem: 'anthem',
     facebook: 'facebook',
@@ -34776,6 +34788,7 @@ export namespace Prisma {
     name: 'name',
     quantity: 'quantity',
     address: 'address',
+    foundationYear: 'foundationYear',
     phone: 'phone',
     anthem: 'anthem',
     facebook: 'facebook',
@@ -35455,6 +35468,7 @@ export namespace Prisma {
     name?: StringFilter<"Church"> | string
     quantity?: StringFilter<"Church"> | string
     address?: StringNullableFilter<"Church"> | string | null
+    foundationYear?: StringNullableFilter<"Church"> | string | null
     phone?: StringNullableFilter<"Church"> | string | null
     anthem?: StringNullableFilter<"Church"> | string | null
     facebook?: StringNullableFilter<"Church"> | string | null
@@ -35504,6 +35518,7 @@ export namespace Prisma {
     name?: SortOrder
     quantity?: SortOrder
     address?: SortOrderInput | SortOrder
+    foundationYear?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     anthem?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
@@ -35558,6 +35573,7 @@ export namespace Prisma {
     NOT?: ChurchWhereInput | ChurchWhereInput[]
     quantity?: StringFilter<"Church"> | string
     address?: StringNullableFilter<"Church"> | string | null
+    foundationYear?: StringNullableFilter<"Church"> | string | null
     phone?: StringNullableFilter<"Church"> | string | null
     anthem?: StringNullableFilter<"Church"> | string | null
     facebook?: StringNullableFilter<"Church"> | string | null
@@ -35606,6 +35622,7 @@ export namespace Prisma {
     name?: SortOrder
     quantity?: SortOrder
     address?: SortOrderInput | SortOrder
+    foundationYear?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     anthem?: SortOrderInput | SortOrder
     facebook?: SortOrderInput | SortOrder
@@ -35636,6 +35653,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Church"> | string
     quantity?: StringWithAggregatesFilter<"Church"> | string
     address?: StringNullableWithAggregatesFilter<"Church"> | string | null
+    foundationYear?: StringNullableWithAggregatesFilter<"Church"> | string | null
     phone?: StringNullableWithAggregatesFilter<"Church"> | string | null
     anthem?: StringNullableWithAggregatesFilter<"Church"> | string | null
     facebook?: StringNullableWithAggregatesFilter<"Church"> | string | null
@@ -38016,6 +38034,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -38062,6 +38081,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -38108,6 +38128,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38154,6 +38175,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38200,6 +38222,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -38224,6 +38247,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38245,6 +38269,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41148,6 +41173,7 @@ export namespace Prisma {
     name?: SortOrder
     quantity?: SortOrder
     address?: SortOrder
+    foundationYear?: SortOrder
     phone?: SortOrder
     anthem?: SortOrder
     facebook?: SortOrder
@@ -41172,6 +41198,7 @@ export namespace Prisma {
     name?: SortOrder
     quantity?: SortOrder
     address?: SortOrder
+    foundationYear?: SortOrder
     phone?: SortOrder
     anthem?: SortOrder
     facebook?: SortOrder
@@ -41196,6 +41223,7 @@ export namespace Prisma {
     name?: SortOrder
     quantity?: SortOrder
     address?: SortOrder
+    foundationYear?: SortOrder
     phone?: SortOrder
     anthem?: SortOrder
     facebook?: SortOrder
@@ -44851,6 +44879,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -44896,6 +44925,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -44985,6 +45015,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45030,6 +45061,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45347,6 +45379,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -45392,6 +45425,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -45466,6 +45500,7 @@ export namespace Prisma {
     name?: StringFilter<"Church"> | string
     quantity?: StringFilter<"Church"> | string
     address?: StringNullableFilter<"Church"> | string | null
+    foundationYear?: StringNullableFilter<"Church"> | string | null
     phone?: StringNullableFilter<"Church"> | string | null
     anthem?: StringNullableFilter<"Church"> | string | null
     facebook?: StringNullableFilter<"Church"> | string | null
@@ -45490,6 +45525,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -45535,6 +45571,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -45596,6 +45633,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45641,6 +45679,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47447,6 +47486,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -47492,6 +47532,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -47948,6 +47989,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47993,6 +48035,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48249,6 +48292,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48294,6 +48338,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48464,6 +48509,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48509,6 +48555,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48570,6 +48617,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48615,6 +48663,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48676,6 +48725,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48721,6 +48771,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48766,6 +48817,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48811,6 +48863,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -48872,6 +48925,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48917,6 +48971,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48962,6 +49017,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49007,6 +49063,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49068,6 +49125,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49113,6 +49171,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49158,6 +49217,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49203,6 +49263,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49264,6 +49325,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49309,6 +49371,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49354,6 +49417,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49399,6 +49463,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49460,6 +49525,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49505,6 +49571,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49550,6 +49617,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49595,6 +49663,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49656,6 +49725,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49701,6 +49771,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49746,6 +49817,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49791,6 +49863,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49852,6 +49925,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49897,6 +49971,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49942,6 +50017,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -49987,6 +50063,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50048,6 +50125,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50093,6 +50171,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50138,6 +50217,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50183,6 +50263,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50244,6 +50325,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50289,6 +50371,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50334,6 +50417,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50379,6 +50463,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50440,6 +50525,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50485,6 +50571,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50530,6 +50617,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50575,6 +50663,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50636,6 +50725,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50681,6 +50771,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50726,6 +50817,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50771,6 +50863,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50832,6 +50925,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50877,6 +50971,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50922,6 +51017,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -50967,6 +51063,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51246,6 +51343,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51291,6 +51389,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51368,6 +51467,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51413,6 +51513,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51583,6 +51684,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51628,6 +51730,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51689,6 +51792,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51734,6 +51838,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51784,6 +51889,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51829,6 +51935,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -51999,6 +52106,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52044,6 +52152,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52100,6 +52209,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52145,6 +52255,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52305,6 +52416,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52350,6 +52462,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52421,6 +52534,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52466,6 +52580,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52527,6 +52642,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52572,6 +52688,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52617,6 +52734,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52662,6 +52780,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52723,6 +52842,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52768,6 +52888,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52813,6 +52934,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52858,6 +52980,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -52919,6 +53042,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52964,6 +53088,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53209,6 +53334,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -53232,6 +53358,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53277,6 +53404,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53322,6 +53450,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55594,6 +55723,7 @@ export namespace Prisma {
     name: string
     quantity?: string
     address?: string | null
+    foundationYear?: string | null
     phone?: string | null
     anthem?: string | null
     facebook?: string | null
@@ -55617,6 +55747,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55662,6 +55793,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55707,6 +55839,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     quantity?: StringFieldUpdateOperationsInput | string
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     anthem?: NullableStringFieldUpdateOperationsInput | string | null
     facebook?: NullableStringFieldUpdateOperationsInput | string | null

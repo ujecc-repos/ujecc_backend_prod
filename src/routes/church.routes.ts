@@ -6,22 +6,24 @@ const router = express.Router();
 
 // Create a new church
 router.post('/', async (req, res) => {
-  const {name, commune, sectionCommunale, departement, longitude, latitude, country, telephone, rue} = req.body
- 
+  const { name, commune, foundationYear, sectionCommunale, departement, longitude, latitude, country, telephone, rue } = req.body
+  console.log("okay body : ", req.body)
+
   try {
     const isChurchExist = await prisma.church.findUnique({
-        where: {
-          name: name
-        }
+      where: {
+        name: name
+      }
     })
 
-    if(isChurchExist) {
+    if (isChurchExist) {
       return res.status(400).json({ error: 'Désoler, cette église existe déja' });
     }
 
     // Prepare church data
     const churchData: any = {
       name,
+      foundationYear: foundationYear || "",
       longitude: longitude || "",
       latitude: latitude || "",
       option: req.body.option || null,
@@ -51,21 +53,34 @@ router.post('/', async (req, res) => {
       select: {
         id: true,
         name: true,
-        users: {select: {id: true, firstname: true, lastname: true, email: true}}
+        users: { select: { id: true, firstname: true, lastname: true, email: true } }
       },
     });
-    // console.log("last : ", church.option)
-    // Generate JWT token
-    // const token = jwt.sign(
-    //     { id: church.users[0].id, email: church.users[0].email },
-    //     JWT_SECRET,
-    //     { expiresIn: '24h' }
-    //   );
-    res.json({churchName: church.name});
+
+    res.json({ churchName: church.name });
   } catch (error) {
     console.log("error : ", error)
     res.status(400).json({ error: `${error}` });
   }
+});
+
+//  total number of churches
+router.get('/admin/total-churches', async (req, res) => {
+
+  try {
+    const totalChurches = await prisma.church.count()
+
+    res.status(200).json({
+      success: true,
+      total: totalChurches
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to count churches"
+    })
+  }
+
 });
 
 // Get all churches
@@ -124,15 +139,15 @@ router.put('/:id', upload.single('churchImage'), async (req, res) => {
   try {
     // Extract data from request body
     const { country, departement, commune, sectionCommunale, telephone, rue, ...otherData } = req.body;
-    
+
     // Prepare church data
     const churchData: Record<string, any> = otherData;
-    
+
     // If a file was uploaded, add the file path to the church data
     if (req.file) {
       churchData.picture = `/uploads/${req.file.filename}`;
     }
-    
+
     // Handle fullAddress update if address fields are provided
     if (country || departement || commune || sectionCommunale || telephone || rue) {
       // First, get the current church to check if it has an existing address
@@ -140,7 +155,7 @@ router.put('/:id', upload.single('churchImage'), async (req, res) => {
         where: { id: req.params.id },
         include: { fullAddress: true }
       });
-      
+
       if (existingChurch?.fullAddress) {
         // Update existing address
         churchData.fullAddress = {
@@ -167,7 +182,7 @@ router.put('/:id', upload.single('churchImage'), async (req, res) => {
         };
       }
     }
-    
+
     const church = await prisma.church.update({
       where: { id: req.params.id },
       data: churchData,
@@ -239,7 +254,7 @@ router.post('/:churchId/add-user', async (req, res) => {
       }
     });
 
-    res.status(200).json({ 
+    res.status(200).json({
       message: 'User added to church successfully',
       user: {
         id: updatedUser.id,
@@ -291,7 +306,7 @@ router.post('/:churchId/remove-user', async (req, res) => {
       }
     });
 
-    res.status(200).json({ 
+    res.status(200).json({
       message: 'User removed from church successfully',
       user: {
         id: updatedUser.id,
