@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
       churchId
     } = req.body;
 
-    
+
 
     const newPasteur = await prisma.pasteur.create({
       data: {
@@ -54,6 +54,24 @@ router.get('/', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Erreur lors du chargement des pasteurs.' });
   }
+});
+
+router.get('/admin/total-pasteurs', async (req, res) => {
+
+  try {
+    const totalPasteurs = await prisma.pasteur.count()
+
+    res.status(200).json({
+      success: true,
+      total: totalPasteurs
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to count pasteurs"
+    })
+  }
+
 });
 
 // Get pasteur by ID
@@ -126,7 +144,7 @@ router.get('/church/:churchId', async (req, res) => {
 
   try {
     const pasteurs = await prisma.pasteur.findMany({
-      where: { 
+      where: {
         church: {
           id: churchId
         }

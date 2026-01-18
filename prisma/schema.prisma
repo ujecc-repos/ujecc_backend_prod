@@ -55,52 +55,53 @@ model Address {
 }
 
 model Church {
-  id            String         @id @default(uuid())
-  name          String         @unique
-  quantity      String         @default("1")
-  address       String?
-  phone         String?
-  anthem        String?
-  facebook      String?
-  instagram     String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  picture       String?
-  option        String?
-  missionId     String?
-  email         String?
-  mainPasteur   String?
-  whatsapp      String?
-  latitude      String?
-  longitude     String?
-  ttiId         String?
-  addressId     String?        @unique
-  batism        Baptism[]
-  fullAddress   Address?       @relation(fields: [addressId], references: [id])
-  mission       Mission?       @relation(fields: [missionId], references: [id])
-  tti           Tti?           @relation(fields: [ttiId], references: [id])
-  events        Event[]
-  funerals      Funeral[]
-  groups        Groupe[]
-  mariages      Mariage[]
-  presentations Presentation[]
-  services      Service[]
-  users         User[]
-  isBaptized    Boolean        @default(false)
-  appointments  appointment[]
-  comitees      comitee[]
-  death         death[]
-  donation      donation[]
-  expense       expense[]
-  ministry      ministry[]
-  moisson       moisson[]
-  offering      offering[]
-  pasteur       pasteur[]
-  sanction      sanction[]
-  sundayClass   sundayClass[]
-  tithing       tithing[]
-  transfersFrom transfert[]    @relation("FromChurch")
-  transfersTo   transfert[]    @relation("ToChurch")
+  id             String         @id @default(uuid())
+  name           String         @unique
+  quantity       String         @default("1")
+  address        String?
+  foundationYear String?
+  phone          String?
+  anthem         String?
+  facebook       String?
+  instagram      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  picture        String?
+  option         String?
+  missionId      String?
+  email          String?
+  mainPasteur    String?
+  whatsapp       String?
+  latitude       String?
+  longitude      String?
+  ttiId          String?
+  addressId      String?        @unique
+  batism         Baptism[]
+  fullAddress    Address?       @relation(fields: [addressId], references: [id])
+  mission        Mission?       @relation(fields: [missionId], references: [id])
+  tti            Tti?           @relation(fields: [ttiId], references: [id])
+  events         Event[]
+  funerals       Funeral[]
+  groups         Groupe[]
+  mariages       Mariage[]
+  presentations  Presentation[]
+  services       Service[]
+  users          User[]
+  isBaptized     Boolean        @default(false)
+  appointments   appointment[]
+  comitees       comitee[]
+  death          death[]
+  donation       donation[]
+  expense        expense[]
+  ministry       ministry[]
+  moisson        moisson[]
+  offering       offering[]
+  pasteur        pasteur[]
+  sanction       sanction[]
+  sundayClass    sundayClass[]
+  tithing        tithing[]
+  transfersFrom  transfert[]    @relation("FromChurch")
+  transfersTo    transfert[]    @relation("ToChurch")
 
   @@index([missionId], map: "Church_missionId_fkey")
   @@index([ttiId], map: "Church_ttiId_fkey")
@@ -130,7 +131,7 @@ model User {
   profession       String?
   role             Role          @default(Membre)
   sex              String?
-  code           String?       @unique
+  code             String?       @unique
   sundayClass      String?
   lastname         String
   membreActif      Boolean       @default(true)

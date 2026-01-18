@@ -43,14 +43,14 @@ import upload from '../utils/upload';
 const handleMulterError = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   if (err instanceof multer.MulterError) {
     console.error('Multer Error:', err);
-    return res.status(400).json({ 
+    return res.status(400).json({
       error: `File upload error: ${err.message}`,
-      code: err.code 
+      code: err.code
     });
   } else if (err) {
     console.error('Upload Error:', err);
-    return res.status(400).json({ 
-      error: `Upload error: ${err.message}` 
+    return res.status(400).json({
+      error: `Upload error: ${err.message}`
     });
   }
   next();
@@ -62,111 +62,111 @@ function generate6DigitCode() {
 
 // Create a new user with optional image upload
 router.post('/', upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
-     
-    try {
-        const {firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
-            birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession,
-            churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
-        } = req.body;
 
-        console.log("groupId : ", groupId, sundayClassId, isBaptized)
+  try {
+    const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
+      birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession,
+      churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
+    } = req.body;
 
-        // Check if email already exists
-        // const existingUser = await prisma.user.findUnique({
-        //     where: {
-        //       email: email
-        //     }
-        // })
+    console.log("groupId : ", groupId, sundayClassId, isBaptized)
 
-        // if(existingUser) {
-        //     return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
-        // }
+    // Check if email already exists
+    // const existingUser = await prisma.user.findUnique({
+    //     where: {
+    //       email: email
+    //     }
+    // })
 
-        if (email !== "" && email !== null && email !== undefined) {  // Only check if email is not null or empty
-         const existingUser = await prisma.user.findUnique({
-         where: { email: email }
-        });
+    // if(existingUser) {
+    //     return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+    // }
 
-        if (existingUser) {
-         return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
-         }
+    if (email !== "" && email !== null && email !== undefined) {  // Only check if email is not null or empty
+      const existingUser = await prisma.user.findUnique({
+        where: { email: email }
+      });
+
+      if (existingUser) {
+        return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
       }
+    }
 
-      if (nif !== "" && nif !== null && nif !== undefined) {
-         const existingUserNif = await prisma.user.findFirst({
-           where: { nif: nif }
-         });
+    if (nif !== "" && nif !== null && nif !== undefined) {
+      const existingUserNif = await prisma.user.findFirst({
+        where: { nif: nif }
+      });
 
-         if (existingUserNif) {
-           return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
-         }
+      if (existingUserNif) {
+        return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
       }
+    }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        const userData = {
-            firstname,
-            lastname,
-            nif: nif || "",
-            isBaptized: Boolean(isBaptized) || false,
-            groupeSanguin: groupeSanguin || "",
-            plainPassword: password || "",
-            password: hashedPassword || "",
-            email: email || null, // Ensure email is null when not provided
-            role: role || "Membre",
-            personToContact: personToContact || "",
-            minister: minister || "",
-            spouseFullName: spouseFullName || "",
-            etatCivil: civilState || "",
-            birthDate: birthDate || "",
-            sex: gender || "",
-            joinDate: joinDate || "",
-            country: country || "",
-            birthCountry: birthCountry || "",
-            baptismDate: baptismDate || "",
-            baptismLocation: baptismLocation || "",
-            mobilePhone: mobilePhone || "",
-            homePhone: homePhone || "",
-            facebook: facebook || "",
-            city: city || "",
-            age: age || "",
-            code: `${generate6DigitCode()}` || "",
-            birthCity: birthCity || "",
-            profession: profession || "",
-            addressLine: addressLine || "",
-            // Add profile picture path if an image was uploaded
-            picture: req.file ? `/uploads/${req.file.filename}` : undefined
-        };
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const userData = {
+      firstname,
+      lastname,
+      nif: nif || "",
+      isBaptized: Boolean(isBaptized) || false,
+      groupeSanguin: groupeSanguin || "",
+      plainPassword: password || "",
+      password: hashedPassword || "",
+      email: email || null, // Ensure email is null when not provided
+      role: role || "Membre",
+      personToContact: personToContact || "",
+      minister: minister || "",
+      spouseFullName: spouseFullName || "",
+      etatCivil: civilState || "",
+      birthDate: birthDate || "",
+      sex: gender || "",
+      joinDate: joinDate || "",
+      country: country || "",
+      birthCountry: birthCountry || "",
+      baptismDate: baptismDate || "",
+      baptismLocation: baptismLocation || "",
+      mobilePhone: mobilePhone || "",
+      homePhone: homePhone || "",
+      facebook: facebook || "",
+      city: city || "",
+      age: age || "",
+      code: `${generate6DigitCode()}` || "",
+      birthCity: birthCity || "",
+      profession: profession || "",
+      addressLine: addressLine || "",
+      // Add profile picture path if an image was uploaded
+      picture: req.file ? `/uploads/${req.file.filename}` : undefined
+    };
 
-          const createData: any = { ...userData };
+    const createData: any = { ...userData };
 
-          if (churchId) {
-            createData.church = { connect: { id: churchId } };
-          }
+    if (churchId) {
+      createData.church = { connect: { id: churchId } };
+    }
 
-          if (groupId) {
-             createData.groups = { connect: { id: groupId } };
-          }
+    if (groupId) {
+      createData.groups = { connect: { id: groupId } };
+    }
 
-          const user = await prisma.user.create({
-            data: createData
-          });
-        console.log("user is  : ", user)
-        res.json({user: user.code});
-      } catch (error) {
-        console.error('=== User Registration Error ===');
-        console.error('Error details:', error);
-        console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
-        
-        // Send more detailed error response
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-        res.status(400).json({ 
-          error: errorMessage,
-          details: error instanceof Error ? error.stack : error
-        });
-      }
+    const user = await prisma.user.create({
+      data: createData
+    });
+    console.log("user is  : ", user)
+    res.json({ user: user.code });
+  } catch (error) {
+    console.error('=== User Registration Error ===');
+    console.error('Error details:', error);
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
 
-  
+    // Send more detailed error response
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+    res.status(400).json({
+      error: errorMessage,
+      details: error instanceof Error ? error.stack : error
+    });
+  }
+
+
 })
 
 
@@ -191,7 +191,7 @@ router.post('/login', async (req, res) => {
         password: true,
       }
     });
-    
+
 
     if (!user) {
       return res.status(400).json({ message: 'Email ou mot de passe incorrect', state: "error" });
@@ -201,12 +201,12 @@ router.post('/login', async (req, res) => {
     if (!user.password) {
       return res.status(400).json({ message: 'Email ou mot de passe incorrect' });
     }
-    
+
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) {
       return res.status(400).json({ message: 'Email ou mot de passe incorrect' });
     }
-   
+
     // Generate JWT token
     const token = jwt.sign(
       { id: user.id, email: user.email },
@@ -279,15 +279,15 @@ router.get('/members/recovery', async (req, res) => {
 router.post('/change-password', verifyToken, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
-    
+
     // Validate input
     if (!currentPassword || !newPassword) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         message: 'Le mot de passe actuel et le nouveau mot de passe sont requis',
-        state: "error" 
+        state: "error"
       });
     }
-    
+
     // Get user with password
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
@@ -296,34 +296,34 @@ router.post('/change-password', verifyToken, async (req, res) => {
         password: true
       }
     });
-    
+
     if (!user) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         message: 'Utilisateur non trouvé',
-        state: "error" 
+        state: "error"
       });
     }
-    
+
     // Verify current password
     if (!user.password) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         message: 'Impossible de vérifier le mot de passe actuel',
-        state: "error" 
+        state: "error"
       });
     }
-    
+
     const validPassword = await bcrypt.compare(currentPassword, user.password);
     if (!validPassword) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         message: 'Le mot de passe actuel est incorrect',
-        state: "error" 
+        state: "error"
       });
     }
-    
+
     // Hash new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
-    
+
     // Update password
     await prisma.user.update({
       where: { id: user.id },
@@ -332,28 +332,104 @@ router.post('/change-password', verifyToken, async (req, res) => {
         plainPassword: newPassword // Store plain password for reference if needed
       }
     });
-    
-    res.status(200).json({ 
+
+    res.status(200).json({
       message: 'Mot de passe modifié avec succès',
-      state: "success" 
+      state: "success"
     });
   } catch (error) {
     console.error('Error changing password:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       message: 'Une erreur est survenue lors du changement de mot de passe',
-      state: "error" 
+      state: "error"
+    });
+  }
+});
+
+//  total number of users
+router.get('/admin/total-members', async (req, res) => {
+
+  try {
+    const totalUsers = await prisma.user.count()
+
+    res.status(200).json({
+      success: true,
+      total: totalUsers
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to count users"
+    })
+  }
+
+});
+
+// Admin change password endpoint (no current password required)
+router.put('/admin/change-password/:userId', async (req, res) => {
+  try {
+    const { newPassword } = req.body;
+    const { userId } = req.params;
+
+    // Validate input
+    if (!newPassword) {
+      return res.status(400).json({
+        message: 'Le nouveau mot de passe est requis',
+        state: "error"
+      });
+    }
+
+    // Get user
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'Utilisateur non trouvé',
+        state: "error"
+      });
+    }
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update password
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        password: hashedPassword,
+        plainPassword: newPassword // Store plain password for reference if needed
+      }
+    });
+
+    res.status(200).json({
+      message: `Mot de passe modifié avec succès pour ${user.firstname} ${user.lastname}`,
+      state: "success"
+    });
+  } catch (error) {
+    console.error('Error changing password:', error);
+    res.status(500).json({
+      message: 'Une erreur est survenue lors du changement de mot de passe',
+      state: "error"
     });
   }
 });
 
 // Get a single user by ID (protected route)
-router.get('/:id',  async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const user = await prisma.user.findUnique({
       where: { id: `${req.params.id}` },
       include: {
         church: {
-          include: {pasteur: true}
+          include: { pasteur: true }
         },
         groups: true,
       }
@@ -361,30 +437,30 @@ router.get('/:id',  async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'Utilisateur non trouvé' });
     }
-    
+
     res.json(user);
   } catch (error) {
     res.status(400).json({ error: 'Impossible de récupérer l\'utilisateur' });
   }
 });
 
-router.get('/userbytoken/token',verifyToken,  async (req, res) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: { id: `${req.user.id}` },
-        include: {
-          church: true,
-          groups: true
-        }
-      });
-      if (!user) {
-        return res.status(404).json({ error: 'L\'Utilisateur n\'es pas trouvé' });
+router.get('/userbytoken/token', verifyToken, async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: `${req.user.id}` },
+      include: {
+        church: true,
+        groups: true
       }
-      res.json(user);
-    } catch (error) {
-      res.status(400).json({ error: 'Failed to fetch user' });
+    });
+    if (!user) {
+      return res.status(404).json({ error: 'L\'Utilisateur n\'es pas trouvé' });
     }
-  });
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to fetch user' });
+  }
+});
 
 // Connect tithe to timothee - MUST be before /:id route
 router.put("/connect-tithe", async (req, res) => {
@@ -394,7 +470,7 @@ router.put("/connect-tithe", async (req, res) => {
     if (!titheId || !timotheeId) {
       return res.status(400).json({ error: "titheId and timotheeId are required" });
     }
-    console.log("titheid  & timotheeId: ",titheId, timotheeId)
+    console.log("titheid  & timotheeId: ", titheId, timotheeId)
 
     // Update the tithe user to connect with a timothee
     const updatedTithe = await prisma.user.update({
@@ -414,11 +490,11 @@ router.put("/connect-tithe", async (req, res) => {
 
 // Update a user with optional image upload
 router.put('/:id', upload.single('profileImage'), async (req, res) => {
-  
+
   try {
     // Extract data from request body
     const userData: Record<string, any> = req.body;
-    
+
     // If a file was uploaded, add the file path to the user data
     if (req.file) {
       console.log('File uploaded:', req.file.filename);
@@ -430,12 +506,12 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
     // Remove fields that shouldn't be updated or cause conflicts
     const fieldsToOmit = ['id', 'createdAt', 'updatedAt', 'civilState'];
     const cleanedData: Record<string, any> = __.omit(userData, fieldsToOmit);
-    
+
     // Handle civilState mapping
     if (userData.civilState) {
       cleanedData.etatCivil = userData.civilState;
     }
-    
+
     // Handle password updates carefully
     if (cleanedData.password && cleanedData.password.trim() !== '') {
       // Hash the new password
@@ -447,7 +523,7 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
       delete cleanedData.password;
       delete cleanedData.plainPassword;
     }
-    
+
     // Convert string values to appropriate types and handle empty strings
     Object.keys(cleanedData).forEach(key => {
       if (cleanedData[key] === '' || cleanedData[key] === 'undefined' || cleanedData[key] === 'null') {
@@ -458,17 +534,17 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
         cleanedData[key] = cleanedData[key].toString();
       }
     });
-    
-    // 1. Boolean fields list
-const booleanFields = ["membreActif"];
 
-// 2. Convert strings to booleans
-booleanFields.forEach((field) => {
-  if (cleanedData[field] !== undefined && cleanedData[field] !== null) {
-    cleanedData[field] = cleanedData[field] === "true";
-  }
-});
-    
+    // 1. Boolean fields list
+    const booleanFields = ["membreActif"];
+
+    // 2. Convert strings to booleans
+    booleanFields.forEach((field) => {
+      if (cleanedData[field] !== undefined && cleanedData[field] !== null) {
+        cleanedData[field] = cleanedData[field] === "true";
+      }
+    });
+
     const user = await prisma.user.update({
       where: { id: req.params.id },
       data: cleanedData,
@@ -477,7 +553,7 @@ booleanFields.forEach((field) => {
         groups: true
       }
     });
-    
+
     res.json(user);
   } catch (error: any) {
     console.log("error : ", error)
@@ -509,7 +585,7 @@ router.put('/changeuser/role/:id', async (req, res) => {
     console.log("role : ", req.body.role)
     const user = await prisma.user.update({
       where: { id: req.params.id },
-      data: {role: req.body.role}
+      data: { role: req.body.role }
     });
     res.json(user);
   } catch (error) {
@@ -528,7 +604,7 @@ router.get('/church/:churchId', async (req, res) => {
         groups: true
       }
     });
-    console.log("users : ",users)
+    console.log("users : ", users)
     res.json(users);
   } catch (error) {
     res.status(400).json({ error: 'Failed to fetch church users' });
@@ -541,7 +617,7 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
   try {
     // Get query parameter for days ahead (default to 30 days)
     const daysAhead = parseInt(req.query.days as string) || 30;
-    
+
     // Get all users with birthDate
     const users = await prisma.user.findMany({
       where: {
@@ -569,11 +645,11 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
     // Filter users with upcoming birthdays
     const usersWithUpcomingBirthdays = users.filter(user => {
       if (!user.birthDate) return false;
-      
+
       try {
         // Parse the birthDate string (assuming format like "YYYY-MM-DD" or "MM/DD/YYYY")
         let birthDate: Date;
-        
+
         // Try different date formats
         if (user.birthDate.includes('-')) {
           // Format: YYYY-MM-DD or DD-MM-YYYY
@@ -602,19 +678,19 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
         // Get current date and calculate upcoming birthday
         const today = new Date();
         const currentYear = today.getFullYear();
-        
+
         // Create this year's birthday
         let thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
-        
+
         // If this year's birthday has passed, check next year's birthday
         if (thisYearBirthday < today) {
           thisYearBirthday = new Date(currentYear + 1, birthDate.getMonth(), birthDate.getDate());
         }
-        
+
         // Calculate days until birthday
         const timeDiff = thisYearBirthday.getTime() - today.getTime();
         const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        
+
         return daysDiff >= 0 && daysDiff <= daysAhead;
       } catch (error) {
         console.error(`Error parsing birthDate for user ${user.id}:`, error);
@@ -626,11 +702,11 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
     usersWithUpcomingBirthdays.sort((a, b) => {
       const today = new Date();
       const currentYear = today.getFullYear();
-      
+
       const getBirthdayThisYear = (dateStr: string) => {
         try {
           let birthDate: Date;
-          
+
           if (dateStr.includes('-')) {
             const parts = dateStr.split('-');
             if (parts[0].length === 4) {
@@ -644,21 +720,21 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
           } else {
             birthDate = new Date(dateStr);
           }
-          
+
           let thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
           if (thisYearBirthday < today) {
             thisYearBirthday = new Date(currentYear + 1, birthDate.getMonth(), birthDate.getDate());
           }
-          
+
           return thisYearBirthday;
         } catch {
           return new Date(9999, 11, 31); // Far future date for invalid dates
         }
       };
-      
+
       const aBirthday = getBirthdayThisYear(a.birthDate!);
       const bBirthday = getBirthdayThisYear(b.birthDate!);
-      
+
       return aBirthday.getTime() - bBirthday.getTime();
     });
 
@@ -666,10 +742,10 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
     const usersWithBirthdayInfo = usersWithUpcomingBirthdays.map(user => {
       const today = new Date();
       const currentYear = today.getFullYear();
-      
+
       try {
         let birthDate: Date;
-        
+
         if (user.birthDate!.includes('-')) {
           const parts = user.birthDate!.split('-');
           if (parts[0].length === 4) {
@@ -683,15 +759,15 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
         } else {
           birthDate = new Date(user.birthDate!);
         }
-        
+
         let thisYearBirthday = new Date(currentYear, birthDate.getMonth(), birthDate.getDate());
         if (thisYearBirthday < today) {
           thisYearBirthday = new Date(currentYear + 1, birthDate.getMonth(), birthDate.getDate());
         }
-        
+
         const timeDiff = thisYearBirthday.getTime() - today.getTime();
         const daysUntilBirthday = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        
+
         return {
           ...user,
           daysUntilBirthday,
@@ -844,7 +920,7 @@ router.post('/bulk-insert', async (req, res) => {
     // Process each user
     for (let i = 0; i < users.length; i++) {
       const user = users[i];
-      
+
       try {
         // Validate required fields
         if (!user.firstname || !user.lastname) {
@@ -911,10 +987,10 @@ router.post('/bulk-insert', async (req, res) => {
         createdUsers.push(createdUser);
       } catch (error) {
         console.error(`Error creating user at index ${i}:`, error);
-        errors.push({ 
-          index: i, 
-          error: error instanceof Error ? error.message : 'Unknown error', 
-          user 
+        errors.push({
+          index: i,
+          error: error instanceof Error ? error.message : 'Unknown error',
+          user
         });
       }
     }
@@ -934,7 +1010,7 @@ router.post('/bulk-insert', async (req, res) => {
 
   } catch (error) {
     console.error('Bulk insert error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Internal server error during bulk insert',
       details: error instanceof Error ? error.message : 'Unknown error'
     });
