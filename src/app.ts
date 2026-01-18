@@ -12,7 +12,7 @@ import userRoutes from './routes/user.routes';
 import groupsRoutes from './routes/groups.routes';
 import eventRoutes from './routes/event.routes';
 import baptismRoutes from './routes/baptism.routes';
-import deathRoutes from  './routes/death.routes'
+import deathRoutes from './routes/death.routes'
 import funeralRoutes from './routes/funeral.routes';
 import presentationRoutes from "./routes/presentation.routes"
 import MariageRoutes from './routes/mariage.routes';
@@ -39,9 +39,9 @@ dotenv.config();
 const app = express();
 // Middleware
 app.use(cors({
-  origin: [`${process.env.FRONTEND_URL}`],
+  origin: [`${process.env.FRONTEND_URL}`, "https://ujecc-test.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  credentials: true
+  credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,28 +64,28 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 app.get('/api/departement/:departementName', async (req, res) => {
   try {
     const departement = await prisma.departement.findUnique({
-    where: { name: req.params.departementName },
-    include: {
-      commune: {
-        include: {
-          sectionCommunale: true,
+      where: { name: req.params.departementName },
+      include: {
+        commune: {
+          include: {
+            sectionCommunale: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  if (!departement) {
-    throw new Error(`Departement with name Artibonite not found`);
-  }
-  
-  // Map into { [communeName]: string[] }
- const result: Record<string, string[]> = {};
+    if (!departement) {
+      throw new Error(`Departement with name Artibonite not found`);
+    }
 
-  departement?.commune.forEach(commune => {
-    result[commune.name] = commune.sectionCommunale.map(section => section.name);
-  });
+    // Map into { [communeName]: string[] }
+    const result: Record<string, string[]> = {};
 
-  res.json(result)
+    departement?.commune.forEach(commune => {
+      result[commune.name] = commune.sectionCommunale.map(section => section.name);
+    });
+
+    res.json(result)
 
   } catch (error) {
     throw new Error(`error : ${error}`)
@@ -189,39 +189,39 @@ export const SudEst: { [commune: string]: string[] } = {
 
 app.post('/api/communes', async (req, res) => {
   try {
-   // Upsert the Departement
-  const departement = await prisma.departement.upsert({
-    where: { name: "Sud-Est" },
-    update: {},
-    create: { name: "Sud-Est" },
-  });
-
-  // Loop through Communes
-  for (const [communeName, localities] of Object.entries(SudEst)) {
-    const commune = await prisma.commune.upsert({
-      where: { name: communeName },
+    // Upsert the Departement
+    const departement = await prisma.departement.upsert({
+      where: { name: "Sud-Est" },
       update: {},
-      create: {
-        name: communeName,
-        departementId: departement.id,
-      },
+      create: { name: "Sud-Est" },
     });
 
-    // Now insert Section Communales under this Commune
-    for (const localityName of localities) {
-      await prisma.sectionCommunale.upsert({
-        where: { name: localityName },
+    // Loop through Communes
+    for (const [communeName, localities] of Object.entries(SudEst)) {
+      const commune = await prisma.commune.upsert({
+        where: { name: communeName },
         update: {},
         create: {
-          name: localityName,
-          communeId: commune.id,
+          name: communeName,
+          departementId: departement.id,
         },
       });
-    }
-  }
 
-  console.log('All Communes and their Section Communales registered!');
-  res.status(200).json({ message: 'All Communes and their Section Communales registered!' });
+      // Now insert Section Communales under this Commune
+      for (const localityName of localities) {
+        await prisma.sectionCommunale.upsert({
+          where: { name: localityName },
+          update: {},
+          create: {
+            name: localityName,
+            communeId: commune.id,
+          },
+        });
+      }
+    }
+
+    console.log('All Communes and their Section Communales registered!');
+    res.status(200).json({ message: 'All Communes and their Section Communales registered!' });
   } catch (error) {
     console.log("error : ", error)
     res.status(500).json({ error: error });

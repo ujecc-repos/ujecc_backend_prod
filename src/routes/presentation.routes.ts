@@ -92,6 +92,7 @@ router.get('/', async (req, res) => {
     });
     res.json(presentations);
   } catch (error) {
+    console.log("error : ", error)
     res.status(400).json({ error: 'Failed to fetch presentation records' });
   }
 });
