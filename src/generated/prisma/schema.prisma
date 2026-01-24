@@ -108,49 +108,54 @@ model Church {
 }
 
 model User {
-  id               String        @id @default(uuid())
-  createdAt        DateTime      @default(now())
-  updatedAt        DateTime      @updatedAt
-  email            String?       @unique
-  baptismDate      String?
-  baptismLocation  String?
-  birthCity        String?
-  birthCountry     String?
-  birthDate        String?
-  churchId         String?
-  churchRole       String?
-  city             String?
-  country          String?
-  envelopeNumber   String?
-  etatCivil        String?
-  facebook         String?
-  firstname        String
-  instagram        String?
-  password         String?       @unique
-  picture          String?
-  profession       String?
-  role             Role          @default(Membre)
-  sex              String?
-  code             String?       @unique
-  sundayClass      String?
-  lastname         String
-  membreActif      Boolean       @default(true)
-  addressLine      String?
-  homePhone        String?
-  isBaptized       Boolean       @default(false)
-  joinDate         String?
-  mobilePhone      String?
-  age              String?
-  minister         String?
-  plainPassword    String?
-  personToContact  String?
-  spouseFullName   String?
-  latitude         String?
-  longitude        String?
-  nif              String?
-  groupeSanguin    String?
-  istimothee       Boolean?      @default(false)
-  timotheeId       String?
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  email           String?  @unique
+  baptismDate     String?
+  baptismLocation String?
+  birthCity       String?
+  birthCountry    String?
+  birthDate       String?
+  churchId        String?
+  churchRole      String?
+  city            String?
+  country         String?
+  envelopeNumber  String?
+  etatCivil       String?
+  facebook        String?
+  firstname       String
+  instagram       String?
+  password        String?  @unique
+  picture         String?
+  profession      String?
+  role            Role     @default(Membre)
+  sex             String?
+  code            String?  @unique
+  sundayClass     String?
+  lastname        String
+  membreActif     Boolean  @default(true)
+  addressLine     String?
+  homePhone       String?
+  isBaptized      Boolean  @default(false)
+  joinDate        String?
+  mobilePhone     String?
+  age             String?
+  minister        String?
+  plainPassword   String?
+  personToContact String?
+  spouseFullName  String?
+  latitude        String?
+  longitude       String?
+  nif             String?
+  groupeSanguin   String?
+  istimothee      Boolean? @default(false)
+  timotheeId      String?
+  // 👇 Foreign key (each user belongs to ONE ministry)
+  ministryId      String?
+
+  ministry ministry? @relation(fields: [ministryId], references: [id])
+
   presences        Presence[]
   church           Church?       @relation(fields: [churchId], references: [id])
   timothee         User?         @relation("TimotheeTithes", fields: [timotheeId], references: [id])
@@ -484,7 +489,10 @@ model ministry {
   churchId    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  church      Church?  @relation(fields: [churchId], references: [id])
+  // 👇 ONE ministry has MANY users
+  users       User[]
+
+  church Church? @relation(fields: [churchId], references: [id])
 
   @@index([churchId], map: "ministry_churchId_fkey")
 }
