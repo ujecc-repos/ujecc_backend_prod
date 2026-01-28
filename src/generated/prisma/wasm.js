@@ -222,7 +222,8 @@ exports.Prisma.UserScalarFieldEnum = {
   nif: 'nif',
   groupeSanguin: 'groupeSanguin',
   istimothee: 'istimothee',
-  timotheeId: 'timotheeId'
+  timotheeId: 'timotheeId',
+  ministryId: 'ministryId'
 };
 
 exports.Prisma.GroupeScalarFieldEnum = {
@@ -609,7 +610,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   longitude: 'longitude',
   nif: 'nif',
   groupeSanguin: 'groupeSanguin',
-  timotheeId: 'timotheeId'
+  timotheeId: 'timotheeId',
+  ministryId: 'ministryId'
 };
 
 exports.Prisma.GroupeOrderByRelevanceFieldEnum = {

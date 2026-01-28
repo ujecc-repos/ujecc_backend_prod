@@ -65,7 +65,8 @@ router.get("/services/:id/presences", async (req, res) => {
     limit = '10',
     search = '',
     status = '',
-    date = ''
+    date = '',
+    userId = ''
   } = req.query;
 
   try {
@@ -74,12 +75,31 @@ router.get("/services/:id/presences", async (req, res) => {
     const limitNum = parseInt(limit as string, 10);
     const skip = (pageNum - 1) * limitNum;
 
+
     // Build where clause with filters
     const whereClause: any = { serviceId: id };
+
+    // Check if user has ministry restrictions
+    if (userId && userId !== '') {
+      const currentUser = await prisma.user.findUnique({
+        where: { id: userId as string },
+        select: { role: true, ministryId: true }
+      });
+
+      // console.log("current user : ", currentUser, currentUser?.ministryId, currentUser?.role)
+      // If user is "Leader" or has a ministry assigned, filter by ministry
+      if (currentUser && (currentUser.role === 'Leader' || currentUser.ministryId)) {
+        whereClause.user = {
+          ...whereClause.user,
+          ministryId: currentUser.ministryId
+        };
+      }
+    }
 
     // Add search filter for user firstname, lastname, or email
     if (search && search !== '') {
       whereClause.user = {
+        ...whereClause.user,
         OR: [
           { firstname: { contains: search as string } },
           { lastname: { contains: search as string } },
