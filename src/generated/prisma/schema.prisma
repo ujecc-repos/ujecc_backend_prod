@@ -170,6 +170,21 @@ model User {
   @@index([timotheeId], map: "User_timotheeId_fkey")
 }
 
+model ministry {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  churchId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  // 👇 ONE ministry has MANY users
+  users       User[]
+
+  church Church? @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "ministry_churchId_fkey")
+}
+
 model Groupe {
   id               String   @id @default(uuid())
   name             String
@@ -480,21 +495,6 @@ model sanction {
   church      Church?  @relation(fields: [churchId], references: [id])
 
   @@index([churchId], map: "sanction_churchId_fkey")
-}
-
-model ministry {
-  id          String   @id @default(uuid())
-  name        String
-  description String
-  churchId    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  // 👇 ONE ministry has MANY users
-  users       User[]
-
-  church Church? @relation(fields: [churchId], references: [id])
-
-  @@index([churchId], map: "ministry_churchId_fkey")
 }
 
 model pasteur {
