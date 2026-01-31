@@ -44,6 +44,11 @@ export type Church = $Result.DefaultSelection<Prisma.$ChurchPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model ministry
+ * 
+ */
+export type ministry = $Result.DefaultSelection<Prisma.$ministryPayload>
+/**
  * Model Groupe
  * 
  */
@@ -133,11 +138,6 @@ export type Mission = $Result.DefaultSelection<Prisma.$MissionPayload>
  * 
  */
 export type sanction = $Result.DefaultSelection<Prisma.$sanctionPayload>
-/**
- * Model ministry
- * 
- */
-export type ministry = $Result.DefaultSelection<Prisma.$ministryPayload>
 /**
  * Model pasteur
  * 
@@ -380,6 +380,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.ministry`: Exposes CRUD operations for the **ministry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Ministries
+    * const ministries = await prisma.ministry.findMany()
+    * ```
+    */
+  get ministry(): Prisma.ministryDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.groupe`: Exposes CRUD operations for the **Groupe** model.
     * Example usage:
     * ```ts
@@ -558,16 +568,6 @@ export class PrismaClient<
     * ```
     */
   get sanction(): Prisma.sanctionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.ministry`: Exposes CRUD operations for the **ministry** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Ministries
-    * const ministries = await prisma.ministry.findMany()
-    * ```
-    */
-  get ministry(): Prisma.ministryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.pasteur`: Exposes CRUD operations for the **pasteur** model.
@@ -1054,6 +1054,7 @@ export namespace Prisma {
     Address: 'Address',
     Church: 'Church',
     User: 'User',
+    ministry: 'ministry',
     Groupe: 'Groupe',
     Event: 'Event',
     Mariage: 'Mariage',
@@ -1072,7 +1073,6 @@ export namespace Prisma {
     transfert: 'transfert',
     Mission: 'Mission',
     sanction: 'sanction',
-    ministry: 'ministry',
     pasteur: 'pasteur',
     Departement: 'Departement',
     Commune: 'Commune',
@@ -1095,7 +1095,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "service" | "presence" | "tti" | "address" | "church" | "user" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "ministry" | "pasteur" | "departement" | "commune" | "sectionCommunale"
+      modelProps: "service" | "presence" | "tti" | "address" | "church" | "user" | "ministry" | "groupe" | "event" | "mariage" | "funeral" | "presentation" | "baptism" | "death" | "sundayClass" | "expense" | "offering" | "tithing" | "donation" | "moisson" | "comitee" | "appointment" | "transfert" | "mission" | "sanction" | "pasteur" | "departement" | "commune" | "sectionCommunale"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1492,6 +1492,72 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      ministry: {
+        payload: Prisma.$ministryPayload<ExtArgs>
+        fields: Prisma.ministryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ministryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ministryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          findFirst: {
+            args: Prisma.ministryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ministryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          findMany: {
+            args: Prisma.ministryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>[]
+          }
+          create: {
+            args: Prisma.ministryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          createMany: {
+            args: Prisma.ministryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ministryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          update: {
+            args: Prisma.ministryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          deleteMany: {
+            args: Prisma.ministryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ministryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ministryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
+          }
+          aggregate: {
+            args: Prisma.MinistryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMinistry>
+          }
+          groupBy: {
+            args: Prisma.ministryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MinistryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ministryCountArgs<ExtArgs>
+            result: $Utils.Optional<MinistryCountAggregateOutputType> | number
           }
         }
       }
@@ -2683,72 +2749,6 @@ export namespace Prisma {
           }
         }
       }
-      ministry: {
-        payload: Prisma.$ministryPayload<ExtArgs>
-        fields: Prisma.ministryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ministryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ministryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          findFirst: {
-            args: Prisma.ministryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ministryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          findMany: {
-            args: Prisma.ministryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>[]
-          }
-          create: {
-            args: Prisma.ministryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          createMany: {
-            args: Prisma.ministryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.ministryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          update: {
-            args: Prisma.ministryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          deleteMany: {
-            args: Prisma.ministryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ministryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ministryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ministryPayload>
-          }
-          aggregate: {
-            args: Prisma.MinistryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMinistry>
-          }
-          groupBy: {
-            args: Prisma.ministryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MinistryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ministryCountArgs<ExtArgs>
-            result: $Utils.Optional<MinistryCountAggregateOutputType> | number
-          }
-        }
-      }
       pasteur: {
         payload: Prisma.$pasteurPayload<ExtArgs>
         fields: Prisma.pasteurFieldRefs
@@ -3103,6 +3103,7 @@ export namespace Prisma {
     address?: AddressOmit
     church?: ChurchOmit
     user?: UserOmit
+    ministry?: ministryOmit
     groupe?: GroupeOmit
     event?: EventOmit
     mariage?: MariageOmit
@@ -3121,7 +3122,6 @@ export namespace Prisma {
     transfert?: transfertOmit
     mission?: MissionOmit
     sanction?: sanctionOmit
-    ministry?: ministryOmit
     pasteur?: pasteurOmit
     departement?: DepartementOmit
     commune?: CommuneOmit
@@ -3583,6 +3583,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type MinistryCountOutputType
+   */
+
+  export type MinistryCountOutputType = {
+    users: number
+  }
+
+  export type MinistryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | MinistryCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MinistryCountOutputType without action
+   */
+  export type MinistryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MinistryCountOutputType
+     */
+    select?: MinistryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MinistryCountOutputType without action
+   */
+  export type MinistryCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Count Type GroupeCountOutputType
    */
 
@@ -3712,37 +3743,6 @@ export namespace Prisma {
    */
   export type MissionCountOutputTypeCountChurchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ChurchWhereInput
-  }
-
-
-  /**
-   * Count Type MinistryCountOutputType
-   */
-
-  export type MinistryCountOutputType = {
-    users: number
-  }
-
-  export type MinistryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | MinistryCountOutputTypeCountUsersArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * MinistryCountOutputType without action
-   */
-  export type MinistryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MinistryCountOutputType
-     */
-    select?: MinistryCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * MinistryCountOutputType without action
-   */
-  export type MinistryCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
   }
 
 
@@ -11065,6 +11065,995 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ministry
+   */
+
+  export type AggregateMinistry = {
+    _count: MinistryCountAggregateOutputType | null
+    _min: MinistryMinAggregateOutputType | null
+    _max: MinistryMaxAggregateOutputType | null
+  }
+
+  export type MinistryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MinistryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    churchId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MinistryCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    churchId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MinistryMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MinistryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MinistryCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    churchId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MinistryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ministry to aggregate.
+     */
+    where?: ministryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ministries to fetch.
+     */
+    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ministryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ministries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ministries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ministries
+    **/
+    _count?: true | MinistryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MinistryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MinistryMaxAggregateInputType
+  }
+
+  export type GetMinistryAggregateType<T extends MinistryAggregateArgs> = {
+        [P in keyof T & keyof AggregateMinistry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMinistry[P]>
+      : GetScalarType<T[P], AggregateMinistry[P]>
+  }
+
+
+
+
+  export type ministryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ministryWhereInput
+    orderBy?: ministryOrderByWithAggregationInput | ministryOrderByWithAggregationInput[]
+    by: MinistryScalarFieldEnum[] | MinistryScalarFieldEnum
+    having?: ministryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MinistryCountAggregateInputType | true
+    _min?: MinistryMinAggregateInputType
+    _max?: MinistryMaxAggregateInputType
+  }
+
+  export type MinistryGroupByOutputType = {
+    id: string
+    name: string
+    description: string
+    churchId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MinistryCountAggregateOutputType | null
+    _min: MinistryMinAggregateOutputType | null
+    _max: MinistryMaxAggregateOutputType | null
+  }
+
+  type GetMinistryGroupByPayload<T extends ministryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MinistryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MinistryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MinistryGroupByOutputType[P]>
+            : GetScalarType<T[P], MinistryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ministrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    users?: boolean | ministry$usersArgs<ExtArgs>
+    church?: boolean | ministry$churchArgs<ExtArgs>
+    _count?: boolean | MinistryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ministry"]>
+
+
+
+  export type ministrySelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    churchId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ministryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["ministry"]>
+  export type ministryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    users?: boolean | ministry$usersArgs<ExtArgs>
+    church?: boolean | ministry$churchArgs<ExtArgs>
+    _count?: boolean | MinistryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ministryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ministry"
+    objects: {
+      users: Prisma.$UserPayload<ExtArgs>[]
+      church: Prisma.$ChurchPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string
+      churchId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["ministry"]>
+    composites: {}
+  }
+
+  type ministryGetPayload<S extends boolean | null | undefined | ministryDefaultArgs> = $Result.GetResult<Prisma.$ministryPayload, S>
+
+  type ministryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ministryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MinistryCountAggregateInputType | true
+    }
+
+  export interface ministryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ministry'], meta: { name: 'ministry' } }
+    /**
+     * Find zero or one Ministry that matches the filter.
+     * @param {ministryFindUniqueArgs} args - Arguments to find a Ministry
+     * @example
+     * // Get one Ministry
+     * const ministry = await prisma.ministry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ministryFindUniqueArgs>(args: SelectSubset<T, ministryFindUniqueArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Ministry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ministryFindUniqueOrThrowArgs} args - Arguments to find a Ministry
+     * @example
+     * // Get one Ministry
+     * const ministry = await prisma.ministry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ministryFindUniqueOrThrowArgs>(args: SelectSubset<T, ministryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ministry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryFindFirstArgs} args - Arguments to find a Ministry
+     * @example
+     * // Get one Ministry
+     * const ministry = await prisma.ministry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ministryFindFirstArgs>(args?: SelectSubset<T, ministryFindFirstArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Ministry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryFindFirstOrThrowArgs} args - Arguments to find a Ministry
+     * @example
+     * // Get one Ministry
+     * const ministry = await prisma.ministry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ministryFindFirstOrThrowArgs>(args?: SelectSubset<T, ministryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Ministries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Ministries
+     * const ministries = await prisma.ministry.findMany()
+     * 
+     * // Get first 10 Ministries
+     * const ministries = await prisma.ministry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ministryWithIdOnly = await prisma.ministry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ministryFindManyArgs>(args?: SelectSubset<T, ministryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Ministry.
+     * @param {ministryCreateArgs} args - Arguments to create a Ministry.
+     * @example
+     * // Create one Ministry
+     * const Ministry = await prisma.ministry.create({
+     *   data: {
+     *     // ... data to create a Ministry
+     *   }
+     * })
+     * 
+     */
+    create<T extends ministryCreateArgs>(args: SelectSubset<T, ministryCreateArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Ministries.
+     * @param {ministryCreateManyArgs} args - Arguments to create many Ministries.
+     * @example
+     * // Create many Ministries
+     * const ministry = await prisma.ministry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ministryCreateManyArgs>(args?: SelectSubset<T, ministryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Ministry.
+     * @param {ministryDeleteArgs} args - Arguments to delete one Ministry.
+     * @example
+     * // Delete one Ministry
+     * const Ministry = await prisma.ministry.delete({
+     *   where: {
+     *     // ... filter to delete one Ministry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ministryDeleteArgs>(args: SelectSubset<T, ministryDeleteArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Ministry.
+     * @param {ministryUpdateArgs} args - Arguments to update one Ministry.
+     * @example
+     * // Update one Ministry
+     * const ministry = await prisma.ministry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ministryUpdateArgs>(args: SelectSubset<T, ministryUpdateArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Ministries.
+     * @param {ministryDeleteManyArgs} args - Arguments to filter Ministries to delete.
+     * @example
+     * // Delete a few Ministries
+     * const { count } = await prisma.ministry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ministryDeleteManyArgs>(args?: SelectSubset<T, ministryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Ministries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Ministries
+     * const ministry = await prisma.ministry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ministryUpdateManyArgs>(args: SelectSubset<T, ministryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Ministry.
+     * @param {ministryUpsertArgs} args - Arguments to update or create a Ministry.
+     * @example
+     * // Update or create a Ministry
+     * const ministry = await prisma.ministry.upsert({
+     *   create: {
+     *     // ... data to create a Ministry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Ministry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ministryUpsertArgs>(args: SelectSubset<T, ministryUpsertArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Ministries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryCountArgs} args - Arguments to filter Ministries to count.
+     * @example
+     * // Count the number of Ministries
+     * const count = await prisma.ministry.count({
+     *   where: {
+     *     // ... the filter for the Ministries we want to count
+     *   }
+     * })
+    **/
+    count<T extends ministryCountArgs>(
+      args?: Subset<T, ministryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MinistryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Ministry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MinistryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MinistryAggregateArgs>(args: Subset<T, MinistryAggregateArgs>): Prisma.PrismaPromise<GetMinistryAggregateType<T>>
+
+    /**
+     * Group by Ministry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ministryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ministryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ministryGroupByArgs['orderBy'] }
+        : { orderBy?: ministryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ministryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMinistryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ministry model
+   */
+  readonly fields: ministryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ministry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ministryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    users<T extends ministry$usersArgs<ExtArgs> = {}>(args?: Subset<T, ministry$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    church<T extends ministry$churchArgs<ExtArgs> = {}>(args?: Subset<T, ministry$churchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ministry model
+   */
+  interface ministryFieldRefs {
+    readonly id: FieldRef<"ministry", 'String'>
+    readonly name: FieldRef<"ministry", 'String'>
+    readonly description: FieldRef<"ministry", 'String'>
+    readonly churchId: FieldRef<"ministry", 'String'>
+    readonly createdAt: FieldRef<"ministry", 'DateTime'>
+    readonly updatedAt: FieldRef<"ministry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ministry findUnique
+   */
+  export type ministryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter, which ministry to fetch.
+     */
+    where: ministryWhereUniqueInput
+  }
+
+  /**
+   * ministry findUniqueOrThrow
+   */
+  export type ministryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter, which ministry to fetch.
+     */
+    where: ministryWhereUniqueInput
+  }
+
+  /**
+   * ministry findFirst
+   */
+  export type ministryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter, which ministry to fetch.
+     */
+    where?: ministryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ministries to fetch.
+     */
+    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ministries.
+     */
+    cursor?: ministryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ministries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ministries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ministries.
+     */
+    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
+  }
+
+  /**
+   * ministry findFirstOrThrow
+   */
+  export type ministryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter, which ministry to fetch.
+     */
+    where?: ministryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ministries to fetch.
+     */
+    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ministries.
+     */
+    cursor?: ministryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ministries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ministries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ministries.
+     */
+    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
+  }
+
+  /**
+   * ministry findMany
+   */
+  export type ministryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter, which ministries to fetch.
+     */
+    where?: ministryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ministries to fetch.
+     */
+    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ministries.
+     */
+    cursor?: ministryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ministries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ministries.
+     */
+    skip?: number
+    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
+  }
+
+  /**
+   * ministry create
+   */
+  export type ministryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ministry.
+     */
+    data: XOR<ministryCreateInput, ministryUncheckedCreateInput>
+  }
+
+  /**
+   * ministry createMany
+   */
+  export type ministryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ministries.
+     */
+    data: ministryCreateManyInput | ministryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ministry update
+   */
+  export type ministryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ministry.
+     */
+    data: XOR<ministryUpdateInput, ministryUncheckedUpdateInput>
+    /**
+     * Choose, which ministry to update.
+     */
+    where: ministryWhereUniqueInput
+  }
+
+  /**
+   * ministry updateMany
+   */
+  export type ministryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ministries.
+     */
+    data: XOR<ministryUpdateManyMutationInput, ministryUncheckedUpdateManyInput>
+    /**
+     * Filter which ministries to update
+     */
+    where?: ministryWhereInput
+    /**
+     * Limit how many ministries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ministry upsert
+   */
+  export type ministryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ministry to update in case it exists.
+     */
+    where: ministryWhereUniqueInput
+    /**
+     * In case the ministry found by the `where` argument doesn't exist, create a new ministry with this data.
+     */
+    create: XOR<ministryCreateInput, ministryUncheckedCreateInput>
+    /**
+     * In case the ministry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ministryUpdateInput, ministryUncheckedUpdateInput>
+  }
+
+  /**
+   * ministry delete
+   */
+  export type ministryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
+    /**
+     * Filter which ministry to delete.
+     */
+    where: ministryWhereUniqueInput
+  }
+
+  /**
+   * ministry deleteMany
+   */
+  export type ministryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ministries to delete
+     */
+    where?: ministryWhereInput
+    /**
+     * Limit how many ministries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ministry.users
+   */
+  export type ministry$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * ministry.church
+   */
+  export type ministry$churchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Church
+     */
+    select?: ChurchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Church
+     */
+    omit?: ChurchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChurchInclude<ExtArgs> | null
+    where?: ChurchWhereInput
+  }
+
+  /**
+   * ministry without action
+   */
+  export type ministryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ministry
+     */
+    select?: ministrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ministry
+     */
+    omit?: ministryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ministryInclude<ExtArgs> | null
   }
 
 
@@ -29605,995 +30594,6 @@ export namespace Prisma {
 
 
   /**
-   * Model ministry
-   */
-
-  export type AggregateMinistry = {
-    _count: MinistryCountAggregateOutputType | null
-    _min: MinistryMinAggregateOutputType | null
-    _max: MinistryMaxAggregateOutputType | null
-  }
-
-  export type MinistryMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    churchId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type MinistryMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    description: string | null
-    churchId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type MinistryCountAggregateOutputType = {
-    id: number
-    name: number
-    description: number
-    churchId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type MinistryMinAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    churchId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type MinistryMaxAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    churchId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type MinistryCountAggregateInputType = {
-    id?: true
-    name?: true
-    description?: true
-    churchId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type MinistryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ministry to aggregate.
-     */
-    where?: ministryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ministries to fetch.
-     */
-    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ministryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ministries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ministries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ministries
-    **/
-    _count?: true | MinistryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MinistryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MinistryMaxAggregateInputType
-  }
-
-  export type GetMinistryAggregateType<T extends MinistryAggregateArgs> = {
-        [P in keyof T & keyof AggregateMinistry]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMinistry[P]>
-      : GetScalarType<T[P], AggregateMinistry[P]>
-  }
-
-
-
-
-  export type ministryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ministryWhereInput
-    orderBy?: ministryOrderByWithAggregationInput | ministryOrderByWithAggregationInput[]
-    by: MinistryScalarFieldEnum[] | MinistryScalarFieldEnum
-    having?: ministryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MinistryCountAggregateInputType | true
-    _min?: MinistryMinAggregateInputType
-    _max?: MinistryMaxAggregateInputType
-  }
-
-  export type MinistryGroupByOutputType = {
-    id: string
-    name: string
-    description: string
-    churchId: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: MinistryCountAggregateOutputType | null
-    _min: MinistryMinAggregateOutputType | null
-    _max: MinistryMaxAggregateOutputType | null
-  }
-
-  type GetMinistryGroupByPayload<T extends ministryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MinistryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MinistryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MinistryGroupByOutputType[P]>
-            : GetScalarType<T[P], MinistryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ministrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    churchId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    users?: boolean | ministry$usersArgs<ExtArgs>
-    church?: boolean | ministry$churchArgs<ExtArgs>
-    _count?: boolean | MinistryCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["ministry"]>
-
-
-
-  export type ministrySelectScalar = {
-    id?: boolean
-    name?: boolean
-    description?: boolean
-    churchId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type ministryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["ministry"]>
-  export type ministryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | ministry$usersArgs<ExtArgs>
-    church?: boolean | ministry$churchArgs<ExtArgs>
-    _count?: boolean | MinistryCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $ministryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ministry"
-    objects: {
-      users: Prisma.$UserPayload<ExtArgs>[]
-      church: Prisma.$ChurchPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      description: string
-      churchId: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["ministry"]>
-    composites: {}
-  }
-
-  type ministryGetPayload<S extends boolean | null | undefined | ministryDefaultArgs> = $Result.GetResult<Prisma.$ministryPayload, S>
-
-  type ministryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ministryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MinistryCountAggregateInputType | true
-    }
-
-  export interface ministryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ministry'], meta: { name: 'ministry' } }
-    /**
-     * Find zero or one Ministry that matches the filter.
-     * @param {ministryFindUniqueArgs} args - Arguments to find a Ministry
-     * @example
-     * // Get one Ministry
-     * const ministry = await prisma.ministry.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ministryFindUniqueArgs>(args: SelectSubset<T, ministryFindUniqueArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Ministry that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ministryFindUniqueOrThrowArgs} args - Arguments to find a Ministry
-     * @example
-     * // Get one Ministry
-     * const ministry = await prisma.ministry.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ministryFindUniqueOrThrowArgs>(args: SelectSubset<T, ministryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Ministry that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryFindFirstArgs} args - Arguments to find a Ministry
-     * @example
-     * // Get one Ministry
-     * const ministry = await prisma.ministry.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ministryFindFirstArgs>(args?: SelectSubset<T, ministryFindFirstArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Ministry that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryFindFirstOrThrowArgs} args - Arguments to find a Ministry
-     * @example
-     * // Get one Ministry
-     * const ministry = await prisma.ministry.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ministryFindFirstOrThrowArgs>(args?: SelectSubset<T, ministryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Ministries that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Ministries
-     * const ministries = await prisma.ministry.findMany()
-     * 
-     * // Get first 10 Ministries
-     * const ministries = await prisma.ministry.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const ministryWithIdOnly = await prisma.ministry.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ministryFindManyArgs>(args?: SelectSubset<T, ministryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Ministry.
-     * @param {ministryCreateArgs} args - Arguments to create a Ministry.
-     * @example
-     * // Create one Ministry
-     * const Ministry = await prisma.ministry.create({
-     *   data: {
-     *     // ... data to create a Ministry
-     *   }
-     * })
-     * 
-     */
-    create<T extends ministryCreateArgs>(args: SelectSubset<T, ministryCreateArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Ministries.
-     * @param {ministryCreateManyArgs} args - Arguments to create many Ministries.
-     * @example
-     * // Create many Ministries
-     * const ministry = await prisma.ministry.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ministryCreateManyArgs>(args?: SelectSubset<T, ministryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Ministry.
-     * @param {ministryDeleteArgs} args - Arguments to delete one Ministry.
-     * @example
-     * // Delete one Ministry
-     * const Ministry = await prisma.ministry.delete({
-     *   where: {
-     *     // ... filter to delete one Ministry
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ministryDeleteArgs>(args: SelectSubset<T, ministryDeleteArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Ministry.
-     * @param {ministryUpdateArgs} args - Arguments to update one Ministry.
-     * @example
-     * // Update one Ministry
-     * const ministry = await prisma.ministry.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ministryUpdateArgs>(args: SelectSubset<T, ministryUpdateArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Ministries.
-     * @param {ministryDeleteManyArgs} args - Arguments to filter Ministries to delete.
-     * @example
-     * // Delete a few Ministries
-     * const { count } = await prisma.ministry.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ministryDeleteManyArgs>(args?: SelectSubset<T, ministryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Ministries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Ministries
-     * const ministry = await prisma.ministry.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ministryUpdateManyArgs>(args: SelectSubset<T, ministryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Ministry.
-     * @param {ministryUpsertArgs} args - Arguments to update or create a Ministry.
-     * @example
-     * // Update or create a Ministry
-     * const ministry = await prisma.ministry.upsert({
-     *   create: {
-     *     // ... data to create a Ministry
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Ministry we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ministryUpsertArgs>(args: SelectSubset<T, ministryUpsertArgs<ExtArgs>>): Prisma__ministryClient<$Result.GetResult<Prisma.$ministryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Ministries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryCountArgs} args - Arguments to filter Ministries to count.
-     * @example
-     * // Count the number of Ministries
-     * const count = await prisma.ministry.count({
-     *   where: {
-     *     // ... the filter for the Ministries we want to count
-     *   }
-     * })
-    **/
-    count<T extends ministryCountArgs>(
-      args?: Subset<T, ministryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MinistryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Ministry.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MinistryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MinistryAggregateArgs>(args: Subset<T, MinistryAggregateArgs>): Prisma.PrismaPromise<GetMinistryAggregateType<T>>
-
-    /**
-     * Group by Ministry.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ministryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ministryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ministryGroupByArgs['orderBy'] }
-        : { orderBy?: ministryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ministryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMinistryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ministry model
-   */
-  readonly fields: ministryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ministry.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ministryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends ministry$usersArgs<ExtArgs> = {}>(args?: Subset<T, ministry$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    church<T extends ministry$churchArgs<ExtArgs> = {}>(args?: Subset<T, ministry$churchArgs<ExtArgs>>): Prisma__ChurchClient<$Result.GetResult<Prisma.$ChurchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ministry model
-   */
-  interface ministryFieldRefs {
-    readonly id: FieldRef<"ministry", 'String'>
-    readonly name: FieldRef<"ministry", 'String'>
-    readonly description: FieldRef<"ministry", 'String'>
-    readonly churchId: FieldRef<"ministry", 'String'>
-    readonly createdAt: FieldRef<"ministry", 'DateTime'>
-    readonly updatedAt: FieldRef<"ministry", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ministry findUnique
-   */
-  export type ministryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter, which ministry to fetch.
-     */
-    where: ministryWhereUniqueInput
-  }
-
-  /**
-   * ministry findUniqueOrThrow
-   */
-  export type ministryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter, which ministry to fetch.
-     */
-    where: ministryWhereUniqueInput
-  }
-
-  /**
-   * ministry findFirst
-   */
-  export type ministryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter, which ministry to fetch.
-     */
-    where?: ministryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ministries to fetch.
-     */
-    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ministries.
-     */
-    cursor?: ministryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ministries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ministries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ministries.
-     */
-    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
-  }
-
-  /**
-   * ministry findFirstOrThrow
-   */
-  export type ministryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter, which ministry to fetch.
-     */
-    where?: ministryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ministries to fetch.
-     */
-    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ministries.
-     */
-    cursor?: ministryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ministries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ministries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ministries.
-     */
-    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
-  }
-
-  /**
-   * ministry findMany
-   */
-  export type ministryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter, which ministries to fetch.
-     */
-    where?: ministryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ministries to fetch.
-     */
-    orderBy?: ministryOrderByWithRelationInput | ministryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ministries.
-     */
-    cursor?: ministryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ministries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ministries.
-     */
-    skip?: number
-    distinct?: MinistryScalarFieldEnum | MinistryScalarFieldEnum[]
-  }
-
-  /**
-   * ministry create
-   */
-  export type ministryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ministry.
-     */
-    data: XOR<ministryCreateInput, ministryUncheckedCreateInput>
-  }
-
-  /**
-   * ministry createMany
-   */
-  export type ministryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ministries.
-     */
-    data: ministryCreateManyInput | ministryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ministry update
-   */
-  export type ministryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ministry.
-     */
-    data: XOR<ministryUpdateInput, ministryUncheckedUpdateInput>
-    /**
-     * Choose, which ministry to update.
-     */
-    where: ministryWhereUniqueInput
-  }
-
-  /**
-   * ministry updateMany
-   */
-  export type ministryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ministries.
-     */
-    data: XOR<ministryUpdateManyMutationInput, ministryUncheckedUpdateManyInput>
-    /**
-     * Filter which ministries to update
-     */
-    where?: ministryWhereInput
-    /**
-     * Limit how many ministries to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ministry upsert
-   */
-  export type ministryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ministry to update in case it exists.
-     */
-    where: ministryWhereUniqueInput
-    /**
-     * In case the ministry found by the `where` argument doesn't exist, create a new ministry with this data.
-     */
-    create: XOR<ministryCreateInput, ministryUncheckedCreateInput>
-    /**
-     * In case the ministry was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ministryUpdateInput, ministryUncheckedUpdateInput>
-  }
-
-  /**
-   * ministry delete
-   */
-  export type ministryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-    /**
-     * Filter which ministry to delete.
-     */
-    where: ministryWhereUniqueInput
-  }
-
-  /**
-   * ministry deleteMany
-   */
-  export type ministryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ministries to delete
-     */
-    where?: ministryWhereInput
-    /**
-     * Limit how many ministries to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * ministry.users
-   */
-  export type ministry$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    cursor?: UserWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * ministry.church
-   */
-  export type ministry$churchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Church
-     */
-    select?: ChurchSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Church
-     */
-    omit?: ChurchOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChurchInclude<ExtArgs> | null
-    where?: ChurchWhereInput
-  }
-
-  /**
-   * ministry without action
-   */
-  export type ministryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ministry
-     */
-    select?: ministrySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ministry
-     */
-    omit?: ministryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ministryInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model pasteur
    */
 
@@ -34467,6 +34467,18 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const MinistryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    churchId: 'churchId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MinistryScalarFieldEnum = (typeof MinistryScalarFieldEnum)[keyof typeof MinistryScalarFieldEnum]
+
+
   export const GroupeScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -34773,18 +34785,6 @@ export namespace Prisma {
   export type SanctionScalarFieldEnum = (typeof SanctionScalarFieldEnum)[keyof typeof SanctionScalarFieldEnum]
 
 
-  export const MinistryScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    description: 'description',
-    churchId: 'churchId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type MinistryScalarFieldEnum = (typeof MinistryScalarFieldEnum)[keyof typeof MinistryScalarFieldEnum]
-
-
   export const PasteurScalarFieldEnum: {
     id: 'id',
     pasteurName: 'pasteurName',
@@ -34946,6 +34946,16 @@ export namespace Prisma {
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+  export const ministryOrderByRelevanceFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    churchId: 'churchId'
+  };
+
+  export type ministryOrderByRelevanceFieldEnum = (typeof ministryOrderByRelevanceFieldEnum)[keyof typeof ministryOrderByRelevanceFieldEnum]
 
 
   export const GroupeOrderByRelevanceFieldEnum: {
@@ -35209,16 +35219,6 @@ export namespace Prisma {
   };
 
   export type sanctionOrderByRelevanceFieldEnum = (typeof sanctionOrderByRelevanceFieldEnum)[keyof typeof sanctionOrderByRelevanceFieldEnum]
-
-
-  export const ministryOrderByRelevanceFieldEnum: {
-    id: 'id',
-    name: 'name',
-    description: 'description',
-    churchId: 'churchId'
-  };
-
-  export type ministryOrderByRelevanceFieldEnum = (typeof ministryOrderByRelevanceFieldEnum)[keyof typeof ministryOrderByRelevanceFieldEnum]
 
 
   export const pasteurOrderByRelevanceFieldEnum: {
@@ -36046,6 +36046,70 @@ export namespace Prisma {
     istimothee?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     timotheeId?: StringNullableWithAggregatesFilter<"User"> | string | null
     ministryId?: StringNullableWithAggregatesFilter<"User"> | string | null
+  }
+
+  export type ministryWhereInput = {
+    AND?: ministryWhereInput | ministryWhereInput[]
+    OR?: ministryWhereInput[]
+    NOT?: ministryWhereInput | ministryWhereInput[]
+    id?: StringFilter<"ministry"> | string
+    name?: StringFilter<"ministry"> | string
+    description?: StringFilter<"ministry"> | string
+    churchId?: StringNullableFilter<"ministry"> | string | null
+    createdAt?: DateTimeFilter<"ministry"> | Date | string
+    updatedAt?: DateTimeFilter<"ministry"> | Date | string
+    users?: UserListRelationFilter
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }
+
+  export type ministryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    churchId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    users?: UserOrderByRelationAggregateInput
+    church?: ChurchOrderByWithRelationInput
+    _relevance?: ministryOrderByRelevanceInput
+  }
+
+  export type ministryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ministryWhereInput | ministryWhereInput[]
+    OR?: ministryWhereInput[]
+    NOT?: ministryWhereInput | ministryWhereInput[]
+    name?: StringFilter<"ministry"> | string
+    description?: StringFilter<"ministry"> | string
+    churchId?: StringNullableFilter<"ministry"> | string | null
+    createdAt?: DateTimeFilter<"ministry"> | Date | string
+    updatedAt?: DateTimeFilter<"ministry"> | Date | string
+    users?: UserListRelationFilter
+    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
+  }, "id">
+
+  export type ministryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    churchId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ministryCountOrderByAggregateInput
+    _max?: ministryMaxOrderByAggregateInput
+    _min?: ministryMinOrderByAggregateInput
+  }
+
+  export type ministryScalarWhereWithAggregatesInput = {
+    AND?: ministryScalarWhereWithAggregatesInput | ministryScalarWhereWithAggregatesInput[]
+    OR?: ministryScalarWhereWithAggregatesInput[]
+    NOT?: ministryScalarWhereWithAggregatesInput | ministryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ministry"> | string
+    name?: StringWithAggregatesFilter<"ministry"> | string
+    description?: StringWithAggregatesFilter<"ministry"> | string
+    churchId?: StringNullableWithAggregatesFilter<"ministry"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ministry"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ministry"> | Date | string
   }
 
   export type GroupeWhereInput = {
@@ -37624,70 +37688,6 @@ export namespace Prisma {
     endDate?: StringNullableWithAggregatesFilter<"sanction"> | string | null
   }
 
-  export type ministryWhereInput = {
-    AND?: ministryWhereInput | ministryWhereInput[]
-    OR?: ministryWhereInput[]
-    NOT?: ministryWhereInput | ministryWhereInput[]
-    id?: StringFilter<"ministry"> | string
-    name?: StringFilter<"ministry"> | string
-    description?: StringFilter<"ministry"> | string
-    churchId?: StringNullableFilter<"ministry"> | string | null
-    createdAt?: DateTimeFilter<"ministry"> | Date | string
-    updatedAt?: DateTimeFilter<"ministry"> | Date | string
-    users?: UserListRelationFilter
-    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
-  }
-
-  export type ministryOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    churchId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    users?: UserOrderByRelationAggregateInput
-    church?: ChurchOrderByWithRelationInput
-    _relevance?: ministryOrderByRelevanceInput
-  }
-
-  export type ministryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ministryWhereInput | ministryWhereInput[]
-    OR?: ministryWhereInput[]
-    NOT?: ministryWhereInput | ministryWhereInput[]
-    name?: StringFilter<"ministry"> | string
-    description?: StringFilter<"ministry"> | string
-    churchId?: StringNullableFilter<"ministry"> | string | null
-    createdAt?: DateTimeFilter<"ministry"> | Date | string
-    updatedAt?: DateTimeFilter<"ministry"> | Date | string
-    users?: UserListRelationFilter
-    church?: XOR<ChurchNullableScalarRelationFilter, ChurchWhereInput> | null
-  }, "id">
-
-  export type ministryOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    churchId?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ministryCountOrderByAggregateInput
-    _max?: ministryMaxOrderByAggregateInput
-    _min?: ministryMinOrderByAggregateInput
-  }
-
-  export type ministryScalarWhereWithAggregatesInput = {
-    AND?: ministryScalarWhereWithAggregatesInput | ministryScalarWhereWithAggregatesInput[]
-    OR?: ministryScalarWhereWithAggregatesInput[]
-    NOT?: ministryScalarWhereWithAggregatesInput | ministryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ministry"> | string
-    name?: StringWithAggregatesFilter<"ministry"> | string
-    description?: StringWithAggregatesFilter<"ministry"> | string
-    churchId?: StringNullableWithAggregatesFilter<"ministry"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"ministry"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"ministry"> | Date | string
-  }
-
   export type pasteurWhereInput = {
     AND?: pasteurWhereInput | pasteurWhereInput[]
     OR?: pasteurWhereInput[]
@@ -38749,6 +38749,72 @@ export namespace Prisma {
     istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
     timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
     ministryId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ministryCreateInput = {
+    id?: string
+    name: string
+    description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutMinistryInput
+    church?: ChurchCreateNestedOneWithoutMinistryInput
+  }
+
+  export type ministryUncheckedCreateInput = {
+    id?: string
+    name: string
+    description: string
+    churchId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutMinistryInput
+  }
+
+  export type ministryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutMinistryNestedInput
+    church?: ChurchUpdateOneWithoutMinistryNestedInput
+  }
+
+  export type ministryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutMinistryNestedInput
+  }
+
+  export type ministryCreateManyInput = {
+    id?: string
+    name: string
+    description: string
+    churchId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ministryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ministryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GroupeCreateInput = {
@@ -40516,72 +40582,6 @@ export namespace Prisma {
     endDate?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type ministryCreateInput = {
-    id?: string
-    name: string
-    description: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    users?: UserCreateNestedManyWithoutMinistryInput
-    church?: ChurchCreateNestedOneWithoutMinistryInput
-  }
-
-  export type ministryUncheckedCreateInput = {
-    id?: string
-    name: string
-    description: string
-    churchId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    users?: UserUncheckedCreateNestedManyWithoutMinistryInput
-  }
-
-  export type ministryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUpdateManyWithoutMinistryNestedInput
-    church?: ChurchUpdateOneWithoutMinistryNestedInput
-  }
-
-  export type ministryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    churchId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserUncheckedUpdateManyWithoutMinistryNestedInput
-  }
-
-  export type ministryCreateManyInput = {
-    id?: string
-    name: string
-    description: string
-    churchId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ministryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ministryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    churchId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type pasteurCreateInput = {
     id?: string
     pasteurName: string
@@ -41556,6 +41556,39 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type ministryOrderByRelevanceInput = {
+    fields: ministryOrderByRelevanceFieldEnum | ministryOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ministryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ministryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ministryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    churchId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type GroupeOrderByRelevanceInput = {
     fields: GroupeOrderByRelevanceFieldEnum | GroupeOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -42490,39 +42523,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     endDate?: SortOrder
-  }
-
-  export type ministryOrderByRelevanceInput = {
-    fields: ministryOrderByRelevanceFieldEnum | ministryOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type ministryCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    churchId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ministryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    churchId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ministryMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    description?: SortOrder
-    churchId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type pasteurOrderByRelevanceInput = {
@@ -44146,6 +44146,64 @@ export namespace Prisma {
     deleteMany?: appointmentScalarWhereInput | appointmentScalarWhereInput[]
   }
 
+  export type UserCreateNestedManyWithoutMinistryInput = {
+    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
+    createMany?: UserCreateManyMinistryInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type ChurchCreateNestedOneWithoutMinistryInput = {
+    create?: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutMinistryInput
+    connect?: ChurchWhereUniqueInput
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutMinistryInput = {
+    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
+    createMany?: UserCreateManyMinistryInputEnvelope
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type UserUpdateManyWithoutMinistryNestedInput = {
+    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutMinistryInput | UserUpsertWithWhereUniqueWithoutMinistryInput[]
+    createMany?: UserCreateManyMinistryInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutMinistryInput | UserUpdateWithWhereUniqueWithoutMinistryInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutMinistryInput | UserUpdateManyWithWhereWithoutMinistryInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type ChurchUpdateOneWithoutMinistryNestedInput = {
+    create?: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
+    connectOrCreate?: ChurchCreateOrConnectWithoutMinistryInput
+    upsert?: ChurchUpsertWithoutMinistryInput
+    disconnect?: ChurchWhereInput | boolean
+    delete?: ChurchWhereInput | boolean
+    connect?: ChurchWhereUniqueInput
+    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutMinistryInput, ChurchUpdateWithoutMinistryInput>, ChurchUncheckedUpdateWithoutMinistryInput>
+  }
+
+  export type UserUncheckedUpdateManyWithoutMinistryNestedInput = {
+    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutMinistryInput | UserUpsertWithWhereUniqueWithoutMinistryInput[]
+    createMany?: UserCreateManyMinistryInputEnvelope
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutMinistryInput | UserUpdateWithWhereUniqueWithoutMinistryInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutMinistryInput | UserUpdateManyWithWhereWithoutMinistryInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
   export type ChurchCreateNestedOneWithoutGroupsInput = {
     create?: XOR<ChurchCreateWithoutGroupsInput, ChurchUncheckedCreateWithoutGroupsInput>
     connectOrCreate?: ChurchCreateOrConnectWithoutGroupsInput
@@ -44644,64 +44702,6 @@ export namespace Prisma {
     delete?: ChurchWhereInput | boolean
     connect?: ChurchWhereUniqueInput
     update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutSanctionInput, ChurchUpdateWithoutSanctionInput>, ChurchUncheckedUpdateWithoutSanctionInput>
-  }
-
-  export type UserCreateNestedManyWithoutMinistryInput = {
-    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
-    createMany?: UserCreateManyMinistryInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type ChurchCreateNestedOneWithoutMinistryInput = {
-    create?: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
-    connectOrCreate?: ChurchCreateOrConnectWithoutMinistryInput
-    connect?: ChurchWhereUniqueInput
-  }
-
-  export type UserUncheckedCreateNestedManyWithoutMinistryInput = {
-    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
-    createMany?: UserCreateManyMinistryInputEnvelope
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-  }
-
-  export type UserUpdateManyWithoutMinistryNestedInput = {
-    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutMinistryInput | UserUpsertWithWhereUniqueWithoutMinistryInput[]
-    createMany?: UserCreateManyMinistryInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutMinistryInput | UserUpdateWithWhereUniqueWithoutMinistryInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutMinistryInput | UserUpdateManyWithWhereWithoutMinistryInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
-  }
-
-  export type ChurchUpdateOneWithoutMinistryNestedInput = {
-    create?: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
-    connectOrCreate?: ChurchCreateOrConnectWithoutMinistryInput
-    upsert?: ChurchUpsertWithoutMinistryInput
-    disconnect?: ChurchWhereInput | boolean
-    delete?: ChurchWhereInput | boolean
-    connect?: ChurchWhereUniqueInput
-    update?: XOR<XOR<ChurchUpdateToOneWithWhereWithoutMinistryInput, ChurchUpdateWithoutMinistryInput>, ChurchUncheckedUpdateWithoutMinistryInput>
-  }
-
-  export type UserUncheckedUpdateManyWithoutMinistryNestedInput = {
-    create?: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput> | UserCreateWithoutMinistryInput[] | UserUncheckedCreateWithoutMinistryInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutMinistryInput | UserCreateOrConnectWithoutMinistryInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutMinistryInput | UserUpsertWithWhereUniqueWithoutMinistryInput[]
-    createMany?: UserCreateManyMinistryInputEnvelope
-    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutMinistryInput | UserUpdateWithWhereUniqueWithoutMinistryInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutMinistryInput | UserUpdateManyWithWhereWithoutMinistryInput[]
-    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type ChurchCreateNestedOneWithoutPasteurInput = {
@@ -48536,6 +48536,338 @@ export namespace Prisma {
   export type appointmentUpdateManyWithWhereWithoutAssignedUsersInput = {
     where: appointmentScalarWhereInput
     data: XOR<appointmentUpdateManyMutationInput, appointmentUncheckedUpdateManyWithoutAssignedUsersInput>
+  }
+
+  export type UserCreateWithoutMinistryInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email?: string | null
+    baptismDate?: string | null
+    baptismLocation?: string | null
+    birthCity?: string | null
+    birthCountry?: string | null
+    birthDate?: string | null
+    churchRole?: string | null
+    city?: string | null
+    country?: string | null
+    envelopeNumber?: string | null
+    etatCivil?: string | null
+    facebook?: string | null
+    firstname: string
+    instagram?: string | null
+    password?: string | null
+    picture?: string | null
+    profession?: string | null
+    role?: $Enums.Role
+    sex?: string | null
+    code?: string | null
+    sundayClass?: string | null
+    lastname: string
+    membreActif?: boolean
+    addressLine?: string | null
+    homePhone?: string | null
+    isBaptized?: boolean
+    joinDate?: string | null
+    mobilePhone?: string | null
+    age?: string | null
+    minister?: string | null
+    plainPassword?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    nif?: string | null
+    groupeSanguin?: string | null
+    istimothee?: boolean | null
+    presences?: PresenceCreateNestedManyWithoutUserInput
+    church?: ChurchCreateNestedOneWithoutUsersInput
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
+    transfers?: transfertCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
+    groups?: GroupeCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutMinistryInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email?: string | null
+    baptismDate?: string | null
+    baptismLocation?: string | null
+    birthCity?: string | null
+    birthCountry?: string | null
+    birthDate?: string | null
+    churchId?: string | null
+    churchRole?: string | null
+    city?: string | null
+    country?: string | null
+    envelopeNumber?: string | null
+    etatCivil?: string | null
+    facebook?: string | null
+    firstname: string
+    instagram?: string | null
+    password?: string | null
+    picture?: string | null
+    profession?: string | null
+    role?: $Enums.Role
+    sex?: string | null
+    code?: string | null
+    sundayClass?: string | null
+    lastname: string
+    membreActif?: boolean
+    addressLine?: string | null
+    homePhone?: string | null
+    isBaptized?: boolean
+    joinDate?: string | null
+    mobilePhone?: string | null
+    age?: string | null
+    minister?: string | null
+    plainPassword?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    nif?: string | null
+    groupeSanguin?: string | null
+    istimothee?: boolean | null
+    timotheeId?: string | null
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
+    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+  }
+
+  export type UserCreateOrConnectWithoutMinistryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput>
+  }
+
+  export type UserCreateManyMinistryInputEnvelope = {
+    data: UserCreateManyMinistryInput | UserCreateManyMinistryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ChurchCreateWithoutMinistryInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    foundationYear?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    picture?: string | null
+    option?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    whatsapp?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    isBaptized?: boolean
+    batism?: BaptismCreateNestedManyWithoutChurchInput
+    fullAddress?: AddressCreateNestedOneWithoutChurchInput
+    mission?: MissionCreateNestedOneWithoutChurchInput
+    tti?: TtiCreateNestedOneWithoutChurchInput
+    events?: EventCreateNestedManyWithoutChurchInput
+    funerals?: FuneralCreateNestedManyWithoutChurchInput
+    groups?: GroupeCreateNestedManyWithoutChurchInput
+    mariages?: MariageCreateNestedManyWithoutChurchInput
+    presentations?: PresentationCreateNestedManyWithoutChurchInput
+    services?: ServiceCreateNestedManyWithoutChurchInput
+    users?: UserCreateNestedManyWithoutChurchInput
+    appointments?: appointmentCreateNestedManyWithoutChurchInput
+    comitees?: comiteeCreateNestedManyWithoutChurchInput
+    death?: deathCreateNestedManyWithoutChurchInput
+    donation?: donationCreateNestedManyWithoutChurchInput
+    expense?: expenseCreateNestedManyWithoutChurchInput
+    moisson?: moissonCreateNestedManyWithoutChurchInput
+    offering?: offeringCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurCreateNestedManyWithoutChurchInput
+    sanction?: sanctionCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassCreateNestedManyWithoutChurchInput
+    tithing?: tithingCreateNestedManyWithoutChurchInput
+    transfersFrom?: transfertCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertCreateNestedManyWithoutToChurchInput
+  }
+
+  export type ChurchUncheckedCreateWithoutMinistryInput = {
+    id?: string
+    name: string
+    quantity?: string
+    address?: string | null
+    foundationYear?: string | null
+    phone?: string | null
+    anthem?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    picture?: string | null
+    option?: string | null
+    missionId?: string | null
+    email?: string | null
+    mainPasteur?: string | null
+    whatsapp?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    ttiId?: string | null
+    addressId?: string | null
+    isBaptized?: boolean
+    batism?: BaptismUncheckedCreateNestedManyWithoutChurchInput
+    events?: EventUncheckedCreateNestedManyWithoutChurchInput
+    funerals?: FuneralUncheckedCreateNestedManyWithoutChurchInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutChurchInput
+    mariages?: MariageUncheckedCreateNestedManyWithoutChurchInput
+    presentations?: PresentationUncheckedCreateNestedManyWithoutChurchInput
+    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
+    users?: UserUncheckedCreateNestedManyWithoutChurchInput
+    appointments?: appointmentUncheckedCreateNestedManyWithoutChurchInput
+    comitees?: comiteeUncheckedCreateNestedManyWithoutChurchInput
+    death?: deathUncheckedCreateNestedManyWithoutChurchInput
+    donation?: donationUncheckedCreateNestedManyWithoutChurchInput
+    expense?: expenseUncheckedCreateNestedManyWithoutChurchInput
+    moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
+    offering?: offeringUncheckedCreateNestedManyWithoutChurchInput
+    pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
+    sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
+    sundayClass?: sundayClassUncheckedCreateNestedManyWithoutChurchInput
+    tithing?: tithingUncheckedCreateNestedManyWithoutChurchInput
+    transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
+    transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
+  }
+
+  export type ChurchCreateOrConnectWithoutMinistryInput = {
+    where: ChurchWhereUniqueInput
+    create: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutMinistryInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutMinistryInput, UserUncheckedUpdateWithoutMinistryInput>
+    create: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutMinistryInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutMinistryInput, UserUncheckedUpdateWithoutMinistryInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutMinistryInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutMinistryInput>
+  }
+
+  export type ChurchUpsertWithoutMinistryInput = {
+    update: XOR<ChurchUpdateWithoutMinistryInput, ChurchUncheckedUpdateWithoutMinistryInput>
+    create: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
+    where?: ChurchWhereInput
+  }
+
+  export type ChurchUpdateToOneWithWhereWithoutMinistryInput = {
+    where?: ChurchWhereInput
+    data: XOR<ChurchUpdateWithoutMinistryInput, ChurchUncheckedUpdateWithoutMinistryInput>
+  }
+
+  export type ChurchUpdateWithoutMinistryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    option?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    batism?: BaptismUpdateManyWithoutChurchNestedInput
+    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
+    mission?: MissionUpdateOneWithoutChurchNestedInput
+    tti?: TtiUpdateOneWithoutChurchNestedInput
+    events?: EventUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUpdateManyWithoutChurchNestedInput
+    services?: ServiceUpdateManyWithoutChurchNestedInput
+    users?: UserUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUpdateManyWithoutChurchNestedInput
+    death?: deathUpdateManyWithoutChurchNestedInput
+    donation?: donationUpdateManyWithoutChurchNestedInput
+    expense?: expenseUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUpdateManyWithoutChurchNestedInput
+    offering?: offeringUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUpdateManyWithoutChurchNestedInput
+    transfersFrom?: transfertUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUpdateManyWithoutToChurchNestedInput
+  }
+
+  export type ChurchUncheckedUpdateWithoutMinistryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    anthem?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    option?: NullableStringFieldUpdateOperationsInput | string | null
+    missionId?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
+    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
+    addressId?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    batism?: BaptismUncheckedUpdateManyWithoutChurchNestedInput
+    events?: EventUncheckedUpdateManyWithoutChurchNestedInput
+    funerals?: FuneralUncheckedUpdateManyWithoutChurchNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutChurchNestedInput
+    mariages?: MariageUncheckedUpdateManyWithoutChurchNestedInput
+    presentations?: PresentationUncheckedUpdateManyWithoutChurchNestedInput
+    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
+    users?: UserUncheckedUpdateManyWithoutChurchNestedInput
+    appointments?: appointmentUncheckedUpdateManyWithoutChurchNestedInput
+    comitees?: comiteeUncheckedUpdateManyWithoutChurchNestedInput
+    death?: deathUncheckedUpdateManyWithoutChurchNestedInput
+    donation?: donationUncheckedUpdateManyWithoutChurchNestedInput
+    expense?: expenseUncheckedUpdateManyWithoutChurchNestedInput
+    moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
+    offering?: offeringUncheckedUpdateManyWithoutChurchNestedInput
+    pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
+    sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
+    sundayClass?: sundayClassUncheckedUpdateManyWithoutChurchNestedInput
+    tithing?: tithingUncheckedUpdateManyWithoutChurchNestedInput
+    transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
+    transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
   }
 
   export type ChurchCreateWithoutGroupsInput = {
@@ -52992,338 +53324,6 @@ export namespace Prisma {
     transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
   }
 
-  export type UserCreateWithoutMinistryInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email?: string | null
-    baptismDate?: string | null
-    baptismLocation?: string | null
-    birthCity?: string | null
-    birthCountry?: string | null
-    birthDate?: string | null
-    churchRole?: string | null
-    city?: string | null
-    country?: string | null
-    envelopeNumber?: string | null
-    etatCivil?: string | null
-    facebook?: string | null
-    firstname: string
-    instagram?: string | null
-    password?: string | null
-    picture?: string | null
-    profession?: string | null
-    role?: $Enums.Role
-    sex?: string | null
-    code?: string | null
-    sundayClass?: string | null
-    lastname: string
-    membreActif?: boolean
-    addressLine?: string | null
-    homePhone?: string | null
-    isBaptized?: boolean
-    joinDate?: string | null
-    mobilePhone?: string | null
-    age?: string | null
-    minister?: string | null
-    plainPassword?: string | null
-    personToContact?: string | null
-    spouseFullName?: string | null
-    latitude?: string | null
-    longitude?: string | null
-    nif?: string | null
-    groupeSanguin?: string | null
-    istimothee?: boolean | null
-    presences?: PresenceCreateNestedManyWithoutUserInput
-    church?: ChurchCreateNestedOneWithoutUsersInput
-    timothee?: UserCreateNestedOneWithoutTithesInput
-    tithes?: UserCreateNestedManyWithoutTimotheeInput
-    transfers?: transfertCreateNestedManyWithoutMemberInput
-    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
-    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
-    groups?: GroupeCreateNestedManyWithoutUsersInput
-    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
-  }
-
-  export type UserUncheckedCreateWithoutMinistryInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email?: string | null
-    baptismDate?: string | null
-    baptismLocation?: string | null
-    birthCity?: string | null
-    birthCountry?: string | null
-    birthDate?: string | null
-    churchId?: string | null
-    churchRole?: string | null
-    city?: string | null
-    country?: string | null
-    envelopeNumber?: string | null
-    etatCivil?: string | null
-    facebook?: string | null
-    firstname: string
-    instagram?: string | null
-    password?: string | null
-    picture?: string | null
-    profession?: string | null
-    role?: $Enums.Role
-    sex?: string | null
-    code?: string | null
-    sundayClass?: string | null
-    lastname: string
-    membreActif?: boolean
-    addressLine?: string | null
-    homePhone?: string | null
-    isBaptized?: boolean
-    joinDate?: string | null
-    mobilePhone?: string | null
-    age?: string | null
-    minister?: string | null
-    plainPassword?: string | null
-    personToContact?: string | null
-    spouseFullName?: string | null
-    latitude?: string | null
-    longitude?: string | null
-    nif?: string | null
-    groupeSanguin?: string | null
-    istimothee?: boolean | null
-    timotheeId?: string | null
-    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
-    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
-    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
-    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
-    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
-    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
-    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
-  }
-
-  export type UserCreateOrConnectWithoutMinistryInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput>
-  }
-
-  export type UserCreateManyMinistryInputEnvelope = {
-    data: UserCreateManyMinistryInput | UserCreateManyMinistryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ChurchCreateWithoutMinistryInput = {
-    id?: string
-    name: string
-    quantity?: string
-    address?: string | null
-    foundationYear?: string | null
-    phone?: string | null
-    anthem?: string | null
-    facebook?: string | null
-    instagram?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    picture?: string | null
-    option?: string | null
-    email?: string | null
-    mainPasteur?: string | null
-    whatsapp?: string | null
-    latitude?: string | null
-    longitude?: string | null
-    isBaptized?: boolean
-    batism?: BaptismCreateNestedManyWithoutChurchInput
-    fullAddress?: AddressCreateNestedOneWithoutChurchInput
-    mission?: MissionCreateNestedOneWithoutChurchInput
-    tti?: TtiCreateNestedOneWithoutChurchInput
-    events?: EventCreateNestedManyWithoutChurchInput
-    funerals?: FuneralCreateNestedManyWithoutChurchInput
-    groups?: GroupeCreateNestedManyWithoutChurchInput
-    mariages?: MariageCreateNestedManyWithoutChurchInput
-    presentations?: PresentationCreateNestedManyWithoutChurchInput
-    services?: ServiceCreateNestedManyWithoutChurchInput
-    users?: UserCreateNestedManyWithoutChurchInput
-    appointments?: appointmentCreateNestedManyWithoutChurchInput
-    comitees?: comiteeCreateNestedManyWithoutChurchInput
-    death?: deathCreateNestedManyWithoutChurchInput
-    donation?: donationCreateNestedManyWithoutChurchInput
-    expense?: expenseCreateNestedManyWithoutChurchInput
-    moisson?: moissonCreateNestedManyWithoutChurchInput
-    offering?: offeringCreateNestedManyWithoutChurchInput
-    pasteur?: pasteurCreateNestedManyWithoutChurchInput
-    sanction?: sanctionCreateNestedManyWithoutChurchInput
-    sundayClass?: sundayClassCreateNestedManyWithoutChurchInput
-    tithing?: tithingCreateNestedManyWithoutChurchInput
-    transfersFrom?: transfertCreateNestedManyWithoutFromChurchInput
-    transfersTo?: transfertCreateNestedManyWithoutToChurchInput
-  }
-
-  export type ChurchUncheckedCreateWithoutMinistryInput = {
-    id?: string
-    name: string
-    quantity?: string
-    address?: string | null
-    foundationYear?: string | null
-    phone?: string | null
-    anthem?: string | null
-    facebook?: string | null
-    instagram?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    picture?: string | null
-    option?: string | null
-    missionId?: string | null
-    email?: string | null
-    mainPasteur?: string | null
-    whatsapp?: string | null
-    latitude?: string | null
-    longitude?: string | null
-    ttiId?: string | null
-    addressId?: string | null
-    isBaptized?: boolean
-    batism?: BaptismUncheckedCreateNestedManyWithoutChurchInput
-    events?: EventUncheckedCreateNestedManyWithoutChurchInput
-    funerals?: FuneralUncheckedCreateNestedManyWithoutChurchInput
-    groups?: GroupeUncheckedCreateNestedManyWithoutChurchInput
-    mariages?: MariageUncheckedCreateNestedManyWithoutChurchInput
-    presentations?: PresentationUncheckedCreateNestedManyWithoutChurchInput
-    services?: ServiceUncheckedCreateNestedManyWithoutChurchInput
-    users?: UserUncheckedCreateNestedManyWithoutChurchInput
-    appointments?: appointmentUncheckedCreateNestedManyWithoutChurchInput
-    comitees?: comiteeUncheckedCreateNestedManyWithoutChurchInput
-    death?: deathUncheckedCreateNestedManyWithoutChurchInput
-    donation?: donationUncheckedCreateNestedManyWithoutChurchInput
-    expense?: expenseUncheckedCreateNestedManyWithoutChurchInput
-    moisson?: moissonUncheckedCreateNestedManyWithoutChurchInput
-    offering?: offeringUncheckedCreateNestedManyWithoutChurchInput
-    pasteur?: pasteurUncheckedCreateNestedManyWithoutChurchInput
-    sanction?: sanctionUncheckedCreateNestedManyWithoutChurchInput
-    sundayClass?: sundayClassUncheckedCreateNestedManyWithoutChurchInput
-    tithing?: tithingUncheckedCreateNestedManyWithoutChurchInput
-    transfersFrom?: transfertUncheckedCreateNestedManyWithoutFromChurchInput
-    transfersTo?: transfertUncheckedCreateNestedManyWithoutToChurchInput
-  }
-
-  export type ChurchCreateOrConnectWithoutMinistryInput = {
-    where: ChurchWhereUniqueInput
-    create: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
-  }
-
-  export type UserUpsertWithWhereUniqueWithoutMinistryInput = {
-    where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutMinistryInput, UserUncheckedUpdateWithoutMinistryInput>
-    create: XOR<UserCreateWithoutMinistryInput, UserUncheckedCreateWithoutMinistryInput>
-  }
-
-  export type UserUpdateWithWhereUniqueWithoutMinistryInput = {
-    where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutMinistryInput, UserUncheckedUpdateWithoutMinistryInput>
-  }
-
-  export type UserUpdateManyWithWhereWithoutMinistryInput = {
-    where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutMinistryInput>
-  }
-
-  export type ChurchUpsertWithoutMinistryInput = {
-    update: XOR<ChurchUpdateWithoutMinistryInput, ChurchUncheckedUpdateWithoutMinistryInput>
-    create: XOR<ChurchCreateWithoutMinistryInput, ChurchUncheckedCreateWithoutMinistryInput>
-    where?: ChurchWhereInput
-  }
-
-  export type ChurchUpdateToOneWithWhereWithoutMinistryInput = {
-    where?: ChurchWhereInput
-    data: XOR<ChurchUpdateWithoutMinistryInput, ChurchUncheckedUpdateWithoutMinistryInput>
-  }
-
-  export type ChurchUpdateWithoutMinistryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    anthem?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    picture?: NullableStringFieldUpdateOperationsInput | string | null
-    option?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableStringFieldUpdateOperationsInput | string | null
-    longitude?: NullableStringFieldUpdateOperationsInput | string | null
-    isBaptized?: BoolFieldUpdateOperationsInput | boolean
-    batism?: BaptismUpdateManyWithoutChurchNestedInput
-    fullAddress?: AddressUpdateOneWithoutChurchNestedInput
-    mission?: MissionUpdateOneWithoutChurchNestedInput
-    tti?: TtiUpdateOneWithoutChurchNestedInput
-    events?: EventUpdateManyWithoutChurchNestedInput
-    funerals?: FuneralUpdateManyWithoutChurchNestedInput
-    groups?: GroupeUpdateManyWithoutChurchNestedInput
-    mariages?: MariageUpdateManyWithoutChurchNestedInput
-    presentations?: PresentationUpdateManyWithoutChurchNestedInput
-    services?: ServiceUpdateManyWithoutChurchNestedInput
-    users?: UserUpdateManyWithoutChurchNestedInput
-    appointments?: appointmentUpdateManyWithoutChurchNestedInput
-    comitees?: comiteeUpdateManyWithoutChurchNestedInput
-    death?: deathUpdateManyWithoutChurchNestedInput
-    donation?: donationUpdateManyWithoutChurchNestedInput
-    expense?: expenseUpdateManyWithoutChurchNestedInput
-    moisson?: moissonUpdateManyWithoutChurchNestedInput
-    offering?: offeringUpdateManyWithoutChurchNestedInput
-    pasteur?: pasteurUpdateManyWithoutChurchNestedInput
-    sanction?: sanctionUpdateManyWithoutChurchNestedInput
-    sundayClass?: sundayClassUpdateManyWithoutChurchNestedInput
-    tithing?: tithingUpdateManyWithoutChurchNestedInput
-    transfersFrom?: transfertUpdateManyWithoutFromChurchNestedInput
-    transfersTo?: transfertUpdateManyWithoutToChurchNestedInput
-  }
-
-  export type ChurchUncheckedUpdateWithoutMinistryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    quantity?: StringFieldUpdateOperationsInput | string
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    foundationYear?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    anthem?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    picture?: NullableStringFieldUpdateOperationsInput | string | null
-    option?: NullableStringFieldUpdateOperationsInput | string | null
-    missionId?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    mainPasteur?: NullableStringFieldUpdateOperationsInput | string | null
-    whatsapp?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableStringFieldUpdateOperationsInput | string | null
-    longitude?: NullableStringFieldUpdateOperationsInput | string | null
-    ttiId?: NullableStringFieldUpdateOperationsInput | string | null
-    addressId?: NullableStringFieldUpdateOperationsInput | string | null
-    isBaptized?: BoolFieldUpdateOperationsInput | boolean
-    batism?: BaptismUncheckedUpdateManyWithoutChurchNestedInput
-    events?: EventUncheckedUpdateManyWithoutChurchNestedInput
-    funerals?: FuneralUncheckedUpdateManyWithoutChurchNestedInput
-    groups?: GroupeUncheckedUpdateManyWithoutChurchNestedInput
-    mariages?: MariageUncheckedUpdateManyWithoutChurchNestedInput
-    presentations?: PresentationUncheckedUpdateManyWithoutChurchNestedInput
-    services?: ServiceUncheckedUpdateManyWithoutChurchNestedInput
-    users?: UserUncheckedUpdateManyWithoutChurchNestedInput
-    appointments?: appointmentUncheckedUpdateManyWithoutChurchNestedInput
-    comitees?: comiteeUncheckedUpdateManyWithoutChurchNestedInput
-    death?: deathUncheckedUpdateManyWithoutChurchNestedInput
-    donation?: donationUncheckedUpdateManyWithoutChurchNestedInput
-    expense?: expenseUncheckedUpdateManyWithoutChurchNestedInput
-    moisson?: moissonUncheckedUpdateManyWithoutChurchNestedInput
-    offering?: offeringUncheckedUpdateManyWithoutChurchNestedInput
-    pasteur?: pasteurUncheckedUpdateManyWithoutChurchNestedInput
-    sanction?: sanctionUncheckedUpdateManyWithoutChurchNestedInput
-    sundayClass?: sundayClassUncheckedUpdateManyWithoutChurchNestedInput
-    tithing?: tithingUncheckedUpdateManyWithoutChurchNestedInput
-    transfersFrom?: transfertUncheckedUpdateManyWithoutFromChurchNestedInput
-    transfersTo?: transfertUncheckedUpdateManyWithoutToChurchNestedInput
-  }
-
   export type ChurchCreateWithoutPasteurInput = {
     id?: string
     name: string
@@ -55523,6 +55523,204 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserCreateManyMinistryInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email?: string | null
+    baptismDate?: string | null
+    baptismLocation?: string | null
+    birthCity?: string | null
+    birthCountry?: string | null
+    birthDate?: string | null
+    churchId?: string | null
+    churchRole?: string | null
+    city?: string | null
+    country?: string | null
+    envelopeNumber?: string | null
+    etatCivil?: string | null
+    facebook?: string | null
+    firstname: string
+    instagram?: string | null
+    password?: string | null
+    picture?: string | null
+    profession?: string | null
+    role?: $Enums.Role
+    sex?: string | null
+    code?: string | null
+    sundayClass?: string | null
+    lastname: string
+    membreActif?: boolean
+    addressLine?: string | null
+    homePhone?: string | null
+    isBaptized?: boolean
+    joinDate?: string | null
+    mobilePhone?: string | null
+    age?: string | null
+    minister?: string | null
+    plainPassword?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    nif?: string | null
+    groupeSanguin?: string | null
+    istimothee?: boolean | null
+    timotheeId?: string | null
+  }
+
+  export type UserUpdateWithoutMinistryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    presences?: PresenceUpdateManyWithoutUserNestedInput
+    church?: ChurchUpdateOneWithoutUsersNestedInput
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
+    transfers?: transfertUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
+    groups?: GroupeUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMinistryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
+    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateManyWithoutMinistryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type UserUpdateWithoutGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56273,204 +56471,6 @@ export namespace Prisma {
     ttiId?: NullableStringFieldUpdateOperationsInput | string | null
     addressId?: NullableStringFieldUpdateOperationsInput | string | null
     isBaptized?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserCreateManyMinistryInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    email?: string | null
-    baptismDate?: string | null
-    baptismLocation?: string | null
-    birthCity?: string | null
-    birthCountry?: string | null
-    birthDate?: string | null
-    churchId?: string | null
-    churchRole?: string | null
-    city?: string | null
-    country?: string | null
-    envelopeNumber?: string | null
-    etatCivil?: string | null
-    facebook?: string | null
-    firstname: string
-    instagram?: string | null
-    password?: string | null
-    picture?: string | null
-    profession?: string | null
-    role?: $Enums.Role
-    sex?: string | null
-    code?: string | null
-    sundayClass?: string | null
-    lastname: string
-    membreActif?: boolean
-    addressLine?: string | null
-    homePhone?: string | null
-    isBaptized?: boolean
-    joinDate?: string | null
-    mobilePhone?: string | null
-    age?: string | null
-    minister?: string | null
-    plainPassword?: string | null
-    personToContact?: string | null
-    spouseFullName?: string | null
-    latitude?: string | null
-    longitude?: string | null
-    nif?: string | null
-    groupeSanguin?: string | null
-    istimothee?: boolean | null
-    timotheeId?: string | null
-  }
-
-  export type UserUpdateWithoutMinistryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
-    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: StringFieldUpdateOperationsInput | string
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    picture?: NullableStringFieldUpdateOperationsInput | string | null
-    profession?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    sex?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    membreActif?: BoolFieldUpdateOperationsInput | boolean
-    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
-    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isBaptized?: BoolFieldUpdateOperationsInput | boolean
-    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
-    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableStringFieldUpdateOperationsInput | string | null
-    minister?: NullableStringFieldUpdateOperationsInput | string | null
-    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
-    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
-    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableStringFieldUpdateOperationsInput | string | null
-    longitude?: NullableStringFieldUpdateOperationsInput | string | null
-    nif?: NullableStringFieldUpdateOperationsInput | string | null
-    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
-    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    presences?: PresenceUpdateManyWithoutUserNestedInput
-    church?: ChurchUpdateOneWithoutUsersNestedInput
-    timothee?: UserUpdateOneWithoutTithesNestedInput
-    tithes?: UserUpdateManyWithoutTimotheeNestedInput
-    transfers?: transfertUpdateManyWithoutMemberNestedInput
-    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
-    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
-    groups?: GroupeUpdateManyWithoutUsersNestedInput
-    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutMinistryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
-    churchId?: NullableStringFieldUpdateOperationsInput | string | null
-    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: StringFieldUpdateOperationsInput | string
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    picture?: NullableStringFieldUpdateOperationsInput | string | null
-    profession?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    sex?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    membreActif?: BoolFieldUpdateOperationsInput | boolean
-    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
-    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isBaptized?: BoolFieldUpdateOperationsInput | boolean
-    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
-    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableStringFieldUpdateOperationsInput | string | null
-    minister?: NullableStringFieldUpdateOperationsInput | string | null
-    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
-    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
-    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableStringFieldUpdateOperationsInput | string | null
-    longitude?: NullableStringFieldUpdateOperationsInput | string | null
-    nif?: NullableStringFieldUpdateOperationsInput | string | null
-    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
-    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
-    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
-    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
-    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
-    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
-    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
-    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
-    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
-  }
-
-  export type UserUncheckedUpdateManyWithoutMinistryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
-    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
-    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
-    churchId?: NullableStringFieldUpdateOperationsInput | string | null
-    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
-    city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
-    facebook?: NullableStringFieldUpdateOperationsInput | string | null
-    firstname?: StringFieldUpdateOperationsInput | string
-    instagram?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    picture?: NullableStringFieldUpdateOperationsInput | string | null
-    profession?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    sex?: NullableStringFieldUpdateOperationsInput | string | null
-    code?: NullableStringFieldUpdateOperationsInput | string | null
-    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    membreActif?: BoolFieldUpdateOperationsInput | boolean
-    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
-    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    isBaptized?: BoolFieldUpdateOperationsInput | boolean
-    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
-    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
-    age?: NullableStringFieldUpdateOperationsInput | string | null
-    minister?: NullableStringFieldUpdateOperationsInput | string | null
-    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
-    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
-    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: NullableStringFieldUpdateOperationsInput | string | null
-    longitude?: NullableStringFieldUpdateOperationsInput | string | null
-    nif?: NullableStringFieldUpdateOperationsInput | string | null
-    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
-    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CommuneCreateManyDepartementInput = {

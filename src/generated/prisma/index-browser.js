@@ -226,6 +226,15 @@ exports.Prisma.UserScalarFieldEnum = {
   ministryId: 'ministryId'
 };
 
+exports.Prisma.MinistryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.GroupeScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -478,15 +487,6 @@ exports.Prisma.SanctionScalarFieldEnum = {
   endDate: 'endDate'
 };
 
-exports.Prisma.MinistryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  churchId: 'churchId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.PasteurScalarFieldEnum = {
   id: 'id',
   pasteurName: 'pasteurName',
@@ -612,6 +612,13 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   groupeSanguin: 'groupeSanguin',
   timotheeId: 'timotheeId',
   ministryId: 'ministryId'
+};
+
+exports.Prisma.ministryOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  churchId: 'churchId'
 };
 
 exports.Prisma.GroupeOrderByRelevanceFieldEnum = {
@@ -823,13 +830,6 @@ exports.Prisma.sanctionOrderByRelevanceFieldEnum = {
   endDate: 'endDate'
 };
 
-exports.Prisma.ministryOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  churchId: 'churchId'
-};
-
 exports.Prisma.pasteurOrderByRelevanceFieldEnum = {
   id: 'id',
   pasteurName: 'pasteurName',
@@ -879,6 +879,7 @@ exports.Prisma.ModelName = {
   Address: 'Address',
   Church: 'Church',
   User: 'User',
+  ministry: 'ministry',
   Groupe: 'Groupe',
   Event: 'Event',
   Mariage: 'Mariage',
@@ -897,7 +898,6 @@ exports.Prisma.ModelName = {
   transfert: 'transfert',
   Mission: 'Mission',
   sanction: 'sanction',
-  ministry: 'ministry',
   pasteur: 'pasteur',
   Departement: 'Departement',
   Commune: 'Commune',
