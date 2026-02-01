@@ -66,7 +66,7 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
   try {
     const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
       birthCountry, baptismDate, baptismLocation, mobilePhone, homePhone, facebook, email, addressLine, city, birthCity, profession,
-      churchId, age, personToContact, spouseFullName, minister, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
+      churchId, age, personToContact, spouseFullName, ministryId, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
     } = req.body;
 
     console.log("groupId : ", groupId, sundayClassId, isBaptized)
@@ -115,7 +115,6 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       email: email || null, // Ensure email is null when not provided
       role: role || "Membre",
       personToContact: personToContact || "",
-      minister: minister || "",
       spouseFullName: spouseFullName || "",
       etatCivil: civilState || "",
       birthDate: birthDate || "",
@@ -146,6 +145,10 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
 
     if (groupId) {
       createData.groups = { connect: { id: groupId } };
+    }
+
+    if (ministryId) {
+      createData.ministry = { connect: { id: ministryId } };
     }
 
     const user = await prisma.user.create({
@@ -544,6 +547,19 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
         cleanedData[field] = cleanedData[field] === "true";
       }
     });
+
+    // Handle ministry relationship
+    if (userData.ministryId !== undefined) {
+      if (userData.ministryId === '' || userData.ministryId === null) {
+        // Disconnect ministry if empty
+        cleanedData.ministry = { disconnect: true };
+      } else {
+        // Connect to ministry
+        cleanedData.ministry = { connect: { id: userData.ministryId } };
+      }
+      // Remove ministryId from cleanedData as we've handled it with the relationship
+      delete cleanedData.ministryId;
+    }
 
     const user = await prisma.user.update({
       where: { id: req.params.id },

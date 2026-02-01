@@ -138,7 +138,8 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', upload.single('churchImage'), async (req, res) => {
   try {
     // Extract data from request body
-    const { country, departement, commune, sectionCommunale, telephone, rue, ...otherData } = req.body;
+    const { country, departement, commune, sectionCommunale, option, foundationYear, telephone, rue, ...otherData } = req.body;
+
 
     // Prepare church data
     const churchData: Record<string, any> = otherData;
@@ -146,6 +147,14 @@ router.put('/:id', upload.single('churchImage'), async (req, res) => {
     // If a file was uploaded, add the file path to the church data
     if (req.file) {
       churchData.picture = `/uploads/${req.file.filename}`;
+    }
+
+    // Add option and foundationYear to churchData if provided
+    if (option !== undefined) {
+      churchData.option = option;
+    }
+    if (foundationYear !== undefined) {
+      churchData.foundationYear = foundationYear;
     }
 
     // Handle fullAddress update if address fields are provided
@@ -190,7 +199,7 @@ router.put('/:id', upload.single('churchImage'), async (req, res) => {
     });
     res.json(church);
   } catch (error) {
-    console.log("error : ", error)
+    console.log("see all the errors right now : ", error)
     res.status(400).json({ error: error });
   }
 });

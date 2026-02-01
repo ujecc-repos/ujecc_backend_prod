@@ -69,13 +69,13 @@ router.get('/president/:presidentName', async (req, res) => {
   console.log("presidentName : ", presidentName)
   try {
     const mission = await prisma.mission.findFirst({
-      where: { 
+      where: {
         presidentName: {
           contains: presidentName.toLowerCase().trim(),
           // mode: 'insensitive'
         }
       },
-      include: { 
+      include: {
         church: {
           include: {
             users: true,
@@ -373,7 +373,7 @@ router.put('/:id', async (req, res) => {
     presidentName,
   } = req.body;
   console.log(req.body)
-  
+
 
   try {
     const updatedMission = await prisma.mission.update({
@@ -415,13 +415,13 @@ router.get('/people/:presidentName', async (req, res) => {
   try {
     // Find the mission by president name
     const mission = await prisma.mission.findFirst({
-      where: { 
+      where: {
         presidentName: {
           contains: presidentNameLower,
           // mode: 'insensitive'
         }
       },
-      include: { 
+      include: {
         church: {
           select: {
             id: true
@@ -486,13 +486,13 @@ router.get('/groups/:presidentName', async (req, res) => {
   try {
     // Find the mission by president name
     const mission = await prisma.mission.findFirst({
-      where: { 
+      where: {
         presidentName: {
           contains: presidentNameLower,
           // mode: 'insensitive'
         }
       },
-      include: { 
+      include: {
         church: {
           select: {
             id: true
@@ -500,7 +500,7 @@ router.get('/groups/:presidentName', async (req, res) => {
         }
       },
     });
-    
+
     console.log("mission : ", mission)
 
     if (!mission) {
@@ -550,13 +550,13 @@ router.get('/pasteurs/:presidentName', async (req, res) => {
   try {
     // Find the mission by president name
     const mission = await prisma.mission.findFirst({
-      where: { 
+      where: {
         presidentName: {
           contains: presidentName.toLowerCase().trim(),
           // mode: 'insensitive'
         }
       },
-      include: { 
+      include: {
         church: {
           select: {
             id: true
@@ -596,6 +596,46 @@ router.get('/pasteurs/:presidentName', async (req, res) => {
   }
 });
 
+// Get all churches from a specific president's mission
+router.get('/churches/:presidentName', async (req, res) => {
+  const { presidentName } = req.params;
+
+  try {
+    // Find the mission by president name
+    const mission = await prisma.mission.findFirst({
+      where: {
+        presidentName: {
+          contains: presidentName.toLowerCase().trim(),
+          // mode: 'insensitive'
+        }
+      },
+      include: {
+        church: {
+          include: {
+            mission: {
+              select: {
+                missionName: true,
+                presidentName: true
+              }
+            },
+            fullAddress: true
+          }
+        }
+      },
+    });
+
+    if (!mission) {
+      return res.status(404).json({ error: 'Aucune mission trouvée pour ce président.' });
+    }
+
+    // Return all churches with their details
+    // console.log("mission.church : ", mission.church)
+    res.status(200).json(mission.church);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erreur lors de la récupération des églises.' });
+  }
+});
 
 
 export default router;
