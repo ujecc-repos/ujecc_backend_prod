@@ -617,7 +617,8 @@ router.get('/church/:churchId', async (req, res) => {
       where: { churchId: req.params.churchId },
       include: {
         church: true,
-        groups: true
+        groups: true,
+        ministry: true
       }
     });
     console.log("users : ", users)
