@@ -7,13 +7,28 @@ const router = express.Router()
  * Créer une présence pour un utilisateur et un événement
  */
 router.post("/", async (req, res) => {
-  const { utilisateurId, serviceId, statut } = req.body;
+  const { utilisateurId, serviceId, statut, attendanceDate } = req.body;
+  const offlineOperationId = typeof req.body.offlineOperationId === 'string'
+    ? req.body.offlineOperationId.trim().slice(0, 191)
+    : undefined;
   try {
-    // Check if user has already marked presence for this service today
+    if (offlineOperationId) {
+      const previousAttempt = await prisma.presence.findUnique({
+        where: { offlineOperationId },
+        include: { user: true, service: true },
+      });
+      if (previousAttempt) {
+        return res.json({ ...previousAttempt, deduplicated: true });
+      }
+    }
 
-    const today = new Date();
-    const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
-    const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+    // Preserve the calendar day on which attendance was marked offline.
+    const validAttendanceDate = typeof attendanceDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(attendanceDate)
+      ? attendanceDate
+      : new Date().toISOString().slice(0, 10);
+    const markedDate = new Date(`${validAttendanceDate}T12:00:00.000Z`);
+    const startOfDay = new Date(`${validAttendanceDate}T00:00:00.000Z`);
+    const endOfDay = new Date(`${validAttendanceDate}T23:59:59.999Z`);
 
     const existingPresence = await prisma.presence.findFirst({
       where: {
@@ -27,18 +42,34 @@ router.post("/", async (req, res) => {
     });
 
     if (existingPresence) {
-      return res.status(400).json({
-        error: "Vous avez déjà marqué votre présence pour ce service aujourd'hui"
+      return res.status(409).json({
+        error: "Vous avez déjà marqué votre présence pour ce service aujourd'hui",
+        code: 'PRESENCE_ALREADY_EXISTS'
       });
     }
 
     // Create the presence if no duplicate found
     const presence = await prisma.presence.create({
-      data: { utilisateurId, serviceId, statut },
+      data: {
+        utilisateurId,
+        serviceId,
+        statut,
+        createdAt: markedDate,
+        offlineOperationId: offlineOperationId || null,
+      },
       include: { user: true, service: true },
     });
     res.json(presence);
   } catch (err) {
+    if (offlineOperationId) {
+      const previousAttempt = await prisma.presence.findUnique({
+        where: { offlineOperationId },
+        include: { user: true, service: true },
+      });
+      if (previousAttempt) {
+        return res.json({ ...previousAttempt, deduplicated: true });
+      }
+    }
     console.log("error is : ", err)
     res.status(500).json({ error: "Impossible de créer la présence" });
   }
