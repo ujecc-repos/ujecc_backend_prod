@@ -31,15 +31,26 @@ import pasteurRoutes from './routes/pasteur.routes'
 import statsRoutes from './routes/stats.routes'
 import presenceRoutes from "./routes/presence.route"
 import serviceRoutes from "./routes/service.routes"
+import messageRoutes from "./routes/message.routes"
 
 // Initialize environment variables
 dotenv.config();
 
 // Create Express application
 const app = express();
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:4173',
+  'http://127.0.0.1:4173',
+  'https://ujecc-test.onrender.com',
+].filter((origin): origin is string => Boolean(origin));
+
 // Middleware
 app.use(cors({
-  origin: [`${process.env.FRONTEND_URL}`, "https://ujecc-test.onrender.com"],
+  origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 }));
@@ -119,6 +130,7 @@ app.use('/api/pasteurs', pasteurRoutes)
 app.use('/api/stats', statsRoutes)
 app.use('/api/presences', presenceRoutes)
 app.use('/api/services', serviceRoutes)
+app.use('/api/messages', messageRoutes)
 
 // Import Sunday Class routes
 import sundayClassRoutes from './routes/sundayClass.routes';

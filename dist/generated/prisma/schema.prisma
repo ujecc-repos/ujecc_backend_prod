@@ -1,0 +1,598 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id        String     @id @default(cuid())
+  nom       String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  churchId  String?
+  presences Presence[]
+  church    Church?    @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Service_churchId_fkey")
+}
+
+model Presence {
+  id                 String         @id @default(cuid())
+  offlineOperationId String?        @unique
+  statut             StatutPresence
+  utilisateurId      String
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  serviceId          String
+  service            Service        @relation(fields: [serviceId], references: [id])
+  user               User           @relation(fields: [utilisateurId], references: [id])
+
+  @@index([serviceId], map: "Presence_serviceId_fkey")
+  @@index([utilisateurId], map: "Presence_utilisateurId_fkey")
+}
+
+model Tti {
+  id        String   @id @default(cuid())
+  nom       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  church    Church[]
+}
+
+model Address {
+  id               String  @id @default(cuid())
+  country          String?
+  departement      String?
+  commune          String?
+  sectionCommunale String?
+  telephone        String?
+  rue              String?
+  church           Church?
+}
+
+model Church {
+  id             String         @id @default(uuid())
+  name           String         @unique
+  quantity       String         @default("1")
+  address        String?
+  foundationYear String?
+  phone          String?
+  anthem         String?
+  facebook       String?
+  instagram      String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  picture        String?
+  option         String?
+  missionId      String?
+  email          String?
+  mainPasteur    String?
+  whatsapp       String?
+  latitude       String?
+  longitude      String?
+  ttiId          String?
+  addressId      String?        @unique
+  batism         Baptism[]
+  fullAddress    Address?       @relation(fields: [addressId], references: [id])
+  mission        Mission?       @relation(fields: [missionId], references: [id])
+  tti            Tti?           @relation(fields: [ttiId], references: [id])
+  events         Event[]
+  funerals       Funeral[]
+  groups         Groupe[]
+  mariages       Mariage[]
+  presentations  Presentation[]
+  services       Service[]
+  users          User[]
+  isBaptized     Boolean        @default(false)
+  appointments   appointment[]
+  comitees       comitee[]
+  death          death[]
+  donation       donation[]
+  expense        expense[]
+  ministry       ministry[]
+  moisson        moisson[]
+  offering       offering[]
+  pasteur        pasteur[]
+  sanction       sanction[]
+  sundayClass    sundayClass[]
+  tithing        tithing[]
+  transfersFrom  transfert[]    @relation("FromChurch")
+  transfersTo    transfert[]    @relation("ToChurch")
+
+  @@index([missionId], map: "Church_missionId_fkey")
+  @@index([ttiId], map: "Church_ttiId_fkey")
+}
+
+model User {
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  email              String?  @unique
+  baptismDate        String?
+  baptismLocation    String?
+  birthCity          String?
+  birthCountry       String?
+  birthDate          String?
+  churchId           String?
+  churchRole         String?
+  city               String?
+  country            String?
+  envelopeNumber     String?
+  etatCivil          String?
+  facebook           String?
+  firstname          String
+  instagram          String?
+  password           String?  @unique
+  picture            String?
+  profession         String?
+  role               Role     @default(Membre)
+  sex                String?
+  code               String?  @unique
+  sundayClass        String?
+  lastname           String
+  membreActif        Boolean  @default(true)
+  addressLine        String?
+  homePhone          String?
+  isBaptized         Boolean  @default(false)
+  joinDate           String?
+  mobilePhone        String?
+  age                String?
+  minister           String?
+  plainPassword      String?
+  personToContact    String?
+  spouseFullName     String?
+  latitude           String?
+  longitude          String?
+  nif                String?
+  groupeSanguin      String?
+  istimothee         Boolean? @default(false)
+  timotheeId         String?
+  // 👇 Foreign key (each user belongs to ONE ministry)
+  ministryId         String?
+  // Stable client-generated ID used to make offline member creation idempotent.
+  offlineOperationId String?  @unique
+
+  ministry ministry? @relation(fields: [ministryId], references: [id])
+
+  presences                Presence[]
+  church                   Church?                   @relation(fields: [churchId], references: [id])
+  timothee                 User?                     @relation("TimotheeTithes", fields: [timotheeId], references: [id])
+  tithes                   User[]                    @relation("TimotheeTithes")
+  transfers                transfert[]
+  leadingComittees         comitee[]                 @relation("ComiteeLeaders")
+  memberComittees          comitee[]                 @relation("ComiteeMembers")
+  groups                   Groupe[]                  @relation("GroupeToUser")
+  userAppointments         appointment[]             @relation("UserToappointment")
+  conversationParticipants ConversationParticipant[]
+  sentMessages             Message[]                 @relation("SentMessages")
+
+  @@index([churchId], map: "User_churchId_fkey")
+  @@index([timotheeId], map: "User_timotheeId_fkey")
+  @@index([firstname], map: "User_firstname_idx")
+  @@index([lastname], map: "User_lastname_idx")
+}
+
+model Conversation {
+  id           String                    @id @default(uuid())
+  title        String?
+  isGroup      Boolean                   @default(false)
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+  participants ConversationParticipant[]
+  messages     Message[]
+}
+
+model ConversationParticipant {
+  conversationId String
+  userId         String
+  joinedAt       DateTime     @default(now())
+  lastReadAt     DateTime     @default(now())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  content        String       @db.Text
+  attachmentUrl  String?
+  attachmentName String?
+  attachmentType String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  conversationId String
+  senderId       String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
+  @@index([senderId])
+}
+
+model ministry {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  churchId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  // 👇 ONE ministry has MANY users
+  users       User[]
+
+  church Church? @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "ministry_churchId_fkey")
+}
+
+model Groupe {
+  id               String   @id @default(uuid())
+  name             String
+  description      String?
+  picture          String?
+  showToMembers    Boolean?
+  showToNonMembers Boolean?
+  showMembers      Boolean?
+  showLeaders      Boolean?
+  meetingDays      String?
+  meetingTime      String?
+  meetingLocation  String?
+  meetingFrequency String?
+  maxMembers       String?
+  churchId         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  ageGroup         String?
+  minister         String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+  users            User[]   @relation("GroupeToUser")
+
+  @@index([churchId], map: "Groupe_churchId_fkey")
+}
+
+model Event {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  location     String?
+  frequency    String
+  startDate    String
+  endDate      String
+  churchId     String?
+  createAt     DateTime @default(now())
+  updateAt     DateTime @updatedAt
+  isRecurring  Boolean  @default(true)
+  endPeriode   String?
+  startPeriode String?
+  church       Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Event_churchId_fkey")
+}
+
+model Mariage {
+  id                     String   @id @default(uuid())
+  brideFullname          String
+  birthDate              DateTime
+  groomFullname          String
+  goomBirthDate          DateTime
+  weddingDate            DateTime
+  weddingLocation        String
+  weddingCertificate     String?
+  officiantName          String
+  churchId               String?
+  brideCertificate       String?
+  civilStateOfficer      String?
+  grooomCertificate      String?
+  witness                String?
+  civilStateStateOfficer String?
+  witnessSignature       String?
+  church                 Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Mariage_churchId_fkey")
+}
+
+model Funeral {
+  id               String   @id @default(uuid())
+  fullname         String
+  birthDate        DateTime
+  funeralDate      DateTime
+  funeralTime      String
+  relationShip     String
+  email            String
+  deathCertificate String?
+  nextOfKin        String
+  officiantName    String
+  description      String
+  funeralLocation  String
+  churchId         String?
+  createdAt        DateTime @default(now())
+  status           String   @default("en attente")
+  updatedAt        DateTime @updatedAt
+  telephone        String?
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Funeral_churchId_fkey")
+}
+
+model Presentation {
+  id               String   @id @default(uuid())
+  placeOfBirth     String
+  birthCertificate String?
+  fatherName       String
+  motherName       String
+  phone            String
+  address          String
+  presentationDate DateTime
+  officiantName    String
+  description      String?
+  churchId         String?
+  childName        String
+  dateOfBirth      DateTime
+  witness          String
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Presentation_churchId_fkey")
+}
+
+model Baptism {
+  id                 String   @id @default(uuid())
+  fullName           String
+  birthDate          DateTime
+  placeOfBirth       String
+  baptismDate        DateTime
+  baptismCertificate String?
+  officiantName      String
+  withness           String
+  previousChurch     String
+  testimony          String
+  churchId           String?
+  conversionDate     DateTime
+  status             String?
+  baptismLocation    String
+  endDate            String?
+  startDate          String?
+  church             Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "Baptism_churchId_fkey")
+}
+
+model death {
+  id               String   @id @default(uuid())
+  deathDate        DateTime
+  deathPlace       String
+  deathCause       String
+  deathCertificate String?
+  churchId         String?
+  deathTime        String
+  description      String?
+  location         String
+  officiantName    String
+  relationShip     String
+  serviceDate      DateTime
+  nextOfKin        String
+  church           Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "death_churchId_fkey")
+}
+
+model sundayClass {
+  id          String   @id @default(uuid())
+  nom         String
+  teacher     String
+  startTime   String
+  endTime     String
+  description String
+  churchId    String?
+  createdAt   DateTime @default(now())
+  maxStudents String
+  ageGroup    String
+  book        String?
+  church      Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "sundayClass_churchId_fkey")
+}
+
+model expense {
+  id            String   @id @default(uuid())
+  amount        Int
+  category      String
+  date          DateTime
+  paymentMethod String
+  description   String
+  churchId      String?
+  currency      String?
+  church        Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "expense_churchId_fkey")
+}
+
+model offering {
+  id            String   @id @default(uuid())
+  amount        Int
+  date          DateTime
+  paymentMethod String
+  note          String
+  currency      String?
+  churchId      String?
+  status        String?
+  church        Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "offering_churchId_fkey")
+}
+
+model tithing {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  currency        String?
+  churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "tithing_churchId_fkey")
+}
+
+model donation {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  currency        String?
+  churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "donation_churchId_fkey")
+}
+
+model moisson {
+  id              String   @id @default(uuid())
+  contributorName String
+  amount          Int
+  date            DateTime
+  paymentMethod   String
+  note            String
+  currency        String?
+  churchId        String?
+  church          Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "moisson_churchId_fkey")
+}
+
+model comitee {
+  id             String  @id @default(uuid())
+  description    String
+  meetingDay     String
+  meetingTime    String
+  name           String
+  churchId       String?
+  church         Church? @relation(fields: [churchId], references: [id])
+  commiteeLeader User[]  @relation("ComiteeLeaders")
+  commiteeMember User[]  @relation("ComiteeMembers")
+
+  @@index([churchId], map: "comitee_churchId_fkey")
+}
+
+model appointment {
+  id            String   @id @default(uuid())
+  name          String
+  visibility    String?
+  description   String
+  date          DateTime
+  time          String
+  duration      String
+  notes         String
+  churchId      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  church        Church?  @relation(fields: [churchId], references: [id])
+  assignedUsers User[]   @relation("UserToappointment")
+
+  @@index([churchId], map: "appointment_churchId_fkey")
+}
+
+model transfert {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  fromChurchId String
+  toChurchId   String
+  userId       String
+  fromChurch   Church   @relation("FromChurch", fields: [fromChurchId], references: [id])
+  toChurch     Church   @relation("ToChurch", fields: [toChurchId], references: [id])
+  member       User     @relation(fields: [userId], references: [id])
+
+  @@index([fromChurchId], map: "transfert_fromChurchId_fkey")
+  @@index([toChurchId], map: "transfert_toChurchId_fkey")
+  @@index([userId], map: "transfert_userId_fkey")
+}
+
+model Mission {
+  id            String   @id @default(uuid())
+  missionName   String
+  description   String
+  status        String
+  location      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  presidentName String?
+  church        Church[]
+}
+
+model sanction {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  startDate   String
+  status      String
+  churchId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  endDate     String?
+  church      Church?  @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "sanction_churchId_fkey")
+}
+
+model pasteur {
+  id          String  @id @default(uuid())
+  pasteurName String
+  churchId    String?
+  address     String
+  phone       String
+  status      String
+  email       String?
+  church      Church? @relation(fields: [churchId], references: [id])
+
+  @@index([churchId], map: "pasteur_churchId_fkey")
+}
+
+model Departement {
+  id      String    @id @default(uuid())
+  name    String    @unique
+  commune Commune[]
+}
+
+model Commune {
+  id               String             @id @default(uuid())
+  name             String             @unique
+  departementId    String
+  departement      Departement        @relation(fields: [departementId], references: [id])
+  sectionCommunale SectionCommunale[]
+
+  @@index([departementId], map: "Commune_departementId_fkey")
+}
+
+model SectionCommunale {
+  id        String  @id @default(uuid())
+  name      String  @unique
+  communeId String
+  commune   Commune @relation(fields: [communeId], references: [id])
+
+  @@index([communeId], map: "SectionCommunale_communeId_fkey")
+}
+
+enum Role {
+  Admin
+  Membre
+  SuperAdmin
+  Directeur
+  Invite
+  Leader
+}
+
+enum StatutPresence {
+  PRESENT
+  ABSENT
+  EN_RETARD
+  MOTIVE
+}
