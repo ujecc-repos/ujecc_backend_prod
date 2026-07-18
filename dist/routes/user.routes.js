@@ -91,7 +91,10 @@ router.post('/', upload_1.default.single('profileImage'), handleMulterError, asy
                 where: { email: email }
             });
             if (existingUser) {
-                return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+                return res.status(400).json({
+                    code: 'DUPLICATE_EMAIL',
+                    error: 'Désolé, cette adresse email existe déjà',
+                });
             }
         }
         if (nif !== "" && nif !== null && nif !== undefined) {
@@ -99,7 +102,10 @@ router.post('/', upload_1.default.single('profileImage'), handleMulterError, asy
                 where: { nif: nif }
             });
             if (existingUserNif) {
-                return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
+                return res.status(400).json({
+                    code: 'DUPLICATE_NIF',
+                    error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre',
+                });
             }
         }
         const salt = await bcryptjs_1.default.genSalt(10);
