@@ -170,6 +170,7 @@ model User {
   userAppointments         appointment[]             @relation("UserToappointment")
   conversationParticipants ConversationParticipant[]
   sentMessages             Message[]                 @relation("SentMessages")
+  ownedConversations       Conversation[]            @relation("ConversationOwner")
 
   @@index([churchId], map: "User_churchId_fkey")
   @@index([timotheeId], map: "User_timotheeId_fkey")
@@ -181,10 +182,14 @@ model Conversation {
   id           String                    @id @default(uuid())
   title        String?
   isGroup      Boolean                   @default(false)
+  ownerId      String?
   createdAt    DateTime                  @default(now())
   updatedAt    DateTime                  @updatedAt
+  owner        User?                     @relation("ConversationOwner", fields: [ownerId], references: [id], onDelete: SetNull)
   participants ConversationParticipant[]
   messages     Message[]
+
+  @@index([ownerId])
 }
 
 model ConversationParticipant {
@@ -483,19 +488,20 @@ model comitee {
 }
 
 model appointment {
-  id            String   @id @default(uuid())
-  name          String
-  visibility    String?
-  description   String
-  date          DateTime
-  time          String
-  duration      String
-  notes         String
-  churchId      String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  church        Church?  @relation(fields: [churchId], references: [id])
-  assignedUsers User[]   @relation("UserToappointment")
+  id                   String   @id @default(uuid())
+  name                 String
+  visibility           String?
+  description          String
+  date                 DateTime
+  time                 String
+  duration             String
+  notes                String
+  externalParticipants String?  @db.Text
+  churchId             String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  church               Church?  @relation(fields: [churchId], references: [id])
+  assignedUsers        User[]   @relation("UserToappointment")
 
   @@index([churchId], map: "appointment_churchId_fkey")
 }

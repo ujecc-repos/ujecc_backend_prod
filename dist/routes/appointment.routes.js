@@ -9,6 +9,17 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const client_1 = require("../utils/client");
 const router = (0, express_1.Router)();
 const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
+const normalizeExternalParticipants = (value) => {
+    if (typeof value !== 'string')
+        return undefined;
+    const names = value
+        .split(/\r?\n/)
+        .map((name) => name.trim())
+        .filter(Boolean)
+        .slice(0, 100)
+        .join('\n');
+    return names ? names.slice(0, 5000) : null;
+};
 const requireChurchAdmin = async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
@@ -40,7 +51,7 @@ router.use(requireChurchAdmin);
 // Create a new appointment
 router.post("/", async (req, res) => {
     try {
-        const { name, visibility, description, date, time, duration, notes, userIds } = req.body;
+        const { name, visibility, description, date, time, duration, notes, userIds, externalParticipants } = req.body;
         const churchId = req.appointmentAdmin.churchId;
         // if (!userIds || userIds.length === 0) {
         //   return res.status(400).json({ error: "At least one user must be assigned" });
@@ -58,6 +69,7 @@ router.post("/", async (req, res) => {
                 time,
                 duration,
                 notes,
+                externalParticipants: normalizeExternalParticipants(externalParticipants),
                 assignedUsers: {
                     connect: (Array.isArray(userIds) ? userIds : []).map((id) => ({ id }))
                 },
@@ -132,7 +144,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, visibility, description, date, time, duration, notes, userIds } = req.body;
+        const { name, visibility, description, date, time, duration, notes, userIds, externalParticipants } = req.body;
         const existingAppointment = await client_1.prisma.appointment.findFirst({
             where: { id, churchId: req.appointmentAdmin.churchId },
             select: { id: true },
@@ -150,6 +162,7 @@ router.put("/:id", async (req, res) => {
                 time,
                 duration,
                 notes,
+                externalParticipants: normalizeExternalParticipants(externalParticipants),
                 assignedUsers: {
                     set: (Array.isArray(userIds) ? userIds : []).map((id) => ({ id }))
                 },

@@ -232,6 +232,7 @@ exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   title: 'title',
   isGroup: 'isGroup',
+  ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -479,6 +480,7 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   time: 'time',
   duration: 'duration',
   notes: 'notes',
+  externalParticipants: 'externalParticipants',
   churchId: 'churchId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -647,7 +649,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ConversationOrderByRelevanceFieldEnum = {
   id: 'id',
-  title: 'title'
+  title: 'title',
+  ownerId: 'ownerId'
 };
 
 exports.Prisma.ConversationParticipantOrderByRelevanceFieldEnum = {
@@ -852,6 +855,7 @@ exports.Prisma.appointmentOrderByRelevanceFieldEnum = {
   time: 'time',
   duration: 'duration',
   notes: 'notes',
+  externalParticipants: 'externalParticipants',
   churchId: 'churchId'
 };
 
