@@ -3760,6 +3760,7 @@ export namespace Prisma {
     userAppointments: number
     conversationParticipants: number
     sentMessages: number
+    ownedConversations: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3772,6 +3773,7 @@ export namespace Prisma {
     userAppointments?: boolean | UserCountOutputTypeCountUserAppointmentsArgs
     conversationParticipants?: boolean | UserCountOutputTypeCountConversationParticipantsArgs
     sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+    ownedConversations?: boolean | UserCountOutputTypeCountOwnedConversationsArgs
   }
 
   // Custom InputTypes
@@ -3846,6 +3848,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MessageWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOwnedConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConversationWhereInput
   }
 
 
@@ -10261,6 +10270,7 @@ export namespace Prisma {
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
     conversationParticipants?: boolean | User$conversationParticipantsArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    ownedConversations?: boolean | User$ownedConversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -10328,6 +10338,7 @@ export namespace Prisma {
     userAppointments?: boolean | User$userAppointmentsArgs<ExtArgs>
     conversationParticipants?: boolean | User$conversationParticipantsArgs<ExtArgs>
     sentMessages?: boolean | User$sentMessagesArgs<ExtArgs>
+    ownedConversations?: boolean | User$ownedConversationsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -10346,6 +10357,7 @@ export namespace Prisma {
       userAppointments: Prisma.$appointmentPayload<ExtArgs>[]
       conversationParticipants: Prisma.$ConversationParticipantPayload<ExtArgs>[]
       sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+      ownedConversations: Prisma.$ConversationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10745,6 +10757,7 @@ export namespace Prisma {
     userAppointments<T extends User$userAppointmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$userAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$appointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     conversationParticipants<T extends User$conversationParticipantsArgs<ExtArgs> = {}>(args?: Subset<T, User$conversationParticipantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sentMessages<T extends User$sentMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ownedConversations<T extends User$ownedConversationsArgs<ExtArgs> = {}>(args?: Subset<T, User$ownedConversationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11435,6 +11448,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.ownedConversations
+   */
+  export type User$ownedConversationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Conversation
+     */
+    select?: ConversationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Conversation
+     */
+    omit?: ConversationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConversationInclude<ExtArgs> | null
+    where?: ConversationWhereInput
+    orderBy?: ConversationOrderByWithRelationInput | ConversationOrderByWithRelationInput[]
+    cursor?: ConversationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConversationScalarFieldEnum | ConversationScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11467,6 +11504,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     isGroup: boolean | null
+    ownerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11475,6 +11513,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     isGroup: boolean | null
+    ownerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11483,6 +11522,7 @@ export namespace Prisma {
     id: number
     title: number
     isGroup: number
+    ownerId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -11493,6 +11533,7 @@ export namespace Prisma {
     id?: true
     title?: true
     isGroup?: true
+    ownerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11501,6 +11542,7 @@ export namespace Prisma {
     id?: true
     title?: true
     isGroup?: true
+    ownerId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11509,6 +11551,7 @@ export namespace Prisma {
     id?: true
     title?: true
     isGroup?: true
+    ownerId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -11590,6 +11633,7 @@ export namespace Prisma {
     id: string
     title: string | null
     isGroup: boolean
+    ownerId: string | null
     createdAt: Date
     updatedAt: Date
     _count: ConversationCountAggregateOutputType | null
@@ -11615,8 +11659,10 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     isGroup?: boolean
+    ownerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    owner?: boolean | Conversation$ownerArgs<ExtArgs>
     participants?: boolean | Conversation$participantsArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
@@ -11628,12 +11674,14 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     isGroup?: boolean
+    ownerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "isGroup" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
+  export type ConversationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "isGroup" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["conversation"]>
   export type ConversationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    owner?: boolean | Conversation$ownerArgs<ExtArgs>
     participants?: boolean | Conversation$participantsArgs<ExtArgs>
     messages?: boolean | Conversation$messagesArgs<ExtArgs>
     _count?: boolean | ConversationCountOutputTypeDefaultArgs<ExtArgs>
@@ -11642,6 +11690,7 @@ export namespace Prisma {
   export type $ConversationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Conversation"
     objects: {
+      owner: Prisma.$UserPayload<ExtArgs> | null
       participants: Prisma.$ConversationParticipantPayload<ExtArgs>[]
       messages: Prisma.$MessagePayload<ExtArgs>[]
     }
@@ -11649,6 +11698,7 @@ export namespace Prisma {
       id: string
       title: string | null
       isGroup: boolean
+      ownerId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["conversation"]>
@@ -11991,6 +12041,7 @@ export namespace Prisma {
    */
   export interface Prisma__ConversationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    owner<T extends Conversation$ownerArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$ownerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     participants<T extends Conversation$participantsArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConversationParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends Conversation$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Conversation$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -12025,6 +12076,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Conversation", 'String'>
     readonly title: FieldRef<"Conversation", 'String'>
     readonly isGroup: FieldRef<"Conversation", 'Boolean'>
+    readonly ownerId: FieldRef<"Conversation", 'String'>
     readonly createdAt: FieldRef<"Conversation", 'DateTime'>
     readonly updatedAt: FieldRef<"Conversation", 'DateTime'>
   }
@@ -12367,6 +12419,25 @@ export namespace Prisma {
      * Limit how many Conversations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Conversation.owner
+   */
+  export type Conversation$ownerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -29907,6 +29978,7 @@ export namespace Prisma {
     time: string | null
     duration: string | null
     notes: string | null
+    externalParticipants: string | null
     churchId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -29921,6 +29993,7 @@ export namespace Prisma {
     time: string | null
     duration: string | null
     notes: string | null
+    externalParticipants: string | null
     churchId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -29935,6 +30008,7 @@ export namespace Prisma {
     time: number
     duration: number
     notes: number
+    externalParticipants: number
     churchId: number
     createdAt: number
     updatedAt: number
@@ -29951,6 +30025,7 @@ export namespace Prisma {
     time?: true
     duration?: true
     notes?: true
+    externalParticipants?: true
     churchId?: true
     createdAt?: true
     updatedAt?: true
@@ -29965,6 +30040,7 @@ export namespace Prisma {
     time?: true
     duration?: true
     notes?: true
+    externalParticipants?: true
     churchId?: true
     createdAt?: true
     updatedAt?: true
@@ -29979,6 +30055,7 @@ export namespace Prisma {
     time?: true
     duration?: true
     notes?: true
+    externalParticipants?: true
     churchId?: true
     createdAt?: true
     updatedAt?: true
@@ -30066,6 +30143,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants: string | null
     churchId: string | null
     createdAt: Date
     updatedAt: Date
@@ -30097,6 +30175,7 @@ export namespace Prisma {
     time?: boolean
     duration?: boolean
     notes?: boolean
+    externalParticipants?: boolean
     churchId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -30116,12 +30195,13 @@ export namespace Prisma {
     time?: boolean
     duration?: boolean
     notes?: boolean
+    externalParticipants?: boolean
     churchId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type appointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "visibility" | "description" | "date" | "time" | "duration" | "notes" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type appointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "visibility" | "description" | "date" | "time" | "duration" | "notes" | "externalParticipants" | "churchId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type appointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     church?: boolean | appointment$churchArgs<ExtArgs>
     assignedUsers?: boolean | appointment$assignedUsersArgs<ExtArgs>
@@ -30143,6 +30223,7 @@ export namespace Prisma {
       time: string
       duration: string
       notes: string
+      externalParticipants: string | null
       churchId: string | null
       createdAt: Date
       updatedAt: Date
@@ -30525,6 +30606,7 @@ export namespace Prisma {
     readonly time: FieldRef<"appointment", 'String'>
     readonly duration: FieldRef<"appointment", 'String'>
     readonly notes: FieldRef<"appointment", 'String'>
+    readonly externalParticipants: FieldRef<"appointment", 'String'>
     readonly churchId: FieldRef<"appointment", 'String'>
     readonly createdAt: FieldRef<"appointment", 'DateTime'>
     readonly updatedAt: FieldRef<"appointment", 'DateTime'>
@@ -37740,6 +37822,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     isGroup: 'isGroup',
+    ownerId: 'ownerId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -38041,6 +38124,7 @@ export namespace Prisma {
     time: 'time',
     duration: 'duration',
     notes: 'notes',
+    externalParticipants: 'externalParticipants',
     churchId: 'churchId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -38257,7 +38341,8 @@ export namespace Prisma {
 
   export const ConversationOrderByRelevanceFieldEnum: {
     id: 'id',
-    title: 'title'
+    title: 'title',
+    ownerId: 'ownerId'
   };
 
   export type ConversationOrderByRelevanceFieldEnum = (typeof ConversationOrderByRelevanceFieldEnum)[keyof typeof ConversationOrderByRelevanceFieldEnum]
@@ -38516,6 +38601,7 @@ export namespace Prisma {
     time: 'time',
     duration: 'duration',
     notes: 'notes',
+    externalParticipants: 'externalParticipants',
     churchId: 'churchId'
   };
 
@@ -39172,6 +39258,7 @@ export namespace Prisma {
     userAppointments?: AppointmentListRelationFilter
     conversationParticipants?: ConversationParticipantListRelationFilter
     sentMessages?: MessageListRelationFilter
+    ownedConversations?: ConversationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -39232,6 +39319,7 @@ export namespace Prisma {
     userAppointments?: appointmentOrderByRelationAggregateInput
     conversationParticipants?: ConversationParticipantOrderByRelationAggregateInput
     sentMessages?: MessageOrderByRelationAggregateInput
+    ownedConversations?: ConversationOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -39296,6 +39384,7 @@ export namespace Prisma {
     userAppointments?: AppointmentListRelationFilter
     conversationParticipants?: ConversationParticipantListRelationFilter
     sentMessages?: MessageListRelationFilter
+    ownedConversations?: ConversationListRelationFilter
   }, "id" | "email" | "password" | "code" | "offlineOperationId">
 
   export type UserOrderByWithAggregationInput = {
@@ -39407,8 +39496,10 @@ export namespace Prisma {
     id?: StringFilter<"Conversation"> | string
     title?: StringNullableFilter<"Conversation"> | string | null
     isGroup?: BoolFilter<"Conversation"> | boolean
+    ownerId?: StringNullableFilter<"Conversation"> | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    owner?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     participants?: ConversationParticipantListRelationFilter
     messages?: MessageListRelationFilter
   }
@@ -39417,8 +39508,10 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrderInput | SortOrder
     isGroup?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    owner?: UserOrderByWithRelationInput
     participants?: ConversationParticipantOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
     _relevance?: ConversationOrderByRelevanceInput
@@ -39431,8 +39524,10 @@ export namespace Prisma {
     NOT?: ConversationWhereInput | ConversationWhereInput[]
     title?: StringNullableFilter<"Conversation"> | string | null
     isGroup?: BoolFilter<"Conversation"> | boolean
+    ownerId?: StringNullableFilter<"Conversation"> | string | null
     createdAt?: DateTimeFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+    owner?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     participants?: ConversationParticipantListRelationFilter
     messages?: MessageListRelationFilter
   }, "id">
@@ -39441,6 +39536,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrderInput | SortOrder
     isGroup?: SortOrder
+    ownerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ConversationCountOrderByAggregateInput
@@ -39455,6 +39551,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Conversation"> | string
     title?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     isGroup?: BoolWithAggregatesFilter<"Conversation"> | boolean
+    ownerId?: StringNullableWithAggregatesFilter<"Conversation"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Conversation"> | Date | string
   }
@@ -40942,6 +41039,7 @@ export namespace Prisma {
     time?: StringFilter<"appointment"> | string
     duration?: StringFilter<"appointment"> | string
     notes?: StringFilter<"appointment"> | string
+    externalParticipants?: StringNullableFilter<"appointment"> | string | null
     churchId?: StringNullableFilter<"appointment"> | string | null
     createdAt?: DateTimeFilter<"appointment"> | Date | string
     updatedAt?: DateTimeFilter<"appointment"> | Date | string
@@ -40958,6 +41056,7 @@ export namespace Prisma {
     time?: SortOrder
     duration?: SortOrder
     notes?: SortOrder
+    externalParticipants?: SortOrderInput | SortOrder
     churchId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -40978,6 +41077,7 @@ export namespace Prisma {
     time?: StringFilter<"appointment"> | string
     duration?: StringFilter<"appointment"> | string
     notes?: StringFilter<"appointment"> | string
+    externalParticipants?: StringNullableFilter<"appointment"> | string | null
     churchId?: StringNullableFilter<"appointment"> | string | null
     createdAt?: DateTimeFilter<"appointment"> | Date | string
     updatedAt?: DateTimeFilter<"appointment"> | Date | string
@@ -40994,6 +41094,7 @@ export namespace Prisma {
     time?: SortOrder
     duration?: SortOrder
     notes?: SortOrder
+    externalParticipants?: SortOrderInput | SortOrder
     churchId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -41014,6 +41115,7 @@ export namespace Prisma {
     time?: StringWithAggregatesFilter<"appointment"> | string
     duration?: StringWithAggregatesFilter<"appointment"> | string
     notes?: StringWithAggregatesFilter<"appointment"> | string
+    externalParticipants?: StringNullableWithAggregatesFilter<"appointment"> | string | null
     churchId?: StringNullableWithAggregatesFilter<"appointment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"appointment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"appointment"> | Date | string
@@ -42004,6 +42106,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -42061,6 +42164,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUpdateInput = {
@@ -42118,6 +42222,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -42175,6 +42280,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -42324,6 +42430,7 @@ export namespace Prisma {
     isGroup?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    owner?: UserCreateNestedOneWithoutOwnedConversationsInput
     participants?: ConversationParticipantCreateNestedManyWithoutConversationInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
@@ -42332,6 +42439,7 @@ export namespace Prisma {
     id?: string
     title?: string | null
     isGroup?: boolean
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     participants?: ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
@@ -42344,6 +42452,7 @@ export namespace Prisma {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneWithoutOwnedConversationsNestedInput
     participants?: ConversationParticipantUpdateManyWithoutConversationNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
@@ -42352,6 +42461,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     participants?: ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
@@ -42362,6 +42472,7 @@ export namespace Prisma {
     id?: string
     title?: string | null
     isGroup?: boolean
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -42378,6 +42489,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44026,6 +44138,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     church?: ChurchCreateNestedOneWithoutAppointmentsInput
@@ -44041,6 +44154,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     churchId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -44056,6 +44170,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     church?: ChurchUpdateOneWithoutAppointmentsNestedInput
@@ -44071,6 +44186,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44086,6 +44202,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     churchId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -44100,6 +44217,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -44113,6 +44231,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45166,11 +45285,21 @@ export namespace Prisma {
     none?: MessageWhereInput
   }
 
+  export type ConversationListRelationFilter = {
+    every?: ConversationWhereInput
+    some?: ConversationWhereInput
+    none?: ConversationWhereInput
+  }
+
   export type ConversationParticipantOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ConversationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -45352,6 +45481,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     isGroup?: SortOrder
+    ownerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -45360,6 +45490,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     isGroup?: SortOrder
+    ownerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -45368,6 +45499,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     isGroup?: SortOrder
+    ownerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -46268,6 +46400,7 @@ export namespace Prisma {
     time?: SortOrder
     duration?: SortOrder
     notes?: SortOrder
+    externalParticipants?: SortOrder
     churchId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -46282,6 +46415,7 @@ export namespace Prisma {
     time?: SortOrder
     duration?: SortOrder
     notes?: SortOrder
+    externalParticipants?: SortOrder
     churchId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -46296,6 +46430,7 @@ export namespace Prisma {
     time?: SortOrder
     duration?: SortOrder
     notes?: SortOrder
+    externalParticipants?: SortOrder
     churchId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -47784,6 +47919,13 @@ export namespace Prisma {
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
   }
 
+  export type ConversationCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput> | ConversationCreateWithoutOwnerInput[] | ConversationUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutOwnerInput | ConversationCreateOrConnectWithoutOwnerInput[]
+    createMany?: ConversationCreateManyOwnerInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+  }
+
   export type PresenceUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
@@ -47841,6 +47983,13 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutSenderInput | MessageCreateOrConnectWithoutSenderInput[]
     createMany?: MessageCreateManySenderInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type ConversationUncheckedCreateNestedManyWithoutOwnerInput = {
+    create?: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput> | ConversationCreateWithoutOwnerInput[] | ConversationUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutOwnerInput | ConversationCreateOrConnectWithoutOwnerInput[]
+    createMany?: ConversationCreateManyOwnerInputEnvelope
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -48003,6 +48152,20 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type ConversationUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput> | ConversationCreateWithoutOwnerInput[] | ConversationUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutOwnerInput | ConversationCreateOrConnectWithoutOwnerInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutOwnerInput | ConversationUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: ConversationCreateManyOwnerInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutOwnerInput | ConversationUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutOwnerInput | ConversationUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
   export type PresenceUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PresenceCreateWithoutUserInput, PresenceUncheckedCreateWithoutUserInput> | PresenceCreateWithoutUserInput[] | PresenceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PresenceCreateOrConnectWithoutUserInput | PresenceCreateOrConnectWithoutUserInput[]
@@ -48125,6 +48288,26 @@ export namespace Prisma {
     deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
   }
 
+  export type ConversationUncheckedUpdateManyWithoutOwnerNestedInput = {
+    create?: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput> | ConversationCreateWithoutOwnerInput[] | ConversationUncheckedCreateWithoutOwnerInput[]
+    connectOrCreate?: ConversationCreateOrConnectWithoutOwnerInput | ConversationCreateOrConnectWithoutOwnerInput[]
+    upsert?: ConversationUpsertWithWhereUniqueWithoutOwnerInput | ConversationUpsertWithWhereUniqueWithoutOwnerInput[]
+    createMany?: ConversationCreateManyOwnerInputEnvelope
+    set?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    disconnect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    delete?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    connect?: ConversationWhereUniqueInput | ConversationWhereUniqueInput[]
+    update?: ConversationUpdateWithWhereUniqueWithoutOwnerInput | ConversationUpdateWithWhereUniqueWithoutOwnerInput[]
+    updateMany?: ConversationUpdateManyWithWhereWithoutOwnerInput | ConversationUpdateManyWithWhereWithoutOwnerInput[]
+    deleteMany?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutOwnedConversationsInput = {
+    create?: XOR<UserCreateWithoutOwnedConversationsInput, UserUncheckedCreateWithoutOwnedConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedConversationsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ConversationParticipantCreateNestedManyWithoutConversationInput = {
     create?: XOR<ConversationParticipantCreateWithoutConversationInput, ConversationParticipantUncheckedCreateWithoutConversationInput> | ConversationParticipantCreateWithoutConversationInput[] | ConversationParticipantUncheckedCreateWithoutConversationInput[]
     connectOrCreate?: ConversationParticipantCreateOrConnectWithoutConversationInput | ConversationParticipantCreateOrConnectWithoutConversationInput[]
@@ -48151,6 +48334,16 @@ export namespace Prisma {
     connectOrCreate?: MessageCreateOrConnectWithoutConversationInput | MessageCreateOrConnectWithoutConversationInput[]
     createMany?: MessageCreateManyConversationInputEnvelope
     connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneWithoutOwnedConversationsNestedInput = {
+    create?: XOR<UserCreateWithoutOwnedConversationsInput, UserUncheckedCreateWithoutOwnedConversationsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOwnedConversationsInput
+    upsert?: UserUpsertWithoutOwnedConversationsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOwnedConversationsInput, UserUpdateWithoutOwnedConversationsInput>, UserUncheckedUpdateWithoutOwnedConversationsInput>
   }
 
   export type ConversationParticipantUpdateManyWithoutConversationNestedInput = {
@@ -49483,6 +49676,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutPresencesInput = {
@@ -49539,6 +49733,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutPresencesInput = {
@@ -49638,6 +49833,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPresencesInput = {
@@ -49694,6 +49890,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type ChurchCreateWithoutTtiInput = {
@@ -50467,6 +50664,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutChurchInput = {
@@ -50523,6 +50721,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutChurchInput = {
@@ -50544,6 +50743,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     assignedUsers?: UserCreateNestedManyWithoutUserAppointmentsInput
@@ -50558,6 +50758,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     assignedUsers?: UserUncheckedCreateNestedManyWithoutUserAppointmentsInput
@@ -51406,6 +51607,7 @@ export namespace Prisma {
     time?: StringFilter<"appointment"> | string
     duration?: StringFilter<"appointment"> | string
     notes?: StringFilter<"appointment"> | string
+    externalParticipants?: StringNullableFilter<"appointment"> | string | null
     churchId?: StringNullableFilter<"appointment"> | string | null
     createdAt?: DateTimeFilter<"appointment"> | Date | string
     updatedAt?: DateTimeFilter<"appointment"> | Date | string
@@ -51991,6 +52193,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutTithesInput = {
@@ -52047,6 +52250,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutTithesInput = {
@@ -52108,6 +52312,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutTimotheeInput = {
@@ -52164,6 +52369,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutTimotheeInput = {
@@ -52308,6 +52514,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     church?: ChurchCreateNestedOneWithoutAppointmentsInput
@@ -52322,6 +52529,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     churchId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -52383,6 +52591,36 @@ export namespace Prisma {
 
   export type MessageCreateManySenderInputEnvelope = {
     data: MessageCreateManySenderInput | MessageCreateManySenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConversationCreateWithoutOwnerInput = {
+    id?: string
+    title?: string | null
+    isGroup?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ConversationParticipantCreateNestedManyWithoutConversationInput
+    messages?: MessageCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationUncheckedCreateWithoutOwnerInput = {
+    id?: string
+    title?: string | null
+    isGroup?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    participants?: ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
+  }
+
+  export type ConversationCreateOrConnectWithoutOwnerInput = {
+    where: ConversationWhereUniqueInput
+    create: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type ConversationCreateManyOwnerInputEnvelope = {
+    data: ConversationCreateManyOwnerInput | ConversationCreateManyOwnerInput[]
     skipDuplicates?: boolean
   }
 
@@ -52599,6 +52837,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTithesInput = {
@@ -52655,6 +52894,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutTimotheeInput = {
@@ -52810,6 +53050,153 @@ export namespace Prisma {
     senderId?: StringFilter<"Message"> | string
   }
 
+  export type ConversationUpsertWithWhereUniqueWithoutOwnerInput = {
+    where: ConversationWhereUniqueInput
+    update: XOR<ConversationUpdateWithoutOwnerInput, ConversationUncheckedUpdateWithoutOwnerInput>
+    create: XOR<ConversationCreateWithoutOwnerInput, ConversationUncheckedCreateWithoutOwnerInput>
+  }
+
+  export type ConversationUpdateWithWhereUniqueWithoutOwnerInput = {
+    where: ConversationWhereUniqueInput
+    data: XOR<ConversationUpdateWithoutOwnerInput, ConversationUncheckedUpdateWithoutOwnerInput>
+  }
+
+  export type ConversationUpdateManyWithWhereWithoutOwnerInput = {
+    where: ConversationScalarWhereInput
+    data: XOR<ConversationUpdateManyMutationInput, ConversationUncheckedUpdateManyWithoutOwnerInput>
+  }
+
+  export type ConversationScalarWhereInput = {
+    AND?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    OR?: ConversationScalarWhereInput[]
+    NOT?: ConversationScalarWhereInput | ConversationScalarWhereInput[]
+    id?: StringFilter<"Conversation"> | string
+    title?: StringNullableFilter<"Conversation"> | string | null
+    isGroup?: BoolFilter<"Conversation"> | boolean
+    ownerId?: StringNullableFilter<"Conversation"> | string | null
+    createdAt?: DateTimeFilter<"Conversation"> | Date | string
+    updatedAt?: DateTimeFilter<"Conversation"> | Date | string
+  }
+
+  export type UserCreateWithoutOwnedConversationsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email?: string | null
+    baptismDate?: string | null
+    baptismLocation?: string | null
+    birthCity?: string | null
+    birthCountry?: string | null
+    birthDate?: string | null
+    churchRole?: string | null
+    city?: string | null
+    country?: string | null
+    envelopeNumber?: string | null
+    etatCivil?: string | null
+    facebook?: string | null
+    firstname: string
+    instagram?: string | null
+    password?: string | null
+    picture?: string | null
+    profession?: string | null
+    role?: $Enums.Role
+    sex?: string | null
+    code?: string | null
+    sundayClass?: string | null
+    lastname: string
+    membreActif?: boolean
+    addressLine?: string | null
+    homePhone?: string | null
+    isBaptized?: boolean
+    joinDate?: string | null
+    mobilePhone?: string | null
+    age?: string | null
+    minister?: string | null
+    plainPassword?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    nif?: string | null
+    groupeSanguin?: string | null
+    istimothee?: boolean | null
+    offlineOperationId?: string | null
+    ministry?: ministryCreateNestedOneWithoutUsersInput
+    presences?: PresenceCreateNestedManyWithoutUserInput
+    church?: ChurchCreateNestedOneWithoutUsersInput
+    timothee?: UserCreateNestedOneWithoutTithesInput
+    tithes?: UserCreateNestedManyWithoutTimotheeInput
+    transfers?: transfertCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeCreateNestedManyWithoutCommiteeMemberInput
+    groups?: GroupeCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserUncheckedCreateWithoutOwnedConversationsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    email?: string | null
+    baptismDate?: string | null
+    baptismLocation?: string | null
+    birthCity?: string | null
+    birthCountry?: string | null
+    birthDate?: string | null
+    churchId?: string | null
+    churchRole?: string | null
+    city?: string | null
+    country?: string | null
+    envelopeNumber?: string | null
+    etatCivil?: string | null
+    facebook?: string | null
+    firstname: string
+    instagram?: string | null
+    password?: string | null
+    picture?: string | null
+    profession?: string | null
+    role?: $Enums.Role
+    sex?: string | null
+    code?: string | null
+    sundayClass?: string | null
+    lastname: string
+    membreActif?: boolean
+    addressLine?: string | null
+    homePhone?: string | null
+    isBaptized?: boolean
+    joinDate?: string | null
+    mobilePhone?: string | null
+    age?: string | null
+    minister?: string | null
+    plainPassword?: string | null
+    personToContact?: string | null
+    spouseFullName?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    nif?: string | null
+    groupeSanguin?: string | null
+    istimothee?: boolean | null
+    timotheeId?: string | null
+    ministryId?: string | null
+    offlineOperationId?: string | null
+    presences?: PresenceUncheckedCreateNestedManyWithoutUserInput
+    tithes?: UserUncheckedCreateNestedManyWithoutTimotheeInput
+    transfers?: transfertUncheckedCreateNestedManyWithoutMemberInput
+    leadingComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeLeaderInput
+    memberComittees?: comiteeUncheckedCreateNestedManyWithoutCommiteeMemberInput
+    groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
+    userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+  }
+
+  export type UserCreateOrConnectWithoutOwnedConversationsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOwnedConversationsInput, UserUncheckedCreateWithoutOwnedConversationsInput>
+  }
+
   export type ConversationParticipantCreateWithoutConversationInput = {
     joinedAt?: Date | string
     lastReadAt?: Date | string
@@ -52864,6 +53251,131 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutOwnedConversationsInput = {
+    update: XOR<UserUpdateWithoutOwnedConversationsInput, UserUncheckedUpdateWithoutOwnedConversationsInput>
+    create: XOR<UserCreateWithoutOwnedConversationsInput, UserUncheckedCreateWithoutOwnedConversationsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOwnedConversationsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOwnedConversationsInput, UserUncheckedUpdateWithoutOwnedConversationsInput>
+  }
+
+  export type UserUpdateWithoutOwnedConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    offlineOperationId?: NullableStringFieldUpdateOperationsInput | string | null
+    ministry?: ministryUpdateOneWithoutUsersNestedInput
+    presences?: PresenceUpdateManyWithoutUserNestedInput
+    church?: ChurchUpdateOneWithoutUsersNestedInput
+    timothee?: UserUpdateOneWithoutTithesNestedInput
+    tithes?: UserUpdateManyWithoutTimotheeNestedInput
+    transfers?: transfertUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUpdateManyWithoutCommiteeMemberNestedInput
+    groups?: GroupeUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOwnedConversationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismDate?: NullableStringFieldUpdateOperationsInput | string | null
+    baptismLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCity?: NullableStringFieldUpdateOperationsInput | string | null
+    birthCountry?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: NullableStringFieldUpdateOperationsInput | string | null
+    churchId?: NullableStringFieldUpdateOperationsInput | string | null
+    churchRole?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    envelopeNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    etatCivil?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    picture?: NullableStringFieldUpdateOperationsInput | string | null
+    profession?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    sex?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: NullableStringFieldUpdateOperationsInput | string | null
+    sundayClass?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    membreActif?: BoolFieldUpdateOperationsInput | boolean
+    addressLine?: NullableStringFieldUpdateOperationsInput | string | null
+    homePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    isBaptized?: BoolFieldUpdateOperationsInput | boolean
+    joinDate?: NullableStringFieldUpdateOperationsInput | string | null
+    mobilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableStringFieldUpdateOperationsInput | string | null
+    minister?: NullableStringFieldUpdateOperationsInput | string | null
+    plainPassword?: NullableStringFieldUpdateOperationsInput | string | null
+    personToContact?: NullableStringFieldUpdateOperationsInput | string | null
+    spouseFullName?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    nif?: NullableStringFieldUpdateOperationsInput | string | null
+    groupeSanguin?: NullableStringFieldUpdateOperationsInput | string | null
+    istimothee?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    timotheeId?: NullableStringFieldUpdateOperationsInput | string | null
+    ministryId?: NullableStringFieldUpdateOperationsInput | string | null
+    offlineOperationId?: NullableStringFieldUpdateOperationsInput | string | null
+    presences?: PresenceUncheckedUpdateManyWithoutUserNestedInput
+    tithes?: UserUncheckedUpdateManyWithoutTimotheeNestedInput
+    transfers?: transfertUncheckedUpdateManyWithoutMemberNestedInput
+    leadingComittees?: comiteeUncheckedUpdateManyWithoutCommiteeLeaderNestedInput
+    memberComittees?: comiteeUncheckedUpdateManyWithoutCommiteeMemberNestedInput
+    groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
+    userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+  }
+
   export type ConversationParticipantUpsertWithWhereUniqueWithoutConversationInput = {
     where: ConversationParticipantWhereUniqueInput
     update: XOR<ConversationParticipantUpdateWithoutConversationInput, ConversationParticipantUncheckedUpdateWithoutConversationInput>
@@ -52902,6 +53414,7 @@ export namespace Prisma {
     isGroup?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    owner?: UserCreateNestedOneWithoutOwnedConversationsInput
     messages?: MessageCreateNestedManyWithoutConversationInput
   }
 
@@ -52909,6 +53422,7 @@ export namespace Prisma {
     id?: string
     title?: string | null
     isGroup?: boolean
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     messages?: MessageUncheckedCreateNestedManyWithoutConversationInput
@@ -52973,6 +53487,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutConversationParticipantsInput = {
@@ -53029,6 +53544,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutConversationParticipantsInput = {
@@ -53053,6 +53569,7 @@ export namespace Prisma {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneWithoutOwnedConversationsNestedInput
     messages?: MessageUpdateManyWithoutConversationNestedInput
   }
 
@@ -53060,6 +53577,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
@@ -53130,6 +53648,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
@@ -53186,6 +53705,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -53194,6 +53714,7 @@ export namespace Prisma {
     isGroup?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    owner?: UserCreateNestedOneWithoutOwnedConversationsInput
     participants?: ConversationParticipantCreateNestedManyWithoutConversationInput
   }
 
@@ -53201,6 +53722,7 @@ export namespace Prisma {
     id?: string
     title?: string | null
     isGroup?: boolean
+    ownerId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     participants?: ConversationParticipantUncheckedCreateNestedManyWithoutConversationInput
@@ -53265,6 +53787,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -53321,6 +53844,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -53345,6 +53869,7 @@ export namespace Prisma {
     isGroup?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    owner?: UserUpdateOneWithoutOwnedConversationsNestedInput
     participants?: ConversationParticipantUpdateManyWithoutConversationNestedInput
   }
 
@@ -53352,6 +53877,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
     isGroup?: BoolFieldUpdateOperationsInput | boolean
+    ownerId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     participants?: ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
@@ -53422,6 +53948,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -53478,6 +54005,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserCreateWithoutMinistryInput = {
@@ -53534,6 +54062,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutMinistryInput = {
@@ -53590,6 +54119,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutMinistryInput = {
@@ -53969,6 +54499,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutGroupsInput = {
@@ -54025,6 +54556,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutGroupsInput = {
@@ -56702,6 +57234,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutLeadingComitteesInput = {
@@ -56758,6 +57291,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutLeadingComitteesInput = {
@@ -56819,6 +57353,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutMemberComitteesInput = {
@@ -56875,6 +57410,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutMemberComitteesInput = {
@@ -57168,6 +57704,7 @@ export namespace Prisma {
     groups?: GroupeCreateNestedManyWithoutUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutUserAppointmentsInput = {
@@ -57224,6 +57761,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedCreateNestedManyWithoutUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutUserAppointmentsInput = {
@@ -57598,6 +58136,7 @@ export namespace Prisma {
     userAppointments?: appointmentCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationCreateNestedManyWithoutOwnerInput
   }
 
   export type UserUncheckedCreateWithoutTransfersInput = {
@@ -57654,6 +58193,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedCreateNestedManyWithoutAssignedUsersInput
     conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    ownedConversations?: ConversationUncheckedCreateNestedManyWithoutOwnerInput
   }
 
   export type UserCreateOrConnectWithoutTransfersInput = {
@@ -57932,6 +58472,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransfersInput = {
@@ -57988,6 +58529,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type ChurchCreateWithoutMissionInput = {
@@ -59021,6 +59563,7 @@ export namespace Prisma {
     time: string
     duration: string
     notes: string
+    externalParticipants?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -59552,6 +60095,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChurchInput = {
@@ -59608,6 +60152,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutChurchInput = {
@@ -59666,6 +60211,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedUsers?: UserUpdateManyWithoutUserAppointmentsNestedInput
@@ -59680,6 +60226,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignedUsers?: UserUncheckedUpdateManyWithoutUserAppointmentsNestedInput
@@ -59694,6 +60241,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -60175,6 +60723,14 @@ export namespace Prisma {
     conversationId: string
   }
 
+  export type ConversationCreateManyOwnerInput = {
+    id?: string
+    title?: string | null
+    isGroup?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PresenceUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     offlineOperationId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -60256,6 +60812,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTimotheeInput = {
@@ -60312,6 +60869,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutTimotheeInput = {
@@ -60515,6 +61073,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     church?: ChurchUpdateOneWithoutAppointmentsNestedInput
@@ -60529,6 +61088,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60543,6 +61103,7 @@ export namespace Prisma {
     time?: StringFieldUpdateOperationsInput | string
     duration?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
+    externalParticipants?: NullableStringFieldUpdateOperationsInput | string | null
     churchId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -60597,6 +61158,34 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversationId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ConversationUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ConversationParticipantUpdateManyWithoutConversationNestedInput
+    messages?: MessageUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    participants?: ConversationParticipantUncheckedUpdateManyWithoutConversationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutConversationNestedInput
+  }
+
+  export type ConversationUncheckedUpdateManyWithoutOwnerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    isGroup?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConversationParticipantCreateManyConversationInput = {
@@ -60768,6 +61357,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMinistryInput = {
@@ -60824,6 +61414,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutMinistryInput = {
@@ -60927,6 +61518,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutGroupsInput = {
@@ -60983,6 +61575,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutGroupsInput = {
@@ -61087,6 +61680,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLeadingComitteesInput = {
@@ -61143,6 +61737,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutLeadingComitteesInput = {
@@ -61247,6 +61842,7 @@ export namespace Prisma {
     userAppointments?: appointmentUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMemberComitteesInput = {
@@ -61303,6 +61899,7 @@ export namespace Prisma {
     userAppointments?: appointmentUncheckedUpdateManyWithoutAssignedUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutMemberComitteesInput = {
@@ -61407,6 +62004,7 @@ export namespace Prisma {
     groups?: GroupeUpdateManyWithoutUsersNestedInput
     conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserAppointmentsInput = {
@@ -61463,6 +62061,7 @@ export namespace Prisma {
     groups?: GroupeUncheckedUpdateManyWithoutUsersNestedInput
     conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    ownedConversations?: ConversationUncheckedUpdateManyWithoutOwnerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutUserAppointmentsInput = {

@@ -6,6 +6,19 @@ import { prisma } from "../utils/client";
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
 
+const normalizeExternalParticipants = (value: unknown) => {
+  if (typeof value !== 'string') return undefined;
+
+  const names = value
+    .split(/\r?\n/)
+    .map((name) => name.trim())
+    .filter(Boolean)
+    .slice(0, 100)
+    .join('\n');
+
+  return names ? names.slice(0, 5000) : null;
+};
+
 declare global {
   namespace Express {
     interface Request {
@@ -49,7 +62,7 @@ router.use(requireChurchAdmin);
 // Create a new appointment
 router.post("/", async (req, res) => {
   try {
-    const { name, visibility, description, date, time, duration, notes, userIds } = req.body;
+    const { name, visibility, description, date, time, duration, notes, userIds, externalParticipants } = req.body;
     const churchId = req.appointmentAdmin!.churchId;
     // if (!userIds || userIds.length === 0) {
     //   return res.status(400).json({ error: "At least one user must be assigned" });
@@ -70,6 +83,7 @@ router.post("/", async (req, res) => {
         time,
         duration,
         notes,
+        externalParticipants: normalizeExternalParticipants(externalParticipants),
         assignedUsers: {
           connect: (Array.isArray(userIds) ? userIds : []).map((id: string) => ({ id }))
         },
@@ -147,7 +161,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, visibility, description, date, time, duration, notes, userIds } = req.body;
+    const { name, visibility, description, date, time, duration, notes, userIds, externalParticipants } = req.body;
 
     const existingAppointment = await prisma.appointment.findFirst({
       where: { id, churchId: req.appointmentAdmin!.churchId },
@@ -167,6 +181,7 @@ router.put("/:id", async (req, res) => {
         time,
         duration,
         notes,
+        externalParticipants: normalizeExternalParticipants(externalParticipants),
         assignedUsers: {
           set: (Array.isArray(userIds) ? userIds : []).map((id: string) => ({ id }))
         },
