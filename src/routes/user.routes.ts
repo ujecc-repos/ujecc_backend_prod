@@ -116,7 +116,10 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       });
 
       if (existingUser) {
-        return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+        return res.status(400).json({
+          code: 'DUPLICATE_EMAIL',
+          error: 'Désolé, cette adresse email existe déjà',
+        });
       }
     }
 
@@ -126,7 +129,10 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       });
 
       if (existingUserNif) {
-        return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
+        return res.status(400).json({
+          code: 'DUPLICATE_NIF',
+          error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre',
+        });
       }
     }
 
