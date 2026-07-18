@@ -130,6 +130,7 @@ exports.Prisma.ServiceScalarFieldEnum = {
 
 exports.Prisma.PresenceScalarFieldEnum = {
   id: 'id',
+  offlineOperationId: 'offlineOperationId',
   statut: 'statut',
   utilisateurId: 'utilisateurId',
   createdAt: 'createdAt',
@@ -223,7 +224,36 @@ exports.Prisma.UserScalarFieldEnum = {
   groupeSanguin: 'groupeSanguin',
   istimothee: 'istimothee',
   timotheeId: 'timotheeId',
-  ministryId: 'ministryId'
+  ministryId: 'ministryId',
+  offlineOperationId: 'offlineOperationId'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  isGroup: 'isGroup',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ConversationParticipantScalarFieldEnum = {
+  conversationId: 'conversationId',
+  userId: 'userId',
+  joinedAt: 'joinedAt',
+  lastReadAt: 'lastReadAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  content: 'content',
+  attachmentUrl: 'attachmentUrl',
+  attachmentName: 'attachmentName',
+  attachmentType: 'attachmentType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  conversationId: 'conversationId',
+  senderId: 'senderId'
 };
 
 exports.Prisma.MinistryScalarFieldEnum = {
@@ -450,6 +480,7 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   time: 'time',
   duration: 'duration',
   notes: 'notes',
+  externalParticipants: 'externalParticipants',
   churchId: 'churchId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -532,6 +563,7 @@ exports.Prisma.ServiceOrderByRelevanceFieldEnum = {
 
 exports.Prisma.PresenceOrderByRelevanceFieldEnum = {
   id: 'id',
+  offlineOperationId: 'offlineOperationId',
   utilisateurId: 'utilisateurId',
   serviceId: 'serviceId'
 };
@@ -611,7 +643,29 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   nif: 'nif',
   groupeSanguin: 'groupeSanguin',
   timotheeId: 'timotheeId',
-  ministryId: 'ministryId'
+  ministryId: 'ministryId',
+  offlineOperationId: 'offlineOperationId'
+};
+
+exports.Prisma.ConversationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  ownerId: 'ownerId'
+};
+
+exports.Prisma.ConversationParticipantOrderByRelevanceFieldEnum = {
+  conversationId: 'conversationId',
+  userId: 'userId'
+};
+
+exports.Prisma.MessageOrderByRelevanceFieldEnum = {
+  id: 'id',
+  content: 'content',
+  attachmentUrl: 'attachmentUrl',
+  attachmentName: 'attachmentName',
+  attachmentType: 'attachmentType',
+  conversationId: 'conversationId',
+  senderId: 'senderId'
 };
 
 exports.Prisma.ministryOrderByRelevanceFieldEnum = {
@@ -801,6 +855,7 @@ exports.Prisma.appointmentOrderByRelevanceFieldEnum = {
   time: 'time',
   duration: 'duration',
   notes: 'notes',
+  externalParticipants: 'externalParticipants',
   churchId: 'churchId'
 };
 
@@ -879,6 +934,9 @@ exports.Prisma.ModelName = {
   Address: 'Address',
   Church: 'Church',
   User: 'User',
+  Conversation: 'Conversation',
+  ConversationParticipant: 'ConversationParticipant',
+  Message: 'Message',
   ministry: 'ministry',
   Groupe: 'Groupe',
   Event: 'Event',

@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import __ from "lodash"
 import multer from 'multer';
+import fs from 'fs/promises';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
 
@@ -60,8 +61,21 @@ function generate6DigitCode() {
   return Math.floor(100000 + Math.random() * 900000);
 }
 
+const removeRetryUpload = async (file?: Express.Multer.File) => {
+  if (!file?.path) return;
+  try {
+    await fs.unlink(file.path);
+  } catch (error) {
+    console.warn('Unable to remove duplicate retry upload:', error);
+  }
+};
+
 // Create a new user with optional image upload
 router.post('/', upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
+
+  const offlineOperationId = typeof req.body.offlineOperationId === 'string'
+    ? req.body.offlineOperationId.trim().slice(0, 191)
+    : undefined;
 
   try {
     const { firstname, lastname, civilState, password, birthDate, gender, joinDate, country,
@@ -70,6 +84,20 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
     } = req.body;
 
     console.log("groupId : ", groupId, sundayClassId, isBaptized)
+
+    // A retry can arrive after the database commit when the original response was
+    // interrupted. Return the original result so the client can safely clear Dexie.
+    if (offlineOperationId) {
+      const existingOfflineCreation = await prisma.user.findUnique({
+        where: { offlineOperationId },
+        select: { code: true }
+      });
+
+      if (existingOfflineCreation) {
+        await removeRetryUpload(req.file);
+        return res.json({ user: existingOfflineCreation.code, deduplicated: true });
+      }
+    }
 
     // Check if email already exists
     // const existingUser = await prisma.user.findUnique({
@@ -88,7 +116,10 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       });
 
       if (existingUser) {
-        return res.status(400).json({ error: 'Désolé, cette adresse email existe déjà' });
+        return res.status(400).json({
+          code: 'DUPLICATE_EMAIL',
+          error: 'Désolé, cette adresse email existe déjà',
+        });
       }
     }
 
@@ -98,7 +129,10 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       });
 
       if (existingUserNif) {
-        return res.status(400).json({ error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre' });
+        return res.status(400).json({
+          code: 'DUPLICATE_NIF',
+          error: 'Désolé, ce NIF existe déjà, veuillez en entrer un autre',
+        });
       }
     }
 
@@ -108,12 +142,13 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       firstname,
       lastname,
       nif: nif || "",
-      isBaptized: Boolean(isBaptized) || false,
+      isBaptized: isBaptized === true || isBaptized === 'true',
       groupeSanguin: groupeSanguin || "",
       plainPassword: password || "",
       password: hashedPassword || "",
       email: email || null, // Ensure email is null when not provided
       role: role || "Membre",
+      sundayClass: sundayClassId || "",
       personToContact: personToContact || "",
       spouseFullName: spouseFullName || "",
       etatCivil: civilState || "",
@@ -133,6 +168,7 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       birthCity: birthCity || "",
       profession: profession || "",
       addressLine: addressLine || "",
+      offlineOperationId: offlineOperationId || null,
       // Add profile picture path if an image was uploaded
       picture: req.file ? `/uploads/${req.file.filename}` : undefined
     };
@@ -157,6 +193,20 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
     console.log("user is  : ", user)
     res.json({ user: user.code });
   } catch (error) {
+    // Handle two simultaneous retries racing past the initial lookup. The unique
+    // database index is the final authority and turns the loser into a success.
+    if (offlineOperationId) {
+      const existingOfflineCreation = await prisma.user.findUnique({
+        where: { offlineOperationId },
+        select: { code: true }
+      });
+
+      if (existingOfflineCreation) {
+        await removeRetryUpload(req.file);
+        return res.json({ user: existingOfflineCreation.code, deduplicated: true });
+      }
+    }
+
     console.error('=== User Registration Error ===');
     console.error('Error details:', error);
     console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
@@ -539,12 +589,14 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
     });
 
     // 1. Boolean fields list
-    const booleanFields = ["membreActif"];
+    const booleanFields = ["membreActif", "isBaptized"];
 
     // 2. Convert strings to booleans
     booleanFields.forEach((field) => {
       if (cleanedData[field] !== undefined && cleanedData[field] !== null) {
-        cleanedData[field] = cleanedData[field] === "true";
+        cleanedData[field] = typeof cleanedData[field] === 'string'
+          ? cleanedData[field] === "true"
+          : Boolean(cleanedData[field]);
       }
     });
 
@@ -559,6 +611,20 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
       }
       // Remove ministryId from cleanedData as we've handled it with the relationship
       delete cleanedData.ministryId;
+    }
+
+    // Keep the edit form's group selector in sync with the many-to-many relation.
+    if (userData.groupId !== undefined) {
+      cleanedData.groups = userData.groupId
+        ? { set: [{ id: userData.groupId }] }
+        : { set: [] };
+      delete cleanedData.groupId;
+    }
+
+    // The User model stores the selected Sunday class identifier as a string.
+    if (userData.sundayClassId !== undefined) {
+      cleanedData.sundayClass = userData.sundayClassId || null;
+      delete cleanedData.sundayClassId;
     }
 
     const user = await prisma.user.update({
