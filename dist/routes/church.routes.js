@@ -82,7 +82,7 @@ router.get('/', async (req, res) => {
     try {
         const churches = await client_1.prisma.church.findMany({
             include: {
-                users: true,
+                users: { where: { membreActif: true } },
                 groups: true,
                 events: true,
                 mariages: true,
@@ -107,7 +107,7 @@ router.get('/:id', async (req, res) => {
         const church = await client_1.prisma.church.findUnique({
             where: { id: req.params.id },
             include: {
-                users: true,
+                users: { where: { membreActif: true } },
                 groups: true,
                 events: true,
                 mariages: true,

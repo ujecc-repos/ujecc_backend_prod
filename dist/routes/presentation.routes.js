@@ -84,11 +84,31 @@ router.get('/:id', async (req, res) => {
     }
 });
 // Update a presentation record
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload_1.default.fields([
+    { name: 'birthCertificate', maxCount: 1 }
+]), async (req, res) => {
     try {
+        const files = req.files;
+        const updateData = {
+            childName: req.body.childName,
+            presentationDate: (0, moment_1.default)(req.body.presentationDate, 'YYYY-MM-DD', true).toDate(),
+            dateOfBirth: (0, moment_1.default)(req.body.dateOfBirth, 'YYYY-MM-DD', true).toDate(),
+            placeOfBirth: req.body.placeOfBirth,
+            fatherName: req.body.fatherName,
+            motherName: req.body.motherName,
+            officiantName: req.body.officiantName,
+            address: req.body.address,
+            phone: req.body.phone,
+            witness: req.body.witness,
+            description: req.body.description,
+        };
+        if (files?.birthCertificate)
+            updateData.birthCertificate = `/uploads/${path_1.default.basename(files.birthCertificate[0].path)}`;
+        if (req.body.churchId)
+            updateData.church = { connect: { id: req.body.churchId } };
         const presentation = await client_1.prisma.presentation.update({
             where: { id: req.params.id },
-            data: req.body
+            data: updateData,
         });
         res.json(presentation);
     }

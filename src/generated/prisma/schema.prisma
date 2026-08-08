@@ -103,16 +103,17 @@ model Church {
   tithing        tithing[]
   transfersFrom  transfert[]    @relation("FromChurch")
   transfersTo    transfert[]    @relation("ToChurch")
+  visitors       Visitor[]
 
   @@index([missionId], map: "Church_missionId_fkey")
   @@index([ttiId], map: "Church_ttiId_fkey")
 }
 
 model User {
-  id                 String   @id @default(uuid())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  email              String?  @unique
+  id                 String    @id @default(uuid())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  email              String?   @unique
   baptismDate        String?
   baptismLocation    String?
   birthCity          String?
@@ -127,20 +128,20 @@ model User {
   facebook           String?
   firstname          String
   instagram          String?
-  password           String?  @unique
+  password           String?   @unique
   picture            String?
   profession         String?
-  role               Role     @default(Membre)
+  role               Role      @default(Membre)
   sex                String?
-  code               String?  @unique
+  code               String?   @unique
   sundayClass        String?
   lastname           String
-  membreActif        Boolean  @default(true)
+  membreActif        Boolean   @default(true)
   addressLine        String?
-  homePhone          String?
-  isBaptized         Boolean  @default(false)
+  homePhone          String?   @db.Text
+  isBaptized         Boolean   @default(false)
   joinDate           String?
-  mobilePhone        String?
+  mobilePhone        String?   @db.Text
   age                String?
   minister           String?
   plainPassword      String?
@@ -150,12 +151,13 @@ model User {
   longitude          String?
   nif                String?
   groupeSanguin      String?
-  istimothee         Boolean? @default(false)
+  istimothee         Boolean?  @default(false)
   timotheeId         String?
   // 👇 Foreign key (each user belongs to ONE ministry)
   ministryId         String?
   // Stable client-generated ID used to make offline member creation idempotent.
-  offlineOperationId String?  @unique
+  offlineOperationId String?   @unique
+  deceasedAt         DateTime?
 
   ministry ministry? @relation(fields: [ministryId], references: [id])
 
@@ -171,11 +173,43 @@ model User {
   conversationParticipants ConversationParticipant[]
   sentMessages             Message[]                 @relation("SentMessages")
   ownedConversations       Conversation[]            @relation("ConversationOwner")
+  funeral                  Funeral?                  @relation("MemberFuneral")
 
   @@index([churchId], map: "User_churchId_fkey")
   @@index([timotheeId], map: "User_timotheeId_fkey")
   @@index([firstname], map: "User_firstname_idx")
   @@index([lastname], map: "User_lastname_idx")
+}
+
+model Visitor {
+  id               String   @id @default(uuid())
+  code             String   @unique
+  firstname        String
+  lastname         String
+  gender           String?
+  mobilePhone      String?
+  email            String?
+  addressLine      String?
+  city             String?
+  country          String?
+  visitDate        String
+  discoverySource  String?
+  invitedBy        String?
+  visitReason      String?
+  status           String   @default("Nouveau")
+  nextFollowUpDate String?
+  isAffiliated     Boolean  @default(false)
+  churchId         String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  church           Church   @relation(fields: [churchId], references: [id], onDelete: Cascade)
+
+  @@index([churchId, createdAt], map: "Visitor_churchId_createdAt_idx")
+  @@index([churchId, status], map: "Visitor_churchId_status_idx")
+  @@index([churchId, visitDate], map: "Visitor_churchId_visitDate_idx")
+  @@index([churchId, firstname], map: "Visitor_churchId_firstname_idx")
+  @@index([churchId, lastname], map: "Visitor_churchId_lastname_idx")
+  @@index([churchId, mobilePhone], map: "Visitor_churchId_mobilePhone_idx")
 }
 
 model Conversation {
@@ -303,10 +337,11 @@ model Mariage {
 }
 
 model Funeral {
-  id               String   @id @default(uuid())
+  id               String    @id @default(uuid())
   fullname         String
   birthDate        DateTime
   funeralDate      DateTime
+  deathDate        DateTime?
   funeralTime      String
   relationShip     String
   email            String
@@ -316,11 +351,13 @@ model Funeral {
   description      String
   funeralLocation  String
   churchId         String?
-  createdAt        DateTime @default(now())
-  status           String   @default("en attente")
-  updatedAt        DateTime @updatedAt
+  memberId         String?   @unique
+  createdAt        DateTime  @default(now())
+  status           String    @default("en attente")
+  updatedAt        DateTime  @updatedAt
   telephone        String?
-  church           Church?  @relation(fields: [churchId], references: [id])
+  church           Church?   @relation(fields: [churchId], references: [id])
+  member           User?     @relation("MemberFuneral", fields: [memberId], references: [id], onDelete: SetNull)
 
   @@index([churchId], map: "Funeral_churchId_fkey")
 }

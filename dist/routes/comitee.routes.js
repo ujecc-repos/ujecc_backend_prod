@@ -28,8 +28,8 @@ router.post("/", async (req, res) => {
                 },
             },
             include: {
-                commiteeLeader: true,
-                commiteeMember: true,
+                commiteeLeader: { where: { membreActif: true } },
+                commiteeMember: { where: { membreActif: true } },
             },
         });
         // Transform the data to match the frontend expectations
@@ -60,8 +60,8 @@ router.get("/", async (req, res) => {
     try {
         const comitees = await client_1.prisma.comitee.findMany({
             include: {
-                commiteeLeader: true,
-                commiteeMember: true,
+                commiteeLeader: { where: { membreActif: true } },
+                commiteeMember: { where: { membreActif: true } },
             },
         });
         res.json(comitees);
@@ -79,8 +79,8 @@ router.get("/church/:churchId", async (req, res) => {
         const comitees = await client_1.prisma.comitee.findMany({
             where: { churchId },
             include: {
-                commiteeLeader: true,
-                commiteeMember: true,
+                commiteeLeader: { where: { membreActif: true } },
+                commiteeMember: { where: { membreActif: true } },
             },
         });
         console.log('Found committees:', comitees.length);
@@ -132,8 +132,8 @@ router.get("/:id", async (req, res) => {
         const comitee = await client_1.prisma.comitee.findUnique({
             where: { id },
             include: {
-                commiteeLeader: true,
-                commiteeMember: true,
+                commiteeLeader: { where: { membreActif: true } },
+                commiteeMember: { where: { membreActif: true } },
             },
         });
         if (!comitee) {
@@ -171,8 +171,8 @@ router.put("/:id", async (req, res) => {
                 },
             },
             include: {
-                commiteeLeader: true,
-                commiteeMember: true,
+                commiteeLeader: { where: { membreActif: true } },
+                commiteeMember: { where: { membreActif: true } },
             },
         });
         res.json(comitee);
