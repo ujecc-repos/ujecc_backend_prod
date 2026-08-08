@@ -36,6 +36,7 @@ const stats_routes_1 = __importDefault(require("./routes/stats.routes"));
 const presence_route_1 = __importDefault(require("./routes/presence.route"));
 const service_routes_1 = __importDefault(require("./routes/service.routes"));
 const message_routes_1 = __importDefault(require("./routes/message.routes"));
+const visitor_routes_1 = __importDefault(require("./routes/visitor.routes"));
 // Initialize environment variables
 dotenv_1.default.config();
 // Create Express application
@@ -120,6 +121,7 @@ app.use('/api/stats', stats_routes_1.default);
 app.use('/api/presences', presence_route_1.default);
 app.use('/api/services', service_routes_1.default);
 app.use('/api/messages', message_routes_1.default);
+app.use('/api/visitors', visitor_routes_1.default);
 // Import Sunday Class routes
 const sundayClass_routes_1 = __importDefault(require("./routes/sundayClass.routes"));
 // Register Sunday Class routes

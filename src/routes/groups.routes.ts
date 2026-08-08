@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
     const groups = await prisma.groupe.findMany({
       include: {
         church: true,
-        users: true
+        users: { where: { membreActif: true } }
       }
     });
     res.json(groups);
@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
       where: { id: req.params.id },
       include: {
         church: true,
-        users: true
+        users: { where: { membreActif: true } }
       }
     });
     if (!group) {
@@ -118,7 +118,7 @@ router.get('/church/:churchId', async (req, res) => {
       where: { churchId: req.params.churchId },
       include: {
         church: true,
-        users: true
+        users: { where: { membreActif: true } }
       }
     });
     res.json(groups);
@@ -141,7 +141,7 @@ router.post('/:id/users', async (req, res) => {
           }
         },
         include: {
-          users: true
+          users: { where: { membreActif: true } }
         }
       });
       res.json(group);
@@ -157,7 +157,7 @@ router.post('/:id/users', async (req, res) => {
           }
         },
         include: {
-          users: true
+          users: { where: { membreActif: true } }
         }
       });
       res.json(group);
@@ -218,7 +218,7 @@ router.post('/:sourceGroupId/transfer/:userId', async (req, res) => {
           }
         },
         include: {
-          users: true
+          users: { where: { membreActif: true } }
         }
       });
       

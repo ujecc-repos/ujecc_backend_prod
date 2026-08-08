@@ -116,11 +116,29 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update a presentation record
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.fields([
+  { name: 'birthCertificate', maxCount: 1 }
+]), async (req, res) => {
   try {
+    const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+    const updateData: any = {
+      childName: req.body.childName,
+      presentationDate: moment(req.body.presentationDate, 'YYYY-MM-DD', true).toDate(),
+      dateOfBirth: moment(req.body.dateOfBirth, 'YYYY-MM-DD', true).toDate(),
+      placeOfBirth: req.body.placeOfBirth,
+      fatherName: req.body.fatherName,
+      motherName: req.body.motherName,
+      officiantName: req.body.officiantName,
+      address: req.body.address,
+      phone: req.body.phone,
+      witness: req.body.witness,
+      description: req.body.description,
+    };
+    if (files?.birthCertificate) updateData.birthCertificate = `/uploads/${path.basename(files.birthCertificate[0].path)}`;
+    if (req.body.churchId) updateData.church = { connect: { id: req.body.churchId } };
     const presentation = await prisma.presentation.update({
       where: { id: req.params.id },
-      data: req.body
+      data: updateData,
     });
     res.json(presentation);
   } catch (error) {

@@ -152,10 +152,10 @@ router.get('/:id/users', async (req, res) => {
         const ministryId = req.params.id;
         // Get total count of users in this ministry
         const totalUsers = await client_1.prisma.user.count({
-            where: { ministryId: ministryId }
+            where: { ministryId: ministryId, membreActif: true }
         });
         const users = await client_1.prisma.user.findMany({
-            where: { ministryId: ministryId },
+            where: { ministryId: ministryId, membreActif: true },
             skip: skip,
             take: limit,
             include: {

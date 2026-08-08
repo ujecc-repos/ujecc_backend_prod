@@ -225,7 +225,31 @@ exports.Prisma.UserScalarFieldEnum = {
   istimothee: 'istimothee',
   timotheeId: 'timotheeId',
   ministryId: 'ministryId',
-  offlineOperationId: 'offlineOperationId'
+  offlineOperationId: 'offlineOperationId',
+  deceasedAt: 'deceasedAt'
+};
+
+exports.Prisma.VisitorScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  gender: 'gender',
+  mobilePhone: 'mobilePhone',
+  email: 'email',
+  addressLine: 'addressLine',
+  city: 'city',
+  country: 'country',
+  visitDate: 'visitDate',
+  discoverySource: 'discoverySource',
+  invitedBy: 'invitedBy',
+  visitReason: 'visitReason',
+  status: 'status',
+  nextFollowUpDate: 'nextFollowUpDate',
+  isAffiliated: 'isAffiliated',
+  churchId: 'churchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ConversationScalarFieldEnum = {
@@ -326,6 +350,7 @@ exports.Prisma.FuneralScalarFieldEnum = {
   fullname: 'fullname',
   birthDate: 'birthDate',
   funeralDate: 'funeralDate',
+  deathDate: 'deathDate',
   funeralTime: 'funeralTime',
   relationShip: 'relationShip',
   email: 'email',
@@ -335,6 +360,7 @@ exports.Prisma.FuneralScalarFieldEnum = {
   description: 'description',
   funeralLocation: 'funeralLocation',
   churchId: 'churchId',
+  memberId: 'memberId',
   createdAt: 'createdAt',
   status: 'status',
   updatedAt: 'updatedAt',
@@ -647,6 +673,26 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   offlineOperationId: 'offlineOperationId'
 };
 
+exports.Prisma.VisitorOrderByRelevanceFieldEnum = {
+  id: 'id',
+  code: 'code',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  gender: 'gender',
+  mobilePhone: 'mobilePhone',
+  email: 'email',
+  addressLine: 'addressLine',
+  city: 'city',
+  country: 'country',
+  visitDate: 'visitDate',
+  discoverySource: 'discoverySource',
+  invitedBy: 'invitedBy',
+  visitReason: 'visitReason',
+  status: 'status',
+  nextFollowUpDate: 'nextFollowUpDate',
+  churchId: 'churchId'
+};
+
 exports.Prisma.ConversationOrderByRelevanceFieldEnum = {
   id: 'id',
   title: 'title',
@@ -731,6 +777,7 @@ exports.Prisma.FuneralOrderByRelevanceFieldEnum = {
   description: 'description',
   funeralLocation: 'funeralLocation',
   churchId: 'churchId',
+  memberId: 'memberId',
   status: 'status',
   telephone: 'telephone'
 };
@@ -934,6 +981,7 @@ exports.Prisma.ModelName = {
   Address: 'Address',
   Church: 'Church',
   User: 'User',
+  Visitor: 'Visitor',
   Conversation: 'Conversation',
   ConversationParticipant: 'ConversationParticipant',
   Message: 'Message',
