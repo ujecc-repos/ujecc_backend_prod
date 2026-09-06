@@ -8,10 +8,27 @@ const client_1 = require("../utils/client");
 const lodash_1 = __importDefault(require("lodash"));
 const upload_1 = __importDefault(require("../utils/upload"));
 const router = express_1.default.Router();
+const meetingDayAliases = {
+    lundi: 'Lendi', lendi: 'Lendi',
+    mardi: 'Madi', madi: 'Madi',
+    mercredi: 'Mèkredi', mekredi: 'Mèkredi', mèkredi: 'Mèkredi',
+    jeudi: 'Jedi', jedi: 'Jedi',
+    vendredi: 'Vandredi', vandredi: 'Vandredi',
+    samedi: 'Samdi', samdi: 'Samdi',
+    dimanche: 'Dimanch', dimanch: 'Dimanch',
+};
+const normalizeMeetingDays = (value) => {
+    const values = Array.isArray(value) ? value : String(value || '').split(',');
+    const normalized = values
+        .map((day) => String(day).trim().replace(/^Chaque\s+/i, '').toLocaleLowerCase('fr'))
+        .map((day) => meetingDayAliases[day])
+        .filter((day) => Boolean(day));
+    return Array.from(new Set(normalized)).join(', ');
+};
 router.post('/', upload_1.default.single('groupImage'), async (req, res) => {
     // Extract data from request body
     const userData = req.body;
-    const { name, minister, description, meetingDay, meetingTime, churchId, meetingLocation, meetingFrequency, ageGroup, maxMembers } = userData;
+    const { name, minister, description, meetingDay, meetingDays, meetingTime, churchId, meetingLocation, meetingFrequency, ageGroup, maxMembers } = userData;
     try {
         // If a file was uploaded, add the file path to the group data
         if (req.file) {
@@ -22,7 +39,7 @@ router.post('/', upload_1.default.single('groupImage'), async (req, res) => {
                 name,
                 minister: minister || "",
                 description: description || "",
-                meetingDays: meetingDay || "",
+                meetingDays: normalizeMeetingDays(meetingDays ?? meetingDay),
                 meetingTime: meetingTime || "",
                 meetingLocation: meetingLocation || "",
                 meetingFrequency: meetingFrequency || "",
@@ -81,13 +98,17 @@ router.put('/:id', upload_1.default.single('groupImage'), async (req, res) => {
         if (req.file) {
             groupData.picture = `/uploads/${req.file.filename}`;
         }
+        const meetingDaysInput = groupData.meetingDays ?? groupData.meetingDay;
+        const updateData = {
+            ...lodash_1.default.omit(groupData, ["id", "meetingDay", "meetingDays"]),
+            picture: req.file ? `/uploads/${req.file.filename}` : undefined
+        };
+        if (meetingDaysInput !== undefined) {
+            updateData.meetingDays = normalizeMeetingDays(meetingDaysInput);
+        }
         const group = await client_1.prisma.groupe.update({
             where: { id: req.params.id },
-            data: {
-                ...lodash_1.default.omit(groupData, ["id", "meetingDay"]),
-                meetingDays: groupData.meetingDay || "",
-                picture: req.file ? `/uploads/${req.file.filename}` : undefined
-            }
+            data: updateData
         });
         res.json(group);
     }
