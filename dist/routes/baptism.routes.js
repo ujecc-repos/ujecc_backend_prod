@@ -34,6 +34,7 @@ router.post('/', upload_1.default.single('baptismCertificate'), async (req, res)
         const baptism = await client_1.prisma.baptism.create({
             data: {
                 ...rest,
+                testimony: rest.testimony?.trim() || '',
                 birthDate: convert2.toDate(),
                 baptismDate: convert3.toDate(),
                 conversionDate: convert4.toDate(),
