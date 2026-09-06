@@ -32,6 +32,7 @@ import statsRoutes from './routes/stats.routes'
 import presenceRoutes from "./routes/presence.route"
 import serviceRoutes from "./routes/service.routes"
 import messageRoutes from "./routes/message.routes"
+import visitorRoutes from "./routes/visitor.routes"
 
 // Initialize environment variables
 dotenv.config();
@@ -131,6 +132,7 @@ app.use('/api/stats', statsRoutes)
 app.use('/api/presences', presenceRoutes)
 app.use('/api/services', serviceRoutes)
 app.use('/api/messages', messageRoutes)
+app.use('/api/visitors', visitorRoutes)
 
 // Import Sunday Class routes
 import sundayClassRoutes from './routes/sundayClass.routes';

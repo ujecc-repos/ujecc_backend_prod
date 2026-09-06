@@ -285,7 +285,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { amount, quantity, category, date, paymentMethod, description } = req.body;
+        const { amount, quantity, category, date, paymentMethod, description, currency } = req.body;
         const expense = await client_1.prisma.expense.update({
             where: { id },
             data: {
@@ -295,6 +295,7 @@ router.put("/:id", async (req, res) => {
                 date: new Date(date),
                 paymentMethod,
                 description,
+                currency,
             },
         });
         res.json(expense);

@@ -7,7 +7,7 @@ const prisma = new prisma_1.PrismaClient();
 // Create a new Sunday Class
 router.post("/", async (req, res) => {
     try {
-        const { nom, teacher, ageGroup, startTime, endTime, maxStudents, description, churchId } = req.body;
+        const { nom, teacher, ageGroup, startTime, endTime, book, maxStudents, description, churchId } = req.body;
         // Ensure proper data types
         const parsedData = {
             nom: String(nom),
@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
             ageGroup: String(ageGroup),
             startTime: startTime, // Convert to Date object
             endTime: endTime, // Convert to Date object
+            book: book || null,
             maxStudents: maxStudents, // Ensure it's a number
             description: String(description),
             church: {
@@ -106,7 +107,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { nom, teacher, ageGroup, startTime, endTime, maxStudents, description, churchId } = req.body;
+        const { nom, teacher, ageGroup, startTime, endTime, book, maxStudents, description, churchId } = req.body;
         const updatedSundayClass = await prisma.sundayClass.update({
             where: { id },
             data: {
@@ -115,6 +116,7 @@ router.put("/:id", async (req, res) => {
                 ageGroup,
                 startTime: startTime,
                 endTime: endTime,
+                book,
                 maxStudents,
                 description,
                 churchId

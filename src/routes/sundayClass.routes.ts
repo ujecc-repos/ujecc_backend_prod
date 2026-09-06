@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
       ageGroup,
       startTime,
       endTime,
+      book,
       maxStudents,
       description,
       churchId
@@ -26,6 +27,7 @@ router.post("/", async (req, res) => {
       ageGroup: String(ageGroup),
       startTime: startTime, // Convert to Date object
       endTime: endTime,     // Convert to Date object
+      book: book || null,
       maxStudents: maxStudents, // Ensure it's a number
       description: String(description),
       church: {
@@ -133,6 +135,7 @@ router.put("/:id", async (req, res) => {
       ageGroup,
       startTime,
       endTime,
+      book,
       maxStudents,
       description,
       churchId
@@ -146,6 +149,7 @@ router.put("/:id", async (req, res) => {
         ageGroup,
         startTime: startTime ,
         endTime: endTime,
+        book,
         maxStudents,
         description,
         churchId

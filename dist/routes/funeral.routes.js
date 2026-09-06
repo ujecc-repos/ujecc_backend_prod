@@ -5,50 +5,160 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const client_1 = require("../utils/client");
-const lodash_1 = __importDefault(require("lodash"));
 const moment_1 = __importDefault(require("moment"));
 const upload_1 = __importDefault(require("../utils/upload"));
 const path_1 = __importDefault(require("path"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const router = express_1.default.Router();
+const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
+const requireChurchAdmin = async (req, res, next) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token)
+        return res.status(401).json({ message: 'Authentification requise' });
+    try {
+        const payload = jsonwebtoken_1.default.verify(token, JWT_SECRET);
+        const user = await client_1.prisma.user.findUnique({
+            where: { id: payload.id },
+            select: { id: true, role: true, churchId: true, membreActif: true },
+        });
+        if (!user?.membreActif)
+            return res.status(403).json({ message: 'Compte indisponible' });
+        if (user.role !== 'Admin') {
+            return res.status(403).json({ message: 'Cette fonctionnalité est réservée aux administrateurs' });
+        }
+        if (!user.churchId) {
+            return res.status(403).json({ message: 'Votre compte doit être associé à une église' });
+        }
+        req.funeralAdmin = { id: user.id, churchId: user.churchId };
+        next();
+    }
+    catch {
+        return res.status(401).json({ message: 'Session invalide ou expirée' });
+    }
+};
+const memberPreview = {
+    id: true,
+    code: true,
+    firstname: true,
+    lastname: true,
+    birthDate: true,
+    mobilePhone: true,
+    email: true,
+    picture: true,
+};
+const cleanString = (value, maxLength = 191) => typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
+const parseRequiredDate = (value) => {
+    const parsed = (0, moment_1.default)(cleanString(value, 10), 'YYYY-MM-DD', true);
+    return parsed.isValid() ? parsed.toDate() : null;
+};
+// Search only after input, only inside the administrator's church, and never
+// return the complete member directory.
+router.get('/member-search', requireChurchAdmin, async (req, res) => {
+    try {
+        const query = cleanString(req.query.query, 80);
+        if (query.length < 2)
+            return res.json([]);
+        const terms = query.split(/\s+/).filter(Boolean).slice(0, 3);
+        const members = await client_1.prisma.user.findMany({
+            where: {
+                churchId: req.funeralAdmin.churchId,
+                membreActif: true,
+                AND: terms.map((term) => ({
+                    OR: [
+                        { firstname: { startsWith: term } },
+                        { lastname: { startsWith: term } },
+                        { code: { startsWith: term } },
+                        { mobilePhone: { contains: term } },
+                    ],
+                })),
+            },
+            select: memberPreview,
+            orderBy: [{ firstname: 'asc' }, { lastname: 'asc' }],
+            take: 20,
+        });
+        return res.json(members);
+    }
+    catch (error) {
+        console.error('Funeral member search error:', error);
+        return res.status(500).json({ message: 'Impossible de rechercher les membres' });
+    }
+});
 // Create a new funeral record
-router.post('/', upload_1.default.fields([
+router.post('/', requireChurchAdmin, upload_1.default.fields([
     { name: 'deathCertificate', maxCount: 1 }
 ]), async (req, res) => {
     try {
-        const allDate = lodash_1.default.pick(req.body, ["birthDate", "funeralDate"]);
-        const rest = lodash_1.default.omit(req.body, ["birthDate", "funeralDate", "churchId"]);
-        const convert1 = (0, moment_1.default)(`${allDate.birthDate}`, 'YYYY-MM-DD', true);
-        const convert2 = (0, moment_1.default)(`${allDate.funeralDate}`, 'YYYY-MM-DD', true);
+        const birthDate = parseRequiredDate(req.body.birthDate);
+        const deathDate = parseRequiredDate(req.body.deathDate);
+        const funeralDate = parseRequiredDate(req.body.funeralDate);
+        const memberId = cleanString(req.body.memberId) || null;
+        if (!birthDate || !deathDate || !funeralDate) {
+            return res.status(400).json({ message: 'Les dates de naissance, décès et funérailles sont obligatoires' });
+        }
+        if (funeralDate < deathDate) {
+            return res.status(400).json({ message: 'La date des funérailles doit suivre la date du décès' });
+        }
         // Handle file uploads
         const files = req.files;
         // Get file path if it exists
         const deathCertificatePath = files?.deathCertificate ?
             `/uploads/${path_1.default.basename(files.deathCertificate[0].path)}` : null;
-        // Préparer les données pour la création
-        const createData = {
-            ...rest,
-            birthDate: convert1.toDate(),
-            funeralDate: convert2.toDate(),
-            deathCertificate: deathCertificatePath
-        };
-        // Ajouter la relation church si churchId est fourni
-        if (req.body.churchId) {
-            createData.church = {
-                connect: {
-                    id: req.body.churchId
+        const funeral = await client_1.prisma.$transaction(async (tx) => {
+            let selectedMember = null;
+            if (memberId) {
+                selectedMember = await tx.user.findFirst({
+                    where: {
+                        id: memberId,
+                        churchId: req.funeralAdmin.churchId,
+                        membreActif: true,
+                    },
+                });
+                if (!selectedMember) {
+                    throw new Error('MEMBER_NOT_AVAILABLE');
                 }
-            };
-            // Supprimer churchId de l'objet rest pour éviter le conflit
-            delete createData.churchId;
-        }
-        const funeral = await client_1.prisma.funeral.create({
-            data: createData
+            }
+            const createdFuneral = await tx.funeral.create({
+                data: {
+                    fullname: selectedMember
+                        ? `${selectedMember.firstname} ${selectedMember.lastname}`.trim()
+                        : cleanString(req.body.fullname),
+                    birthDate,
+                    deathDate,
+                    funeralDate,
+                    funeralTime: cleanString(req.body.funeralTime),
+                    relationShip: cleanString(req.body.relationShip),
+                    email: cleanString(req.body.email),
+                    telephone: cleanString(req.body.telephone),
+                    nextOfKin: cleanString(req.body.nextOfKin),
+                    officiantName: cleanString(req.body.officiantName),
+                    description: cleanString(req.body.description, 5000),
+                    funeralLocation: cleanString(req.body.funeralLocation),
+                    status: cleanString(req.body.status) || 'en attente',
+                    deathCertificate: deathCertificatePath,
+                    church: { connect: { id: req.funeralAdmin.churchId } },
+                    ...(selectedMember ? { member: { connect: { id: selectedMember.id } } } : {}),
+                },
+                include: { member: { select: memberPreview }, church: true },
+            });
+            if (selectedMember) {
+                await tx.user.update({
+                    where: { id: selectedMember.id },
+                    data: { membreActif: false, deceasedAt: deathDate },
+                });
+            }
+            return createdFuneral;
         });
         res.json(funeral);
     }
     catch (error) {
         console.error('Error creating funeral record:', error);
-        res.status(400).json({ error: 'Failed to create funeral record' });
+        if (error?.message === 'MEMBER_NOT_AVAILABLE') {
+            return res.status(409).json({ message: 'Ce membre est introuvable, déjà inactif ou appartient à une autre église' });
+        }
+        if (error?.code === 'P2002') {
+            return res.status(409).json({ message: 'Une funéraille est déjà associée à ce membre' });
+        }
+        res.status(400).json({ message: 'Impossible de créer la funéraille' });
     }
 });
 // Get all funeral records
@@ -56,7 +166,8 @@ router.get('/', async (req, res) => {
     try {
         const funerals = await client_1.prisma.funeral.findMany({
             include: {
-                church: true
+                church: true,
+                member: { select: memberPreview },
             }
         });
         res.json(funerals);
@@ -71,7 +182,8 @@ router.get('/:id', async (req, res) => {
         const funeral = await client_1.prisma.funeral.findUnique({
             where: { id: req.params.id },
             include: {
-                church: true
+                church: true,
+                member: { select: memberPreview },
             }
         });
         if (!funeral) {
@@ -84,12 +196,20 @@ router.get('/:id', async (req, res) => {
     }
 });
 // Update a funeral record
-router.put('/:id', upload_1.default.fields([
+router.put('/:id', requireChurchAdmin, upload_1.default.fields([
     { name: 'deathCertificate', maxCount: 1 }
 ]), async (req, res) => {
     try {
+        const existingFuneral = await client_1.prisma.funeral.findFirst({
+            where: { id: req.params.id, churchId: req.funeralAdmin.churchId },
+            select: { id: true, memberId: true },
+        });
+        if (!existingFuneral)
+            return res.status(404).json({ message: 'Funéraille introuvable' });
         // Handle dates if present
         let updateData = { ...req.body };
+        delete updateData.memberId;
+        delete updateData.churchId;
         if (req.body.birthDate) {
             const convertedBirthDate = (0, moment_1.default)(req.body.birthDate, 'YYYY-MM-DD', true);
             updateData.birthDate = convertedBirthDate.toDate();
@@ -98,25 +218,29 @@ router.put('/:id', upload_1.default.fields([
             const convertedFuneralDate = (0, moment_1.default)(req.body.funeralDate, 'YYYY-MM-DD', true);
             updateData.funeralDate = convertedFuneralDate.toDate();
         }
+        if (req.body.deathDate) {
+            const convertedDeathDate = (0, moment_1.default)(req.body.deathDate, 'YYYY-MM-DD', true);
+            updateData.deathDate = convertedDeathDate.toDate();
+        }
         // Handle file uploads
         const files = req.files;
         // Get file path if it exists
         if (files?.deathCertificate) {
             updateData.deathCertificate = `/uploads/${path_1.default.basename(files.deathCertificate[0].path)}`;
         }
-        // Handle church relationship if churchId is provided
-        if (updateData.churchId) {
-            updateData.church = {
-                connect: {
-                    id: updateData.churchId
-                }
-            };
-            // Remove churchId to avoid conflicts
-            delete updateData.churchId;
-        }
-        const funeral = await client_1.prisma.funeral.update({
-            where: { id: req.params.id },
-            data: updateData
+        const funeral = await client_1.prisma.$transaction(async (tx) => {
+            const updatedFuneral = await tx.funeral.update({
+                where: { id: req.params.id },
+                data: updateData,
+                include: { member: { select: memberPreview }, church: true },
+            });
+            if (existingFuneral.memberId && updateData.deathDate) {
+                await tx.user.update({
+                    where: { id: existingFuneral.memberId },
+                    data: { deceasedAt: updateData.deathDate, membreActif: false },
+                });
+            }
+            return updatedFuneral;
         });
         res.json(funeral);
     }
@@ -126,11 +250,15 @@ router.put('/:id', upload_1.default.fields([
     }
 });
 // Delete a funeral record
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireChurchAdmin, async (req, res) => {
     try {
-        await client_1.prisma.funeral.delete({
-            where: { id: req.params.id }
+        const funeral = await client_1.prisma.funeral.findFirst({
+            where: { id: req.params.id, churchId: req.funeralAdmin.churchId },
+            select: { id: true },
         });
+        if (!funeral)
+            return res.status(404).json({ message: 'Funéraille introuvable' });
+        await client_1.prisma.funeral.delete({ where: { id: funeral.id } });
         res.json({ message: 'Funeral record deleted successfully' });
     }
     catch (error) {
@@ -143,7 +271,8 @@ router.get('/church/:churchId', async (req, res) => {
         const funerals = await client_1.prisma.funeral.findMany({
             where: { churchId: req.params.churchId },
             include: {
-                church: true
+                church: true,
+                member: { select: memberPreview },
             }
         });
         res.json(funerals);

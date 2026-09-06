@@ -223,11 +223,11 @@ router.get('/president/:presidentName', async (req, res) => {
 
       const stats = {
         membership: {
-          totalMembers: church.users.length,
+          totalMembers: church.users.filter(user => user.membreActif).length,
           activeMembers: church.users.filter(user => user.membreActif).length,
           inactiveMembers: church.users.filter(user => !user.membreActif).length,
-          maleMembers: church.users.filter(user => user.sex === 'Masculin').length,
-          femaleMembers: church.users.filter(user => user.sex === 'Féminin').length
+          maleMembers: church.users.filter(user => user.membreActif && user.sex === 'Masculin').length,
+          femaleMembers: church.users.filter(user => user.membreActif && user.sex === 'Féminin').length
         },
         sacraments: {
           baptismsTotal: church.batism.length,

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import __ from "lodash"
 import multer from 'multer';
 import fs from 'fs/promises';
+import { getInvalidPhoneNumbers, normalizePhoneNumbers } from '../utils/phoneNumbers';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
 
@@ -71,7 +72,7 @@ const removeRetryUpload = async (file?: Express.Multer.File) => {
 };
 
 // Create a new user with optional image upload
-router.post('/', upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
+router.post('/', verifyToken, upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
 
   const offlineOperationId = typeof req.body.offlineOperationId === 'string'
     ? req.body.offlineOperationId.trim().slice(0, 191)
@@ -83,7 +84,78 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       churchId, age, personToContact, spouseFullName, ministryId, role, nif, groupeSanguin, isBaptized, groupId, sundayClassId
     } = req.body;
 
+    // Tenant ownership is decided from the authenticated creator, never from an
+    // Admin/Invite request body. SuperAdmin keeps the ability to create users
+    // without a church and assign them later.
+    const creator = await prisma.user.findUnique({
+      where: { id: `${req.user.id}` },
+      select: { role: true, churchId: true },
+    });
+
+    if (!creator) {
+      await removeRetryUpload(req.file);
+      return res.status(401).json({
+        code: 'CREATOR_NOT_FOUND',
+        error: 'Le compte connecté est introuvable.',
+      });
+    }
+
+    let effectiveChurchId: string | null = null;
+
+    if (creator.role === 'SuperAdmin') {
+      effectiveChurchId = typeof churchId === 'string' && churchId.trim()
+        ? churchId.trim()
+        : null;
+
+      if (effectiveChurchId) {
+        const churchExists = await prisma.church.findUnique({
+          where: { id: effectiveChurchId },
+          select: { id: true },
+        });
+
+        if (!churchExists) {
+          await removeRetryUpload(req.file);
+          return res.status(400).json({
+            code: 'CHURCH_NOT_FOUND',
+            error: "L'église sélectionnée est introuvable.",
+          });
+        }
+      }
+    } else if (creator.role === 'Admin' || creator.role === 'Invite') {
+      if (!creator.churchId) {
+        await removeRetryUpload(req.file);
+        return res.status(400).json({
+          code: 'CREATOR_CHURCH_REQUIRED',
+          error: "Votre compte n'est associé à aucune église.",
+        });
+      }
+
+      effectiveChurchId = creator.churchId;
+    } else {
+      await removeRetryUpload(req.file);
+      return res.status(403).json({
+        code: 'MEMBER_CREATION_FORBIDDEN',
+        error: "Votre rôle ne permet pas de créer un membre.",
+      });
+    }
+
     console.log("groupId : ", groupId, sundayClassId, isBaptized)
+
+    const invalidPhoneNumbers = getInvalidPhoneNumbers(mobilePhone);
+    if (invalidPhoneNumbers.length > 0) {
+      return res.status(400).json({
+        code: 'INVALID_PHONE_NUMBER',
+        error: `Numéro(s) de téléphone invalide(s) : ${invalidPhoneNumbers.join(', ')}`,
+      });
+    }
+
+    const invalidHomePhoneNumbers = getInvalidPhoneNumbers(homePhone);
+    if (invalidHomePhoneNumbers.length > 0) {
+      return res.status(400).json({
+        code: 'INVALID_CONTACT_PHONE_NUMBER',
+        error: `Numéro(s) de la personne à contacter invalide(s) : ${invalidHomePhoneNumbers.join(', ')}`,
+      });
+    }
 
     // A retry can arrive after the database commit when the original response was
     // interrupted. Return the original result so the client can safely clear Dexie.
@@ -159,8 +231,8 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
       birthCountry: birthCountry || "",
       baptismDate: baptismDate || "",
       baptismLocation: baptismLocation || "",
-      mobilePhone: mobilePhone || "",
-      homePhone: homePhone || "",
+      mobilePhone: normalizePhoneNumbers(mobilePhone),
+      homePhone: normalizePhoneNumbers(homePhone),
       facebook: facebook || "",
       city: city || "",
       age: age || "",
@@ -175,8 +247,8 @@ router.post('/', upload.single('profileImage'), handleMulterError, async (req: e
 
     const createData: any = { ...userData };
 
-    if (churchId) {
-      createData.church = { connect: { id: churchId } };
+    if (effectiveChurchId) {
+      createData.church = { connect: { id: effectiveChurchId } };
     }
 
     if (groupId) {
@@ -242,12 +314,16 @@ router.post('/login', async (req, res) => {
         email: true,
         role: true,
         password: true,
+        membreActif: true,
       }
     });
 
 
     if (!user) {
       return res.status(400).json({ message: 'Email ou mot de passe incorrect', state: "error" });
+    }
+    if (!user.membreActif) {
+      return res.status(403).json({ message: 'Ce compte est inactif', state: 'error' });
     }
     // Verify password
     // Handle case where password might be null
@@ -400,10 +476,19 @@ router.post('/change-password', verifyToken, async (req, res) => {
 });
 
 //  total number of users
-router.get('/admin/total-members', async (req, res) => {
+router.get('/admin/total-members', verifyToken, async (req, res) => {
 
   try {
-    const totalUsers = await prisma.user.count()
+    const requester = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: { churchId: true },
+    });
+    if (!requester?.churchId) {
+      return res.status(403).json({ success: false, message: 'Église introuvable' });
+    }
+    const totalUsers = await prisma.user.count({
+      where: { churchId: requester.churchId, membreActif: true },
+    });
 
     res.status(200).json({
       success: true,
@@ -547,6 +632,28 @@ router.put('/:id', upload.single('profileImage'), async (req, res) => {
   try {
     // Extract data from request body
     const userData: Record<string, any> = req.body;
+
+    if (userData.mobilePhone !== undefined) {
+      const invalidPhoneNumbers = getInvalidPhoneNumbers(userData.mobilePhone);
+      if (invalidPhoneNumbers.length > 0) {
+        return res.status(400).json({
+          code: 'INVALID_PHONE_NUMBER',
+          error: `Numéro(s) de téléphone invalide(s) : ${invalidPhoneNumbers.join(', ')}`,
+        });
+      }
+      userData.mobilePhone = normalizePhoneNumbers(userData.mobilePhone);
+    }
+
+    if (userData.homePhone !== undefined) {
+      const invalidHomePhoneNumbers = getInvalidPhoneNumbers(userData.homePhone);
+      if (invalidHomePhoneNumbers.length > 0) {
+        return res.status(400).json({
+          code: 'INVALID_CONTACT_PHONE_NUMBER',
+          error: `Numéro(s) de la personne à contacter invalide(s) : ${invalidHomePhoneNumbers.join(', ')}`,
+        });
+      }
+      userData.homePhone = normalizePhoneNumbers(userData.homePhone);
+    }
 
     // If a file was uploaded, add the file path to the user data
     if (req.file) {
@@ -707,6 +814,9 @@ router.get('/birthdays/upcoming/:churchId', async (req, res) => {
         AND: [
           {
             churchId: req.params.churchId
+          },
+          {
+            membreActif: true
           },
           {
             birthDate: {
@@ -1011,6 +1121,26 @@ router.post('/bulk-insert', async (req, res) => {
           continue;
         }
 
+        const invalidPhoneNumbers = getInvalidPhoneNumbers(user.mobilePhone);
+        if (invalidPhoneNumbers.length > 0) {
+          errors.push({
+            index: i,
+            error: `Numéro(s) de téléphone invalide(s) : ${invalidPhoneNumbers.join(', ')}`,
+            user,
+          });
+          continue;
+        }
+
+        const invalidHomePhoneNumbers = getInvalidPhoneNumbers(user.homePhone);
+        if (invalidHomePhoneNumbers.length > 0) {
+          errors.push({
+            index: i,
+            error: `Numéro(s) de la personne à contacter invalide(s) : ${invalidHomePhoneNumbers.join(', ')}`,
+            user,
+          });
+          continue;
+        }
+
         // Check if email already exists (if provided)
         if (user.email) {
           const existingUser = await prisma.user.findUnique({
@@ -1042,8 +1172,8 @@ router.post('/bulk-insert', async (req, res) => {
           city: user.city || '',
           country: user.country || '',
           addressLine: user.addressLine || '',
-          mobilePhone: user.mobilePhone || '',
-          homePhone: user.homePhone || '',
+          mobilePhone: normalizePhoneNumbers(user.mobilePhone),
+          homePhone: normalizePhoneNumbers(user.homePhone),
           facebook: user.facebook || '',
           age: user.age || '',
           personToContact: user.personToContact || '',
@@ -1108,7 +1238,7 @@ router.get('/baptized/count/:id', async (req, res) => {
   try {
     const churchId = req.params.id
     const count = await prisma.user.count({
-      where: { isBaptized: true, churchId }
+      where: { isBaptized: true, churchId, membreActif: true }
     });
     res.json({ count });
   } catch (error) {

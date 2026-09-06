@@ -21,7 +21,7 @@ interface Ires {
   officiantName: string;
   withness: string;
   placeOfBirth: string;
-  testimony: string;
+  testimony?: string;
   previousChurch: string;
   status?: string;
   isCatechumene?: string;
@@ -57,7 +57,8 @@ const convertCatechumeneEnd = catechumeneEndDate ? moment(`${catechumeneEndDate}
     
     const baptism = await prisma.baptism.create({
       data: {
-        ...rest, 
+        ...rest,
+        testimony: rest.testimony?.trim() || '',
         birthDate: convert2.toDate(), 
         baptismDate: convert3.toDate(), 
         conversionDate: convert4.toDate(),
