@@ -416,13 +416,18 @@ router.get('/admin/total-members', verifyToken, async (req, res) => {
     try {
         const requester = await client_1.prisma.user.findUnique({
             where: { id: req.user.id },
-            select: { churchId: true },
+            select: { churchId: true, role: true },
         });
-        if (!requester?.churchId) {
+        if (!requester) {
+            return res.status(401).json({ success: false, message: 'Utilisateur introuvable' });
+        }
+        if (requester.role !== 'SuperAdmin' && !requester.churchId) {
             return res.status(403).json({ success: false, message: 'Église introuvable' });
         }
         const totalUsers = await client_1.prisma.user.count({
-            where: { churchId: requester.churchId, membreActif: true },
+            where: requester.role === 'SuperAdmin'
+                ? { membreActif: true }
+                : { churchId: requester.churchId, membreActif: true },
         });
         res.status(200).json({
             success: true,
