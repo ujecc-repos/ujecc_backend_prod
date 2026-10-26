@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import __ from "lodash"
 import multer from 'multer';
 import fs from 'fs/promises';
+import crypto from 'crypto';
 import { getInvalidPhoneNumbers, normalizePhoneNumbers } from '../utils/phoneNumbers';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fkhdlhfjdl389484934893lhfjd938439843949hjfdh384934343434344894jkjkfdjfjd378434jkfdf';
@@ -71,6 +72,103 @@ const removeRetryUpload = async (file?: Express.Multer.File) => {
   }
 };
 
+const setupKeysMatch = (providedKey: string, configuredKey: string) => {
+  const providedBuffer = Buffer.from(providedKey);
+  const configuredBuffer = Buffer.from(configuredKey);
+
+  return providedBuffer.length === configuredBuffer.length
+    && crypto.timingSafeEqual(providedBuffer, configuredBuffer);
+};
+
+// Setup-key-protected SuperAdmin creation. This intentionally does not accept
+// a bearer token, but it always requires the private server-side setup key.
+router.post('/bootstrap-superadmin', async (req, res) => {
+  const configuredSetupKey = process.env.SUPERADMIN_SETUP_KEY?.trim();
+  const providedSetupKey = req.header('X-Setup-Key')?.trim();
+
+  if (!configuredSetupKey) {
+    return res.status(503).json({
+      code: 'SUPERADMIN_BOOTSTRAP_DISABLED',
+      error: "L'initialisation du SuperAdmin n'est pas configurée.",
+    });
+  }
+
+  if (!providedSetupKey || !setupKeysMatch(providedSetupKey, configuredSetupKey)) {
+    return res.status(401).json({
+      code: 'INVALID_SETUP_KEY',
+      error: "La clé d'initialisation est invalide.",
+    });
+  }
+
+  const firstname = typeof req.body.firstname === 'string' ? req.body.firstname.trim() : '';
+  const lastname = typeof req.body.lastname === 'string' ? req.body.lastname.trim() : '';
+  const email = typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
+  const password = typeof req.body.password === 'string' ? req.body.password : '';
+
+  if (!firstname || !lastname || !email || !password) {
+    return res.status(400).json({
+      code: 'MISSING_REQUIRED_FIELDS',
+      error: 'Le prénom, le nom, l\'adresse email et le mot de passe sont obligatoires.',
+    });
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({
+      code: 'INVALID_EMAIL',
+      error: "L'adresse email est invalide.",
+    });
+  }
+
+  if (password.length < 12) {
+    return res.status(400).json({
+      code: 'WEAK_PASSWORD',
+      error: 'Le mot de passe doit contenir au moins 12 caractères.',
+    });
+  }
+
+  try {
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    const createdSuperAdmin = await prisma.user.create({
+      data: {
+        firstname,
+        lastname,
+        email,
+        password: passwordHash,
+        role: 'SuperAdmin',
+        code: `${generate6DigitCode()}`,
+        membreActif: true,
+      },
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        email: true,
+        role: true,
+        createdAt: true,
+      },
+    });
+
+    return res.status(201).json({
+      message: 'SuperAdmin créé avec succès.',
+      user: createdSuperAdmin,
+    });
+  } catch (error: any) {
+    if (error?.code === 'P2002') {
+      return res.status(409).json({
+        code: 'SUPERADMIN_CONFLICT',
+        error: "L'adresse email ou le code utilisateur existe déjà.",
+      });
+    }
+
+    console.error('SuperAdmin bootstrap error:', error);
+    return res.status(500).json({
+      code: 'SUPERADMIN_BOOTSTRAP_FAILED',
+      error: "Impossible de créer le SuperAdmin.",
+    });
+  }
+});
+
 // Create a new user with optional image upload
 router.post('/', verifyToken, upload.single('profileImage'), handleMulterError, async (req: express.Request, res: express.Response) => {
 
@@ -97,6 +195,14 @@ router.post('/', verifyToken, upload.single('profileImage'), handleMulterError, 
       return res.status(401).json({
         code: 'CREATOR_NOT_FOUND',
         error: 'Le compte connecté est introuvable.',
+      });
+    }
+
+    if (role === 'SuperAdmin' && creator.role !== 'SuperAdmin') {
+      await removeRetryUpload(req.file);
+      return res.status(403).json({
+        code: 'SUPERADMIN_CREATION_FORBIDDEN',
+        error: 'Seul un SuperAdmin authentifié peut créer un autre SuperAdmin.',
       });
     }
 
